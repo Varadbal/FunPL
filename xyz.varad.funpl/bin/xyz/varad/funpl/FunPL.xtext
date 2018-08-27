@@ -2,8 +2,53 @@ grammar xyz.varad.funpl.FunPL with org.eclipse.xtext.common.Terminals
 
 generate funPL "http://www.varad.xyz/funpl/FunPL"
 
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+FunProgram:
+	elements += FunAbstractElement*
+;
+
+FunAbstractElement:
+	FunVarDeclaration |
+	FunMethod
+;
+
+FunVarDeclaration:
+	'var' name=ID ('=' value=FunExpression)?
+;
+
+FunMethod:
+	'method' name=ID '(' (params+=FunParameter (',' params+=FunParameter)*)? ')'
+	body=FunBlock
+;
+
+FunBlock:
+	{FunBlock} '{' statements+=FunStatement* '}'
+;
+
+FunParameter:
+	name=ID
+;
+
+FunStatement:
+	FunVarDeclaration |
+	FunExpression
+;
+
+FunExpression:
+	FunPlus
+;
+
+FunPlus returns FunExpression:
+	FunPrimary(
+		{FunPlus.left=current} '+' right=FunPrimary
+	)*
+;
+
+FunPrimary returns FunExpression:
+	'(' FunExpression ')' |
+	FunAtomic
+;
+
+FunAtomic:
+	{StringConstant} value=STRING |
+	{IntConstant} value=INT
+;
