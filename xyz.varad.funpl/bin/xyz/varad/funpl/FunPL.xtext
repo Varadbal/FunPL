@@ -1,0 +1,9 @@
+grammar xyz.varad.funpl.FunPL with org.eclipse.xtext.common.Terminals
+
+generate funPL "http://www.varad.xyz/funpl/FunPL"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
