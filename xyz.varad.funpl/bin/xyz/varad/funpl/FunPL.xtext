@@ -3,52 +3,67 @@ grammar xyz.varad.funpl.FunPL with org.eclipse.xtext.common.Terminals
 generate funPL "http://www.varad.xyz/funpl/FunPL"
 
 FunProgram:
-	elements += FunAbstractElement*
+	elements+=AbstractElement*
 ;
 
-FunAbstractElement:
-	FunVarDeclaration |
-	FunMethod
+AbstractElement:
+	Definition
 ;
 
-FunVarDeclaration:
-	'var' name=ID ('=' value=FunExpression)?
+Definition:
+	Value | Function
 ;
 
-FunMethod:
-	'method' name=ID '(' (params+=FunParameter (',' params+=FunParameter)*)? ')'
-	body=FunBlock
+Value:
+	//TODO force const definition - validation
+	//TODO type
+	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 ;
 
-FunBlock:
-	{FunBlock} '{' statements+=FunStatement* '}'
+Function:
+	'function' name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)* )? ')' body=Block
 ;
 
-FunParameter:
-	name=ID
+FunctionParam:
+	Name=ID
 ;
 
-FunStatement:
-	FunVarDeclaration |
-	FunExpression
+Block:
+	'{'
+	{Block} statements+=Statement*
+	'}'
 ;
 
-FunExpression:
-	FunPlus
+Statement:
+	Value | Expression ';'
 ;
 
-FunPlus returns FunExpression:
-	FunPrimary(
-		{FunPlus.left=current} '+' right=FunPrimary
-	)*
+Expression:
+	Assignment
 ;
 
-FunPrimary returns FunExpression:
-	'(' FunExpression ')' |
-	FunAtomic
+Assignment returns Expression:
+	Plus({Assignment.left=current} '=' right=Expression)?
 ;
 
-FunAtomic:
+Plus returns Expression:
+	PrimaryExpression({Plus.left=current} '+' right=PrimaryExpression)*
+;
+
+PrimaryExpression returns Expression:
+	'(' Expression ')' |
+	FunctionCall |
+	TerminalExpression
+;
+
+FunctionCall returns Expression:
+	{FunctionCall} function=[Function] '(' (args+=Expression (',' args+=Expression)*)? ')'
+;
+
+TerminalExpression:
+	{IntConstant} value=INT | 
 	{StringConstant} value=STRING |
-	{IntConstant} value=INT
+	{BoolConstant} value=('true'|'false') |
+	{ValueRef} variable=[Value]
 ;
+

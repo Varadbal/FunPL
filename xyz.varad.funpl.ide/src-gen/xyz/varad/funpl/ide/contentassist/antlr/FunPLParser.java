@@ -31,33 +31,50 @@ public class FunPLParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, FunPLGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getFunAbstractElementAccess().getAlternatives(), "rule__FunAbstractElement__Alternatives");
-			builder.put(grammarAccess.getFunStatementAccess().getAlternatives(), "rule__FunStatement__Alternatives");
-			builder.put(grammarAccess.getFunPrimaryAccess().getAlternatives(), "rule__FunPrimary__Alternatives");
-			builder.put(grammarAccess.getFunAtomicAccess().getAlternatives(), "rule__FunAtomic__Alternatives");
-			builder.put(grammarAccess.getFunVarDeclarationAccess().getGroup(), "rule__FunVarDeclaration__Group__0");
-			builder.put(grammarAccess.getFunVarDeclarationAccess().getGroup_2(), "rule__FunVarDeclaration__Group_2__0");
-			builder.put(grammarAccess.getFunMethodAccess().getGroup(), "rule__FunMethod__Group__0");
-			builder.put(grammarAccess.getFunMethodAccess().getGroup_3(), "rule__FunMethod__Group_3__0");
-			builder.put(grammarAccess.getFunMethodAccess().getGroup_3_1(), "rule__FunMethod__Group_3_1__0");
-			builder.put(grammarAccess.getFunBlockAccess().getGroup(), "rule__FunBlock__Group__0");
-			builder.put(grammarAccess.getFunPlusAccess().getGroup(), "rule__FunPlus__Group__0");
-			builder.put(grammarAccess.getFunPlusAccess().getGroup_1(), "rule__FunPlus__Group_1__0");
-			builder.put(grammarAccess.getFunPrimaryAccess().getGroup_0(), "rule__FunPrimary__Group_0__0");
-			builder.put(grammarAccess.getFunAtomicAccess().getGroup_0(), "rule__FunAtomic__Group_0__0");
-			builder.put(grammarAccess.getFunAtomicAccess().getGroup_1(), "rule__FunAtomic__Group_1__0");
+			builder.put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
+			builder.put(grammarAccess.getValueAccess().getAlternatives_0(), "rule__Value__Alternatives_0");
+			builder.put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
+			builder.put(grammarAccess.getPrimaryExpressionAccess().getAlternatives(), "rule__PrimaryExpression__Alternatives");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getAlternatives(), "rule__TerminalExpression__Alternatives");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getValueAlternatives_2_1_0(), "rule__TerminalExpression__ValueAlternatives_2_1_0");
+			builder.put(grammarAccess.getValueAccess().getGroup(), "rule__Value__Group__0");
+			builder.put(grammarAccess.getValueAccess().getGroup_2(), "rule__Value__Group_2__0");
+			builder.put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
+			builder.put(grammarAccess.getFunctionAccess().getGroup_3(), "rule__Function__Group_3__0");
+			builder.put(grammarAccess.getFunctionAccess().getGroup_3_1(), "rule__Function__Group_3_1__0");
+			builder.put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
+			builder.put(grammarAccess.getStatementAccess().getGroup_1(), "rule__Statement__Group_1__0");
+			builder.put(grammarAccess.getAssignmentAccess().getGroup(), "rule__Assignment__Group__0");
+			builder.put(grammarAccess.getAssignmentAccess().getGroup_1(), "rule__Assignment__Group_1__0");
+			builder.put(grammarAccess.getPlusAccess().getGroup(), "rule__Plus__Group__0");
+			builder.put(grammarAccess.getPlusAccess().getGroup_1(), "rule__Plus__Group_1__0");
+			builder.put(grammarAccess.getPrimaryExpressionAccess().getGroup_0(), "rule__PrimaryExpression__Group_0__0");
+			builder.put(grammarAccess.getFunctionCallAccess().getGroup(), "rule__FunctionCall__Group__0");
+			builder.put(grammarAccess.getFunctionCallAccess().getGroup_3(), "rule__FunctionCall__Group_3__0");
+			builder.put(grammarAccess.getFunctionCallAccess().getGroup_3_1(), "rule__FunctionCall__Group_3_1__0");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_0(), "rule__TerminalExpression__Group_0__0");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_1(), "rule__TerminalExpression__Group_1__0");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_2(), "rule__TerminalExpression__Group_2__0");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_3(), "rule__TerminalExpression__Group_3__0");
 			builder.put(grammarAccess.getFunProgramAccess().getElementsAssignment(), "rule__FunProgram__ElementsAssignment");
-			builder.put(grammarAccess.getFunVarDeclarationAccess().getNameAssignment_1(), "rule__FunVarDeclaration__NameAssignment_1");
-			builder.put(grammarAccess.getFunVarDeclarationAccess().getValueAssignment_2_1(), "rule__FunVarDeclaration__ValueAssignment_2_1");
-			builder.put(grammarAccess.getFunMethodAccess().getNameAssignment_1(), "rule__FunMethod__NameAssignment_1");
-			builder.put(grammarAccess.getFunMethodAccess().getParamsAssignment_3_0(), "rule__FunMethod__ParamsAssignment_3_0");
-			builder.put(grammarAccess.getFunMethodAccess().getParamsAssignment_3_1_1(), "rule__FunMethod__ParamsAssignment_3_1_1");
-			builder.put(grammarAccess.getFunMethodAccess().getBodyAssignment_5(), "rule__FunMethod__BodyAssignment_5");
-			builder.put(grammarAccess.getFunBlockAccess().getStatementsAssignment_2(), "rule__FunBlock__StatementsAssignment_2");
-			builder.put(grammarAccess.getFunParameterAccess().getNameAssignment(), "rule__FunParameter__NameAssignment");
-			builder.put(grammarAccess.getFunPlusAccess().getRightAssignment_1_2(), "rule__FunPlus__RightAssignment_1_2");
-			builder.put(grammarAccess.getFunAtomicAccess().getValueAssignment_0_1(), "rule__FunAtomic__ValueAssignment_0_1");
-			builder.put(grammarAccess.getFunAtomicAccess().getValueAssignment_1_1(), "rule__FunAtomic__ValueAssignment_1_1");
+			builder.put(grammarAccess.getValueAccess().getIsConstAssignment_0_0(), "rule__Value__IsConstAssignment_0_0");
+			builder.put(grammarAccess.getValueAccess().getNameAssignment_1(), "rule__Value__NameAssignment_1");
+			builder.put(grammarAccess.getValueAccess().getExpressionAssignment_2_1(), "rule__Value__ExpressionAssignment_2_1");
+			builder.put(grammarAccess.getFunctionAccess().getNameAssignment_1(), "rule__Function__NameAssignment_1");
+			builder.put(grammarAccess.getFunctionAccess().getParamsAssignment_3_0(), "rule__Function__ParamsAssignment_3_0");
+			builder.put(grammarAccess.getFunctionAccess().getParamsAssignment_3_1_1(), "rule__Function__ParamsAssignment_3_1_1");
+			builder.put(grammarAccess.getFunctionAccess().getBodyAssignment_5(), "rule__Function__BodyAssignment_5");
+			builder.put(grammarAccess.getFunctionParamAccess().getNameAssignment(), "rule__FunctionParam__NameAssignment");
+			builder.put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
+			builder.put(grammarAccess.getAssignmentAccess().getRightAssignment_1_2(), "rule__Assignment__RightAssignment_1_2");
+			builder.put(grammarAccess.getPlusAccess().getRightAssignment_1_2(), "rule__Plus__RightAssignment_1_2");
+			builder.put(grammarAccess.getFunctionCallAccess().getFunctionAssignment_1(), "rule__FunctionCall__FunctionAssignment_1");
+			builder.put(grammarAccess.getFunctionCallAccess().getArgsAssignment_3_0(), "rule__FunctionCall__ArgsAssignment_3_0");
+			builder.put(grammarAccess.getFunctionCallAccess().getArgsAssignment_3_1_1(), "rule__FunctionCall__ArgsAssignment_3_1_1");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getValueAssignment_0_1(), "rule__TerminalExpression__ValueAssignment_0_1");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getValueAssignment_1_1(), "rule__TerminalExpression__ValueAssignment_1_1");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getValueAssignment_2_1(), "rule__TerminalExpression__ValueAssignment_2_1");
+			builder.put(grammarAccess.getTerminalExpressionAccess().getVariableAssignment_3_1(), "rule__TerminalExpression__VariableAssignment_3_1");
 		}
 	}
 	

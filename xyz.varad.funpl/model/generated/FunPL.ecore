@@ -3,41 +3,60 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="funPL" nsURI="http://www.varad.xyz/funpl/FunPL" nsPrefix="funPL">
   <eClassifiers xsi:type="ecore:EClass" name="FunProgram">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//FunAbstractElement" containment="true"/>
+        eType="#//AbstractElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunAbstractElement">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Definition" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunVarDeclaration" eSuperTypes="#//FunAbstractElement #//FunStatement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//FunExpression"
+  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//Definition #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConst" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunMethod" eSuperTypes="#//FunAbstractElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//Definition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
-        eType="#//FunParameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//FunBlock"
+        eType="#//FunctionParam" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunBlock">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionParam">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//FunStatement" containment="true"/>
+        eType="#//Statement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunParameter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunStatement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FunExpression" eSuperTypes="#//FunStatement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FunAtomic" eSuperTypes="#//FunExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FunPlus" eSuperTypes="#//FunExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//FunExpression"
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminalExpression" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//FunExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringConstant" eSuperTypes="#//FunAtomic">
+  <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntConstant" eSuperTypes="#//TerminalExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringConstant" eSuperTypes="#//TerminalExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntConstant" eSuperTypes="#//FunAtomic">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolConstant" eSuperTypes="#//TerminalExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueRef" eSuperTypes="#//TerminalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Value"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -66,17 +66,22 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
     switch (eClass.getClassifierID())
     {
       case FunPLPackage.FUN_PROGRAM: return createFunProgram();
-      case FunPLPackage.FUN_ABSTRACT_ELEMENT: return createFunAbstractElement();
-      case FunPLPackage.FUN_VAR_DECLARATION: return createFunVarDeclaration();
-      case FunPLPackage.FUN_METHOD: return createFunMethod();
-      case FunPLPackage.FUN_BLOCK: return createFunBlock();
-      case FunPLPackage.FUN_PARAMETER: return createFunParameter();
-      case FunPLPackage.FUN_STATEMENT: return createFunStatement();
-      case FunPLPackage.FUN_EXPRESSION: return createFunExpression();
-      case FunPLPackage.FUN_ATOMIC: return createFunAtomic();
-      case FunPLPackage.FUN_PLUS: return createFunPlus();
-      case FunPLPackage.STRING_CONSTANT: return createStringConstant();
+      case FunPLPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case FunPLPackage.DEFINITION: return createDefinition();
+      case FunPLPackage.VALUE: return createValue();
+      case FunPLPackage.FUNCTION: return createFunction();
+      case FunPLPackage.FUNCTION_PARAM: return createFunctionParam();
+      case FunPLPackage.BLOCK: return createBlock();
+      case FunPLPackage.STATEMENT: return createStatement();
+      case FunPLPackage.EXPRESSION: return createExpression();
+      case FunPLPackage.TERMINAL_EXPRESSION: return createTerminalExpression();
+      case FunPLPackage.ASSIGNMENT: return createAssignment();
+      case FunPLPackage.PLUS: return createPlus();
+      case FunPLPackage.FUNCTION_CALL: return createFunctionCall();
       case FunPLPackage.INT_CONSTANT: return createIntConstant();
+      case FunPLPackage.STRING_CONSTANT: return createStringConstant();
+      case FunPLPackage.BOOL_CONSTANT: return createBoolConstant();
+      case FunPLPackage.VALUE_REF: return createValueRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -98,10 +103,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunAbstractElement createFunAbstractElement()
+  public AbstractElement createAbstractElement()
   {
-    FunAbstractElementImpl funAbstractElement = new FunAbstractElementImpl();
-    return funAbstractElement;
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
   }
 
   /**
@@ -109,10 +114,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunVarDeclaration createFunVarDeclaration()
+  public Definition createDefinition()
   {
-    FunVarDeclarationImpl funVarDeclaration = new FunVarDeclarationImpl();
-    return funVarDeclaration;
+    DefinitionImpl definition = new DefinitionImpl();
+    return definition;
   }
 
   /**
@@ -120,10 +125,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunMethod createFunMethod()
+  public Value createValue()
   {
-    FunMethodImpl funMethod = new FunMethodImpl();
-    return funMethod;
+    ValueImpl value = new ValueImpl();
+    return value;
   }
 
   /**
@@ -131,10 +136,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunBlock createFunBlock()
+  public Function createFunction()
   {
-    FunBlockImpl funBlock = new FunBlockImpl();
-    return funBlock;
+    FunctionImpl function = new FunctionImpl();
+    return function;
   }
 
   /**
@@ -142,10 +147,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunParameter createFunParameter()
+  public FunctionParam createFunctionParam()
   {
-    FunParameterImpl funParameter = new FunParameterImpl();
-    return funParameter;
+    FunctionParamImpl functionParam = new FunctionParamImpl();
+    return functionParam;
   }
 
   /**
@@ -153,10 +158,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunStatement createFunStatement()
+  public Block createBlock()
   {
-    FunStatementImpl funStatement = new FunStatementImpl();
-    return funStatement;
+    BlockImpl block = new BlockImpl();
+    return block;
   }
 
   /**
@@ -164,10 +169,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunExpression createFunExpression()
+  public Statement createStatement()
   {
-    FunExpressionImpl funExpression = new FunExpressionImpl();
-    return funExpression;
+    StatementImpl statement = new StatementImpl();
+    return statement;
   }
 
   /**
@@ -175,10 +180,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunAtomic createFunAtomic()
+  public Expression createExpression()
   {
-    FunAtomicImpl funAtomic = new FunAtomicImpl();
-    return funAtomic;
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
   }
 
   /**
@@ -186,10 +191,54 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunPlus createFunPlus()
+  public TerminalExpression createTerminalExpression()
   {
-    FunPlusImpl funPlus = new FunPlusImpl();
-    return funPlus;
+    TerminalExpressionImpl terminalExpression = new TerminalExpressionImpl();
+    return terminalExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Assignment createAssignment()
+  {
+    AssignmentImpl assignment = new AssignmentImpl();
+    return assignment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Plus createPlus()
+  {
+    PlusImpl plus = new PlusImpl();
+    return plus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FunctionCall createFunctionCall()
+  {
+    FunctionCallImpl functionCall = new FunctionCallImpl();
+    return functionCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntConstant createIntConstant()
+  {
+    IntConstantImpl intConstant = new IntConstantImpl();
+    return intConstant;
   }
 
   /**
@@ -208,10 +257,21 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public IntConstant createIntConstant()
+  public BoolConstant createBoolConstant()
   {
-    IntConstantImpl intConstant = new IntConstantImpl();
-    return intConstant;
+    BoolConstantImpl boolConstant = new BoolConstantImpl();
+    return boolConstant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ValueRef createValueRef()
+  {
+    ValueRefImpl valueRef = new ValueRefImpl();
+    return valueRef;
   }
 
   /**

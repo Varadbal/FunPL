@@ -86,14 +86,33 @@ public interface FunPLPackage extends EPackage
   int FUN_PROGRAM_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunAbstractElementImpl <em>Fun Abstract Element</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunAbstractElementImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunAbstractElement()
+   * @see xyz.varad.funpl.funPL.impl.AbstractElementImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAbstractElement()
    * @generated
    */
-  int FUN_ABSTRACT_ELEMENT = 1;
+  int ABSTRACT_ELEMENT = 1;
+
+  /**
+   * The number of structural features of the '<em>Abstract Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionImpl <em>Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.DefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinition()
+   * @generated
+   */
+  int DEFINITION = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -102,26 +121,26 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_ABSTRACT_ELEMENT__NAME = 0;
+  int DEFINITION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Fun Abstract Element</em>' class.
+   * The number of structural features of the '<em>Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
+  int DEFINITION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunVarDeclarationImpl <em>Fun Var Declaration</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ValueImpl <em>Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunVarDeclarationImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunVarDeclaration()
+   * @see xyz.varad.funpl.funPL.impl.ValueImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValue()
    * @generated
    */
-  int FUN_VAR_DECLARATION = 2;
+  int VALUE = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -130,35 +149,44 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_VAR_DECLARATION__NAME = FUN_ABSTRACT_ELEMENT__NAME;
+  int VALUE__NAME = DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * The feature id for the '<em><b>Is Const</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_VAR_DECLARATION__VALUE = FUN_ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int VALUE__IS_CONST = DEFINITION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Fun Var Declaration</em>' class.
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_VAR_DECLARATION_FEATURE_COUNT = FUN_ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int VALUE__EXPRESSION = DEFINITION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunMethodImpl <em>Fun Method</em>}' class.
+   * The number of structural features of the '<em>Value</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunMethodImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunMethod()
+   * @generated
+   * @ordered
+   */
+  int VALUE_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionImpl <em>Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.FunctionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunction()
    * @generated
    */
-  int FUN_METHOD = 3;
+  int FUNCTION = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -167,7 +195,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_METHOD__NAME = FUN_ABSTRACT_ELEMENT__NAME;
+  int FUNCTION__NAME = DEFINITION__NAME;
 
   /**
    * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -176,7 +204,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_METHOD__PARAMS = FUN_ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int FUNCTION__PARAMS = DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -185,54 +213,26 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_METHOD__BODY = FUN_ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int FUNCTION__BODY = DEFINITION_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Fun Method</em>' class.
+   * The number of structural features of the '<em>Function</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_METHOD_FEATURE_COUNT = FUN_ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+  int FUNCTION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunBlockImpl <em>Fun Block</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionParamImpl <em>Function Param</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunBlockImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunBlock()
+   * @see xyz.varad.funpl.funPL.impl.FunctionParamImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionParam()
    * @generated
    */
-  int FUN_BLOCK = 4;
-
-  /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUN_BLOCK__STATEMENTS = 0;
-
-  /**
-   * The number of structural features of the '<em>Fun Block</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUN_BLOCK_FEATURE_COUNT = 1;
-
-  /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunParameterImpl <em>Fun Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunParameterImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunParameter()
-   * @generated
-   */
-  int FUN_PARAMETER = 5;
+  int FUNCTION_PARAM = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,83 +241,111 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_PARAMETER__NAME = 0;
+  int FUNCTION_PARAM__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Fun Parameter</em>' class.
+   * The number of structural features of the '<em>Function Param</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_PARAMETER_FEATURE_COUNT = 1;
+  int FUNCTION_PARAM_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunStatementImpl <em>Fun Statement</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.BlockImpl <em>Block</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunStatementImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunStatement()
+   * @see xyz.varad.funpl.funPL.impl.BlockImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBlock()
    * @generated
    */
-  int FUN_STATEMENT = 6;
+  int BLOCK = 6;
 
   /**
-   * The number of structural features of the '<em>Fun Statement</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUN_STATEMENT_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunExpressionImpl <em>Fun Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunExpressionImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunExpression()
-   * @generated
-   */
-  int FUN_EXPRESSION = 7;
-
-  /**
-   * The number of structural features of the '<em>Fun Expression</em>' class.
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_EXPRESSION_FEATURE_COUNT = FUN_STATEMENT_FEATURE_COUNT + 0;
+  int BLOCK__STATEMENTS = 0;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunAtomicImpl <em>Fun Atomic</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunAtomicImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunAtomic()
-   * @generated
-   */
-  int FUN_ATOMIC = 8;
-
-  /**
-   * The number of structural features of the '<em>Fun Atomic</em>' class.
+   * The number of structural features of the '<em>Block</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_ATOMIC_FEATURE_COUNT = FUN_EXPRESSION_FEATURE_COUNT + 0;
+  int BLOCK_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunPlusImpl <em>Fun Plus</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.StatementImpl <em>Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.FunPlusImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunPlus()
+   * @see xyz.varad.funpl.funPL.impl.StatementImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStatement()
    * @generated
    */
-  int FUN_PLUS = 9;
+  int STATEMENT = 7;
+
+  /**
+   * The number of structural features of the '<em>Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATEMENT_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.ExpressionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 8;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.TerminalExpressionImpl <em>Terminal Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.TerminalExpressionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTerminalExpression()
+   * @generated
+   */
+  int TERMINAL_EXPRESSION = 9;
+
+  /**
+   * The number of structural features of the '<em>Terminal Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.AssignmentImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
+   * @generated
+   */
+  int ASSIGNMENT = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -326,7 +354,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_PLUS__LEFT = FUN_EXPRESSION_FEATURE_COUNT + 0;
+  int ASSIGNMENT__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
@@ -335,44 +363,90 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUN_PLUS__RIGHT = FUN_EXPRESSION_FEATURE_COUNT + 1;
+  int ASSIGNMENT__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Fun Plus</em>' class.
+   * The number of structural features of the '<em>Assignment</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUN_PLUS_FEATURE_COUNT = FUN_EXPRESSION_FEATURE_COUNT + 2;
+  int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.StringConstantImpl <em>String Constant</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.PlusImpl <em>Plus</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.StringConstantImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
+   * @see xyz.varad.funpl.funPL.impl.PlusImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int STRING_CONSTANT = 10;
+  int PLUS = 11;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRING_CONSTANT__VALUE = FUN_ATOMIC_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>String Constant</em>' class.
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STRING_CONSTANT_FEATURE_COUNT = FUN_ATOMIC_FEATURE_COUNT + 1;
+  int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Plus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionCallImpl <em>Function Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.FunctionCallImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
+   * @generated
+   */
+  int FUNCTION_CALL = 12;
+
+  /**
+   * The feature id for the '<em><b>Function</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_CALL__FUNCTION = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Args</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_CALL__ARGS = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Function Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.IntConstantImpl <em>Int Constant</em>}' class.
@@ -382,7 +456,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 11;
+  int INT_CONSTANT = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -391,7 +465,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_CONSTANT__VALUE = FUN_ATOMIC_FEATURE_COUNT + 0;
+  int INT_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Int Constant</em>' class.
@@ -400,7 +474,91 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_CONSTANT_FEATURE_COUNT = FUN_ATOMIC_FEATURE_COUNT + 1;
+  int INT_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.StringConstantImpl <em>String Constant</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.StringConstantImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
+   * @generated
+   */
+  int STRING_CONSTANT = 14;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>String Constant</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.BoolConstantImpl <em>Bool Constant</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.BoolConstantImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
+   * @generated
+   */
+  int BOOL_CONSTANT = 15;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Bool Constant</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ValueRefImpl <em>Value Ref</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.ValueRefImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValueRef()
+   * @generated
+   */
+  int VALUE_REF = 16;
+
+  /**
+   * The feature id for the '<em><b>Variable</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_REF__VARIABLE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Value Ref</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_REF_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
 
 
   /**
@@ -425,182 +583,288 @@ public interface FunPLPackage extends EPackage
   EReference getFunProgram_Elements();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunAbstractElement <em>Fun Abstract Element</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.AbstractElement <em>Abstract Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Abstract Element</em>'.
-   * @see xyz.varad.funpl.funPL.FunAbstractElement
+   * @return the meta object for class '<em>Abstract Element</em>'.
+   * @see xyz.varad.funpl.funPL.AbstractElement
    * @generated
    */
-  EClass getFunAbstractElement();
+  EClass getAbstractElement();
 
   /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.FunAbstractElement#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Definition <em>Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Definition</em>'.
+   * @see xyz.varad.funpl.funPL.Definition
+   * @generated
+   */
+  EClass getDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Definition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see xyz.varad.funpl.funPL.FunAbstractElement#getName()
-   * @see #getFunAbstractElement()
+   * @see xyz.varad.funpl.funPL.Definition#getName()
+   * @see #getDefinition()
    * @generated
    */
-  EAttribute getFunAbstractElement_Name();
+  EAttribute getDefinition_Name();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunVarDeclaration <em>Fun Var Declaration</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Value <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Var Declaration</em>'.
-   * @see xyz.varad.funpl.funPL.FunVarDeclaration
+   * @return the meta object for class '<em>Value</em>'.
+   * @see xyz.varad.funpl.funPL.Value
    * @generated
    */
-  EClass getFunVarDeclaration();
+  EClass getValue();
 
   /**
-   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.FunVarDeclaration#getValue <em>Value</em>}'.
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Value#isIsConst <em>Is Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see xyz.varad.funpl.funPL.FunVarDeclaration#getValue()
-   * @see #getFunVarDeclaration()
+   * @return the meta object for the attribute '<em>Is Const</em>'.
+   * @see xyz.varad.funpl.funPL.Value#isIsConst()
+   * @see #getValue()
    * @generated
    */
-  EReference getFunVarDeclaration_Value();
+  EAttribute getValue_IsConst();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunMethod <em>Fun Method</em>}'.
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Value#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Method</em>'.
-   * @see xyz.varad.funpl.funPL.FunMethod
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see xyz.varad.funpl.funPL.Value#getExpression()
+   * @see #getValue()
    * @generated
    */
-  EClass getFunMethod();
+  EReference getValue_Expression();
 
   /**
-   * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.FunMethod#getParams <em>Params</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Function <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Function</em>'.
+   * @see xyz.varad.funpl.funPL.Function
+   * @generated
+   */
+  EClass getFunction();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.Function#getParams <em>Params</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Params</em>'.
-   * @see xyz.varad.funpl.funPL.FunMethod#getParams()
-   * @see #getFunMethod()
+   * @see xyz.varad.funpl.funPL.Function#getParams()
+   * @see #getFunction()
    * @generated
    */
-  EReference getFunMethod_Params();
+  EReference getFunction_Params();
 
   /**
-   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.FunMethod#getBody <em>Body</em>}'.
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Function#getBody <em>Body</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Body</em>'.
-   * @see xyz.varad.funpl.funPL.FunMethod#getBody()
-   * @see #getFunMethod()
+   * @see xyz.varad.funpl.funPL.Function#getBody()
+   * @see #getFunction()
    * @generated
    */
-  EReference getFunMethod_Body();
+  EReference getFunction_Body();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunBlock <em>Fun Block</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunctionParam <em>Function Param</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Block</em>'.
-   * @see xyz.varad.funpl.funPL.FunBlock
+   * @return the meta object for class '<em>Function Param</em>'.
+   * @see xyz.varad.funpl.funPL.FunctionParam
    * @generated
    */
-  EClass getFunBlock();
+  EClass getFunctionParam();
 
   /**
-   * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.FunBlock#getStatements <em>Statements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see xyz.varad.funpl.funPL.FunBlock#getStatements()
-   * @see #getFunBlock()
-   * @generated
-   */
-  EReference getFunBlock_Statements();
-
-  /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunParameter <em>Fun Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Parameter</em>'.
-   * @see xyz.varad.funpl.funPL.FunParameter
-   * @generated
-   */
-  EClass getFunParameter();
-
-  /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.FunParameter#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.FunctionParam#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see xyz.varad.funpl.funPL.FunParameter#getName()
-   * @see #getFunParameter()
+   * @see xyz.varad.funpl.funPL.FunctionParam#getName()
+   * @see #getFunctionParam()
    * @generated
    */
-  EAttribute getFunParameter_Name();
+  EAttribute getFunctionParam_Name();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunStatement <em>Fun Statement</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Block <em>Block</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Statement</em>'.
-   * @see xyz.varad.funpl.funPL.FunStatement
+   * @return the meta object for class '<em>Block</em>'.
+   * @see xyz.varad.funpl.funPL.Block
    * @generated
    */
-  EClass getFunStatement();
+  EClass getBlock();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunExpression <em>Fun Expression</em>}'.
+   * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.Block#getStatements <em>Statements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Expression</em>'.
-   * @see xyz.varad.funpl.funPL.FunExpression
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see xyz.varad.funpl.funPL.Block#getStatements()
+   * @see #getBlock()
    * @generated
    */
-  EClass getFunExpression();
+  EReference getBlock_Statements();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunAtomic <em>Fun Atomic</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Statement <em>Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Atomic</em>'.
-   * @see xyz.varad.funpl.funPL.FunAtomic
+   * @return the meta object for class '<em>Statement</em>'.
+   * @see xyz.varad.funpl.funPL.Statement
    * @generated
    */
-  EClass getFunAtomic();
+  EClass getStatement();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunPlus <em>Fun Plus</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Fun Plus</em>'.
-   * @see xyz.varad.funpl.funPL.FunPlus
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see xyz.varad.funpl.funPL.Expression
    * @generated
    */
-  EClass getFunPlus();
+  EClass getExpression();
 
   /**
-   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.FunPlus#getLeft <em>Left</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.TerminalExpression <em>Terminal Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Terminal Expression</em>'.
+   * @see xyz.varad.funpl.funPL.TerminalExpression
+   * @generated
+   */
+  EClass getTerminalExpression();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Assignment <em>Assignment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assignment</em>'.
+   * @see xyz.varad.funpl.funPL.Assignment
+   * @generated
+   */
+  EClass getAssignment();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Assignment#getLeft <em>Left</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see xyz.varad.funpl.funPL.FunPlus#getLeft()
-   * @see #getFunPlus()
+   * @see xyz.varad.funpl.funPL.Assignment#getLeft()
+   * @see #getAssignment()
    * @generated
    */
-  EReference getFunPlus_Left();
+  EReference getAssignment_Left();
 
   /**
-   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.FunPlus#getRight <em>Right</em>}'.
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Assignment#getRight <em>Right</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see xyz.varad.funpl.funPL.FunPlus#getRight()
-   * @see #getFunPlus()
+   * @see xyz.varad.funpl.funPL.Assignment#getRight()
+   * @see #getAssignment()
    * @generated
    */
-  EReference getFunPlus_Right();
+  EReference getAssignment_Right();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Plus</em>'.
+   * @see xyz.varad.funpl.funPL.Plus
+   * @generated
+   */
+  EClass getPlus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Plus#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see xyz.varad.funpl.funPL.Plus#getLeft()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Plus#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see xyz.varad.funpl.funPL.Plus#getRight()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Right();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunctionCall <em>Function Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Function Call</em>'.
+   * @see xyz.varad.funpl.funPL.FunctionCall
+   * @generated
+   */
+  EClass getFunctionCall();
+
+  /**
+   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.FunctionCall#getFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Function</em>'.
+   * @see xyz.varad.funpl.funPL.FunctionCall#getFunction()
+   * @see #getFunctionCall()
+   * @generated
+   */
+  EReference getFunctionCall_Function();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.FunctionCall#getArgs <em>Args</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Args</em>'.
+   * @see xyz.varad.funpl.funPL.FunctionCall#getArgs()
+   * @see #getFunctionCall()
+   * @generated
+   */
+  EReference getFunctionCall_Args();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.IntConstant <em>Int Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Int Constant</em>'.
+   * @see xyz.varad.funpl.funPL.IntConstant
+   * @generated
+   */
+  EClass getIntConstant();
+
+  /**
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.IntConstant#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see xyz.varad.funpl.funPL.IntConstant#getValue()
+   * @see #getIntConstant()
+   * @generated
+   */
+  EAttribute getIntConstant_Value();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.StringConstant <em>String Constant</em>}'.
@@ -624,25 +888,46 @@ public interface FunPLPackage extends EPackage
   EAttribute getStringConstant_Value();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.IntConstant <em>Int Constant</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.BoolConstant <em>Bool Constant</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Int Constant</em>'.
-   * @see xyz.varad.funpl.funPL.IntConstant
+   * @return the meta object for class '<em>Bool Constant</em>'.
+   * @see xyz.varad.funpl.funPL.BoolConstant
    * @generated
    */
-  EClass getIntConstant();
+  EClass getBoolConstant();
 
   /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.IntConstant#getValue <em>Value</em>}'.
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.BoolConstant#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Value</em>'.
-   * @see xyz.varad.funpl.funPL.IntConstant#getValue()
-   * @see #getIntConstant()
+   * @see xyz.varad.funpl.funPL.BoolConstant#getValue()
+   * @see #getBoolConstant()
    * @generated
    */
-  EAttribute getIntConstant_Value();
+  EAttribute getBoolConstant_Value();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.ValueRef <em>Value Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value Ref</em>'.
+   * @see xyz.varad.funpl.funPL.ValueRef
+   * @generated
+   */
+  EClass getValueRef();
+
+  /**
+   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.ValueRef#getVariable <em>Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Variable</em>'.
+   * @see xyz.varad.funpl.funPL.ValueRef#getVariable()
+   * @see #getValueRef()
+   * @generated
+   */
+  EReference getValueRef_Variable();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -686,14 +971,24 @@ public interface FunPLPackage extends EPackage
     EReference FUN_PROGRAM__ELEMENTS = eINSTANCE.getFunProgram_Elements();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunAbstractElementImpl <em>Fun Abstract Element</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunAbstractElementImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunAbstractElement()
+     * @see xyz.varad.funpl.funPL.impl.AbstractElementImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAbstractElement()
      * @generated
      */
-    EClass FUN_ABSTRACT_ELEMENT = eINSTANCE.getFunAbstractElement();
+    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.DefinitionImpl <em>Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.DefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinition()
+     * @generated
+     */
+    EClass DEFINITION = eINSTANCE.getDefinition();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -701,35 +996,43 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FUN_ABSTRACT_ELEMENT__NAME = eINSTANCE.getFunAbstractElement_Name();
+    EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunVarDeclarationImpl <em>Fun Var Declaration</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ValueImpl <em>Value</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunVarDeclarationImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunVarDeclaration()
+     * @see xyz.varad.funpl.funPL.impl.ValueImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValue()
      * @generated
      */
-    EClass FUN_VAR_DECLARATION = eINSTANCE.getFunVarDeclaration();
+    EClass VALUE = eINSTANCE.getValue();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Is Const</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUN_VAR_DECLARATION__VALUE = eINSTANCE.getFunVarDeclaration_Value();
+    EAttribute VALUE__IS_CONST = eINSTANCE.getValue_IsConst();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunMethodImpl <em>Fun Method</em>}' class.
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunMethodImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunMethod()
      * @generated
      */
-    EClass FUN_METHOD = eINSTANCE.getFunMethod();
+    EReference VALUE__EXPRESSION = eINSTANCE.getValue_Expression();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunctionImpl <em>Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.FunctionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunction()
+     * @generated
+     */
+    EClass FUNCTION = eINSTANCE.getFunction();
 
     /**
      * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
@@ -737,7 +1040,7 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUN_METHOD__PARAMS = eINSTANCE.getFunMethod_Params();
+    EReference FUNCTION__PARAMS = eINSTANCE.getFunction_Params();
 
     /**
      * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
@@ -745,35 +1048,17 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUN_METHOD__BODY = eINSTANCE.getFunMethod_Body();
+    EReference FUNCTION__BODY = eINSTANCE.getFunction_Body();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunBlockImpl <em>Fun Block</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunctionParamImpl <em>Function Param</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunBlockImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunBlock()
+     * @see xyz.varad.funpl.funPL.impl.FunctionParamImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionParam()
      * @generated
      */
-    EClass FUN_BLOCK = eINSTANCE.getFunBlock();
-
-    /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FUN_BLOCK__STATEMENTS = eINSTANCE.getFunBlock_Statements();
-
-    /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunParameterImpl <em>Fun Parameter</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunParameterImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunParameter()
-     * @generated
-     */
-    EClass FUN_PARAMETER = eINSTANCE.getFunParameter();
+    EClass FUNCTION_PARAM = eINSTANCE.getFunctionParam();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -781,47 +1066,65 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FUN_PARAMETER__NAME = eINSTANCE.getFunParameter_Name();
+    EAttribute FUNCTION_PARAM__NAME = eINSTANCE.getFunctionParam_Name();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunStatementImpl <em>Fun Statement</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.BlockImpl <em>Block</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunStatementImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunStatement()
+     * @see xyz.varad.funpl.funPL.impl.BlockImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBlock()
      * @generated
      */
-    EClass FUN_STATEMENT = eINSTANCE.getFunStatement();
+    EClass BLOCK = eINSTANCE.getBlock();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunExpressionImpl <em>Fun Expression</em>}' class.
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunExpressionImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunExpression()
      * @generated
      */
-    EClass FUN_EXPRESSION = eINSTANCE.getFunExpression();
+    EReference BLOCK__STATEMENTS = eINSTANCE.getBlock_Statements();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunAtomicImpl <em>Fun Atomic</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.StatementImpl <em>Statement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunAtomicImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunAtomic()
+     * @see xyz.varad.funpl.funPL.impl.StatementImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStatement()
      * @generated
      */
-    EClass FUN_ATOMIC = eINSTANCE.getFunAtomic();
+    EClass STATEMENT = eINSTANCE.getStatement();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunPlusImpl <em>Fun Plus</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ExpressionImpl <em>Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.FunPlusImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunPlus()
+     * @see xyz.varad.funpl.funPL.impl.ExpressionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getExpression()
      * @generated
      */
-    EClass FUN_PLUS = eINSTANCE.getFunPlus();
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.TerminalExpressionImpl <em>Terminal Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.TerminalExpressionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTerminalExpression()
+     * @generated
+     */
+    EClass TERMINAL_EXPRESSION = eINSTANCE.getTerminalExpression();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.AssignmentImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
+     * @generated
+     */
+    EClass ASSIGNMENT = eINSTANCE.getAssignment();
 
     /**
      * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
@@ -829,7 +1132,7 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUN_PLUS__LEFT = eINSTANCE.getFunPlus_Left();
+    EReference ASSIGNMENT__LEFT = eINSTANCE.getAssignment_Left();
 
     /**
      * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
@@ -837,7 +1140,77 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUN_PLUS__RIGHT = eINSTANCE.getFunPlus_Right();
+    EReference ASSIGNMENT__RIGHT = eINSTANCE.getAssignment_Right();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.PlusImpl <em>Plus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.PlusImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
+     * @generated
+     */
+    EClass PLUS = eINSTANCE.getPlus();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__LEFT = eINSTANCE.getPlus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__RIGHT = eINSTANCE.getPlus_Right();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunctionCallImpl <em>Function Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.FunctionCallImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
+     * @generated
+     */
+    EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
+
+    /**
+     * The meta object literal for the '<em><b>Function</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FUNCTION_CALL__FUNCTION = eINSTANCE.getFunctionCall_Function();
+
+    /**
+     * The meta object literal for the '<em><b>Args</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FUNCTION_CALL__ARGS = eINSTANCE.getFunctionCall_Args();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.IntConstantImpl <em>Int Constant</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.IntConstantImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
+     * @generated
+     */
+    EClass INT_CONSTANT = eINSTANCE.getIntConstant();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INT_CONSTANT__VALUE = eINSTANCE.getIntConstant_Value();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.StringConstantImpl <em>String Constant</em>}' class.
@@ -858,14 +1231,14 @@ public interface FunPLPackage extends EPackage
     EAttribute STRING_CONSTANT__VALUE = eINSTANCE.getStringConstant_Value();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.IntConstantImpl <em>Int Constant</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.BoolConstantImpl <em>Bool Constant</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.IntConstantImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
+     * @see xyz.varad.funpl.funPL.impl.BoolConstantImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
      * @generated
      */
-    EClass INT_CONSTANT = eINSTANCE.getIntConstant();
+    EClass BOOL_CONSTANT = eINSTANCE.getBoolConstant();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -873,7 +1246,25 @@ public interface FunPLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute INT_CONSTANT__VALUE = eINSTANCE.getIntConstant_Value();
+    EAttribute BOOL_CONSTANT__VALUE = eINSTANCE.getBoolConstant_Value();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ValueRefImpl <em>Value Ref</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.ValueRefImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValueRef()
+     * @generated
+     */
+    EClass VALUE_REF = eINSTANCE.getValueRef();
+
+    /**
+     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VALUE_REF__VARIABLE = eINSTANCE.getValueRef_Variable();
 
   }
 

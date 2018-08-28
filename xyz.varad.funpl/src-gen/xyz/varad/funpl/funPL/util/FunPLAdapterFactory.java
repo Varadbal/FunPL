@@ -81,49 +81,69 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createFunProgramAdapter();
       }
       @Override
-      public Adapter caseFunAbstractElement(FunAbstractElement object)
+      public Adapter caseAbstractElement(AbstractElement object)
       {
-        return createFunAbstractElementAdapter();
+        return createAbstractElementAdapter();
       }
       @Override
-      public Adapter caseFunVarDeclaration(FunVarDeclaration object)
+      public Adapter caseDefinition(Definition object)
       {
-        return createFunVarDeclarationAdapter();
+        return createDefinitionAdapter();
       }
       @Override
-      public Adapter caseFunMethod(FunMethod object)
+      public Adapter caseValue(Value object)
       {
-        return createFunMethodAdapter();
+        return createValueAdapter();
       }
       @Override
-      public Adapter caseFunBlock(FunBlock object)
+      public Adapter caseFunction(Function object)
       {
-        return createFunBlockAdapter();
+        return createFunctionAdapter();
       }
       @Override
-      public Adapter caseFunParameter(FunParameter object)
+      public Adapter caseFunctionParam(FunctionParam object)
       {
-        return createFunParameterAdapter();
+        return createFunctionParamAdapter();
       }
       @Override
-      public Adapter caseFunStatement(FunStatement object)
+      public Adapter caseBlock(Block object)
       {
-        return createFunStatementAdapter();
+        return createBlockAdapter();
       }
       @Override
-      public Adapter caseFunExpression(FunExpression object)
+      public Adapter caseStatement(Statement object)
       {
-        return createFunExpressionAdapter();
+        return createStatementAdapter();
       }
       @Override
-      public Adapter caseFunAtomic(FunAtomic object)
+      public Adapter caseExpression(Expression object)
       {
-        return createFunAtomicAdapter();
+        return createExpressionAdapter();
       }
       @Override
-      public Adapter caseFunPlus(FunPlus object)
+      public Adapter caseTerminalExpression(TerminalExpression object)
       {
-        return createFunPlusAdapter();
+        return createTerminalExpressionAdapter();
+      }
+      @Override
+      public Adapter caseAssignment(Assignment object)
+      {
+        return createAssignmentAdapter();
+      }
+      @Override
+      public Adapter casePlus(Plus object)
+      {
+        return createPlusAdapter();
+      }
+      @Override
+      public Adapter caseFunctionCall(FunctionCall object)
+      {
+        return createFunctionCallAdapter();
+      }
+      @Override
+      public Adapter caseIntConstant(IntConstant object)
+      {
+        return createIntConstantAdapter();
       }
       @Override
       public Adapter caseStringConstant(StringConstant object)
@@ -131,9 +151,14 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createStringConstantAdapter();
       }
       @Override
-      public Adapter caseIntConstant(IntConstant object)
+      public Adapter caseBoolConstant(BoolConstant object)
       {
-        return createIntConstantAdapter();
+        return createBoolConstantAdapter();
+      }
+      @Override
+      public Adapter caseValueRef(ValueRef object)
+      {
+        return createValueRefAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -173,136 +198,196 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunAbstractElement <em>Fun Abstract Element</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.AbstractElement <em>Abstract Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunAbstractElement
+   * @see xyz.varad.funpl.funPL.AbstractElement
    * @generated
    */
-  public Adapter createFunAbstractElementAdapter()
+  public Adapter createAbstractElementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunVarDeclaration <em>Fun Var Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Definition <em>Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunVarDeclaration
+   * @see xyz.varad.funpl.funPL.Definition
    * @generated
    */
-  public Adapter createFunVarDeclarationAdapter()
+  public Adapter createDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunMethod <em>Fun Method</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Value <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunMethod
+   * @see xyz.varad.funpl.funPL.Value
    * @generated
    */
-  public Adapter createFunMethodAdapter()
+  public Adapter createValueAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunBlock <em>Fun Block</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Function <em>Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunBlock
+   * @see xyz.varad.funpl.funPL.Function
    * @generated
    */
-  public Adapter createFunBlockAdapter()
+  public Adapter createFunctionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunParameter <em>Fun Parameter</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunctionParam <em>Function Param</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunParameter
+   * @see xyz.varad.funpl.funPL.FunctionParam
    * @generated
    */
-  public Adapter createFunParameterAdapter()
+  public Adapter createFunctionParamAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunStatement <em>Fun Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Block <em>Block</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunStatement
+   * @see xyz.varad.funpl.funPL.Block
    * @generated
    */
-  public Adapter createFunStatementAdapter()
+  public Adapter createBlockAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunExpression <em>Fun Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Statement <em>Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunExpression
+   * @see xyz.varad.funpl.funPL.Statement
    * @generated
    */
-  public Adapter createFunExpressionAdapter()
+  public Adapter createStatementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunAtomic <em>Fun Atomic</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunAtomic
+   * @see xyz.varad.funpl.funPL.Expression
    * @generated
    */
-  public Adapter createFunAtomicAdapter()
+  public Adapter createExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunPlus <em>Fun Plus</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.TerminalExpression <em>Terminal Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.FunPlus
+   * @see xyz.varad.funpl.funPL.TerminalExpression
    * @generated
    */
-  public Adapter createFunPlusAdapter()
+  public Adapter createTerminalExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Assignment <em>Assignment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.Assignment
+   * @generated
+   */
+  public Adapter createAssignmentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.Plus
+   * @generated
+   */
+  public Adapter createPlusAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunctionCall <em>Function Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.FunctionCall
+   * @generated
+   */
+  public Adapter createFunctionCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.IntConstant <em>Int Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.IntConstant
+   * @generated
+   */
+  public Adapter createIntConstantAdapter()
   {
     return null;
   }
@@ -323,16 +408,31 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.IntConstant <em>Int Constant</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.BoolConstant <em>Bool Constant</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.IntConstant
+   * @see xyz.varad.funpl.funPL.BoolConstant
    * @generated
    */
-  public Adapter createIntConstantAdapter()
+  public Adapter createBoolConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.ValueRef <em>Value Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.ValueRef
+   * @generated
+   */
+  public Adapter createValueRefAdapter()
   {
     return null;
   }

@@ -10,20 +10,25 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import xyz.varad.funpl.funPL.FunAbstractElement;
-import xyz.varad.funpl.funPL.FunAtomic;
-import xyz.varad.funpl.funPL.FunBlock;
-import xyz.varad.funpl.funPL.FunExpression;
-import xyz.varad.funpl.funPL.FunMethod;
+import xyz.varad.funpl.funPL.AbstractElement;
+import xyz.varad.funpl.funPL.Assignment;
+import xyz.varad.funpl.funPL.Block;
+import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLFactory;
 import xyz.varad.funpl.funPL.FunPLPackage;
-import xyz.varad.funpl.funPL.FunParameter;
-import xyz.varad.funpl.funPL.FunPlus;
 import xyz.varad.funpl.funPL.FunProgram;
-import xyz.varad.funpl.funPL.FunStatement;
-import xyz.varad.funpl.funPL.FunVarDeclaration;
+import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionCall;
+import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.TerminalExpression;
+import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.funPL.ValueRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,63 +50,91 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funAbstractElementEClass = null;
+  private EClass abstractElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funVarDeclarationEClass = null;
+  private EClass definitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funMethodEClass = null;
+  private EClass valueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funBlockEClass = null;
+  private EClass functionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funParameterEClass = null;
+  private EClass functionParamEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funStatementEClass = null;
+  private EClass blockEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funExpressionEClass = null;
+  private EClass statementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funAtomicEClass = null;
+  private EClass expressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass funPlusEClass = null;
+  private EClass terminalExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assignmentEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass plusEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass functionCallEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intConstantEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -115,7 +148,14 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass intConstantEClass = null;
+  private EClass boolConstantEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass valueRefEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -205,9 +245,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunAbstractElement()
+  public EClass getAbstractElement()
   {
-    return funAbstractElementEClass;
+    return abstractElementEClass;
   }
 
   /**
@@ -215,9 +255,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunAbstractElement_Name()
+  public EClass getDefinition()
   {
-    return (EAttribute)funAbstractElementEClass.getEStructuralFeatures().get(0);
+    return definitionEClass;
   }
 
   /**
@@ -225,9 +265,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunVarDeclaration()
+  public EAttribute getDefinition_Name()
   {
-    return funVarDeclarationEClass;
+    return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -235,9 +275,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunVarDeclaration_Value()
+  public EClass getValue()
   {
-    return (EReference)funVarDeclarationEClass.getEStructuralFeatures().get(0);
+    return valueEClass;
   }
 
   /**
@@ -245,9 +285,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunMethod()
+  public EAttribute getValue_IsConst()
   {
-    return funMethodEClass;
+    return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -255,9 +295,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunMethod_Params()
+  public EReference getValue_Expression()
   {
-    return (EReference)funMethodEClass.getEStructuralFeatures().get(0);
+    return (EReference)valueEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -265,9 +305,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunMethod_Body()
+  public EClass getFunction()
   {
-    return (EReference)funMethodEClass.getEStructuralFeatures().get(1);
+    return functionEClass;
   }
 
   /**
@@ -275,9 +315,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunBlock()
+  public EReference getFunction_Params()
   {
-    return funBlockEClass;
+    return (EReference)functionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -285,9 +325,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunBlock_Statements()
+  public EReference getFunction_Body()
   {
-    return (EReference)funBlockEClass.getEStructuralFeatures().get(0);
+    return (EReference)functionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -295,9 +335,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunParameter()
+  public EClass getFunctionParam()
   {
-    return funParameterEClass;
+    return functionParamEClass;
   }
 
   /**
@@ -305,9 +345,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunParameter_Name()
+  public EAttribute getFunctionParam_Name()
   {
-    return (EAttribute)funParameterEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)functionParamEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -315,9 +355,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunStatement()
+  public EClass getBlock()
   {
-    return funStatementEClass;
+    return blockEClass;
   }
 
   /**
@@ -325,9 +365,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunExpression()
+  public EReference getBlock_Statements()
   {
-    return funExpressionEClass;
+    return (EReference)blockEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -335,9 +375,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunAtomic()
+  public EClass getStatement()
   {
-    return funAtomicEClass;
+    return statementEClass;
   }
 
   /**
@@ -345,9 +385,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunPlus()
+  public EClass getExpression()
   {
-    return funPlusEClass;
+    return expressionEClass;
   }
 
   /**
@@ -355,9 +395,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunPlus_Left()
+  public EClass getTerminalExpression()
   {
-    return (EReference)funPlusEClass.getEStructuralFeatures().get(0);
+    return terminalExpressionEClass;
   }
 
   /**
@@ -365,9 +405,109 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunPlus_Right()
+  public EClass getAssignment()
   {
-    return (EReference)funPlusEClass.getEStructuralFeatures().get(1);
+    return assignmentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssignment_Left()
+  {
+    return (EReference)assignmentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssignment_Right()
+  {
+    return (EReference)assignmentEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPlus()
+  {
+    return plusEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPlus_Left()
+  {
+    return (EReference)plusEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPlus_Right()
+  {
+    return (EReference)plusEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFunctionCall()
+  {
+    return functionCallEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunctionCall_Function()
+  {
+    return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunctionCall_Args()
+  {
+    return (EReference)functionCallEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntConstant()
+  {
+    return intConstantEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIntConstant_Value()
+  {
+    return (EAttribute)intConstantEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -395,9 +535,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getIntConstant()
+  public EClass getBoolConstant()
   {
-    return intConstantEClass;
+    return boolConstantEClass;
   }
 
   /**
@@ -405,9 +545,29 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getIntConstant_Value()
+  public EAttribute getBoolConstant_Value()
   {
-    return (EAttribute)intConstantEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)boolConstantEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getValueRef()
+  {
+    return valueRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getValueRef_Variable()
+  {
+    return (EReference)valueRefEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -443,37 +603,54 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     funProgramEClass = createEClass(FUN_PROGRAM);
     createEReference(funProgramEClass, FUN_PROGRAM__ELEMENTS);
 
-    funAbstractElementEClass = createEClass(FUN_ABSTRACT_ELEMENT);
-    createEAttribute(funAbstractElementEClass, FUN_ABSTRACT_ELEMENT__NAME);
+    abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
 
-    funVarDeclarationEClass = createEClass(FUN_VAR_DECLARATION);
-    createEReference(funVarDeclarationEClass, FUN_VAR_DECLARATION__VALUE);
+    definitionEClass = createEClass(DEFINITION);
+    createEAttribute(definitionEClass, DEFINITION__NAME);
 
-    funMethodEClass = createEClass(FUN_METHOD);
-    createEReference(funMethodEClass, FUN_METHOD__PARAMS);
-    createEReference(funMethodEClass, FUN_METHOD__BODY);
+    valueEClass = createEClass(VALUE);
+    createEAttribute(valueEClass, VALUE__IS_CONST);
+    createEReference(valueEClass, VALUE__EXPRESSION);
 
-    funBlockEClass = createEClass(FUN_BLOCK);
-    createEReference(funBlockEClass, FUN_BLOCK__STATEMENTS);
+    functionEClass = createEClass(FUNCTION);
+    createEReference(functionEClass, FUNCTION__PARAMS);
+    createEReference(functionEClass, FUNCTION__BODY);
 
-    funParameterEClass = createEClass(FUN_PARAMETER);
-    createEAttribute(funParameterEClass, FUN_PARAMETER__NAME);
+    functionParamEClass = createEClass(FUNCTION_PARAM);
+    createEAttribute(functionParamEClass, FUNCTION_PARAM__NAME);
 
-    funStatementEClass = createEClass(FUN_STATEMENT);
+    blockEClass = createEClass(BLOCK);
+    createEReference(blockEClass, BLOCK__STATEMENTS);
 
-    funExpressionEClass = createEClass(FUN_EXPRESSION);
+    statementEClass = createEClass(STATEMENT);
 
-    funAtomicEClass = createEClass(FUN_ATOMIC);
+    expressionEClass = createEClass(EXPRESSION);
 
-    funPlusEClass = createEClass(FUN_PLUS);
-    createEReference(funPlusEClass, FUN_PLUS__LEFT);
-    createEReference(funPlusEClass, FUN_PLUS__RIGHT);
+    terminalExpressionEClass = createEClass(TERMINAL_EXPRESSION);
+
+    assignmentEClass = createEClass(ASSIGNMENT);
+    createEReference(assignmentEClass, ASSIGNMENT__LEFT);
+    createEReference(assignmentEClass, ASSIGNMENT__RIGHT);
+
+    plusEClass = createEClass(PLUS);
+    createEReference(plusEClass, PLUS__LEFT);
+    createEReference(plusEClass, PLUS__RIGHT);
+
+    functionCallEClass = createEClass(FUNCTION_CALL);
+    createEReference(functionCallEClass, FUNCTION_CALL__FUNCTION);
+    createEReference(functionCallEClass, FUNCTION_CALL__ARGS);
+
+    intConstantEClass = createEClass(INT_CONSTANT);
+    createEAttribute(intConstantEClass, INT_CONSTANT__VALUE);
 
     stringConstantEClass = createEClass(STRING_CONSTANT);
     createEAttribute(stringConstantEClass, STRING_CONSTANT__VALUE);
 
-    intConstantEClass = createEClass(INT_CONSTANT);
-    createEAttribute(intConstantEClass, INT_CONSTANT__VALUE);
+    boolConstantEClass = createEClass(BOOL_CONSTANT);
+    createEAttribute(boolConstantEClass, BOOL_CONSTANT__VALUE);
+
+    valueRefEClass = createEClass(VALUE_REF);
+    createEReference(valueRefEClass, VALUE_REF__VARIABLE);
   }
 
   /**
@@ -505,50 +682,72 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    funVarDeclarationEClass.getESuperTypes().add(this.getFunAbstractElement());
-    funVarDeclarationEClass.getESuperTypes().add(this.getFunStatement());
-    funMethodEClass.getESuperTypes().add(this.getFunAbstractElement());
-    funExpressionEClass.getESuperTypes().add(this.getFunStatement());
-    funAtomicEClass.getESuperTypes().add(this.getFunExpression());
-    funPlusEClass.getESuperTypes().add(this.getFunExpression());
-    stringConstantEClass.getESuperTypes().add(this.getFunAtomic());
-    intConstantEClass.getESuperTypes().add(this.getFunAtomic());
+    definitionEClass.getESuperTypes().add(this.getAbstractElement());
+    valueEClass.getESuperTypes().add(this.getDefinition());
+    valueEClass.getESuperTypes().add(this.getStatement());
+    functionEClass.getESuperTypes().add(this.getDefinition());
+    expressionEClass.getESuperTypes().add(this.getStatement());
+    terminalExpressionEClass.getESuperTypes().add(this.getExpression());
+    assignmentEClass.getESuperTypes().add(this.getExpression());
+    plusEClass.getESuperTypes().add(this.getExpression());
+    functionCallEClass.getESuperTypes().add(this.getExpression());
+    intConstantEClass.getESuperTypes().add(this.getTerminalExpression());
+    stringConstantEClass.getESuperTypes().add(this.getTerminalExpression());
+    boolConstantEClass.getESuperTypes().add(this.getTerminalExpression());
+    valueRefEClass.getESuperTypes().add(this.getTerminalExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(funProgramEClass, FunProgram.class, "FunProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunProgram_Elements(), this.getFunAbstractElement(), null, "elements", null, 0, -1, FunProgram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunProgram_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, FunProgram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funAbstractElementEClass, FunAbstractElement.class, "FunAbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFunAbstractElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunAbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(funVarDeclarationEClass, FunVarDeclaration.class, "FunVarDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunVarDeclaration_Value(), this.getFunExpression(), null, "value", null, 0, 1, FunVarDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funMethodEClass, FunMethod.class, "FunMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunMethod_Params(), this.getFunParameter(), null, "params", null, 0, -1, FunMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunMethod_Body(), this.getFunBlock(), null, "body", null, 0, 1, FunMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getValue_IsConst(), ecorePackage.getEBoolean(), "isConst", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getValue_Expression(), this.getExpression(), null, "expression", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funBlockEClass, FunBlock.class, "FunBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunBlock_Statements(), this.getFunStatement(), null, "statements", null, 0, -1, FunBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFunction_Params(), this.getFunctionParam(), null, "params", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunction_Body(), this.getBlock(), null, "body", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funParameterEClass, FunParameter.class, "FunParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFunParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(functionParamEClass, FunctionParam.class, "FunctionParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFunctionParam_Name(), ecorePackage.getEString(), "Name", null, 0, 1, FunctionParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funStatementEClass, FunStatement.class, "FunStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(funExpressionEClass, FunExpression.class, "FunExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(funAtomicEClass, FunAtomic.class, "FunAtomic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(funPlusEClass, FunPlus.class, "FunPlus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunPlus_Left(), this.getFunExpression(), null, "left", null, 0, 1, FunPlus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunPlus_Right(), this.getFunExpression(), null, "right", null, 0, 1, FunPlus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(terminalExpressionEClass, TerminalExpression.class, "TerminalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAssignment_Left(), this.getExpression(), null, "left", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssignment_Right(), this.getExpression(), null, "right", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPlus_Left(), this.getExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPlus_Right(), this.getExpression(), null, "right", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFunctionCall_Function(), this.getFunction(), null, "function", null, 0, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionCall_Args(), this.getExpression(), null, "args", null, 0, -1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(intConstantEClass, IntConstant.class, "IntConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIntConstant_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stringConstantEClass, StringConstant.class, "StringConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStringConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(intConstantEClass, IntConstant.class, "IntConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getIntConstant_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(boolConstantEClass, BoolConstant.class, "BoolConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBoolConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, BoolConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(valueRefEClass, ValueRef.class, "ValueRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getValueRef_Variable(), this.getValue(), null, "variable", null, 0, 1, ValueRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

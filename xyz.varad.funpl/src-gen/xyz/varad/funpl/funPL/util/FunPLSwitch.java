@@ -80,84 +80,102 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_ABSTRACT_ELEMENT:
+      case FunPLPackage.ABSTRACT_ELEMENT:
       {
-        FunAbstractElement funAbstractElement = (FunAbstractElement)theEObject;
-        T result = caseFunAbstractElement(funAbstractElement);
+        AbstractElement abstractElement = (AbstractElement)theEObject;
+        T result = caseAbstractElement(abstractElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_VAR_DECLARATION:
+      case FunPLPackage.DEFINITION:
       {
-        FunVarDeclaration funVarDeclaration = (FunVarDeclaration)theEObject;
-        T result = caseFunVarDeclaration(funVarDeclaration);
-        if (result == null) result = caseFunAbstractElement(funVarDeclaration);
-        if (result == null) result = caseFunStatement(funVarDeclaration);
+        Definition definition = (Definition)theEObject;
+        T result = caseDefinition(definition);
+        if (result == null) result = caseAbstractElement(definition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_METHOD:
+      case FunPLPackage.VALUE:
       {
-        FunMethod funMethod = (FunMethod)theEObject;
-        T result = caseFunMethod(funMethod);
-        if (result == null) result = caseFunAbstractElement(funMethod);
+        Value value = (Value)theEObject;
+        T result = caseValue(value);
+        if (result == null) result = caseDefinition(value);
+        if (result == null) result = caseStatement(value);
+        if (result == null) result = caseAbstractElement(value);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_BLOCK:
+      case FunPLPackage.FUNCTION:
       {
-        FunBlock funBlock = (FunBlock)theEObject;
-        T result = caseFunBlock(funBlock);
+        Function function = (Function)theEObject;
+        T result = caseFunction(function);
+        if (result == null) result = caseDefinition(function);
+        if (result == null) result = caseAbstractElement(function);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_PARAMETER:
+      case FunPLPackage.FUNCTION_PARAM:
       {
-        FunParameter funParameter = (FunParameter)theEObject;
-        T result = caseFunParameter(funParameter);
+        FunctionParam functionParam = (FunctionParam)theEObject;
+        T result = caseFunctionParam(functionParam);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_STATEMENT:
+      case FunPLPackage.BLOCK:
       {
-        FunStatement funStatement = (FunStatement)theEObject;
-        T result = caseFunStatement(funStatement);
+        Block block = (Block)theEObject;
+        T result = caseBlock(block);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_EXPRESSION:
+      case FunPLPackage.STATEMENT:
       {
-        FunExpression funExpression = (FunExpression)theEObject;
-        T result = caseFunExpression(funExpression);
-        if (result == null) result = caseFunStatement(funExpression);
+        Statement statement = (Statement)theEObject;
+        T result = caseStatement(statement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_ATOMIC:
+      case FunPLPackage.EXPRESSION:
       {
-        FunAtomic funAtomic = (FunAtomic)theEObject;
-        T result = caseFunAtomic(funAtomic);
-        if (result == null) result = caseFunExpression(funAtomic);
-        if (result == null) result = caseFunStatement(funAtomic);
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = caseStatement(expression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.FUN_PLUS:
+      case FunPLPackage.TERMINAL_EXPRESSION:
       {
-        FunPlus funPlus = (FunPlus)theEObject;
-        T result = caseFunPlus(funPlus);
-        if (result == null) result = caseFunExpression(funPlus);
-        if (result == null) result = caseFunStatement(funPlus);
+        TerminalExpression terminalExpression = (TerminalExpression)theEObject;
+        T result = caseTerminalExpression(terminalExpression);
+        if (result == null) result = caseExpression(terminalExpression);
+        if (result == null) result = caseStatement(terminalExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.STRING_CONSTANT:
+      case FunPLPackage.ASSIGNMENT:
       {
-        StringConstant stringConstant = (StringConstant)theEObject;
-        T result = caseStringConstant(stringConstant);
-        if (result == null) result = caseFunAtomic(stringConstant);
-        if (result == null) result = caseFunExpression(stringConstant);
-        if (result == null) result = caseFunStatement(stringConstant);
+        Assignment assignment = (Assignment)theEObject;
+        T result = caseAssignment(assignment);
+        if (result == null) result = caseExpression(assignment);
+        if (result == null) result = caseStatement(assignment);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.PLUS:
+      {
+        Plus plus = (Plus)theEObject;
+        T result = casePlus(plus);
+        if (result == null) result = caseExpression(plus);
+        if (result == null) result = caseStatement(plus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.FUNCTION_CALL:
+      {
+        FunctionCall functionCall = (FunctionCall)theEObject;
+        T result = caseFunctionCall(functionCall);
+        if (result == null) result = caseExpression(functionCall);
+        if (result == null) result = caseStatement(functionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -165,9 +183,39 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         IntConstant intConstant = (IntConstant)theEObject;
         T result = caseIntConstant(intConstant);
-        if (result == null) result = caseFunAtomic(intConstant);
-        if (result == null) result = caseFunExpression(intConstant);
-        if (result == null) result = caseFunStatement(intConstant);
+        if (result == null) result = caseTerminalExpression(intConstant);
+        if (result == null) result = caseExpression(intConstant);
+        if (result == null) result = caseStatement(intConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.STRING_CONSTANT:
+      {
+        StringConstant stringConstant = (StringConstant)theEObject;
+        T result = caseStringConstant(stringConstant);
+        if (result == null) result = caseTerminalExpression(stringConstant);
+        if (result == null) result = caseExpression(stringConstant);
+        if (result == null) result = caseStatement(stringConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.BOOL_CONSTANT:
+      {
+        BoolConstant boolConstant = (BoolConstant)theEObject;
+        T result = caseBoolConstant(boolConstant);
+        if (result == null) result = caseTerminalExpression(boolConstant);
+        if (result == null) result = caseExpression(boolConstant);
+        if (result == null) result = caseStatement(boolConstant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.VALUE_REF:
+      {
+        ValueRef valueRef = (ValueRef)theEObject;
+        T result = caseValueRef(valueRef);
+        if (result == null) result = caseTerminalExpression(valueRef);
+        if (result == null) result = caseExpression(valueRef);
+        if (result == null) result = caseStatement(valueRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -192,145 +240,209 @@ public class FunPLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Abstract Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Abstract Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunAbstractElement(FunAbstractElement object)
+  public T caseAbstractElement(AbstractElement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Var Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Var Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunVarDeclaration(FunVarDeclaration object)
+  public T caseDefinition(Definition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Method</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Method</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Value</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunMethod(FunMethod object)
+  public T caseValue(Value object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Block</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Block</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunBlock(FunBlock object)
+  public T caseFunction(Function object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Parameter</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Function Param</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Parameter</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Function Param</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunParameter(FunParameter object)
+  public T caseFunctionParam(FunctionParam object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Block</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunStatement(FunStatement object)
+  public T caseBlock(Block object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunExpression(FunExpression object)
+  public T caseStatement(Statement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Atomic</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Atomic</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunAtomic(FunAtomic object)
+  public T caseExpression(Expression object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Plus</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Terminal Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Plus</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Terminal Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunPlus(FunPlus object)
+  public T caseTerminalExpression(TerminalExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssignment(Assignment object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePlus(Plus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFunctionCall(FunctionCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntConstant(IntConstant object)
   {
     return null;
   }
@@ -352,17 +464,33 @@ public class FunPLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Bool Constant</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Bool Constant</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseIntConstant(IntConstant object)
+  public T caseBoolConstant(BoolConstant object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseValueRef(ValueRef object)
   {
     return null;
   }

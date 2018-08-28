@@ -33,85 +33,121 @@ public interface FunPLFactory extends EFactory
   FunProgram createFunProgram();
 
   /**
-   * Returns a new object of class '<em>Fun Abstract Element</em>'.
+   * Returns a new object of class '<em>Abstract Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Abstract Element</em>'.
+   * @return a new object of class '<em>Abstract Element</em>'.
    * @generated
    */
-  FunAbstractElement createFunAbstractElement();
+  AbstractElement createAbstractElement();
 
   /**
-   * Returns a new object of class '<em>Fun Var Declaration</em>'.
+   * Returns a new object of class '<em>Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Var Declaration</em>'.
+   * @return a new object of class '<em>Definition</em>'.
    * @generated
    */
-  FunVarDeclaration createFunVarDeclaration();
+  Definition createDefinition();
 
   /**
-   * Returns a new object of class '<em>Fun Method</em>'.
+   * Returns a new object of class '<em>Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Method</em>'.
+   * @return a new object of class '<em>Value</em>'.
    * @generated
    */
-  FunMethod createFunMethod();
+  Value createValue();
 
   /**
-   * Returns a new object of class '<em>Fun Block</em>'.
+   * Returns a new object of class '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Block</em>'.
+   * @return a new object of class '<em>Function</em>'.
    * @generated
    */
-  FunBlock createFunBlock();
+  Function createFunction();
 
   /**
-   * Returns a new object of class '<em>Fun Parameter</em>'.
+   * Returns a new object of class '<em>Function Param</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Parameter</em>'.
+   * @return a new object of class '<em>Function Param</em>'.
    * @generated
    */
-  FunParameter createFunParameter();
+  FunctionParam createFunctionParam();
 
   /**
-   * Returns a new object of class '<em>Fun Statement</em>'.
+   * Returns a new object of class '<em>Block</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Statement</em>'.
+   * @return a new object of class '<em>Block</em>'.
    * @generated
    */
-  FunStatement createFunStatement();
+  Block createBlock();
 
   /**
-   * Returns a new object of class '<em>Fun Expression</em>'.
+   * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Expression</em>'.
+   * @return a new object of class '<em>Statement</em>'.
    * @generated
    */
-  FunExpression createFunExpression();
+  Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>Fun Atomic</em>'.
+   * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Atomic</em>'.
+   * @return a new object of class '<em>Expression</em>'.
    * @generated
    */
-  FunAtomic createFunAtomic();
+  Expression createExpression();
 
   /**
-   * Returns a new object of class '<em>Fun Plus</em>'.
+   * Returns a new object of class '<em>Terminal Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Plus</em>'.
+   * @return a new object of class '<em>Terminal Expression</em>'.
    * @generated
    */
-  FunPlus createFunPlus();
+  TerminalExpression createTerminalExpression();
+
+  /**
+   * Returns a new object of class '<em>Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assignment</em>'.
+   * @generated
+   */
+  Assignment createAssignment();
+
+  /**
+   * Returns a new object of class '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plus</em>'.
+   * @generated
+   */
+  Plus createPlus();
+
+  /**
+   * Returns a new object of class '<em>Function Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function Call</em>'.
+   * @generated
+   */
+  FunctionCall createFunctionCall();
+
+  /**
+   * Returns a new object of class '<em>Int Constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Int Constant</em>'.
+   * @generated
+   */
+  IntConstant createIntConstant();
 
   /**
    * Returns a new object of class '<em>String Constant</em>'.
@@ -123,13 +159,22 @@ public interface FunPLFactory extends EFactory
   StringConstant createStringConstant();
 
   /**
-   * Returns a new object of class '<em>Int Constant</em>'.
+   * Returns a new object of class '<em>Bool Constant</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Int Constant</em>'.
+   * @return a new object of class '<em>Bool Constant</em>'.
    * @generated
    */
-  IntConstant createIntConstant();
+  BoolConstant createBoolConstant();
+
+  /**
+   * Returns a new object of class '<em>Value Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value Ref</em>'.
+   * @generated
+   */
+  ValueRef createValueRef();
 
   /**
    * Returns the package supported by this factory.

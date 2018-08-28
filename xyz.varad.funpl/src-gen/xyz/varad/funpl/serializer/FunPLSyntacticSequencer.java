@@ -20,14 +20,14 @@ import xyz.varad.funpl.services.FunPLGrammarAccess;
 public class FunPLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected FunPLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_FunPrimary_LeftParenthesisKeyword_0_0_a;
-	protected AbstractElementAlias match_FunPrimary_LeftParenthesisKeyword_0_0_p;
+	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_0_0_a;
+	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_0_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (FunPLGrammarAccess) access;
-		match_FunPrimary_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getFunPrimaryAccess().getLeftParenthesisKeyword_0_0());
-		match_FunPrimary_LeftParenthesisKeyword_0_0_p = new TokenAlias(true, false, grammarAccess.getFunPrimaryAccess().getLeftParenthesisKeyword_0_0());
+		match_PrimaryExpression_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
+		match_PrimaryExpression_LeftParenthesisKeyword_0_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_0_0());
 	}
 	
 	@Override
@@ -42,10 +42,10 @@ public class FunPLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_FunPrimary_LeftParenthesisKeyword_0_0_a.equals(syntax))
-				emit_FunPrimary_LeftParenthesisKeyword_0_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_FunPrimary_LeftParenthesisKeyword_0_0_p.equals(syntax))
-				emit_FunPrimary_LeftParenthesisKeyword_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_PrimaryExpression_LeftParenthesisKeyword_0_0_a.equals(syntax))
+				emit_PrimaryExpression_LeftParenthesisKeyword_0_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PrimaryExpression_LeftParenthesisKeyword_0_0_p.equals(syntax))
+				emit_PrimaryExpression_LeftParenthesisKeyword_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -55,11 +55,16 @@ public class FunPLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) function=[Function|ID]
+	 *     (rule start) (ambiguity) value='false'
+	 *     (rule start) (ambiguity) value='true'
 	 *     (rule start) (ambiguity) value=INT
 	 *     (rule start) (ambiguity) value=STRING
-	 *     (rule start) (ambiguity) {FunPlus.left=}
+	 *     (rule start) (ambiguity) variable=[Value|ID]
+	 *     (rule start) (ambiguity) {Assignment.left=}
+	 *     (rule start) (ambiguity) {Plus.left=}
 	 */
-	protected void emit_FunPrimary_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_PrimaryExpression_LeftParenthesisKeyword_0_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -68,9 +73,10 @@ public class FunPLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) {FunPlus.left=}
+	 *     (rule start) (ambiguity) {Assignment.left=}
+	 *     (rule start) (ambiguity) {Plus.left=}
 	 */
-	protected void emit_FunPrimary_LeftParenthesisKeyword_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_PrimaryExpression_LeftParenthesisKeyword_0_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -14,15 +14,19 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import xyz.varad.funpl.funPL.FunBlock;
-import xyz.varad.funpl.funPL.FunMethod;
+import xyz.varad.funpl.funPL.Assignment;
+import xyz.varad.funpl.funPL.Block;
+import xyz.varad.funpl.funPL.BoolConstant;
 import xyz.varad.funpl.funPL.FunPLPackage;
-import xyz.varad.funpl.funPL.FunParameter;
-import xyz.varad.funpl.funPL.FunPlus;
 import xyz.varad.funpl.funPL.FunProgram;
-import xyz.varad.funpl.funPL.FunVarDeclaration;
+import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionCall;
+import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.funPL.ValueRef;
 import xyz.varad.funpl.services.FunPLGrammarAccess;
 
 @SuppressWarnings("all")
@@ -39,29 +43,41 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == FunPLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case FunPLPackage.FUN_BLOCK:
-				sequence_FunBlock(context, (FunBlock) semanticObject); 
+			case FunPLPackage.ASSIGNMENT:
+				sequence_Assignment(context, (Assignment) semanticObject); 
 				return; 
-			case FunPLPackage.FUN_METHOD:
-				sequence_FunMethod(context, (FunMethod) semanticObject); 
+			case FunPLPackage.BLOCK:
+				sequence_Block(context, (Block) semanticObject); 
 				return; 
-			case FunPLPackage.FUN_PARAMETER:
-				sequence_FunParameter(context, (FunParameter) semanticObject); 
-				return; 
-			case FunPLPackage.FUN_PLUS:
-				sequence_FunPlus(context, (FunPlus) semanticObject); 
+			case FunPLPackage.BOOL_CONSTANT:
+				sequence_TerminalExpression(context, (BoolConstant) semanticObject); 
 				return; 
 			case FunPLPackage.FUN_PROGRAM:
 				sequence_FunProgram(context, (FunProgram) semanticObject); 
 				return; 
-			case FunPLPackage.FUN_VAR_DECLARATION:
-				sequence_FunVarDeclaration(context, (FunVarDeclaration) semanticObject); 
+			case FunPLPackage.FUNCTION:
+				sequence_Function(context, (Function) semanticObject); 
+				return; 
+			case FunPLPackage.FUNCTION_CALL:
+				sequence_FunctionCall(context, (FunctionCall) semanticObject); 
+				return; 
+			case FunPLPackage.FUNCTION_PARAM:
+				sequence_FunctionParam(context, (FunctionParam) semanticObject); 
 				return; 
 			case FunPLPackage.INT_CONSTANT:
-				sequence_FunAtomic(context, (IntConstant) semanticObject); 
+				sequence_TerminalExpression(context, (IntConstant) semanticObject); 
+				return; 
+			case FunPLPackage.PLUS:
+				sequence_Plus(context, (Plus) semanticObject); 
 				return; 
 			case FunPLPackage.STRING_CONSTANT:
-				sequence_FunAtomic(context, (StringConstant) semanticObject); 
+				sequence_TerminalExpression(context, (StringConstant) semanticObject); 
+				return; 
+			case FunPLPackage.VALUE:
+				sequence_Value(context, (Value) semanticObject); 
+				return; 
+			case FunPLPackage.VALUE_REF:
+				sequence_TerminalExpression(context, (ValueRef) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -70,115 +86,40 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     FunStatement returns IntConstant
-	 *     FunExpression returns IntConstant
-	 *     FunPlus returns IntConstant
-	 *     FunPlus.FunPlus_1_0 returns IntConstant
-	 *     FunPrimary returns IntConstant
-	 *     FunAtomic returns IntConstant
+	 *     Statement returns Assignment
+	 *     Expression returns Assignment
+	 *     Assignment returns Assignment
+	 *     Assignment.Assignment_1_0 returns Assignment
+	 *     Plus returns Assignment
+	 *     Plus.Plus_1_0 returns Assignment
+	 *     PrimaryExpression returns Assignment
 	 *
 	 * Constraint:
-	 *     value=INT
+	 *     (left=Assignment_Assignment_1_0 right=Expression)
 	 */
-	protected void sequence_FunAtomic(ISerializationContext context, IntConstant semanticObject) {
+	protected void sequence_Assignment(ISerializationContext context, Assignment semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.INT_CONSTANT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.INT_CONSTANT__VALUE));
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.ASSIGNMENT__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.ASSIGNMENT__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.ASSIGNMENT__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.ASSIGNMENT__RIGHT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunAtomicAccess().getValueINTTerminalRuleCall_1_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getAssignmentAccess().getAssignmentLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAssignmentAccess().getRightExpressionParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     FunStatement returns StringConstant
-	 *     FunExpression returns StringConstant
-	 *     FunPlus returns StringConstant
-	 *     FunPlus.FunPlus_1_0 returns StringConstant
-	 *     FunPrimary returns StringConstant
-	 *     FunAtomic returns StringConstant
+	 *     Block returns Block
 	 *
 	 * Constraint:
-	 *     value=STRING
+	 *     statements+=Statement*
 	 */
-	protected void sequence_FunAtomic(ISerializationContext context, StringConstant semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.STRING_CONSTANT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.STRING_CONSTANT__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunAtomicAccess().getValueSTRINGTerminalRuleCall_0_1_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunBlock returns FunBlock
-	 *
-	 * Constraint:
-	 *     statements+=FunStatement*
-	 */
-	protected void sequence_FunBlock(ISerializationContext context, FunBlock semanticObject) {
+	protected void sequence_Block(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunAbstractElement returns FunMethod
-	 *     FunMethod returns FunMethod
-	 *
-	 * Constraint:
-	 *     (name=ID (params+=FunParameter params+=FunParameter*)? body=FunBlock)
-	 */
-	protected void sequence_FunMethod(ISerializationContext context, FunMethod semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunParameter returns FunParameter
-	 *
-	 * Constraint:
-	 *     name=ID
-	 */
-	protected void sequence_FunParameter(ISerializationContext context, FunParameter semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.FUN_PARAMETER__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.FUN_PARAMETER__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunParameterAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunStatement returns FunPlus
-	 *     FunExpression returns FunPlus
-	 *     FunPlus returns FunPlus
-	 *     FunPlus.FunPlus_1_0 returns FunPlus
-	 *     FunPrimary returns FunPlus
-	 *
-	 * Constraint:
-	 *     (left=FunPlus_FunPlus_1_0 right=FunPrimary)
-	 */
-	protected void sequence_FunPlus(ISerializationContext context, FunPlus semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.FUN_PLUS__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.FUN_PLUS__LEFT));
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.FUN_PLUS__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.FUN_PLUS__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunPlusAccess().getFunPlusLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getFunPlusAccess().getRightFunPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
 	}
 	
 	
@@ -187,7 +128,7 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     FunProgram returns FunProgram
 	 *
 	 * Constraint:
-	 *     elements+=FunAbstractElement+
+	 *     elements+=AbstractElement+
 	 */
 	protected void sequence_FunProgram(ISerializationContext context, FunProgram semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -196,14 +137,187 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     FunAbstractElement returns FunVarDeclaration
-	 *     FunVarDeclaration returns FunVarDeclaration
-	 *     FunStatement returns FunVarDeclaration
+	 *     Statement returns FunctionCall
+	 *     Expression returns FunctionCall
+	 *     Assignment returns FunctionCall
+	 *     Assignment.Assignment_1_0 returns FunctionCall
+	 *     Plus returns FunctionCall
+	 *     Plus.Plus_1_0 returns FunctionCall
+	 *     PrimaryExpression returns FunctionCall
+	 *     FunctionCall returns FunctionCall
 	 *
 	 * Constraint:
-	 *     (name=ID value=FunExpression?)
+	 *     (function=[Function|ID] (args+=Expression args+=Expression*)?)
 	 */
-	protected void sequence_FunVarDeclaration(ISerializationContext context, FunVarDeclaration semanticObject) {
+	protected void sequence_FunctionCall(ISerializationContext context, FunctionCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     FunctionParam returns FunctionParam
+	 *
+	 * Constraint:
+	 *     Name=ID
+	 */
+	protected void sequence_FunctionParam(ISerializationContext context, FunctionParam semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.FUNCTION_PARAM__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.FUNCTION_PARAM__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns Function
+	 *     Definition returns Function
+	 *     Function returns Function
+	 *
+	 * Constraint:
+	 *     (name=ID (params+=FunctionParam params+=FunctionParam*)? body=Block)
+	 */
+	protected void sequence_Function(ISerializationContext context, Function semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns Plus
+	 *     Expression returns Plus
+	 *     Assignment returns Plus
+	 *     Assignment.Assignment_1_0 returns Plus
+	 *     Plus returns Plus
+	 *     Plus.Plus_1_0 returns Plus
+	 *     PrimaryExpression returns Plus
+	 *
+	 * Constraint:
+	 *     (left=Plus_Plus_1_0 right=PrimaryExpression)
+	 */
+	protected void sequence_Plus(ISerializationContext context, Plus semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.PLUS__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.PLUS__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.PLUS__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.PLUS__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPlusAccess().getPlusLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getPlusAccess().getRightPrimaryExpressionParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns BoolConstant
+	 *     Expression returns BoolConstant
+	 *     Assignment returns BoolConstant
+	 *     Assignment.Assignment_1_0 returns BoolConstant
+	 *     Plus returns BoolConstant
+	 *     Plus.Plus_1_0 returns BoolConstant
+	 *     PrimaryExpression returns BoolConstant
+	 *     TerminalExpression returns BoolConstant
+	 *
+	 * Constraint:
+	 *     (value='true' | value='false')
+	 */
+	protected void sequence_TerminalExpression(ISerializationContext context, BoolConstant semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns IntConstant
+	 *     Expression returns IntConstant
+	 *     Assignment returns IntConstant
+	 *     Assignment.Assignment_1_0 returns IntConstant
+	 *     Plus returns IntConstant
+	 *     Plus.Plus_1_0 returns IntConstant
+	 *     PrimaryExpression returns IntConstant
+	 *     TerminalExpression returns IntConstant
+	 *
+	 * Constraint:
+	 *     value=INT
+	 */
+	protected void sequence_TerminalExpression(ISerializationContext context, IntConstant semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.INT_CONSTANT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.INT_CONSTANT__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTerminalExpressionAccess().getValueINTTerminalRuleCall_0_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns StringConstant
+	 *     Expression returns StringConstant
+	 *     Assignment returns StringConstant
+	 *     Assignment.Assignment_1_0 returns StringConstant
+	 *     Plus returns StringConstant
+	 *     Plus.Plus_1_0 returns StringConstant
+	 *     PrimaryExpression returns StringConstant
+	 *     TerminalExpression returns StringConstant
+	 *
+	 * Constraint:
+	 *     value=STRING
+	 */
+	protected void sequence_TerminalExpression(ISerializationContext context, StringConstant semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.STRING_CONSTANT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.STRING_CONSTANT__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTerminalExpressionAccess().getValueSTRINGTerminalRuleCall_1_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns ValueRef
+	 *     Expression returns ValueRef
+	 *     Assignment returns ValueRef
+	 *     Assignment.Assignment_1_0 returns ValueRef
+	 *     Plus returns ValueRef
+	 *     Plus.Plus_1_0 returns ValueRef
+	 *     PrimaryExpression returns ValueRef
+	 *     TerminalExpression returns ValueRef
+	 *
+	 * Constraint:
+	 *     variable=[Value|ID]
+	 */
+	protected void sequence_TerminalExpression(ISerializationContext context, ValueRef semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.VALUE_REF__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.VALUE_REF__VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTerminalExpressionAccess().getVariableValueIDTerminalRuleCall_3_1_0_1(), semanticObject.eGet(FunPLPackage.Literals.VALUE_REF__VARIABLE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns Value
+	 *     Definition returns Value
+	 *     Value returns Value
+	 *     Statement returns Value
+	 *
+	 * Constraint:
+	 *     (isConst?='const'? name=ID expression=Expression?)
+	 */
+	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

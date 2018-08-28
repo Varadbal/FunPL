@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import xyz.varad.funpl.funPL.FunAbstractElement;
+import xyz.varad.funpl.funPL.AbstractElement;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 
@@ -44,7 +44,7 @@ public class FunProgramImpl extends MinimalEObjectImpl.Container implements FunP
    * @generated
    * @ordered
    */
-  protected EList<FunAbstractElement> elements;
+  protected EList<AbstractElement> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,11 +72,11 @@ public class FunProgramImpl extends MinimalEObjectImpl.Container implements FunP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<FunAbstractElement> getElements()
+  public EList<AbstractElement> getElements()
   {
     if (elements == null)
     {
-      elements = new EObjectContainmentEList<FunAbstractElement>(FunAbstractElement.class, this, FunPLPackage.FUN_PROGRAM__ELEMENTS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, FunPLPackage.FUN_PROGRAM__ELEMENTS);
     }
     return elements;
   }
@@ -126,7 +126,7 @@ public class FunProgramImpl extends MinimalEObjectImpl.Container implements FunP
     {
       case FunPLPackage.FUN_PROGRAM__ELEMENTS:
         getElements().clear();
-        getElements().addAll((Collection<? extends FunAbstractElement>)newValue);
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -9,34 +9,50 @@
     <genClasses ecoreClass="FunPL.ecore#//FunProgram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunProgram/elements"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunAbstractElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//FunAbstractElement/name"/>
+    <genClasses ecoreClass="FunPL.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="FunPL.ecore#//Definition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Definition/name"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunVarDeclaration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunVarDeclaration/value"/>
+    <genClasses ecoreClass="FunPL.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Value/isConst"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Value/expression"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunMethod">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunMethod/params"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunMethod/body"/>
+    <genClasses ecoreClass="FunPL.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/body"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunBlock">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunBlock/statements"/>
+    <genClasses ecoreClass="FunPL.ecore#//FunctionParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//FunctionParam/Name"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunParameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//FunParameter/name"/>
+    <genClasses ecoreClass="FunPL.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Block/statements"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunStatement"/>
-    <genClasses ecoreClass="FunPL.ecore#//FunExpression"/>
-    <genClasses ecoreClass="FunPL.ecore#//FunAtomic"/>
-    <genClasses ecoreClass="FunPL.ecore#//FunPlus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunPlus/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunPlus/right"/>
+    <genClasses ecoreClass="FunPL.ecore#//Statement"/>
+    <genClasses ecoreClass="FunPL.ecore#//Expression"/>
+    <genClasses ecoreClass="FunPL.ecore#//TerminalExpression"/>
+    <genClasses ecoreClass="FunPL.ecore#//Assignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/right"/>
+    </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//Plus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Plus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Plus/right"/>
+    </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunctionCall/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunctionCall/args"/>
+    </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//IntConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//IntConstant/value"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//StringConstant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//StringConstant/value"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//IntConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//IntConstant/value"/>
+    <genClasses ecoreClass="FunPL.ecore#//BoolConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//BoolConstant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//ValueRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunPL.ecore#//ValueRef/variable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
