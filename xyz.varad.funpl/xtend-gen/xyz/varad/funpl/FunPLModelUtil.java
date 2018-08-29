@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import xyz.varad.funpl.funPL.AbstractElement;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
@@ -18,10 +19,15 @@ import xyz.varad.funpl.funPL.Statement;
 @SuppressWarnings("all")
 public class FunPLModelUtil {
   /**
-   * def isDefinedBefore(DefinitionRef defRef){
-   * defRef.definedBefore.contains(defRef.definition)
-   * }
+   * TODO restructure
+   * def isDefinedBefore(DefinitionRef defRef)
+   * def definedBefore(Statement s)
+   * ^Should be enough, as defRefs and Expressions are Statements too^
    */
+  public boolean isDefinedBefore(final DefinitionRef defRef) {
+    return this.definedBefore(((Expression) defRef)).contains(defRef.getDefinition());
+  }
+  
   public Set<Definition> definedBefore(final Expression e) {
     Function _containerOfType = EcoreUtil2.<Function>getContainerOfType(e, Function.class);
     boolean _tripleEquals = (_containerOfType == null);

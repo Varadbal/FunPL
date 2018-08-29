@@ -3,6 +3,13 @@
  */
 package xyz.varad.funpl.validation;
 
+import com.google.inject.Inject;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Extension;
+import xyz.varad.funpl.FunPLModelUtil;
+import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.DefinitionRef;
+import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
 /**
@@ -12,5 +19,25 @@ import xyz.varad.funpl.validation.AbstractFunPLValidator;
  */
 @SuppressWarnings("all")
 public class FunPLValidator extends AbstractFunPLValidator {
-  public final static String ISSUE_CODE_PREFIX = "xyz.varad.funpl.";
+  private final static String ISSUE_CODE_PREFIX = "xyz.varad.funpl.";
+  
+  public final static String FORWARD_REFERENCE = (FunPLValidator.ISSUE_CODE_PREFIX + "ForwardReference");
+  
+  @Inject
+  @Extension
+  private FunPLModelUtil _funPLModelUtil;
+  
+  @Check
+  public void checkForwardReference(final DefinitionRef defRef) {
+    final Definition definition = defRef.getDefinition();
+    if (((definition != null) && (!this._funPLModelUtil.isDefinedBefore(defRef)))) {
+      String _name = definition.getName();
+      String _plus = ("Definition forward reference not allowed: \'" + _name);
+      String _plus_1 = (_plus + "\'");
+      this.error(_plus_1, 
+        FunPLPackage.eINSTANCE.getDefinitionRef_Definition(), 
+        FunPLValidator.FORWARD_REFERENCE, 
+        definition.getName());
+    }
+  }
 }

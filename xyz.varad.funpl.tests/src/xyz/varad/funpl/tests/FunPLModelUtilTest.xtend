@@ -32,7 +32,7 @@ class FunPLModelUtilTest {
 	@Inject extension FunPLModelUtil
 	
 	@Test
-	def void definedBeforeOuterValue(){
+	def void testDefinedBefore(){
 		'''
 		var i = 5;		//(0)
 		var j = false;	//(1)
@@ -58,6 +58,37 @@ class FunPLModelUtilTest {
 			
 		]
 	}
+	
+	@Test
+	def void testIsDefinedBefore(){
+		'''
+		var i = 5;		//(0)
+		var j = i;		//(1)
+		var k = m;		//(2)
+		var m = m;		//(3)
+		
+		function myFunc(){	//(4)
+			i;				//(0)
+			var o = p;		//(1)
+		}
+		
+		function myFunc2(){	//(5)
+			o;				//(0)
+			var q = i;		//(1)
+			var z = myFunc;	//(2)
+		}
+		'''.parse => [
+			((it.elements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
+			((it.elements.get(2) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
+			((it.elements.get(3) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
+			((it.elements.get(4) as Function).body.statements.get(0) as DefinitionRef).isDefinedBefore.assertTrue;
+			(((it.elements.get(4) as Function).body.statements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
+			((it.elements.get(5) as Function).body.statements.get(0) as DefinitionRef).isDefinedBefore.assertFalse;
+			(((it.elements.get(5) as Function).body.statements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
+			(((it.elements.get(5) as Function).body.statements.get(2) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
+		]
+	}
+	
 	
 	//Values must have expressions!!!!
 	def private assertDefinedBeforeOutsideValue(FunProgram prog, int elemIndex, CharSequence expected){

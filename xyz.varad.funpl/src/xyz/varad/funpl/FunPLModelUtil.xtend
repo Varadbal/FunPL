@@ -11,14 +11,21 @@ import static extension java.lang.Class.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.emf.ecore.EObject
+import xyz.varad.funpl.funPL.DefinitionRef
+import java.util.Set
 
-class FunPLModelUtil {
+class FunPLModelUtil{
+	/* TODO restructure
+	 * def isDefinedBefore(DefinitionRef defRef)
+	 * def definedBefore(Statement s)
+	 * ^Should be enough, as defRefs and Expressions are Statements too^
+	 */
 	
-	/*def isDefinedBefore(DefinitionRef defRef){
-		defRef.definedBefore.contains(defRef.definition)
-	}*/
+	def boolean isDefinedBefore(DefinitionRef defRef){
+		(defRef as Expression).definedBefore.contains(defRef.definition)
+	}
 	
-	def definedBefore(Expression e){
+	def Set<Definition> definedBefore(Expression e){
 		if(e.getContainerOfType(Function) === null){					//is outside of any functions
 			return e.getContainerOfType(Definition/*Value*/).definedBefore		//Container cannot possibly be Function-Definition
 		}else{															//must be inside
@@ -27,7 +34,7 @@ class FunPLModelUtil {
 		
 	}
 	
-	def private definedBefore(Statement s){						//Precondition: IN a function
+	def private Set<Definition> definedBefore(Statement s){						//Precondition: IN a function
 		
 		val functionLine = s.walkUpContainmentUntilContainerIs(Block)
 		
@@ -45,7 +52,7 @@ class FunPLModelUtil {
 		return allValidDefsBefore.toSet
 	}
 	
-	def private definedBefore(Definition d){					//Precondition: OUT of any functions
+	def private Set<Definition> definedBefore(Definition d){					//Precondition: OUT of any functions
 		val allElements = (d.eContainer as FunProgram).elements
 		/*val allDefs = new BasicEList<Definition>
 		for(elem : allElements){

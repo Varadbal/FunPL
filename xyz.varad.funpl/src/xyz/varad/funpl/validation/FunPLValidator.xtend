@@ -3,6 +3,11 @@
  */
 package xyz.varad.funpl.validation
 
+import org.eclipse.xtext.validation.Check
+import xyz.varad.funpl.funPL.DefinitionRef
+import com.google.inject.Inject
+import xyz.varad.funpl.FunPLModelUtil
+import xyz.varad.funpl.funPL.FunPLPackage
 
 /**
  * This class contains custom validation rules. 
@@ -16,18 +21,22 @@ class FunPLValidator extends AbstractFunPLValidator {
 	//TODO const must be initialized
 	//TODO function call #args=#params
 	
-	public static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
+	private static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
+	public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
 	
 	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					FunPLPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	@Inject extension FunPLModelUtil
+	
+	@Check
+	def void checkForwardReference(DefinitionRef defRef){
+		val definition = defRef.definition
+		if(definition !== null && !defRef.isDefinedBefore){
+			error("Definition forward reference not allowed: '" + definition.name + "'",
+				FunPLPackage::eINSTANCE.definitionRef_Definition,
+				FORWARD_REFERENCE,
+				definition.name
+			)
+		}
+	}
 	
 }
