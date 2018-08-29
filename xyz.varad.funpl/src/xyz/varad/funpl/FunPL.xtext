@@ -15,7 +15,7 @@ Definition:
 ;
 
 Value:
-	//TODO type
+	//TODO type: 'var' (type=...)? name=ID ...
 	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 ;
 
