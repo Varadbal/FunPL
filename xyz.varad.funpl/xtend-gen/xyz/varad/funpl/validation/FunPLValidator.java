@@ -12,4 +12,5 @@ import xyz.varad.funpl.validation.AbstractFunPLValidator;
  */
 @SuppressWarnings("all")
 public class FunPLValidator extends AbstractFunPLValidator {
+  public final static String ISSUE_CODE_PREFIX = "xyz.varad.funpl.";
 }

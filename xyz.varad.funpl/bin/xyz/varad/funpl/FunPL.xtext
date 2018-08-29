@@ -15,7 +15,6 @@ Definition:
 ;
 
 Value:
-	//TODO force const definition - validation
 	//TODO type
 	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 ;
@@ -35,7 +34,7 @@ Block:
 ;
 
 Statement:
-	Value | Expression ';'
+	Value | (Expression ';')
 ;
 
 Expression:

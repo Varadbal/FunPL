@@ -10,6 +10,14 @@ package xyz.varad.funpl.validation
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
+	//TODO forward reference
+	//TODO duplicate variable
+	//TODO const reassignment
+	//TODO const must be initialized
+	//TODO function call #args=#params
+	
+	public static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
+	
 	
 //	public static val INVALID_NAME = 'invalidName'
 //

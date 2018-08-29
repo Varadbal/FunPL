@@ -91,7 +91,6 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 		public Group getGroup() { return cGroup; }
 		
-		////TODO force const definition - validation
 		////TODO type
 		//isConst?='const' | 'var'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
