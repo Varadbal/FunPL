@@ -81,7 +81,7 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
       case FunPLPackage.INT_CONSTANT: return createIntConstant();
       case FunPLPackage.STRING_CONSTANT: return createStringConstant();
       case FunPLPackage.BOOL_CONSTANT: return createBoolConstant();
-      case FunPLPackage.VALUE_REF: return createValueRef();
+      case FunPLPackage.DEFINITION_REF: return createDefinitionRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -268,10 +268,10 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ValueRef createValueRef()
+  public DefinitionRef createDefinitionRef()
   {
-    ValueRefImpl valueRef = new ValueRefImpl();
-    return valueRef;
+    DefinitionRefImpl definitionRef = new DefinitionRefImpl();
+    return definitionRef;
   }
 
   /**

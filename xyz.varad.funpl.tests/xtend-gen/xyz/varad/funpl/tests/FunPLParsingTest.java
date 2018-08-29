@@ -5,17 +5,31 @@ package xyz.varad.funpl.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import xyz.varad.funpl.funPL.AbstractElement;
+import xyz.varad.funpl.funPL.Assignment;
+import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.DefinitionRef;
+import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
+import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionCall;
+import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.Statement;
+import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 
 @RunWith(XtextRunner.class)
@@ -23,24 +37,380 @@ import xyz.varad.funpl.tests.FunPLInjectorProvider;
 @SuppressWarnings("all")
 public class FunPLParsingTest {
   @Inject
-  private ParseHelper<FunProgram> parseHelper;
+  @Extension
+  private ParseHelper<FunProgram> _parseHelper;
+  
+  @Inject
+  @Extension
+  private ValidationTestHelper _validationTestHelper;
   
   @Test
-  public void loadModel() {
+  public void testValueDeclaration() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
-      _builder.newLine();
-      final FunProgram result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
-      final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
+      _builder.append("var i;");
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Unexpected errors: ");
-      String _join = IterableExtensions.join(errors, ", ");
-      _builder_1.append(_join);
-      Assert.assertTrue(_builder_1.toString(), errors.isEmpty());
+      _builder_1.append("var i = 5;");
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("var i = 3;");
+      _builder_2.newLine();
+      _builder_2.append("const j = i;");
+      _builder_2.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testFunctionDefinition() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(p1, p2, p3){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionLocalVariable() {
+    this.testFunctionLocal("var i = 5;");
+    this.testFunctionLocal("const i = \'asd\';");
+    this.testFunctionLocal("var i = v;");
+    this.testFunctionLocal("const i = v;");
+  }
+  
+  @Test
+  public void testFunctionLocalExpression() {
+    this.testFunctionLocal("a = 2;");
+    this.testFunctionLocal("a = b = v = 3;");
+    this.testFunctionLocal("5 + 5;");
+    this.testFunctionLocal("5 + v + 3 + c;");
+    this.testFunctionLocal("(1 + 2);");
+    this.testFunctionLocal("1 + (2 + (3 + 4));");
+    this.testFunctionLocal("5;");
+    this.testFunctionLocal("\'asd\';");
+    this.testFunctionLocal("true;");
+  }
+  
+  @Test
+  public void testFunctionCallExpression() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc();");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc2(1, 2);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc3(1, 1, 5);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc3(1 + 2, 1 + (3 + 4), i = 2);");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("function myFunc2(p1, p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("function myFunc3(p1, p2, p3){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void testFunctionLocal(final CharSequence toInsert) {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(p1, p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var a;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var b;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var v = 1;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("const c = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append(toInsert, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAssignmentAssociativity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("i = 3;\t\t//(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var j = 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("i = j = 2;\t//(3)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("(i = j) = 2\t//(4)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      AbstractElement _get = this._parseHelper.parse(_builder).getElements().get(0);
+      final Procedure1<Function> _function = (Function it) -> {
+        this.assertAssociativity(it.getBody().getStatements().get(1), "(i = 3)");
+        this.assertAssociativity(it.getBody().getStatements().get(3), "(i = (j = 2))");
+        this.assertAssociativity(it.getBody().getStatements().get(4), "((i = j) = 2)");
+      };
+      ObjectExtensions.<Function>operator_doubleArrow(
+        ((Function) _get), _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPlusAssociativity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 + 5;\t\t//(0)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 + 5 + 5;\t//(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 + (5 + 5);//(2)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("3 + i + 2\t//(4)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(this._parseHelper.parse(_builder).getElements());
+      final Procedure1<Function> _function = (Function it) -> {
+        this.assertAssociativity(it.getBody().getStatements().get(0), "(5 + 5)");
+        this.assertAssociativity(it.getBody().getStatements().get(1), "((5 + 5) + 5)");
+        this.assertAssociativity(it.getBody().getStatements().get(2), "(5 + (5 + 5))");
+        this.assertAssociativity(it.getBody().getStatements().get(4), "((3 + i) + 2)");
+      };
+      ObjectExtensions.<Function>operator_doubleArrow(
+        ((Function) _head), _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionCallAssociativity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc2(1, 2);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc2(1, myFunc2(myFunc2(1, 1), 2));\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("function myFunc2(p1, p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(this._parseHelper.parse(_builder).getElements());
+      final Procedure1<Function> _function = (Function it) -> {
+        this.assertAssociativity(it.getBody().getStatements().get(0), "(myFunc2(1, 2))");
+        this.assertAssociativity(it.getBody().getStatements().get(1), "(myFunc2(1, (myFunc2((myFunc2(1, 1)), 2))))");
+      };
+      ObjectExtensions.<Function>operator_doubleArrow(
+        ((Function) _head), _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMixedAssociativity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("const j = \"myString\";");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var k = true;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc2(myFunc2(2 + i, i + j + k + myFunc3(i = 3, k, 1 + (i + j))), myFunc3(k = false, 1 , 2))");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("function myFunc2(p1, p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("function myFunc3(p1, p2, p3){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(this._parseHelper.parse(_builder).getElements());
+      final Procedure1<Function> _function = (Function it) -> {
+        this.assertAssociativity(it.getBody().getStatements().get(3), "(myFunc2((myFunc2((2 + i), (((i + j) + k) + (myFunc3((i = 3), k, (1 + (i + j))))))), (myFunc3((k = false), 1, 2))))");
+      };
+      ObjectExtensions.<Function>operator_doubleArrow(
+        ((Function) _head), _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertAssociativity(final Statement s, final CharSequence expected) {
+    Assert.assertEquals(expected.toString(), this.stringRepr(s));
+  }
+  
+  private String stringRepr(final Statement s) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (s instanceof Assignment) {
+      _matched=true;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("(");
+      String _stringRepr = this.stringRepr(((Assignment)s).getLeft());
+      _builder.append(_stringRepr);
+      _builder.append(" = ");
+      String _stringRepr_1 = this.stringRepr(((Assignment)s).getRight());
+      _builder.append(_stringRepr_1);
+      _builder.append(")");
+      _switchResult = _builder.toString();
+    }
+    if (!_matched) {
+      if (s instanceof Plus) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("(");
+        String _stringRepr = this.stringRepr(((Plus)s).getLeft());
+        _builder.append(_stringRepr);
+        _builder.append(" + ");
+        String _stringRepr_1 = this.stringRepr(((Plus)s).getRight());
+        _builder.append(_stringRepr_1);
+        _builder.append(")");
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (s instanceof FunctionCall) {
+        _matched=true;
+        String _name = ((FunctionCall)s).getFunction().getName();
+        String _plus = ("(" + _name);
+        String ret = (_plus + "(");
+        EList<Expression> _args = ((FunctionCall)s).getArgs();
+        for (final Expression a : _args) {
+          {
+            String _ret = ret;
+            String _stringRepr = this.stringRepr(a);
+            ret = (_ret + _stringRepr);
+            Expression _last = IterableExtensions.<Expression>last(((FunctionCall)s).getArgs());
+            boolean _tripleNotEquals = (a != _last);
+            if (_tripleNotEquals) {
+              String _ret_1 = ret;
+              ret = (_ret_1 + ", ");
+            }
+          }
+        }
+        String _ret = ret;
+        ret = (_ret + "))");
+        return ret;
+      }
+    }
+    if (!_matched) {
+      if (s instanceof IntConstant) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        int _value = ((IntConstant)s).getValue();
+        _builder.append(_value);
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (s instanceof StringConstant) {
+        _matched=true;
+        _switchResult = ((StringConstant)s).getValue();
+      }
+    }
+    if (!_matched) {
+      if (s instanceof BoolConstant) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        String _value = ((BoolConstant)s).getValue();
+        _builder.append(_value);
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (s instanceof DefinitionRef) {
+        _matched=true;
+        _switchResult = ((DefinitionRef)s).getDefinition().getName();
+      }
+    }
+    return _switchResult;
   }
 }

@@ -64,6 +64,6 @@ TerminalExpression:
 	{IntConstant} value=INT | 
 	{StringConstant} value=STRING |
 	{BoolConstant} value=('true'|'false') |
-	{ValueRef} variable=[Value]
+	{DefinitionRef} definition=[Definition]
 ;
 

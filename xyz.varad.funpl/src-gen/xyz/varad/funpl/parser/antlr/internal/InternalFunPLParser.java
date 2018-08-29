@@ -2372,7 +2372,7 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
                     {
 
                     					current = forceCreateModelElement(
-                    						grammarAccess.getTerminalExpressionAccess().getValueRefAction_3_0(),
+                    						grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0(),
                     						current);
                     				
 
@@ -2391,7 +2391,7 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
                     					
                     otherlv_7=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-                    						newLeafNode(otherlv_7, grammarAccess.getTerminalExpressionAccess().getVariableValueCrossReference_3_1_0());
+                    						newLeafNode(otherlv_7, grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0());
                     					
 
                     }

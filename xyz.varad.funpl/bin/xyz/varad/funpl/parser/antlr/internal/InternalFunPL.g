@@ -892,7 +892,7 @@ ruleTerminalExpression returns [EObject current=null]
 			(
 				{
 					$current = forceCreateModelElement(
-						grammarAccess.getTerminalExpressionAccess().getValueRefAction_3_0(),
+						grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0(),
 						$current);
 				}
 			)
@@ -905,7 +905,7 @@ ruleTerminalExpression returns [EObject current=null]
 					}
 					otherlv_7=RULE_ID
 					{
-						newLeafNode(otherlv_7, grammarAccess.getTerminalExpressionAccess().getVariableValueCrossReference_3_1_0());
+						newLeafNode(otherlv_7, grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0());
 					}
 				)
 			)

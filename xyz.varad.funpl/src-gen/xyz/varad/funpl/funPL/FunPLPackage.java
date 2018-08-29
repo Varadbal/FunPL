@@ -533,32 +533,32 @@ public interface FunPLPackage extends EPackage
   int BOOL_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ValueRefImpl <em>Value Ref</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl <em>Definition Ref</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.ValueRefImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValueRef()
+   * @see xyz.varad.funpl.funPL.impl.DefinitionRefImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
    * @generated
    */
-  int VALUE_REF = 16;
+  int DEFINITION_REF = 16;
 
   /**
-   * The feature id for the '<em><b>Variable</b></em>' reference.
+   * The feature id for the '<em><b>Definition</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE_REF__VARIABLE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+  int DEFINITION_REF__DEFINITION = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Value Ref</em>' class.
+   * The number of structural features of the '<em>Definition Ref</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE_REF_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+  int DEFINITION_REF_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
 
 
   /**
@@ -909,25 +909,25 @@ public interface FunPLPackage extends EPackage
   EAttribute getBoolConstant_Value();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.ValueRef <em>Value Ref</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.DefinitionRef <em>Definition Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Value Ref</em>'.
-   * @see xyz.varad.funpl.funPL.ValueRef
+   * @return the meta object for class '<em>Definition Ref</em>'.
+   * @see xyz.varad.funpl.funPL.DefinitionRef
    * @generated
    */
-  EClass getValueRef();
+  EClass getDefinitionRef();
 
   /**
-   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.ValueRef#getVariable <em>Variable</em>}'.
+   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.DefinitionRef#getDefinition <em>Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Variable</em>'.
-   * @see xyz.varad.funpl.funPL.ValueRef#getVariable()
-   * @see #getValueRef()
+   * @return the meta object for the reference '<em>Definition</em>'.
+   * @see xyz.varad.funpl.funPL.DefinitionRef#getDefinition()
+   * @see #getDefinitionRef()
    * @generated
    */
-  EReference getValueRef_Variable();
+  EReference getDefinitionRef_Definition();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1249,22 +1249,22 @@ public interface FunPLPackage extends EPackage
     EAttribute BOOL_CONSTANT__VALUE = eINSTANCE.getBoolConstant_Value();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ValueRefImpl <em>Value Ref</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl <em>Definition Ref</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.ValueRefImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValueRef()
+     * @see xyz.varad.funpl.funPL.impl.DefinitionRefImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
      * @generated
      */
-    EClass VALUE_REF = eINSTANCE.getValueRef();
+    EClass DEFINITION_REF = eINSTANCE.getDefinitionRef();
 
     /**
-     * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VALUE_REF__VARIABLE = eINSTANCE.getValueRef_Variable();
+    EReference DEFINITION_REF__DEFINITION = eINSTANCE.getDefinitionRef_Definition();
 
   }
 

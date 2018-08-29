@@ -5839,13 +5839,13 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
             // InternalFunPL.g:1913:1: ( () )
             // InternalFunPL.g:1914:2: ()
             {
-             before(grammarAccess.getTerminalExpressionAccess().getValueRefAction_3_0()); 
+             before(grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0()); 
             // InternalFunPL.g:1915:2: ()
             // InternalFunPL.g:1915:3: 
             {
             }
 
-             after(grammarAccess.getTerminalExpressionAccess().getValueRefAction_3_0()); 
+             after(grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0()); 
 
             }
 
@@ -5897,31 +5897,31 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TerminalExpression__Group_3__1__Impl"
-    // InternalFunPL.g:1934:1: rule__TerminalExpression__Group_3__1__Impl : ( ( rule__TerminalExpression__VariableAssignment_3_1 ) ) ;
+    // InternalFunPL.g:1934:1: rule__TerminalExpression__Group_3__1__Impl : ( ( rule__TerminalExpression__DefinitionAssignment_3_1 ) ) ;
     public final void rule__TerminalExpression__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFunPL.g:1938:1: ( ( ( rule__TerminalExpression__VariableAssignment_3_1 ) ) )
-            // InternalFunPL.g:1939:1: ( ( rule__TerminalExpression__VariableAssignment_3_1 ) )
+            // InternalFunPL.g:1938:1: ( ( ( rule__TerminalExpression__DefinitionAssignment_3_1 ) ) )
+            // InternalFunPL.g:1939:1: ( ( rule__TerminalExpression__DefinitionAssignment_3_1 ) )
             {
-            // InternalFunPL.g:1939:1: ( ( rule__TerminalExpression__VariableAssignment_3_1 ) )
-            // InternalFunPL.g:1940:2: ( rule__TerminalExpression__VariableAssignment_3_1 )
+            // InternalFunPL.g:1939:1: ( ( rule__TerminalExpression__DefinitionAssignment_3_1 ) )
+            // InternalFunPL.g:1940:2: ( rule__TerminalExpression__DefinitionAssignment_3_1 )
             {
-             before(grammarAccess.getTerminalExpressionAccess().getVariableAssignment_3_1()); 
-            // InternalFunPL.g:1941:2: ( rule__TerminalExpression__VariableAssignment_3_1 )
-            // InternalFunPL.g:1941:3: rule__TerminalExpression__VariableAssignment_3_1
+             before(grammarAccess.getTerminalExpressionAccess().getDefinitionAssignment_3_1()); 
+            // InternalFunPL.g:1941:2: ( rule__TerminalExpression__DefinitionAssignment_3_1 )
+            // InternalFunPL.g:1941:3: rule__TerminalExpression__DefinitionAssignment_3_1
             {
             pushFollow(FOLLOW_2);
-            rule__TerminalExpression__VariableAssignment_3_1();
+            rule__TerminalExpression__DefinitionAssignment_3_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getTerminalExpressionAccess().getVariableAssignment_3_1()); 
+             after(grammarAccess.getTerminalExpressionAccess().getDefinitionAssignment_3_1()); 
 
             }
 
@@ -6675,9 +6675,9 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__TerminalExpression__ValueAssignment_2_1"
 
 
-    // $ANTLR start "rule__TerminalExpression__VariableAssignment_3_1"
-    // InternalFunPL.g:2228:1: rule__TerminalExpression__VariableAssignment_3_1 : ( ( RULE_ID ) ) ;
-    public final void rule__TerminalExpression__VariableAssignment_3_1() throws RecognitionException {
+    // $ANTLR start "rule__TerminalExpression__DefinitionAssignment_3_1"
+    // InternalFunPL.g:2228:1: rule__TerminalExpression__DefinitionAssignment_3_1 : ( ( RULE_ID ) ) ;
+    public final void rule__TerminalExpression__DefinitionAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -6688,17 +6688,17 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
             // InternalFunPL.g:2233:2: ( ( RULE_ID ) )
             // InternalFunPL.g:2234:3: ( RULE_ID )
             {
-             before(grammarAccess.getTerminalExpressionAccess().getVariableValueCrossReference_3_1_0()); 
+             before(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0()); 
             // InternalFunPL.g:2235:3: ( RULE_ID )
             // InternalFunPL.g:2236:4: RULE_ID
             {
-             before(grammarAccess.getTerminalExpressionAccess().getVariableValueIDTerminalRuleCall_3_1_0_1()); 
+             before(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getTerminalExpressionAccess().getVariableValueIDTerminalRuleCall_3_1_0_1()); 
+             after(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1()); 
 
             }
 
-             after(grammarAccess.getTerminalExpressionAccess().getVariableValueCrossReference_3_1_0()); 
+             after(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0()); 
 
             }
 
@@ -6717,7 +6717,7 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TerminalExpression__VariableAssignment_3_1"
+    // $ANTLR end "rule__TerminalExpression__DefinitionAssignment_3_1"
 
     // Delegated rules
 

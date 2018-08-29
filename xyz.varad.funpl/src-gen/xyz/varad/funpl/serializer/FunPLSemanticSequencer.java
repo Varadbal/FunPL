@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
@@ -26,7 +27,6 @@ import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.Value;
-import xyz.varad.funpl.funPL.ValueRef;
 import xyz.varad.funpl.services.FunPLGrammarAccess;
 
 @SuppressWarnings("all")
@@ -52,6 +52,9 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case FunPLPackage.BOOL_CONSTANT:
 				sequence_TerminalExpression(context, (BoolConstant) semanticObject); 
 				return; 
+			case FunPLPackage.DEFINITION_REF:
+				sequence_TerminalExpression(context, (DefinitionRef) semanticObject); 
+				return; 
 			case FunPLPackage.FUN_PROGRAM:
 				sequence_FunProgram(context, (FunProgram) semanticObject); 
 				return; 
@@ -75,9 +78,6 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case FunPLPackage.VALUE:
 				sequence_Value(context, (Value) semanticObject); 
-				return; 
-			case FunPLPackage.VALUE_REF:
-				sequence_TerminalExpression(context, (ValueRef) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -234,6 +234,31 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Statement returns DefinitionRef
+	 *     Expression returns DefinitionRef
+	 *     Assignment returns DefinitionRef
+	 *     Assignment.Assignment_1_0 returns DefinitionRef
+	 *     Plus returns DefinitionRef
+	 *     Plus.Plus_1_0 returns DefinitionRef
+	 *     PrimaryExpression returns DefinitionRef
+	 *     TerminalExpression returns DefinitionRef
+	 *
+	 * Constraint:
+	 *     definition=[Definition|ID]
+	 */
+	protected void sequence_TerminalExpression(ISerializationContext context, DefinitionRef semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.DEFINITION_REF__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.DEFINITION_REF__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1(), semanticObject.eGet(FunPLPackage.Literals.DEFINITION_REF__DEFINITION, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Statement returns IntConstant
 	 *     Expression returns IntConstant
 	 *     Assignment returns IntConstant
@@ -278,31 +303,6 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTerminalExpressionAccess().getValueSTRINGTerminalRuleCall_1_1_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Statement returns ValueRef
-	 *     Expression returns ValueRef
-	 *     Assignment returns ValueRef
-	 *     Assignment.Assignment_1_0 returns ValueRef
-	 *     Plus returns ValueRef
-	 *     Plus.Plus_1_0 returns ValueRef
-	 *     PrimaryExpression returns ValueRef
-	 *     TerminalExpression returns ValueRef
-	 *
-	 * Constraint:
-	 *     variable=[Value|ID]
-	 */
-	protected void sequence_TerminalExpression(ISerializationContext context, ValueRef semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.VALUE_REF__VARIABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.VALUE_REF__VARIABLE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTerminalExpressionAccess().getVariableValueIDTerminalRuleCall_3_1_0_1(), semanticObject.eGet(FunPLPackage.Literals.VALUE_REF__VARIABLE, false));
 		feeder.finish();
 	}
 	

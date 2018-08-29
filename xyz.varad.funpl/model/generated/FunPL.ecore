@@ -56,7 +56,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BoolConstant" eSuperTypes="#//TerminalExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ValueRef" eSuperTypes="#//TerminalExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DefinitionRef" eSuperTypes="#//TerminalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//Definition"/>
   </eClassifiers>
 </ecore:EPackage>

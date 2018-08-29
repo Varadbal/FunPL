@@ -10,41 +10,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.FunPLPackage;
-import xyz.varad.funpl.funPL.Value;
-import xyz.varad.funpl.funPL.ValueRef;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Value Ref</b></em>'.
+ * An implementation of the model object '<em><b>Definition Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.impl.ValueRefImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
+public class DefinitionRefImpl extends TerminalExpressionImpl implements DefinitionRef
 {
   /**
-   * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+   * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVariable()
+   * @see #getDefinition()
    * @generated
    * @ordered
    */
-  protected Value variable;
+  protected Definition definition;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ValueRefImpl()
+  protected DefinitionRefImpl()
   {
     super();
   }
@@ -57,7 +57,7 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
   @Override
   protected EClass eStaticClass()
   {
-    return FunPLPackage.Literals.VALUE_REF;
+    return FunPLPackage.Literals.DEFINITION_REF;
   }
 
   /**
@@ -65,19 +65,19 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Value getVariable()
+  public Definition getDefinition()
   {
-    if (variable != null && variable.eIsProxy())
+    if (definition != null && definition.eIsProxy())
     {
-      InternalEObject oldVariable = (InternalEObject)variable;
-      variable = (Value)eResolveProxy(oldVariable);
-      if (variable != oldVariable)
+      InternalEObject oldDefinition = (InternalEObject)definition;
+      definition = (Definition)eResolveProxy(oldDefinition);
+      if (definition != oldDefinition)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunPLPackage.VALUE_REF__VARIABLE, oldVariable, variable));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunPLPackage.DEFINITION_REF__DEFINITION, oldDefinition, definition));
       }
     }
-    return variable;
+    return definition;
   }
 
   /**
@@ -85,9 +85,9 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Value basicGetVariable()
+  public Definition basicGetDefinition()
   {
-    return variable;
+    return definition;
   }
 
   /**
@@ -95,12 +95,12 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVariable(Value newVariable)
+  public void setDefinition(Definition newDefinition)
   {
-    Value oldVariable = variable;
-    variable = newVariable;
+    Definition oldDefinition = definition;
+    definition = newDefinition;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE_REF__VARIABLE, oldVariable, variable));
+      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.DEFINITION_REF__DEFINITION, oldDefinition, definition));
   }
 
   /**
@@ -113,9 +113,9 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE_REF__VARIABLE:
-        if (resolve) return getVariable();
-        return basicGetVariable();
+      case FunPLPackage.DEFINITION_REF__DEFINITION:
+        if (resolve) return getDefinition();
+        return basicGetDefinition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,8 +130,8 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE_REF__VARIABLE:
-        setVariable((Value)newValue);
+      case FunPLPackage.DEFINITION_REF__DEFINITION:
+        setDefinition((Definition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -147,8 +147,8 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE_REF__VARIABLE:
-        setVariable((Value)null);
+      case FunPLPackage.DEFINITION_REF__DEFINITION:
+        setDefinition((Definition)null);
         return;
     }
     super.eUnset(featureID);
@@ -164,10 +164,10 @@ public class ValueRefImpl extends TerminalExpressionImpl implements ValueRef
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE_REF__VARIABLE:
-        return variable != null;
+      case FunPLPackage.DEFINITION_REF__DEFINITION:
+        return definition != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ValueRefImpl
+} //DefinitionRefImpl

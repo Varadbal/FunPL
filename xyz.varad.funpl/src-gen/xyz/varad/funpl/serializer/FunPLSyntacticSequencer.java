@@ -55,12 +55,12 @@ public class FunPLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) definition=[Definition|ID]
 	 *     (rule start) (ambiguity) function=[Function|ID]
 	 *     (rule start) (ambiguity) value='false'
 	 *     (rule start) (ambiguity) value='true'
 	 *     (rule start) (ambiguity) value=INT
 	 *     (rule start) (ambiguity) value=STRING
-	 *     (rule start) (ambiguity) variable=[Value|ID]
 	 *     (rule start) (ambiguity) {Assignment.left=}
 	 *     (rule start) (ambiguity) {Plus.left=}
 	 */

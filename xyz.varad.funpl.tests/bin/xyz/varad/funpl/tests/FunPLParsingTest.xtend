@@ -7,24 +7,205 @@ import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.Assert
+import static extension org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import xyz.varad.funpl.funPL.FunProgram
-
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import xyz.varad.funpl.funPL.Statement
+import xyz.varad.funpl.funPL.Assignment
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.funPL.FunctionCall
+import xyz.varad.funpl.funPL.DefinitionRef
+import xyz.varad.funpl.funPL.Definition
+import xyz.varad.funpl.funPL.Function
+import xyz.varad.funpl.funPL.Expression
+import xyz.varad.funpl.funPL.IntConstant
+import xyz.varad.funpl.funPL.StringConstant
+import xyz.varad.funpl.funPL.BoolConstant
+import xyz.varad.funpl.funPL.Value
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
 class FunPLParsingTest {
-	@Inject
-	ParseHelper<FunProgram> parseHelper
+	
+	@Inject extension ParseHelper<FunProgram> 
+	@Inject extension ValidationTestHelper
 	
 	@Test
-	def void loadModel() {
-		val result = parseHelper.parse('''
-			Hello Xtext!
-		''')
-		Assert.assertNotNull(result)
-		val errors = result.eResource.errors
-		Assert.assertTrue('''Unexpected errors: «errors.join(", ")»''', errors.isEmpty)
+	def void testValueDeclaration(){
+		'''var i;'''.parse.assertNoErrors
+		'''var i = 5;'''.parse.assertNoErrors
+		'''
+		var i = 3;
+		const j = i;
+		'''.parse.assertNoErrors
 	}
+	
+	@Test
+	def void testFunctionDefinition(){
+		'''
+		function myFunc(p1, p2, p3){
+			
+		}
+		'''.parse.assertNoErrors
+	}
+	
+	@Test
+	def void testFunctionLocalVariable(){
+		testFunctionLocal("var i = 5;")
+		testFunctionLocal("const i = 'asd';")
+		testFunctionLocal("var i = v;")
+		testFunctionLocal("const i = v;")
+	}
+	
+	@Test
+	def void testFunctionLocalExpression(){
+		testFunctionLocal("a = 2;")
+		testFunctionLocal("a = b = v = 3;")
+		
+		testFunctionLocal("5 + 5;")
+		testFunctionLocal("5 + v + 3 + c;")
+		
+		testFunctionLocal("(1 + 2);")
+		testFunctionLocal("1 + (2 + (3 + 4));")
+		
+		testFunctionLocal("5;")
+		testFunctionLocal("'asd';")
+		testFunctionLocal("true;")
+	}
+	
+	@Test
+	def void testFunctionCallExpression(){
+		'''
+		function myFunc(){
+			var i = 5;
+			myFunc();
+			myFunc2(1, 2);
+			myFunc3(1, 1, 5);
+			myFunc3(1 + 2, 1 + (3 + 4), i = 2);
+		}
+		
+		function myFunc2(p1, p2){
+			
+		}
+		
+		function myFunc3(p1, p2, p3){
+			
+		}
+		'''.parse.assertNoErrors
+	}
+	
+	def private testFunctionLocal(CharSequence toInsert){
+		'''
+		function myFunc(p1, p2){
+			var a;
+			var b;
+			var v = 1;
+			const c = 2;
+			«toInsert»
+		}
+		'''.parse.assertNoErrors
+	}
+	
+	@Test
+	def void testAssignmentAssociativity(){
+		'''
+		function myFunc(){
+			var i = 2;
+			i = 3;		//(1)
+			var j = 5;
+			i = j = 2;	//(3)
+			(i = j) = 2	//(4)
+		}
+		'''.parse.elements.get(0) as Function => [
+			it.body.statements.get(1).assertAssociativity("(i = 3)")
+			it.body.statements.get(3).assertAssociativity("(i = (j = 2))")
+			it.body.statements.get(4).assertAssociativity("((i = j) = 2)")
+		]
+	}
+
+	@Test
+	def void testPlusAssociativity(){
+		'''
+		function myFunc(){
+			5 + 5;		//(0)
+			5 + 5 + 5;	//(1)
+			5 + (5 + 5);//(2)
+			var i = 2;
+			3 + i + 2	//(4)
+		}
+		'''.parse.elements.head as Function => [
+			it.body.statements.get(0).assertAssociativity("(5 + 5)")
+			it.body.statements.get(1).assertAssociativity("((5 + 5) + 5)")
+			it.body.statements.get(2).assertAssociativity("(5 + (5 + 5))")
+			it.body.statements.get(4).assertAssociativity("((3 + i) + 2)")
+		]
+	}
+	
+	@Test
+	def void testFunctionCallAssociativity(){
+		'''
+		function myFunc(){
+			myFunc2(1, 2);
+			myFunc2(1, myFunc2(myFunc2(1, 1), 2));	
+		}
+		
+		function myFunc2(p1, p2){
+			
+		}
+		'''.parse.elements.head as Function => [
+			it.body.statements.get(0).assertAssociativity("(myFunc2(1, 2))")
+			it.body.statements.get(1).assertAssociativity("(myFunc2(1, (myFunc2((myFunc2(1, 1)), 2))))")
+		]
+	}
+	
+	@Test
+	def void testMixedAssociativity(){	//TODO look into assignment?
+		'''
+		function myFunc(){
+			var i = 5;
+			const j = "myString";
+			var k = true;
+			myFunc2(myFunc2(2 + i, i + j + k + myFunc3(i = 3, k, 1 + (i + j))), myFunc3(k = false, 1 , 2))
+		}
+		
+		function myFunc2(p1, p2){
+			
+		}
+		
+		function myFunc3(p1, p2, p3){
+			
+		}
+		'''.parse.elements.head as Function => [
+			it.body.statements.get(3).assertAssociativity("(myFunc2((myFunc2((2 + i), (((i + j) + k) + (myFunc3((i = 3), k, (1 + (i + j))))))), (myFunc3((k = false), 1, 2))))")
+		]
+	}
+	
+	def private void assertAssociativity(Statement s, CharSequence expected){
+		expected.toString.assertEquals(s.stringRepr)
+	}
+	
+	def private String stringRepr(Statement s){
+		switch(s){
+			Assignment: '''(«s.left.stringRepr» = «s.right.stringRepr»)'''
+			Plus: '''(«s.left.stringRepr» + «s.right.stringRepr»)'''
+			FunctionCall: {
+				var ret = "(" + s.function.name + "("
+				for(a : s.args){
+					ret += a.stringRepr
+					if(a !== s.args.last){	//Pointer-equality !!
+						ret += ", "
+					}
+				}
+				ret += "))"
+				return ret		
+			}
+			IntConstant: '''«s.value»'''
+			StringConstant: s.value
+			BoolConstant: '''«s.value»'''
+			DefinitionRef: s.definition.name
+		}
+	}
+	
+	
 }

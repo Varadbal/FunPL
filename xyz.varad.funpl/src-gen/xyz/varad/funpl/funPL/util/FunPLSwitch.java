@@ -209,13 +209,13 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.VALUE_REF:
+      case FunPLPackage.DEFINITION_REF:
       {
-        ValueRef valueRef = (ValueRef)theEObject;
-        T result = caseValueRef(valueRef);
-        if (result == null) result = caseTerminalExpression(valueRef);
-        if (result == null) result = caseExpression(valueRef);
-        if (result == null) result = caseStatement(valueRef);
+        DefinitionRef definitionRef = (DefinitionRef)theEObject;
+        T result = caseDefinitionRef(definitionRef);
+        if (result == null) result = caseTerminalExpression(definitionRef);
+        if (result == null) result = caseExpression(definitionRef);
+        if (result == null) result = caseStatement(definitionRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -480,17 +480,17 @@ public class FunPLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Value Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Definition Ref</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Value Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Definition Ref</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseValueRef(ValueRef object)
+  public T caseDefinitionRef(DefinitionRef object)
   {
     return null;
   }

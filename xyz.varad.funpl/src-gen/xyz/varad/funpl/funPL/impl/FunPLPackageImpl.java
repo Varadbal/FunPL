@@ -15,6 +15,7 @@ import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.BoolConstant;
 import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLFactory;
 import xyz.varad.funpl.funPL.FunPLPackage;
@@ -28,7 +29,6 @@ import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.TerminalExpression;
 import xyz.varad.funpl.funPL.Value;
-import xyz.varad.funpl.funPL.ValueRef;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,7 +155,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass valueRefEClass = null;
+  private EClass definitionRefEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -555,9 +555,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getValueRef()
+  public EClass getDefinitionRef()
   {
-    return valueRefEClass;
+    return definitionRefEClass;
   }
 
   /**
@@ -565,9 +565,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getValueRef_Variable()
+  public EReference getDefinitionRef_Definition()
   {
-    return (EReference)valueRefEClass.getEStructuralFeatures().get(0);
+    return (EReference)definitionRefEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -649,8 +649,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     boolConstantEClass = createEClass(BOOL_CONSTANT);
     createEAttribute(boolConstantEClass, BOOL_CONSTANT__VALUE);
 
-    valueRefEClass = createEClass(VALUE_REF);
-    createEReference(valueRefEClass, VALUE_REF__VARIABLE);
+    definitionRefEClass = createEClass(DEFINITION_REF);
+    createEReference(definitionRefEClass, DEFINITION_REF__DEFINITION);
   }
 
   /**
@@ -694,7 +694,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     intConstantEClass.getESuperTypes().add(this.getTerminalExpression());
     stringConstantEClass.getESuperTypes().add(this.getTerminalExpression());
     boolConstantEClass.getESuperTypes().add(this.getTerminalExpression());
-    valueRefEClass.getESuperTypes().add(this.getTerminalExpression());
+    definitionRefEClass.getESuperTypes().add(this.getTerminalExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(funProgramEClass, FunProgram.class, "FunProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -746,8 +746,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(boolConstantEClass, BoolConstant.class, "BoolConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBoolConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, BoolConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(valueRefEClass, ValueRef.class, "ValueRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getValueRef_Variable(), this.getValue(), null, "variable", null, 0, 1, ValueRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(definitionRefEClass, DefinitionRef.class, "DefinitionRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDefinitionRef_Definition(), this.getDefinition(), null, "definition", null, 0, 1, DefinitionRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
