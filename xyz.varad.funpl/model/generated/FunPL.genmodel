@@ -29,7 +29,6 @@
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Statement"/>
     <genClasses ecoreClass="FunPL.ecore#//Expression"/>
-    <genClasses ecoreClass="FunPL.ecore#//TerminalExpression"/>
     <genClasses ecoreClass="FunPL.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/right"/>

@@ -27,7 +27,7 @@ import xyz.varad.funpl.funPL.FunPLPackage;
  *
  * @generated
  */
-public class DefinitionRefImpl extends TerminalExpressionImpl implements DefinitionRef
+public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
 {
   /**
    * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.

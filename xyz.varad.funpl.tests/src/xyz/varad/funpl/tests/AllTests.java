@@ -7,7 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses(
 	{FunPLParsingTest.class, 
-	FunPLModelUtilTest.class}
+	FunPLModelUtilTest.class,
+	FunPLValidatorTest.class}
 )
 public class AllTests {
 

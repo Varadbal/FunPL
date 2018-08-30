@@ -15,11 +15,11 @@ import xyz.varad.funpl.funPL.FunPLPackage
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
-	//TODO forward reference
 	//TODO duplicate variable
 	//TODO const reassignment
 	//TODO const must be initialized
 	//TODO function call #args=#params
+	//TODO disable def. references in global scope???
 	
 	private static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"

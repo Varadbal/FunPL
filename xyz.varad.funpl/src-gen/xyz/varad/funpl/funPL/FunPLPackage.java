@@ -319,25 +319,6 @@ public interface FunPLPackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.TerminalExpressionImpl <em>Terminal Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.TerminalExpressionImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTerminalExpression()
-   * @generated
-   */
-  int TERMINAL_EXPRESSION = 9;
-
-  /**
-   * The number of structural features of the '<em>Terminal Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -345,7 +326,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 10;
+  int ASSIGNMENT = 9;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -382,7 +363,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 11;
+  int PLUS = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -419,7 +400,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 12;
+  int FUNCTION_CALL = 11;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' reference.
@@ -456,7 +437,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 13;
+  int INT_CONSTANT = 12;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -465,7 +446,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+  int INT_CONSTANT__VALUE = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Int Constant</em>' class.
@@ -474,7 +455,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INT_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+  int INT_CONSTANT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.StringConstantImpl <em>String Constant</em>}' class.
@@ -484,7 +465,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 14;
+  int STRING_CONSTANT = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -493,7 +474,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRING_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+  int STRING_CONSTANT__VALUE = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>String Constant</em>' class.
@@ -502,7 +483,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRING_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+  int STRING_CONSTANT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.BoolConstantImpl <em>Bool Constant</em>}' class.
@@ -512,7 +493,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 15;
+  int BOOL_CONSTANT = 14;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -521,7 +502,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOL_CONSTANT__VALUE = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+  int BOOL_CONSTANT__VALUE = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Bool Constant</em>' class.
@@ -530,7 +511,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOL_CONSTANT_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+  int BOOL_CONSTANT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl <em>Definition Ref</em>}' class.
@@ -540,7 +521,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
    * @generated
    */
-  int DEFINITION_REF = 16;
+  int DEFINITION_REF = 15;
 
   /**
    * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -549,7 +530,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DEFINITION_REF__DEFINITION = TERMINAL_EXPRESSION_FEATURE_COUNT + 0;
+  int DEFINITION_REF__DEFINITION = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Definition Ref</em>' class.
@@ -558,7 +539,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DEFINITION_REF_FEATURE_COUNT = TERMINAL_EXPRESSION_FEATURE_COUNT + 1;
+  int DEFINITION_REF_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 
   /**
@@ -738,16 +719,6 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getExpression();
-
-  /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.TerminalExpression <em>Terminal Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Terminal Expression</em>'.
-   * @see xyz.varad.funpl.funPL.TerminalExpression
-   * @generated
-   */
-  EClass getTerminalExpression();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Assignment <em>Assignment</em>}'.
@@ -1105,16 +1076,6 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
-
-    /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.TerminalExpressionImpl <em>Terminal Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.TerminalExpressionImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTerminalExpression()
-     * @generated
-     */
-    EClass TERMINAL_EXPRESSION = eINSTANCE.getTerminalExpression();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.

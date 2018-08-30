@@ -25,7 +25,7 @@ import xyz.varad.funpl.funPL.IntConstant;
  *
  * @generated
  */
-public class IntConstantImpl extends TerminalExpressionImpl implements IntConstant
+public class IntConstantImpl extends ExpressionImpl implements IntConstant
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

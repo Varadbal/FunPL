@@ -121,11 +121,6 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
-      public Adapter caseTerminalExpression(TerminalExpression object)
-      {
-        return createTerminalExpressionAdapter();
-      }
-      @Override
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
@@ -313,21 +308,6 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.TerminalExpression <em>Terminal Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.TerminalExpression
-   * @generated
-   */
-  public Adapter createTerminalExpressionAdapter()
   {
     return null;
   }

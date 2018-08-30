@@ -74,7 +74,6 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
       case FunPLPackage.BLOCK: return createBlock();
       case FunPLPackage.STATEMENT: return createStatement();
       case FunPLPackage.EXPRESSION: return createExpression();
-      case FunPLPackage.TERMINAL_EXPRESSION: return createTerminalExpression();
       case FunPLPackage.ASSIGNMENT: return createAssignment();
       case FunPLPackage.PLUS: return createPlus();
       case FunPLPackage.FUNCTION_CALL: return createFunctionCall();
@@ -184,17 +183,6 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TerminalExpression createTerminalExpression()
-  {
-    TerminalExpressionImpl terminalExpression = new TerminalExpressionImpl();
-    return terminalExpression;
   }
 
   /**

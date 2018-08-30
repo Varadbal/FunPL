@@ -20,7 +20,7 @@ package xyz.varad.funpl.funPL;
  * @model
  * @generated
  */
-public interface DefinitionRef extends TerminalExpression
+public interface DefinitionRef extends Expression
 {
   /**
    * Returns the value of the '<em><b>Definition</b></em>' reference.

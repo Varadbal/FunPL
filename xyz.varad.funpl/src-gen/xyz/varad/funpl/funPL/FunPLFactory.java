@@ -105,15 +105,6 @@ public interface FunPLFactory extends EFactory
   Expression createExpression();
 
   /**
-   * Returns a new object of class '<em>Terminal Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Terminal Expression</em>'.
-   * @generated
-   */
-  TerminalExpression createTerminalExpression();
-
-  /**
    * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

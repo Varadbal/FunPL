@@ -27,7 +27,6 @@ import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
-import xyz.varad.funpl.funPL.TerminalExpression;
 import xyz.varad.funpl.funPL.Value;
 
 /**
@@ -100,13 +99,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * @generated
    */
   private EClass expressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass terminalExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -395,16 +387,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTerminalExpression()
-  {
-    return terminalExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getAssignment()
   {
     return assignmentEClass;
@@ -626,8 +608,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
 
     expressionEClass = createEClass(EXPRESSION);
 
-    terminalExpressionEClass = createEClass(TERMINAL_EXPRESSION);
-
     assignmentEClass = createEClass(ASSIGNMENT);
     createEReference(assignmentEClass, ASSIGNMENT__LEFT);
     createEReference(assignmentEClass, ASSIGNMENT__RIGHT);
@@ -687,14 +667,13 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     valueEClass.getESuperTypes().add(this.getStatement());
     functionEClass.getESuperTypes().add(this.getDefinition());
     expressionEClass.getESuperTypes().add(this.getStatement());
-    terminalExpressionEClass.getESuperTypes().add(this.getExpression());
     assignmentEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     functionCallEClass.getESuperTypes().add(this.getExpression());
-    intConstantEClass.getESuperTypes().add(this.getTerminalExpression());
-    stringConstantEClass.getESuperTypes().add(this.getTerminalExpression());
-    boolConstantEClass.getESuperTypes().add(this.getTerminalExpression());
-    definitionRefEClass.getESuperTypes().add(this.getTerminalExpression());
+    intConstantEClass.getESuperTypes().add(this.getExpression());
+    stringConstantEClass.getESuperTypes().add(this.getExpression());
+    boolConstantEClass.getESuperTypes().add(this.getExpression());
+    definitionRefEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(funProgramEClass, FunProgram.class, "FunProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -722,8 +701,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(terminalExpressionEClass, TerminalExpression.class, "TerminalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssignment_Left(), this.getExpression(), null, "left", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

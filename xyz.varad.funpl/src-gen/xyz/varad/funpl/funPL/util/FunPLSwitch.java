@@ -143,15 +143,6 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FunPLPackage.TERMINAL_EXPRESSION:
-      {
-        TerminalExpression terminalExpression = (TerminalExpression)theEObject;
-        T result = caseTerminalExpression(terminalExpression);
-        if (result == null) result = caseExpression(terminalExpression);
-        if (result == null) result = caseStatement(terminalExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case FunPLPackage.ASSIGNMENT:
       {
         Assignment assignment = (Assignment)theEObject;
@@ -183,7 +174,6 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         IntConstant intConstant = (IntConstant)theEObject;
         T result = caseIntConstant(intConstant);
-        if (result == null) result = caseTerminalExpression(intConstant);
         if (result == null) result = caseExpression(intConstant);
         if (result == null) result = caseStatement(intConstant);
         if (result == null) result = defaultCase(theEObject);
@@ -193,7 +183,6 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         StringConstant stringConstant = (StringConstant)theEObject;
         T result = caseStringConstant(stringConstant);
-        if (result == null) result = caseTerminalExpression(stringConstant);
         if (result == null) result = caseExpression(stringConstant);
         if (result == null) result = caseStatement(stringConstant);
         if (result == null) result = defaultCase(theEObject);
@@ -203,7 +192,6 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         BoolConstant boolConstant = (BoolConstant)theEObject;
         T result = caseBoolConstant(boolConstant);
-        if (result == null) result = caseTerminalExpression(boolConstant);
         if (result == null) result = caseExpression(boolConstant);
         if (result == null) result = caseStatement(boolConstant);
         if (result == null) result = defaultCase(theEObject);
@@ -213,7 +201,6 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         DefinitionRef definitionRef = (DefinitionRef)theEObject;
         T result = caseDefinitionRef(definitionRef);
-        if (result == null) result = caseTerminalExpression(definitionRef);
         if (result == null) result = caseExpression(definitionRef);
         if (result == null) result = caseStatement(definitionRef);
         if (result == null) result = defaultCase(theEObject);
@@ -363,22 +350,6 @@ public class FunPLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpression(Expression object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Terminal Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Terminal Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTerminalExpression(TerminalExpression object)
   {
     return null;
   }

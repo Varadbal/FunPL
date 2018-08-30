@@ -59,7 +59,7 @@ FunctionCall returns Expression:
 	{FunctionCall} function=[Function] '(' (args+=Expression (',' args+=Expression)*)? ')'
 ;
 
-TerminalExpression:
+TerminalExpression returns Expression:
 	{IntConstant} value=INT | 
 	{StringConstant} value=STRING |
 	{BoolConstant} value=('true'|'false') |

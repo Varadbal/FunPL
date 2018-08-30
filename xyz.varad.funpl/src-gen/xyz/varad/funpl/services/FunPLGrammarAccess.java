@@ -91,7 +91,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 		public Group getGroup() { return cGroup; }
 		
-		////TODO type
+		////TODO type: 'var' (type=...)? name=ID ...
 		//isConst?='const' | 'var'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
@@ -468,7 +468,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cDefinitionDefinitionCrossReference_3_1_0 = (CrossReference)cDefinitionAssignment_3_1.eContents().get(0);
 		private final RuleCall cDefinitionDefinitionIDTerminalRuleCall_3_1_0_1 = (RuleCall)cDefinitionDefinitionCrossReference_3_1_0.eContents().get(1);
 		
-		//TerminalExpression:
+		//TerminalExpression Expression:
 		//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {DefinitionRef}
 		//	definition=[Definition];
 		@Override public ParserRule getRule() { return rule; }
@@ -734,7 +734,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		return getFunctionCallAccess().getRule();
 	}
 	
-	//TerminalExpression:
+	//TerminalExpression Expression:
 	//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {DefinitionRef}
 	//	definition=[Definition];
 	public TerminalExpressionElements getTerminalExpressionAccess() {

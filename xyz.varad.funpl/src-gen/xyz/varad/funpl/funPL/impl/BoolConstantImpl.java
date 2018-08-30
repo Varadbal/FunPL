@@ -25,7 +25,7 @@ import xyz.varad.funpl.funPL.FunPLPackage;
  *
  * @generated
  */
-public class BoolConstantImpl extends TerminalExpressionImpl implements BoolConstant
+public class BoolConstantImpl extends ExpressionImpl implements BoolConstant
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

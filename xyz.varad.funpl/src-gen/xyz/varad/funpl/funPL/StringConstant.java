@@ -20,7 +20,7 @@ package xyz.varad.funpl.funPL;
  * @model
  * @generated
  */
-public interface StringConstant extends TerminalExpression
+public interface StringConstant extends Expression
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.
