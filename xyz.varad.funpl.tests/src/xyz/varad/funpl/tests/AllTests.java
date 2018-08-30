@@ -8,7 +8,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses(
 	{FunPLParsingTest.class, 
 	FunPLModelUtilTest.class,
-	FunPLValidatorTest.class}
+	FunPLValidatorTest.class,
+	FunPLScopeProviderTest.class}
 )
 public class AllTests {
 

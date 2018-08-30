@@ -34,29 +34,21 @@ public class FunPLValidatorTest {
   public void testForwardReference() {
     try {
       StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc()");
+      _builder.newLine();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("var i = j;");
       _builder.newLine();
+      _builder.append("\t");
       _builder.append("var j = 10;");
       _builder.newLine();
-      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getDefinitionRef(), 
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getSymbolRef(), 
         FunPLValidator.FORWARD_REFERENCE, 
-        "Definition forward reference not allowed: \'j\'");
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("function myFunc()");
-      _builder_1.newLine();
-      _builder_1.append("{");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("var i = j;");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("var j = 10;");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getDefinitionRef(), 
-        FunPLValidator.FORWARD_REFERENCE, 
-        "Definition forward reference not allowed: \'j\'");
+        "Symbol forward reference not allowed: \'j\'");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

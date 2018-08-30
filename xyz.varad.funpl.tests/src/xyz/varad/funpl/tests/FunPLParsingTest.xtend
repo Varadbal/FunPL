@@ -7,23 +7,23 @@ import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import static extension org.junit.Assert.*
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
-import xyz.varad.funpl.funPL.FunProgram
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
-import xyz.varad.funpl.funPL.Statement
 import xyz.varad.funpl.funPL.Assignment
-import xyz.varad.funpl.funPL.Plus
-import xyz.varad.funpl.funPL.FunctionCall
-import xyz.varad.funpl.funPL.DefinitionRef
-import xyz.varad.funpl.funPL.Definition
-import xyz.varad.funpl.funPL.Function
-import xyz.varad.funpl.funPL.Expression
-import xyz.varad.funpl.funPL.IntConstant
-import xyz.varad.funpl.funPL.StringConstant
 import xyz.varad.funpl.funPL.BoolConstant
+import xyz.varad.funpl.funPL.FunProgram
+import xyz.varad.funpl.funPL.Function
+import xyz.varad.funpl.funPL.FunctionCall
+import xyz.varad.funpl.funPL.IntConstant
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.funPL.Statement
+import xyz.varad.funpl.funPL.StringConstant
+import xyz.varad.funpl.funPL.SymbolRef
 import xyz.varad.funpl.funPL.Value
+
+import static extension org.junit.Assert.*
+
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
 class FunPLParsingTest {
@@ -185,7 +185,7 @@ class FunPLParsingTest {
 		expected.toString.assertEquals(s.stringRepr)
 	}
 	
-	def private String stringRepr(Statement s){
+	def static package String stringRepr(Statement s){
 		switch(s){
 			Assignment: '''(«s.left.stringRepr» = «s.right.stringRepr»)'''
 			Plus: '''(«s.left.stringRepr» + «s.right.stringRepr»)'''
@@ -203,7 +203,22 @@ class FunPLParsingTest {
 			IntConstant: '''«s.value»'''
 			StringConstant: s.value
 			BoolConstant: '''«s.value»'''
-			DefinitionRef: s.definition.name
+			SymbolRef: s.symbol.name
+			Value: {
+				var ret = ""
+				if(s.isConst)
+					ret += "const "
+				else
+					ret += "var "
+					
+				ret += s.name
+				
+				if(s.expression !== null){
+					ret += " = "
+					ret += s.expression.stringRepr
+				}
+				return ret
+			}
 		}
 	}
 	

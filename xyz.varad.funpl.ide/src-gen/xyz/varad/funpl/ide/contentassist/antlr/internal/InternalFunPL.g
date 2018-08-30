@@ -1911,9 +1911,9 @@ rule__TerminalExpression__Group_3__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0()); }
+	{ before(grammarAccess.getTerminalExpressionAccess().getSymbolRefAction_3_0()); }
 	()
-	{ after(grammarAccess.getTerminalExpressionAccess().getDefinitionRefAction_3_0()); }
+	{ after(grammarAccess.getTerminalExpressionAccess().getSymbolRefAction_3_0()); }
 )
 ;
 finally {
@@ -1937,9 +1937,9 @@ rule__TerminalExpression__Group_3__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTerminalExpressionAccess().getDefinitionAssignment_3_1()); }
-	(rule__TerminalExpression__DefinitionAssignment_3_1)
-	{ after(grammarAccess.getTerminalExpressionAccess().getDefinitionAssignment_3_1()); }
+	{ before(grammarAccess.getTerminalExpressionAccess().getSymbolAssignment_3_1()); }
+	(rule__TerminalExpression__SymbolAssignment_3_1)
+	{ after(grammarAccess.getTerminalExpressionAccess().getSymbolAssignment_3_1()); }
 )
 ;
 finally {
@@ -2225,19 +2225,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TerminalExpression__DefinitionAssignment_3_1
+rule__TerminalExpression__SymbolAssignment_3_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0()); }
+		{ before(grammarAccess.getTerminalExpressionAccess().getSymbolSymbolCrossReference_3_1_0()); }
 		(
-			{ before(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1()); }
+			{ before(grammarAccess.getTerminalExpressionAccess().getSymbolSymbolIDTerminalRuleCall_3_1_0_1()); }
 			RULE_ID
-			{ after(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1()); }
+			{ after(grammarAccess.getTerminalExpressionAccess().getSymbolSymbolIDTerminalRuleCall_3_1_0_1()); }
 		)
-		{ after(grammarAccess.getTerminalExpressionAccess().getDefinitionDefinitionCrossReference_3_1_0()); }
+		{ after(grammarAccess.getTerminalExpressionAccess().getSymbolSymbolCrossReference_3_1_0()); }
 	)
 ;
 finally {

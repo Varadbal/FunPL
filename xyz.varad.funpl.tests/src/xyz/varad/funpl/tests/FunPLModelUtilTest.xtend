@@ -4,25 +4,19 @@ import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
-import static extension org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import xyz.varad.funpl.funPL.FunProgram
-import xyz.varad.funpl.funPL.Statement
-import xyz.varad.funpl.funPL.Assignment
-import xyz.varad.funpl.funPL.Plus
-import xyz.varad.funpl.funPL.FunctionCall
-import xyz.varad.funpl.funPL.DefinitionRef
-import xyz.varad.funpl.funPL.Definition
-import xyz.varad.funpl.funPL.Function
-import xyz.varad.funpl.funPL.Expression
-import xyz.varad.funpl.funPL.IntConstant
-import xyz.varad.funpl.funPL.StringConstant
-import xyz.varad.funpl.funPL.BoolConstant
-import xyz.varad.funpl.funPL.Value
 import xyz.varad.funpl.FunPLModelUtil
+import xyz.varad.funpl.funPL.FunProgram
+import xyz.varad.funpl.funPL.IntConstant
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.funPL.Symbol
+import xyz.varad.funpl.funPL.SymbolRef
+import xyz.varad.funpl.funPL.Value
 
-import static extension org.eclipse.xtext.EcoreUtil2.*
+import static extension org.junit.Assert.*
+import static extension xyz.varad.funpl.FunPLModelUtil.*
+import static extension xyz.varad.funpl.tests.FunPLParsingTest.*
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -32,83 +26,221 @@ class FunPLModelUtilTest {
 	@Inject extension FunPLModelUtil
 	
 	@Test
-	def void testDefinedBefore(){
+	def void testIsDefinedBefore_SymbolRef(){
 		'''
-		var i = 5;		//(0)
-		var j = false;	//(1)
-		var k = i + 5;	//(2)
-		var l = m + 1;	//(3)
-		var o = 3;		//(4)
-		
-		function myFunc(){	//(5)
-			var p = 1;		//(0)
-			5 + 5;			//(1)
-			var q = 8;		//(2)
+		var i;
+		var j = 2;
+		function myFunc(p){
+			var k = j;		//(0) - global visibility
+			var q = k;		//(1) - local visibility
+			l;				//(2) - undefined
+			5 + p;			//(3) - parameter visibility
+			var m = myFunc; //(4) - function as symbol
 		}
-		'''.parse => [
-			assertDefinedBeforeOutsideValue(0, "")
-			assertDefinedBeforeOutsideValue(1, "i")
-			assertDefinedBeforeOutsideValue(2, "i,j")
-			assertDefinedBeforeOutsideValue(3, "i,j,k")
-			assertDefinedBeforeOutsideValue(4, "i,j,k,l")
-			
-			assertDefinedBeforeFunctionLocalStatement(5, 0, "i,j,k,l,o")
-			assertDefinedBeforeFunctionLocalStatement(5, 1, "i,j,k,l,o,p")
-			assertDefinedBeforeFunctionLocalStatement(5, 2, "i,j,k,l,o,p")
-			
+		'''.parse.functions.head.statements => [
+			((get(0) as Value).expression as SymbolRef).isDefinedBefore.assertTrue;
+			((get(1) as Value).expression as SymbolRef).isDefinedBefore.assertTrue;
+			(get(2) as SymbolRef).isDefinedBefore.assertFalse;
+			((get(3) as Plus).right as SymbolRef).isDefinedBefore.assertTrue;		
+			((get(4) as Value).expression as SymbolRef).isDefinedBefore
 		]
 	}
 	
 	@Test
-	def void testIsDefinedBefore(){
+	def void symbolsDefinedBefore_Expression(){
 		'''
-		var i = 5;		//(0)
-		var j = i;		//(1)
-		var k = m;		//(2)
-		var m = m;		//(3)
-		
-		function myFunc(){	//(4)
-			i;				//(0)
-			var o = p;		//(1)
+		var i;
+		var j = 2;
+		function myFunc(){
+			var k = 1;
 		}
-		
-		function myFunc2(){	//(5)
-			o;				//(0)
-			var q = i;		//(1)
-			var z = myFunc;	//(2)
+		function myFunc2(p1, p2){
+			var l;
+			5 + 5;
 		}
-		'''.parse => [
-			((it.elements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
-			((it.elements.get(2) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
-			((it.elements.get(3) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
-			((it.elements.get(4) as Function).body.statements.get(0) as DefinitionRef).isDefinedBefore.assertTrue;
-			(((it.elements.get(4) as Function).body.statements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertFalse;
-			((it.elements.get(5) as Function).body.statements.get(0) as DefinitionRef).isDefinedBefore.assertFalse;
-			(((it.elements.get(5) as Function).body.statements.get(1) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
-			(((it.elements.get(5) as Function).body.statements.get(2) as Value).expression as DefinitionRef).isDefinedBefore.assertTrue;
+		'''.parse.functions.last.statements.last as Plus => [
+			"i,j,myFunc,myFunc2,p1,p2,l".assertEquals((left as IntConstant).symbolsDefinedBefore.map[name].join(","))
 		]
 	}
 	
-	
-	//Values must have expressions!!!!
-	def private assertDefinedBeforeOutsideValue(FunProgram prog, int elemIndex, CharSequence expected){
-		expected.assertEquals((prog.elements.get(elemIndex) as Value).expression.definedBefore.map[name].join(","))
-	}
-	
-	//Values must have expressions!!!
-	def private assertDefinedBeforeFunctionLocalStatement
-		(FunProgram prog, int elemIndex, int statementIndex, CharSequence expected){
-		val st = (prog.elements.get(elemIndex) as Function).body.statements.get(statementIndex)
-		switch(st){
-			Value:{
-				expected.assertEquals(st.expression.definedBefore.map[name].join(","))
-			}
-			Expression:{
-				expected.assertEquals(st.definedBefore.map[name].join(","))
-			}
+	@Test
+	def void symbolsDefinedBefore_Symbol(){
+		'''
+		var i;
+		var j = 2;
+		function myFunc(){
+			var k = 1;
 		}
+		var m;
+		function myFunc2(p1, p2, p3){
+			var l;
+			var f = 2;
+			5 + 5;
+		}
+
+		'''.parse => [
+			"i,j,myFunc,m,myFunc2".assertEquals((it.values.get(0) as Symbol).symbolsDefinedBefore.map[name].join(","))
+			"i,j,myFunc,m,myFunc2,p1,p2,p3".assertEquals(it.functions.get(1).values.head.symbolsDefinedBefore.map[name].join(","))
+			"i,j,myFunc,m,myFunc2,p1,p2".assertEquals(it.functions.get(1).params.get(2).symbolsDefinedBefore.map[name].join(","))
+		]
 	}
 	
+	@Test
+	def void symbolsDefinedGlobally(){
+		'''
+		var i;
+		function myFunc() { }
+		var j = 2;
+		function myFunc2() { var l = 5; }
+		var k;
+		'''.parse => [
+			"i,myFunc,j,myFunc2,k".assertEquals(it.symbols.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testFunctions_FunProgram(){
+		'''
+		var i;
+		function myFunc() { }
+		var j = 2;
+		function myFunc2() { 5; }
+		var k;
+		'''.parse => [
+			"myFunc,myFunc2".assertEquals(it.functions.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testValues_FunProgram(){
+		'''
+		var i;
+		function myFunc() { }
+		var j = 2;
+		function myFunc2() { var l = 5; }
+		var k;
+		'''.parse => [
+			"i,j,k".assertEquals(it.values.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testSymbols_FunProgram(){
+		'''
+		var i;
+		function myFunc() { }
+		var j = 2;
+		function myFunc2() { var l = 5; }
+		var k;
+		'''.parse => [
+			"i,myFunc,j,myFunc2,k".assertEquals(it.symbols.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testValues_Function(){
+		'''
+		var i;
+		function myFunc() {
+			
+		}
+		var j = 2;
+		function myFunc2(p1, p2) { 
+			var l = 5;
+			var m;
+			5 + 5;
+		}
+		var k;
+		'''.parse.functions.last => [
+			"l,m".assertEquals(it.values.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testSymbols_Function(){
+		'''
+		var i;
+		function myFunc() {
+			
+		}
+		var j = 2;
+		function myFunc2(p1, p2) { 
+			var l = 5;
+			var m;
+			5 + 5;
+		}
+		var k;
+		'''.parse.functions.last => [
+			"p1,p2,l,m".assertEquals(it.symbols.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testStatements_Function(){
+		'''
+		var i;
+		function myFunc() {
+			
+		}
+		var j = 2;
+		function myFunc2(p1, p2) { 
+			var l = 5;
+			var m;
+			5 + 5;
+			var k = 5 + 5;
+		}
+		var k;
+		'''.parse.functions.last => [
+			4.assertEquals(it.statements.size)
+			"var l = 5".assertEquals(it.statements.get(0).stringRepr)
+			"var m".assertEquals(it.statements.get(1).stringRepr)
+			"(5 + 5)".assertEquals(it.statements.get(2).stringRepr)
+			"var k = (5 + 5)".assertEquals(it.statements.get(3).stringRepr)
+		]
+	}
+	
+	@Test
+	def void testValues_Block(){
+		'''
+		var i;
+		function myFunc() {
+			
+		}
+		var j = 2;
+		function myFunc2(p1, p2) { 
+			var l = 5;
+			var m;
+			5 + 5;
+		}
+		var k;
+		'''.parse.functions.last.body => [
+			"l,m".assertEquals(it.values.map[name].join(","))
+		]
+	}
+	
+	@Test
+	def void testStatements_Block(){
+		'''
+		var i;
+		function myFunc() {
+			
+		}
+		var j = 2;
+		function myFunc2(p1, p2) { 
+			var l = 5;
+			var m;
+			5 + 5;
+			var k = 5 + 5;
+		}
+		var k;
+		'''.parse.functions.last.body => [
+			4.assertEquals(it.statements.size)
+			"var l = 5".assertEquals(it.statements.get(0).stringRepr)
+			"var m".assertEquals(it.statements.get(1).stringRepr)
+			"(5 + 5)".assertEquals(it.statements.get(2).stringRepr)
+			"var k = (5 + 5)".assertEquals(it.statements.get(3).stringRepr)
+		]
+	}
 	
 	
 }

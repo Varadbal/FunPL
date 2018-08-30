@@ -482,18 +482,18 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cValueTrueKeyword_2_1_0_0 = (Keyword)cValueAlternatives_2_1_0.eContents().get(0);
 		private final Keyword cValueFalseKeyword_2_1_0_1 = (Keyword)cValueAlternatives_2_1_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Action cDefinitionRefAction_3_0 = (Action)cGroup_3.eContents().get(0);
-		private final Assignment cDefinitionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final CrossReference cDefinitionDefinitionCrossReference_3_1_0 = (CrossReference)cDefinitionAssignment_3_1.eContents().get(0);
-		private final RuleCall cDefinitionDefinitionIDTerminalRuleCall_3_1_0_1 = (RuleCall)cDefinitionDefinitionCrossReference_3_1_0.eContents().get(1);
+		private final Action cSymbolRefAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Assignment cSymbolAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cSymbolSymbolCrossReference_3_1_0 = (CrossReference)cSymbolAssignment_3_1.eContents().get(0);
+		private final RuleCall cSymbolSymbolIDTerminalRuleCall_3_1_0_1 = (RuleCall)cSymbolSymbolCrossReference_3_1_0.eContents().get(1);
 		
 		//TerminalExpression Expression:
-		//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {DefinitionRef}
-		//	definition=[Definition];
+		//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {SymbolRef}
+		//	symbol=[Symbol];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {DefinitionRef}
-		//definition=[Definition]
+		//{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {SymbolRef}
+		//symbol=[Symbol]
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//{IntConstant} value=INT
@@ -538,20 +538,20 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//'false'
 		public Keyword getValueFalseKeyword_2_1_0_1() { return cValueFalseKeyword_2_1_0_1; }
 		
-		//{DefinitionRef} definition=[Definition]
+		//{SymbolRef} symbol=[Symbol]
 		public Group getGroup_3() { return cGroup_3; }
 		
-		//{DefinitionRef}
-		public Action getDefinitionRefAction_3_0() { return cDefinitionRefAction_3_0; }
+		//{SymbolRef}
+		public Action getSymbolRefAction_3_0() { return cSymbolRefAction_3_0; }
 		
-		//definition=[Definition]
-		public Assignment getDefinitionAssignment_3_1() { return cDefinitionAssignment_3_1; }
+		//symbol=[Symbol]
+		public Assignment getSymbolAssignment_3_1() { return cSymbolAssignment_3_1; }
 		
-		//[Definition]
-		public CrossReference getDefinitionDefinitionCrossReference_3_1_0() { return cDefinitionDefinitionCrossReference_3_1_0; }
+		//[Symbol]
+		public CrossReference getSymbolSymbolCrossReference_3_1_0() { return cSymbolSymbolCrossReference_3_1_0; }
 		
 		//ID
-		public RuleCall getDefinitionDefinitionIDTerminalRuleCall_3_1_0_1() { return cDefinitionDefinitionIDTerminalRuleCall_3_1_0_1; }
+		public RuleCall getSymbolSymbolIDTerminalRuleCall_3_1_0_1() { return cSymbolSymbolIDTerminalRuleCall_3_1_0_1; }
 	}
 	
 	
@@ -766,8 +766,8 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TerminalExpression Expression:
-	//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {DefinitionRef}
-	//	definition=[Definition];
+	//	{IntConstant} value=INT | {StringConstant} value=STRING | {BoolConstant} value=('true' | 'false') | {SymbolRef}
+	//	symbol=[Symbol];
 	public TerminalExpressionElements getTerminalExpressionAccess() {
 		return pTerminalExpression;
 	}

@@ -4,10 +4,10 @@
 package xyz.varad.funpl.validation
 
 import org.eclipse.xtext.validation.Check
-import xyz.varad.funpl.funPL.DefinitionRef
 import com.google.inject.Inject
 import xyz.varad.funpl.FunPLModelUtil
 import xyz.varad.funpl.funPL.FunPLPackage
+import xyz.varad.funpl.funPL.SymbolRef
 
 /**
  * This class contains custom validation rules. 
@@ -15,26 +15,26 @@ import xyz.varad.funpl.funPL.FunPLPackage
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
-	//TODO duplicate variable
-	//TODO const reassignment
-	//TODO const must be initialized
-	//TODO function call #args=#params
-	//TODO disable def. references in global scope???
+	// TODO duplicate variable
+	// TODO const reassignment
+	// TODO const must be initialized
+	// TODO function call #args=#params
+	// TODO disable def. references in global scope???
 	
-	private static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
+	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
 	
 	
 	@Inject extension FunPLModelUtil
 	
 	@Check
-	def void checkForwardReference(DefinitionRef defRef){
-		val definition = defRef.definition
-		if(definition !== null && !defRef.isDefinedBefore){
-			error("Definition forward reference not allowed: '" + definition.name + "'",
-				FunPLPackage::eINSTANCE.definitionRef_Definition,
+	def void checkForwardReference(SymbolRef _sym){
+		val symbol = _sym.symbol
+		if(symbol !== null && !_sym.isDefinedBefore){
+			error("Symbol forward reference not allowed: '" + symbol.name + "'",
+				FunPLPackage::eINSTANCE.symbolRef_Symbol,
 				FORWARD_REFERENCE,
-				definition.name
+				symbol.name
 			)
 		}
 	}

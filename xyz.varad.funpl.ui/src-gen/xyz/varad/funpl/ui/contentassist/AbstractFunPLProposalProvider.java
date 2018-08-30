@@ -67,7 +67,7 @@ public abstract class AbstractFunPLProposalProvider extends TerminalsProposalPro
 			// subclasses may override
 		}
 	}
-	public void completeTerminalExpression_Definition(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeTerminalExpression_Symbol(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		lookupCrossReference(((CrossReference)assignment.getTerminal()), context, acceptor);
 	}
 

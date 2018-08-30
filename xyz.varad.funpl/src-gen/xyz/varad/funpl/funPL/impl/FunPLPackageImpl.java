@@ -15,7 +15,6 @@ import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.BoolConstant;
 import xyz.varad.funpl.funPL.Definition;
-import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLFactory;
 import xyz.varad.funpl.funPL.FunPLPackage;
@@ -28,6 +27,7 @@ import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Value;
 
 /**
@@ -155,7 +155,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass definitionRefEClass = null;
+  private EClass symbolRefEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -545,9 +545,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDefinitionRef()
+  public EClass getSymbolRef()
   {
-    return definitionRefEClass;
+    return symbolRefEClass;
   }
 
   /**
@@ -555,9 +555,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefinitionRef_Definition()
+  public EReference getSymbolRef_Symbol()
   {
-    return (EReference)definitionRefEClass.getEStructuralFeatures().get(0);
+    return (EReference)symbolRefEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -638,8 +638,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     boolConstantEClass = createEClass(BOOL_CONSTANT);
     createEAttribute(boolConstantEClass, BOOL_CONSTANT__VALUE);
 
-    definitionRefEClass = createEClass(DEFINITION_REF);
-    createEReference(definitionRefEClass, DEFINITION_REF__DEFINITION);
+    symbolRefEClass = createEClass(SYMBOL_REF);
+    createEReference(symbolRefEClass, SYMBOL_REF__SYMBOL);
   }
 
   /**
@@ -684,7 +684,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     intConstantEClass.getESuperTypes().add(this.getExpression());
     stringConstantEClass.getESuperTypes().add(this.getExpression());
     boolConstantEClass.getESuperTypes().add(this.getExpression());
-    definitionRefEClass.getESuperTypes().add(this.getExpression());
+    symbolRefEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(funProgramEClass, FunProgram.class, "FunProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -735,8 +735,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(boolConstantEClass, BoolConstant.class, "BoolConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBoolConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, BoolConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(definitionRefEClass, DefinitionRef.class, "DefinitionRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDefinitionRef_Definition(), this.getDefinition(), null, "definition", null, 0, 1, DefinitionRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(symbolRefEClass, SymbolRef.class, "SymbolRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSymbolRef_Symbol(), this.getSymbol(), null, "symbol", null, 0, 1, SymbolRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

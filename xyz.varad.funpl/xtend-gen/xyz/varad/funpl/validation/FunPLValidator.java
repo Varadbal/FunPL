@@ -7,9 +7,9 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.lib.Extension;
 import xyz.varad.funpl.FunPLModelUtil;
-import xyz.varad.funpl.funPL.Definition;
-import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.FunPLPackage;
+import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
 /**
@@ -28,16 +28,16 @@ public class FunPLValidator extends AbstractFunPLValidator {
   private FunPLModelUtil _funPLModelUtil;
   
   @Check
-  public void checkForwardReference(final DefinitionRef defRef) {
-    final Definition definition = defRef.getDefinition();
-    if (((definition != null) && (!this._funPLModelUtil.isDefinedBefore(defRef)))) {
-      String _name = definition.getName();
-      String _plus = ("Definition forward reference not allowed: \'" + _name);
+  public void checkForwardReference(final SymbolRef _sym) {
+    final Symbol symbol = _sym.getSymbol();
+    if (((symbol != null) && (!this._funPLModelUtil.isDefinedBefore(_sym)))) {
+      String _name = symbol.getName();
+      String _plus = ("Symbol forward reference not allowed: \'" + _name);
       String _plus_1 = (_plus + "\'");
       this.error(_plus_1, 
-        FunPLPackage.eINSTANCE.getDefinitionRef_Definition(), 
+        FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
         FunPLValidator.FORWARD_REFERENCE, 
-        definition.getName());
+        symbol.getName());
     }
   }
 }

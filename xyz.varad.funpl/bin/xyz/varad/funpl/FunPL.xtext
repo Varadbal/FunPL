@@ -67,6 +67,6 @@ TerminalExpression returns Expression:
 	{IntConstant} value=INT | 
 	{StringConstant} value=STRING |
 	{BoolConstant} value=('true'|'false') |
-	{DefinitionRef} definition=[Definition]
+	{SymbolRef} symbol=[Symbol]
 ;
 

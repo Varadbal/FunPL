@@ -168,13 +168,13 @@ public interface FunPLFactory extends EFactory
   BoolConstant createBoolConstant();
 
   /**
-   * Returns a new object of class '<em>Definition Ref</em>'.
+   * Returns a new object of class '<em>Symbol Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Definition Ref</em>'.
+   * @return a new object of class '<em>Symbol Ref</em>'.
    * @generated
    */
-  DefinitionRef createDefinitionRef();
+  SymbolRef createSymbolRef();
 
   /**
    * Returns the package supported by this factory.

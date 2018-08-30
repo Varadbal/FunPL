@@ -11,10 +11,11 @@ import static extension java.lang.Class.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.emf.ecore.EObject
-import xyz.varad.funpl.funPL.DefinitionRef
 import java.util.Set
 import xyz.varad.funpl.funPL.Value
 import xyz.varad.funpl.funPL.Symbol
+import xyz.varad.funpl.funPL.SymbolRef
+import java.util.List
 
 class FunPLModelUtil{
 	/* TODO restructure
@@ -22,79 +23,80 @@ class FunPLModelUtil{
 	 * def definedBefore(Statement s)
 	 * ^Should be enough, as defRefs and Expressions are Statements too^
 	 */
+	 
+	 def boolean isDefinedBefore(SymbolRef _sym){
+	 	(_sym as Expression).symbolsDefinedBefore.contains(_sym.symbol)
+	 }
+	 
+	 def Set<Symbol> symbolsDefinedBefore(Expression _exp){
+	 	//println(_exp)
+	 	//println(_exp.getContainerOfType(FunProgram))
+	 	val before = _exp.getContainerOfType(FunProgram).symbolsDefinedGlobally
+
+	 	val contFunc = _exp.getContainerOfType(Function)
+	 	if(contFunc !== null){
+	 		before.addAll(contFunc.params)		//_exp cannot be param, so all params are added
+	 		
+	 		val topLevel = _exp.walkUpContainmentUntilContainerIs(Block)
+	 		val fullList = contFunc.statements	//must be statement as topLevel can be Expression too (not Symbol)
+	 		before.addAll(fullList.subList(0, fullList.indexOf(topLevel)).typeSelect(Symbol))
+	 	}
+	 	
+	 	return before
+	 }
+	 
+	 def Set<Symbol> symbolsDefinedBefore(Symbol _sym){
+	 	val before = _sym.getContainerOfType(FunProgram).symbolsDefinedGlobally
+	 	val contFunc = _sym.getContainerOfType(Function)
+	 	if(contFunc !== null){
+	 		
+	 		val fullList = contFunc.symbols
+	 		before.addAll(fullList.subList(0, fullList.indexOf(_sym)))
+	 	}
+	 	return before
+	 }
+	 
+	 def Set<Symbol> symbolsDefinedGlobally(FunProgram _fp){
+	 	_fp.symbols().toSet
+	 }
 	
-	def boolean isDefinedBefore(DefinitionRef defRef){
-		(defRef as Expression).definedBefore.contains(defRef.definition)
-	}
-	
-	def Set<Definition> definedBefore(Expression e){
-		if(e.getContainerOfType(Function) === null){					//is outside of any functions
-			return e.getContainerOfType(Definition/*Value*/).definedBefore		//Container cannot possibly be Function-Definition
-		}else{															//must be inside
-			return e.getContainerOfType(Statement).definedBefore				//Statement = the containing line of the function
-		}
-		
-	}
-	
-	def private Set<Definition> definedBefore(Statement s){						//Precondition: IN a function
-		
-		val functionLine = s.walkUpContainmentUntilContainerIs(Block)
-		
-		val allStatementsInsideBefore = (functionLine.eContainer as Block).statements
-		val allDefsInsideBefore = allStatementsInsideBefore.
-			subList(0, allStatementsInsideBefore.indexOf(functionLine)).
-			typeSelect(Definition)							
-		
-		val containingFunction = ((functionLine.eContainer as Block).eContainer as Function)
-		val allDefsOutsideBefore = containingFunction.definedBefore			//Should work for function-def too
-		
-		val allValidDefsBefore = new BasicEList<Definition>
-		allValidDefsBefore.addAll(allDefsOutsideBefore)
-		allValidDefsBefore.addAll(allDefsInsideBefore)
-		return allValidDefsBefore.toSet
-	}
-	
-	def private Set<Definition> definedBefore(Definition d){					//Precondition: OUT of any functions
-		val allElements = (d.eContainer as FunProgram).elements
-		/*val allDefs = new BasicEList<Definition>
-		for(elem : allElements){
-			if(elem instanceof Definition)
-				allDefs.add(elem)
-		}
-		allDefs.subList(0, allDefs.indexOf(d))*/
-		allElements.subList(0, allElements.indexOf(d)).typeSelect(Definition).toSet
-	}
-	
-	//Filtered access methods
+	//FunProgram
 	def static functions(FunProgram f){
-		f.elements.filter(typeof(Function))
+		f.elements.typeSelect(typeof(Function))
 	}
 	
 	def static values(FunProgram f){
-		f.elements.filter(typeof(Value))
+		f.elements.typeSelect(typeof(Value))
 	}
 	
+	def static symbols(FunProgram f){
+		f.elements.typeSelect(typeof(Symbol))
+	}
+	
+	//Function
 	def static values(Function f){
 		f.body.values()
-	}
-	
-	def static values(Block b){
-		b.statements.filter(Value)
 	}
 	
 	def static symbols(Function f){
 		val p = new BasicEList<Symbol>
 		p.addAll(f.params)
 		p.addAll(f.values)
-		return p as Iterable<Symbol>
+		return p as List<Symbol>
 	}
 	
 	def static statements(Function f){
-		f.body.statements
+		f.body.statements.toList
+	}
+	
+	
+	//Block
+	def static values(Block b){
+		b.statements.typeSelect(Value)
 	}
 	
 	def static statements(Block b){
-		b.statements as Iterable<Statement>
+		b.statements as List<Statement>
 	}
 	
 	/*Walk up until the "ECONTAINER is of type" (vs. ECoreUtil2.getContainerOfType gets "itself is of type")*/

@@ -37,10 +37,6 @@ public class FunPLScopeProviderTest {
   
   @Inject
   @Extension
-  private FunPLModelUtil _funPLModelUtil;
-  
-  @Inject
-  @Extension
   private IScopeProvider _iScopeProvider;
   
   @Test
@@ -63,8 +59,8 @@ public class FunPLScopeProviderTest {
       _builder.newLine();
       Statement _last = IterableExtensions.<Statement>last(FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder)))));
       final Procedure1<Expression> _function = (Expression it) -> {
-        this.assertScope(it, FunPLPackage.eINSTANCE.getDefinitionRef_Definition(), 
-          "k, i, j, myFunc, myFunc.k");
+        this.assertScope(it, FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
+          "p, k, i, j, myFunc, myFunc.p, myFunc.k");
       };
       ObjectExtensions.<Expression>operator_doubleArrow(
         ((Expression) _last), _function);

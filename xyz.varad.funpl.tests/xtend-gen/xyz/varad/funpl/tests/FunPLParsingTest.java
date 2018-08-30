@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import xyz.varad.funpl.funPL.AbstractElement;
 import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.BoolConstant;
-import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
@@ -30,6 +29,8 @@ import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 
 @RunWith(XtextRunner.class)
@@ -324,20 +325,20 @@ public class FunPLParsingTest {
   }
   
   private void assertAssociativity(final Statement s, final CharSequence expected) {
-    Assert.assertEquals(expected.toString(), this.stringRepr(s));
+    Assert.assertEquals(expected.toString(), FunPLParsingTest.stringRepr(s));
   }
   
-  private String stringRepr(final Statement s) {
+  static String stringRepr(final Statement s) {
     String _switchResult = null;
     boolean _matched = false;
     if (s instanceof Assignment) {
       _matched=true;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("(");
-      String _stringRepr = this.stringRepr(((Assignment)s).getLeft());
+      String _stringRepr = FunPLParsingTest.stringRepr(((Assignment)s).getLeft());
       _builder.append(_stringRepr);
       _builder.append(" = ");
-      String _stringRepr_1 = this.stringRepr(((Assignment)s).getRight());
+      String _stringRepr_1 = FunPLParsingTest.stringRepr(((Assignment)s).getRight());
       _builder.append(_stringRepr_1);
       _builder.append(")");
       _switchResult = _builder.toString();
@@ -347,10 +348,10 @@ public class FunPLParsingTest {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("(");
-        String _stringRepr = this.stringRepr(((Plus)s).getLeft());
+        String _stringRepr = FunPLParsingTest.stringRepr(((Plus)s).getLeft());
         _builder.append(_stringRepr);
         _builder.append(" + ");
-        String _stringRepr_1 = this.stringRepr(((Plus)s).getRight());
+        String _stringRepr_1 = FunPLParsingTest.stringRepr(((Plus)s).getRight());
         _builder.append(_stringRepr_1);
         _builder.append(")");
         _switchResult = _builder.toString();
@@ -366,7 +367,7 @@ public class FunPLParsingTest {
         for (final Expression a : _args) {
           {
             String _ret = ret;
-            String _stringRepr = this.stringRepr(a);
+            String _stringRepr = FunPLParsingTest.stringRepr(a);
             ret = (_ret + _stringRepr);
             Expression _last = IterableExtensions.<Expression>last(((FunctionCall)s).getArgs());
             boolean _tripleNotEquals = (a != _last);
@@ -406,9 +407,36 @@ public class FunPLParsingTest {
       }
     }
     if (!_matched) {
-      if (s instanceof DefinitionRef) {
+      if (s instanceof SymbolRef) {
         _matched=true;
-        _switchResult = ((DefinitionRef)s).getDefinition().getName();
+        _switchResult = ((SymbolRef)s).getSymbol().getName();
+      }
+    }
+    if (!_matched) {
+      if (s instanceof Value) {
+        _matched=true;
+        String ret = "";
+        boolean _isIsConst = ((Value)s).isIsConst();
+        if (_isIsConst) {
+          String _ret = ret;
+          ret = (_ret + "const ");
+        } else {
+          String _ret_1 = ret;
+          ret = (_ret_1 + "var ");
+        }
+        String _ret_2 = ret;
+        String _name = ((Value)s).getName();
+        ret = (_ret_2 + _name);
+        Expression _expression = ((Value)s).getExpression();
+        boolean _tripleNotEquals = (_expression != null);
+        if (_tripleNotEquals) {
+          String _ret_3 = ret;
+          ret = (_ret_3 + " = ");
+          String _ret_4 = ret;
+          String _stringRepr = FunPLParsingTest.stringRepr(((Value)s).getExpression());
+          ret = (_ret_4 + _stringRepr);
+        }
+        return ret;
       }
     }
     return _switchResult;

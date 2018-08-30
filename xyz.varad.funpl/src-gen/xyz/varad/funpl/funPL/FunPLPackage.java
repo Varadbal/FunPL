@@ -542,32 +542,32 @@ public interface FunPLPackage extends EPackage
   int BOOL_CONSTANT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl <em>Definition Ref</em>}' class.
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see xyz.varad.funpl.funPL.impl.DefinitionRefImpl
-   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
+   * @see xyz.varad.funpl.funPL.impl.SymbolRefImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbolRef()
    * @generated
    */
-  int DEFINITION_REF = 16;
+  int SYMBOL_REF = 16;
 
   /**
-   * The feature id for the '<em><b>Definition</b></em>' reference.
+   * The feature id for the '<em><b>Symbol</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DEFINITION_REF__DEFINITION = EXPRESSION_FEATURE_COUNT + 0;
+  int SYMBOL_REF__SYMBOL = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Definition Ref</em>' class.
+   * The number of structural features of the '<em>Symbol Ref</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DEFINITION_REF_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int SYMBOL_REF_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 
   /**
@@ -907,25 +907,25 @@ public interface FunPLPackage extends EPackage
   EAttribute getBoolConstant_Value();
 
   /**
-   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.DefinitionRef <em>Definition Ref</em>}'.
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.SymbolRef <em>Symbol Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Definition Ref</em>'.
-   * @see xyz.varad.funpl.funPL.DefinitionRef
+   * @return the meta object for class '<em>Symbol Ref</em>'.
+   * @see xyz.varad.funpl.funPL.SymbolRef
    * @generated
    */
-  EClass getDefinitionRef();
+  EClass getSymbolRef();
 
   /**
-   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.DefinitionRef#getDefinition <em>Definition</em>}'.
+   * Returns the meta object for the reference '{@link xyz.varad.funpl.funPL.SymbolRef#getSymbol <em>Symbol</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Definition</em>'.
-   * @see xyz.varad.funpl.funPL.DefinitionRef#getDefinition()
-   * @see #getDefinitionRef()
+   * @return the meta object for the reference '<em>Symbol</em>'.
+   * @see xyz.varad.funpl.funPL.SymbolRef#getSymbol()
+   * @see #getSymbolRef()
    * @generated
    */
-  EReference getDefinitionRef_Definition();
+  EReference getSymbolRef_Symbol();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1239,22 +1239,22 @@ public interface FunPLPackage extends EPackage
     EAttribute BOOL_CONSTANT__VALUE = eINSTANCE.getBoolConstant_Value();
 
     /**
-     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl <em>Definition Ref</em>}' class.
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see xyz.varad.funpl.funPL.impl.DefinitionRefImpl
-     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
+     * @see xyz.varad.funpl.funPL.impl.SymbolRefImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbolRef()
      * @generated
      */
-    EClass DEFINITION_REF = eINSTANCE.getDefinitionRef();
+    EClass SYMBOL_REF = eINSTANCE.getSymbolRef();
 
     /**
-     * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Symbol</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DEFINITION_REF__DEFINITION = eINSTANCE.getDefinitionRef_Definition();
+    EReference SYMBOL_REF__SYMBOL = eINSTANCE.getSymbolRef_Symbol();
 
   }
 

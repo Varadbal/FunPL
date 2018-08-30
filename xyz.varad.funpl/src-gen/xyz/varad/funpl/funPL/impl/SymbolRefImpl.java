@@ -10,41 +10,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import xyz.varad.funpl.funPL.Definition;
-import xyz.varad.funpl.funPL.DefinitionRef;
 import xyz.varad.funpl.funPL.FunPLPackage;
+import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.SymbolRef;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Definition Ref</b></em>'.
+ * An implementation of the model object '<em><b>Symbol Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.impl.DefinitionRefImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link xyz.varad.funpl.funPL.impl.SymbolRefImpl#getSymbol <em>Symbol</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
+public class SymbolRefImpl extends ExpressionImpl implements SymbolRef
 {
   /**
-   * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
+   * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDefinition()
+   * @see #getSymbol()
    * @generated
    * @ordered
    */
-  protected Definition definition;
+  protected Symbol symbol;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DefinitionRefImpl()
+  protected SymbolRefImpl()
   {
     super();
   }
@@ -57,7 +57,7 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
   @Override
   protected EClass eStaticClass()
   {
-    return FunPLPackage.Literals.DEFINITION_REF;
+    return FunPLPackage.Literals.SYMBOL_REF;
   }
 
   /**
@@ -65,19 +65,19 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Definition getDefinition()
+  public Symbol getSymbol()
   {
-    if (definition != null && definition.eIsProxy())
+    if (symbol != null && symbol.eIsProxy())
     {
-      InternalEObject oldDefinition = (InternalEObject)definition;
-      definition = (Definition)eResolveProxy(oldDefinition);
-      if (definition != oldDefinition)
+      InternalEObject oldSymbol = (InternalEObject)symbol;
+      symbol = (Symbol)eResolveProxy(oldSymbol);
+      if (symbol != oldSymbol)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunPLPackage.DEFINITION_REF__DEFINITION, oldDefinition, definition));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunPLPackage.SYMBOL_REF__SYMBOL, oldSymbol, symbol));
       }
     }
-    return definition;
+    return symbol;
   }
 
   /**
@@ -85,9 +85,9 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Definition basicGetDefinition()
+  public Symbol basicGetSymbol()
   {
-    return definition;
+    return symbol;
   }
 
   /**
@@ -95,12 +95,12 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDefinition(Definition newDefinition)
+  public void setSymbol(Symbol newSymbol)
   {
-    Definition oldDefinition = definition;
-    definition = newDefinition;
+    Symbol oldSymbol = symbol;
+    symbol = newSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.DEFINITION_REF__DEFINITION, oldDefinition, definition));
+      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.SYMBOL_REF__SYMBOL, oldSymbol, symbol));
   }
 
   /**
@@ -113,9 +113,9 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION_REF__DEFINITION:
-        if (resolve) return getDefinition();
-        return basicGetDefinition();
+      case FunPLPackage.SYMBOL_REF__SYMBOL:
+        if (resolve) return getSymbol();
+        return basicGetSymbol();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,8 +130,8 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION_REF__DEFINITION:
-        setDefinition((Definition)newValue);
+      case FunPLPackage.SYMBOL_REF__SYMBOL:
+        setSymbol((Symbol)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -147,8 +147,8 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION_REF__DEFINITION:
-        setDefinition((Definition)null);
+      case FunPLPackage.SYMBOL_REF__SYMBOL:
+        setSymbol((Symbol)null);
         return;
     }
     super.eUnset(featureID);
@@ -164,10 +164,10 @@ public class DefinitionRefImpl extends ExpressionImpl implements DefinitionRef
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION_REF__DEFINITION:
-        return definition != null;
+      case FunPLPackage.SYMBOL_REF__SYMBOL:
+        return symbol != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //DefinitionRefImpl
+} //SymbolRefImpl

@@ -156,9 +156,9 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createBoolConstantAdapter();
       }
       @Override
-      public Adapter caseDefinitionRef(DefinitionRef object)
+      public Adapter caseSymbolRef(SymbolRef object)
       {
-        return createDefinitionRefAdapter();
+        return createSymbolRefAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -423,16 +423,16 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.DefinitionRef <em>Definition Ref</em>}'.
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.SymbolRef <em>Symbol Ref</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see xyz.varad.funpl.funPL.DefinitionRef
+   * @see xyz.varad.funpl.funPL.SymbolRef
    * @generated
    */
-  public Adapter createDefinitionRefAdapter()
+  public Adapter createSymbolRefAdapter()
   {
     return null;
   }
