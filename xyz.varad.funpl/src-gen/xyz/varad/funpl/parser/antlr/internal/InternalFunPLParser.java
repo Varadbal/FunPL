@@ -932,28 +932,28 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFunctionParam"
-    // InternalFunPL.g:369:1: ruleFunctionParam returns [EObject current=null] : ( (lv_Name_0_0= RULE_ID ) ) ;
+    // InternalFunPL.g:369:1: ruleFunctionParam returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleFunctionParam() throws RecognitionException {
         EObject current = null;
 
-        Token lv_Name_0_0=null;
+        Token lv_name_0_0=null;
 
 
         	enterRule();
 
         try {
-            // InternalFunPL.g:375:2: ( ( (lv_Name_0_0= RULE_ID ) ) )
-            // InternalFunPL.g:376:2: ( (lv_Name_0_0= RULE_ID ) )
+            // InternalFunPL.g:375:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalFunPL.g:376:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalFunPL.g:376:2: ( (lv_Name_0_0= RULE_ID ) )
-            // InternalFunPL.g:377:3: (lv_Name_0_0= RULE_ID )
+            // InternalFunPL.g:376:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalFunPL.g:377:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalFunPL.g:377:3: (lv_Name_0_0= RULE_ID )
-            // InternalFunPL.g:378:4: lv_Name_0_0= RULE_ID
+            // InternalFunPL.g:377:3: (lv_name_0_0= RULE_ID )
+            // InternalFunPL.g:378:4: lv_name_0_0= RULE_ID
             {
-            lv_Name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-            				newLeafNode(lv_Name_0_0, grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_0());
+            				newLeafNode(lv_name_0_0, grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_0());
             			
 
             				if (current==null) {
@@ -961,8 +961,8 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
             				}
             				setWithLastConsumed(
             					current,
-            					"Name",
-            					lv_Name_0_0,
+            					"name",
+            					lv_name_0_0,
             					"org.eclipse.xtext.common.Terminals.ID");
             			
 

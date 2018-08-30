@@ -8,25 +8,25 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import xyz.varad.funpl.funPL.Definition;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.Symbol;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Definition</b></em>'.
+ * An implementation of the model object '<em><b>Symbol</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.impl.DefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link xyz.varad.funpl.funPL.impl.SymbolImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DefinitionImpl extends AbstractElementImpl implements Definition
+public class SymbolImpl extends MinimalEObjectImpl.Container implements Symbol
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,7 +53,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DefinitionImpl()
+  protected SymbolImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
   @Override
   protected EClass eStaticClass()
   {
-    return FunPLPackage.Literals.DEFINITION;
+    return FunPLPackage.Literals.SYMBOL;
   }
 
   /**
@@ -89,7 +89,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.DEFINITION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.SYMBOL__NAME, oldName, name));
   }
 
   /**
@@ -102,7 +102,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION__NAME:
+      case FunPLPackage.SYMBOL__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -118,7 +118,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION__NAME:
+      case FunPLPackage.SYMBOL__NAME:
         setName((String)newValue);
         return;
     }
@@ -135,7 +135,7 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION__NAME:
+      case FunPLPackage.SYMBOL__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -152,48 +152,10 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
   {
     switch (featureID)
     {
-      case FunPLPackage.DEFINITION__NAME:
+      case FunPLPackage.SYMBOL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Symbol.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case FunPLPackage.DEFINITION__NAME: return FunPLPackage.SYMBOL__NAME;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Symbol.class)
-    {
-      switch (baseFeatureID)
-      {
-        case FunPLPackage.SYMBOL__NAME: return FunPLPackage.DEFINITION__NAME;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**
@@ -213,4 +175,4 @@ public class DefinitionImpl extends AbstractElementImpl implements Definition
     return result.toString();
   }
 
-} //DefinitionImpl
+} //SymbolImpl

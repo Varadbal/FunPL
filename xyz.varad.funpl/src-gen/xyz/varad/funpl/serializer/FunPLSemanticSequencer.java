@@ -156,15 +156,16 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Symbol returns FunctionParam
 	 *     FunctionParam returns FunctionParam
 	 *
 	 * Constraint:
-	 *     Name=ID
+	 *     name=ID
 	 */
 	protected void sequence_FunctionParam(ISerializationContext context, FunctionParam semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.FUNCTION_PARAM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.FUNCTION_PARAM__NAME));
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.SYMBOL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.SYMBOL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
@@ -175,6 +176,7 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * Contexts:
 	 *     AbstractElement returns Function
+	 *     Symbol returns Function
 	 *     Definition returns Function
 	 *     Function returns Function
 	 *
@@ -310,6 +312,7 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * Contexts:
 	 *     AbstractElement returns Value
+	 *     Symbol returns Value
 	 *     Definition returns Value
 	 *     Value returns Value
 	 *     Statement returns Value

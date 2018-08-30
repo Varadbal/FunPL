@@ -86,6 +86,11 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
+      public Adapter caseSymbol(Symbol object)
+      {
+        return createSymbolAdapter();
+      }
+      @Override
       public Adapter caseDefinition(Definition object)
       {
         return createDefinitionAdapter();
@@ -203,6 +208,21 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAbstractElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Symbol <em>Symbol</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.Symbol
+   * @generated
+   */
+  public Adapter createSymbolAdapter()
   {
     return null;
   }

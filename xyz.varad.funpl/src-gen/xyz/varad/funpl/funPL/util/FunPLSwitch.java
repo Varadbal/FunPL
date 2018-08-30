@@ -87,11 +87,19 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FunPLPackage.SYMBOL:
+      {
+        Symbol symbol = (Symbol)theEObject;
+        T result = caseSymbol(symbol);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FunPLPackage.DEFINITION:
       {
         Definition definition = (Definition)theEObject;
         T result = caseDefinition(definition);
         if (result == null) result = caseAbstractElement(definition);
+        if (result == null) result = caseSymbol(definition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -102,6 +110,7 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = caseDefinition(value);
         if (result == null) result = caseStatement(value);
         if (result == null) result = caseAbstractElement(value);
+        if (result == null) result = caseSymbol(value);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -111,6 +120,7 @@ public class FunPLSwitch<T> extends Switch<T>
         T result = caseFunction(function);
         if (result == null) result = caseDefinition(function);
         if (result == null) result = caseAbstractElement(function);
+        if (result == null) result = caseSymbol(function);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -118,6 +128,7 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         FunctionParam functionParam = (FunctionParam)theEObject;
         T result = caseFunctionParam(functionParam);
+        if (result == null) result = caseSymbol(functionParam);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -238,6 +249,22 @@ public class FunPLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAbstractElement(AbstractElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Symbol</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Symbol</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSymbol(Symbol object)
   {
     return null;
   }

@@ -31,6 +31,7 @@ public class FunPLParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, FunPLGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getSymbolAccess().getAlternatives(), "rule__Symbol__Alternatives");
 			builder.put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
 			builder.put(grammarAccess.getValueAccess().getAlternatives_0(), "rule__Value__Alternatives_0");
 			builder.put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");

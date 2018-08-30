@@ -10,6 +10,10 @@ AbstractElement:
 	Definition
 ;
 
+Symbol:
+	Definition | FunctionParam
+;
+
 Definition:
 	Value | Function
 ;
@@ -24,7 +28,7 @@ Function:
 ;
 
 FunctionParam:
-	Name=ID
+	name=ID
 ;
 
 Block:

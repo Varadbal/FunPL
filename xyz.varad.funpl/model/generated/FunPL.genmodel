@@ -10,9 +10,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//FunProgram/elements"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="FunPL.ecore#//Definition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Definition/name"/>
+    <genClasses ecoreClass="FunPL.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Symbol/name"/>
     </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//Definition"/>
     <genClasses ecoreClass="FunPL.ecore#//Value">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Value/isConst"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Value/expression"/>
@@ -21,9 +22,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/params"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/body"/>
     </genClasses>
-    <genClasses ecoreClass="FunPL.ecore#//FunctionParam">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//FunctionParam/Name"/>
-    </genClasses>
+    <genClasses ecoreClass="FunPL.ecore#//FunctionParam"/>
     <genClasses ecoreClass="FunPL.ecore#//Block">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Block/statements"/>
     </genClasses>

@@ -1,5 +1,6 @@
 package xyz.varad.funpl;
 
+import com.google.common.collect.Iterables;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.BasicEList;
@@ -15,6 +16,8 @@ import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.Statement;
+import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.Value;
 
 @SuppressWarnings("all")
 public class FunPLModelUtil {
@@ -61,6 +64,38 @@ public class FunPLModelUtil {
       _xblockexpression = IterableExtensions.<Definition>toSet(EcoreUtil2.<Definition>typeSelect(allElements.subList(0, allElements.indexOf(d)), Definition.class));
     }
     return _xblockexpression;
+  }
+  
+  public static Iterable<Function> functions(final FunProgram f) {
+    return Iterables.<Function>filter(f.getElements(), Function.class);
+  }
+  
+  public static Iterable<Value> values(final FunProgram f) {
+    return Iterables.<Value>filter(f.getElements(), Value.class);
+  }
+  
+  public static Iterable<Value> values(final Function f) {
+    return FunPLModelUtil.values(f.getBody());
+  }
+  
+  public static Iterable<Value> values(final Block b) {
+    return Iterables.<Value>filter(b.getStatements(), Value.class);
+  }
+  
+  public static Iterable<Symbol> symbols(final Function f) {
+    final BasicEList<Symbol> p = new BasicEList<Symbol>();
+    p.addAll(f.getParams());
+    Iterables.<Symbol>addAll(p, FunPLModelUtil.values(f));
+    return ((Iterable<Symbol>) p);
+  }
+  
+  public static EList<Statement> statements(final Function f) {
+    return f.getBody().getStatements();
+  }
+  
+  public static Iterable<Statement> statements(final Block b) {
+    EList<Statement> _statements = b.getStatements();
+    return ((Iterable<Statement>) _statements);
   }
   
   /**

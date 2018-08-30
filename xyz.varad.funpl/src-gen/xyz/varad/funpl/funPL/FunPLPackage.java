@@ -105,6 +105,34 @@ public interface FunPLPackage extends EPackage
   int ABSTRACT_ELEMENT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.SymbolImpl <em>Symbol</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.SymbolImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbol()
+   * @generated
+   */
+  int SYMBOL = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Symbol</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionImpl <em>Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -112,7 +140,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinition()
    * @generated
    */
-  int DEFINITION = 2;
+  int DEFINITION = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -140,7 +168,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getValue()
    * @generated
    */
-  int VALUE = 3;
+  int VALUE = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -186,7 +214,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 4;
+  int FUNCTION = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -232,7 +260,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionParam()
    * @generated
    */
-  int FUNCTION_PARAM = 5;
+  int FUNCTION_PARAM = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,7 +269,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTION_PARAM__NAME = 0;
+  int FUNCTION_PARAM__NAME = SYMBOL__NAME;
 
   /**
    * The number of structural features of the '<em>Function Param</em>' class.
@@ -250,7 +278,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTION_PARAM_FEATURE_COUNT = 1;
+  int FUNCTION_PARAM_FEATURE_COUNT = SYMBOL_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.BlockImpl <em>Block</em>}' class.
@@ -260,7 +288,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBlock()
    * @generated
    */
-  int BLOCK = 6;
+  int BLOCK = 7;
 
   /**
    * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -288,7 +316,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 7;
+  int STATEMENT = 8;
 
   /**
    * The number of structural features of the '<em>Statement</em>' class.
@@ -307,7 +335,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 8;
+  int EXPRESSION = 9;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -326,7 +354,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 9;
+  int ASSIGNMENT = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -363,7 +391,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 10;
+  int PLUS = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -400,7 +428,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 11;
+  int FUNCTION_CALL = 12;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' reference.
@@ -437,7 +465,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 12;
+  int INT_CONSTANT = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -465,7 +493,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 13;
+  int STRING_CONSTANT = 14;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -493,7 +521,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 14;
+  int BOOL_CONSTANT = 15;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -521,7 +549,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getDefinitionRef()
    * @generated
    */
-  int DEFINITION_REF = 15;
+  int DEFINITION_REF = 16;
 
   /**
    * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -574,6 +602,27 @@ public interface FunPLPackage extends EPackage
   EClass getAbstractElement();
 
   /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Symbol <em>Symbol</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Symbol</em>'.
+   * @see xyz.varad.funpl.funPL.Symbol
+   * @generated
+   */
+  EClass getSymbol();
+
+  /**
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Symbol#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see xyz.varad.funpl.funPL.Symbol#getName()
+   * @see #getSymbol()
+   * @generated
+   */
+  EAttribute getSymbol_Name();
+
+  /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Definition <em>Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -582,17 +631,6 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getDefinition();
-
-  /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Definition#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see xyz.varad.funpl.funPL.Definition#getName()
-   * @see #getDefinition()
-   * @generated
-   */
-  EAttribute getDefinition_Name();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Value <em>Value</em>}'.
@@ -667,17 +705,6 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getFunctionParam();
-
-  /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.FunctionParam#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see xyz.varad.funpl.funPL.FunctionParam#getName()
-   * @see #getFunctionParam()
-   * @generated
-   */
-  EAttribute getFunctionParam_Name();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Block <em>Block</em>}'.
@@ -952,6 +979,24 @@ public interface FunPLPackage extends EPackage
     EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.SymbolImpl <em>Symbol</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.SymbolImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbol()
+     * @generated
+     */
+    EClass SYMBOL = eINSTANCE.getSymbol();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYMBOL__NAME = eINSTANCE.getSymbol_Name();
+
+    /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.DefinitionImpl <em>Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -960,14 +1005,6 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass DEFINITION = eINSTANCE.getDefinition();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ValueImpl <em>Value</em>}' class.
@@ -1030,14 +1067,6 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass FUNCTION_PARAM = eINSTANCE.getFunctionParam();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FUNCTION_PARAM__NAME = eINSTANCE.getFunctionParam_Name();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.BlockImpl <em>Block</em>}' class.

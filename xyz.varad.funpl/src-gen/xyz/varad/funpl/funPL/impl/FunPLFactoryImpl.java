@@ -67,6 +67,7 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
     {
       case FunPLPackage.FUN_PROGRAM: return createFunProgram();
       case FunPLPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case FunPLPackage.SYMBOL: return createSymbol();
       case FunPLPackage.DEFINITION: return createDefinition();
       case FunPLPackage.VALUE: return createValue();
       case FunPLPackage.FUNCTION: return createFunction();
@@ -106,6 +107,17 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Symbol createSymbol()
+  {
+    SymbolImpl symbol = new SymbolImpl();
+    return symbol;
   }
 
   /**

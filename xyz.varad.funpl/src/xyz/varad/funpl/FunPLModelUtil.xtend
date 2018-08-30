@@ -13,6 +13,8 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.emf.ecore.EObject
 import xyz.varad.funpl.funPL.DefinitionRef
 import java.util.Set
+import xyz.varad.funpl.funPL.Value
+import xyz.varad.funpl.funPL.Symbol
 
 class FunPLModelUtil{
 	/* TODO restructure
@@ -61,6 +63,38 @@ class FunPLModelUtil{
 		}
 		allDefs.subList(0, allDefs.indexOf(d))*/
 		allElements.subList(0, allElements.indexOf(d)).typeSelect(Definition).toSet
+	}
+	
+	//Filtered access methods
+	def static functions(FunProgram f){
+		f.elements.filter(typeof(Function))
+	}
+	
+	def static values(FunProgram f){
+		f.elements.filter(typeof(Value))
+	}
+	
+	def static values(Function f){
+		f.body.values()
+	}
+	
+	def static values(Block b){
+		b.statements.filter(Value)
+	}
+	
+	def static symbols(Function f){
+		val p = new BasicEList<Symbol>
+		p.addAll(f.params)
+		p.addAll(f.values)
+		return p as Iterable<Symbol>
+	}
+	
+	def static statements(Function f){
+		f.body.statements
+	}
+	
+	def static statements(Block b){
+		b.statements as Iterable<Statement>
 	}
 	
 	/*Walk up until the "ECONTAINER is of type" (vs. ECoreUtil2.getContainerOfType gets "itself is of type")*/

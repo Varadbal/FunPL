@@ -50,6 +50,25 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//Definition
 		public RuleCall getDefinitionParserRuleCall() { return cDefinitionParserRuleCall; }
 	}
+	public class SymbolElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Symbol");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFunctionParamParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Symbol:
+		//	Definition | FunctionParam;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Definition | FunctionParam
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Definition
+		public RuleCall getDefinitionParserRuleCall_0() { return cDefinitionParserRuleCall_0; }
+		
+		//FunctionParam
+		public RuleCall getFunctionParamParserRuleCall_1() { return cFunctionParamParserRuleCall_1; }
+	}
 	public class DefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Definition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -198,10 +217,10 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//FunctionParam:
-		//	Name=ID;
+		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Name=ID
+		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
 		//ID
@@ -538,6 +557,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final FunProgramElements pFunProgram;
 	private final AbstractElementElements pAbstractElement;
+	private final SymbolElements pSymbol;
 	private final DefinitionElements pDefinition;
 	private final ValueElements pValue;
 	private final FunctionElements pFunction;
@@ -562,6 +582,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pFunProgram = new FunProgramElements();
 		this.pAbstractElement = new AbstractElementElements();
+		this.pSymbol = new SymbolElements();
 		this.pDefinition = new DefinitionElements();
 		this.pValue = new ValueElements();
 		this.pFunction = new FunctionElements();
@@ -623,6 +644,16 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractElementAccess().getRule();
 	}
 	
+	//Symbol:
+	//	Definition | FunctionParam;
+	public SymbolElements getSymbolAccess() {
+		return pSymbol;
+	}
+	
+	public ParserRule getSymbolRule() {
+		return getSymbolAccess().getRule();
+	}
+	
 	//Definition:
 	//	Value | Function;
 	public DefinitionElements getDefinitionAccess() {
@@ -654,7 +685,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//FunctionParam:
-	//	Name=ID;
+	//	name=ID;
 	public FunctionParamElements getFunctionParamAccess() {
 		return pFunctionParam;
 	}
