@@ -6,10 +6,10 @@ package xyz.varad.funpl.validation;
 import com.google.inject.Inject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.lib.Extension;
-import xyz.varad.funpl.FunPLModelUtil;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.util.FunPLModelUtil;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
 /**

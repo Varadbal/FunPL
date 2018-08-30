@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import xyz.varad.funpl.FunPLModelUtil;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
@@ -29,6 +28,7 @@ import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 import xyz.varad.funpl.tests.FunPLParsingTest;
+import xyz.varad.funpl.util.FunPLModelUtil;
 
 @RunWith(XtextRunner.class)
 @InjectWith(FunPLInjectorProvider.class)

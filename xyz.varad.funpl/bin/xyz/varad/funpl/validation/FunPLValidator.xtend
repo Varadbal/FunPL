@@ -5,7 +5,7 @@ package xyz.varad.funpl.validation
 
 import org.eclipse.xtext.validation.Check
 import com.google.inject.Inject
-import xyz.varad.funpl.FunPLModelUtil
+import xyz.varad.funpl.util.FunPLModelUtil
 import xyz.varad.funpl.funPL.FunPLPackage
 import xyz.varad.funpl.funPL.SymbolRef
 

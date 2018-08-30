@@ -1,4 +1,4 @@
-package xyz.varad.funpl;
+package xyz.varad.funpl.util;
 
 import java.util.List;
 import java.util.Set;

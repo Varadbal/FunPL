@@ -6,7 +6,7 @@ import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
-import xyz.varad.funpl.FunPLModelUtil
+import xyz.varad.funpl.util.FunPLModelUtil
 import xyz.varad.funpl.funPL.FunProgram
 import xyz.varad.funpl.funPL.IntConstant
 import xyz.varad.funpl.funPL.Plus
@@ -15,7 +15,7 @@ import xyz.varad.funpl.funPL.SymbolRef
 import xyz.varad.funpl.funPL.Value
 
 import static extension org.junit.Assert.*
-import static extension xyz.varad.funpl.FunPLModelUtil.*
+import static extension xyz.varad.funpl.util.FunPLModelUtil.*
 import static extension xyz.varad.funpl.tests.FunPLParsingTest.*
 
 @RunWith(XtextRunner)

@@ -14,7 +14,7 @@ import xyz.varad.funpl.funPL.FunPLPackage
 import xyz.varad.funpl.funPL.FunProgram
 
 import static extension org.junit.Assert.*
-import static extension xyz.varad.funpl.FunPLModelUtil.*
+import static extension xyz.varad.funpl.util.FunPLModelUtil.*
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)

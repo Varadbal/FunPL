@@ -1,21 +1,19 @@
-package xyz.varad.funpl
+package xyz.varad.funpl.util
 
+import java.util.List
+import java.util.Set
 import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.ecore.EObject
 import xyz.varad.funpl.funPL.Block
-import xyz.varad.funpl.funPL.Definition
 import xyz.varad.funpl.funPL.Expression
 import xyz.varad.funpl.funPL.FunProgram
 import xyz.varad.funpl.funPL.Function
 import xyz.varad.funpl.funPL.Statement
-import static extension java.lang.Class.*
-
-import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.emf.ecore.EObject
-import java.util.Set
-import xyz.varad.funpl.funPL.Value
 import xyz.varad.funpl.funPL.Symbol
 import xyz.varad.funpl.funPL.SymbolRef
-import java.util.List
+import xyz.varad.funpl.funPL.Value
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class FunPLModelUtil{
 	/* TODO restructure
