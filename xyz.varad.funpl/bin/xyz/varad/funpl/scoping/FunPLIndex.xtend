@@ -17,6 +17,9 @@ class FunPLIndex {
 		o.getResourceDescription.getExportedObjects
 	}
 	
+	def getExportedFunctionsEObjectDescriptions(EObject o){
+		o.getResourceDescription.getExportedObjectsByType(FunPLPackage.eINSTANCE.function)
+	}
 	//getExportedClassesEObjectDescriptions(EObject o) and the similar ones
 	
 }

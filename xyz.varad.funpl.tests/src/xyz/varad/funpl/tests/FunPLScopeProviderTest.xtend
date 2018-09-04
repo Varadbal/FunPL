@@ -33,10 +33,15 @@ class FunPLScopeProviderTest {
 		function myFunc(p){
 			var k = 1;
 			k = 5;
+			myFunc();
 		}
-		'''.parse.functions.head.statements.last as Expression => [
-			assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
-				"p, k, i, j, myFunc, myFunc.p, myFunc.k"
+		function myFunc2() { }
+		'''.parse.functions.head.statements => [
+			(it.get(1) as Expression).assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
+				"p, k, i, j, myFunc, myFunc.p, myFunc.k, myFunc2"
+			)
+			(it.get(2) as Expression).assertScope(FunPLPackage.eINSTANCE.functionCall_Function,
+				"myFunc, myFunc2"
 			)
 		]
 		
@@ -54,7 +59,7 @@ class FunPLScopeProviderTest {
 			)
 		]*/
 		
-		'''
+		/*'''
 		var i;
 		var j = i;
 		function myFunc(p){
@@ -66,7 +71,7 @@ class FunPLScopeProviderTest {
 			((it as Assignment).right as Plus).right.assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
 				"p, k, i, j, myFunc.p, myFunc.k"
 			)
-		]
+		]*/
 	}
 	
 	def private assertScope(EObject context, EReference reference, CharSequence expected){

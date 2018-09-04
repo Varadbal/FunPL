@@ -1,6 +1,7 @@
 package xyz.varad.funpl.tests;
 
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -19,12 +20,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
-import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 import xyz.varad.funpl.util.FunPLModelUtil;
@@ -57,40 +56,23 @@ public class FunPLScopeProviderTest {
       _builder.append("\t");
       _builder.append("k = 5;");
       _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc();");
+      _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      Statement _last = IterableExtensions.<Statement>last(FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder)))));
-      final Procedure1<Expression> _function = (Expression it) -> {
-        this.assertScope(it, FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
-          "p, k, i, j, myFunc, myFunc.p, myFunc.k");
+      _builder.append("function myFunc2() { }");
+      _builder.newLine();
+      List<Statement> _statements = FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder))));
+      final Procedure1<List<Statement>> _function = (List<Statement> it) -> {
+        Statement _get = it.get(1);
+        this.assertScope(((Expression) _get), FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
+          "p, k, i, j, myFunc, myFunc.p, myFunc.k, myFunc2");
+        Statement _get_1 = it.get(2);
+        this.assertScope(((Expression) _get_1), FunPLPackage.eINSTANCE.getFunctionCall_Function(), 
+          "myFunc, myFunc2");
       };
-      ObjectExtensions.<Expression>operator_doubleArrow(
-        ((Expression) _last), _function);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("var i;");
-      _builder_1.newLine();
-      _builder_1.append("var j = i;");
-      _builder_1.newLine();
-      _builder_1.append("function myFunc(p){");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("var k = 1;");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("k = 5 + k;");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      _builder_1.append("var l = 1;");
-      _builder_1.newLine();
-      Statement _last_1 = IterableExtensions.<Statement>last(FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder_1)))));
-      final Procedure1<Expression> _function_1 = (Expression it) -> {
-        Expression _right = ((Assignment) it).getRight();
-        this.assertScope(((Plus) _right).getRight(), FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
-          "p, k, i, j, myFunc.p, myFunc.k");
-      };
-      ObjectExtensions.<Expression>operator_doubleArrow(
-        ((Expression) _last_1), _function_1);
+      ObjectExtensions.<List<Statement>>operator_doubleArrow(_statements, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
