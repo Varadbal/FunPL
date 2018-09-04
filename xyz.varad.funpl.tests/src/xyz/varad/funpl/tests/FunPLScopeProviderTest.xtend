@@ -15,6 +15,8 @@ import xyz.varad.funpl.funPL.FunProgram
 
 import static extension org.junit.Assert.*
 import static extension xyz.varad.funpl.util.FunPLModelUtil.*
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.funPL.Assignment
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -35,6 +37,34 @@ class FunPLScopeProviderTest {
 		'''.parse.functions.head.statements.last as Expression => [
 			assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
 				"p, k, i, j, myFunc, myFunc.p, myFunc.k"
+			)
+		]
+		
+		/*'''
+		var i;
+		var j = i;
+		function myFunc(p){
+			var k = 1;
+			k = 5;
+		}
+		var l = 1;
+		'''.parse.values.last => [
+			it.expression.assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
+				"i, j, myFunc, l"
+			)
+		]*/
+		
+		'''
+		var i;
+		var j = i;
+		function myFunc(p){
+			var k = 1;
+			k = 5 + k;
+		}
+		var l = 1;
+		'''.parse.functions.head.statements.last as Expression => [
+			((it as Assignment).right as Plus).right.assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
+				"p, k, i, j, myFunc.p, myFunc.k"
 			)
 		]
 	}

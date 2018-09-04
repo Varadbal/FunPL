@@ -93,6 +93,64 @@ public class FunPLModelUtilTest {
   }
   
   @Test
+  public void testIsDefinedBefore_Symbol() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var i = 2;\t\t\t\t//(0)");
+      _builder.newLine();
+      _builder.append("var j;\t\t\t\t\t//(1)");
+      _builder.newLine();
+      _builder.append("var j = 1;\t\t\t\t//(2)");
+      _builder.newLine();
+      _builder.append("var j = 2;\t\t\t\t//(3)");
+      _builder.newLine();
+      _builder.append("function myFunc(p){\t\t//(4)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var k = 1;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var k = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var p;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function myFunc(p) {\t//(5)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function myFunc() { }\t//(6)");
+      _builder.newLine();
+      List<Symbol> _symbols = FunPLModelUtil.symbols(this._parseHelper.parse(_builder));
+      final Procedure1<List<Symbol>> _function = (List<Symbol> it) -> {
+        Assert.assertFalse(this._funPLModelUtil.isDefinedBefore(it.get(0)));
+        Assert.assertFalse(this._funPLModelUtil.isDefinedBefore(it.get(1)));
+        Assert.assertTrue(this._funPLModelUtil.isDefinedBefore(it.get(2)));
+        Assert.assertTrue(this._funPLModelUtil.isDefinedBefore(it.get(3)));
+        Assert.assertFalse(this._funPLModelUtil.isDefinedBefore(it.get(4)));
+        Symbol _get = it.get(4);
+        Statement _get_1 = FunPLModelUtil.statements(((Function) _get)).get(0);
+        Assert.assertFalse(this._funPLModelUtil.isDefinedBefore(((Value) _get_1)));
+        Symbol _get_2 = it.get(4);
+        Statement _get_3 = FunPLModelUtil.statements(((Function) _get_2)).get(1);
+        Assert.assertTrue(this._funPLModelUtil.isDefinedBefore(((Value) _get_3)));
+        Symbol _get_4 = it.get(4);
+        Statement _get_5 = FunPLModelUtil.statements(((Function) _get_4)).get(2);
+        Assert.assertTrue(this._funPLModelUtil.isDefinedBefore(((Value) _get_5)));
+        Assert.assertTrue(this._funPLModelUtil.isDefinedBefore(it.get(5)));
+        Assert.assertFalse(this._funPLModelUtil.isDefinedBefore(it.get(6)));
+      };
+      ObjectExtensions.<List<Symbol>>operator_doubleArrow(_symbols, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void symbolsDefinedBefore_Expression() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -123,7 +181,7 @@ public class FunPLModelUtilTest {
         final Function1<Symbol, String> _function_1 = (Symbol it_1) -> {
           return it_1.getName();
         };
-        Assert.assertEquals("i,j,myFunc,myFunc2,p1,p2,l", IterableExtensions.join(IterableExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(((IntConstant) _left)), _function_1), ","));
+        Assert.assertEquals("i,j,myFunc,myFunc2,p1,p2,l", IterableExtensions.join(ListExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(((IntConstant) _left)), _function_1), ","));
       };
       ObjectExtensions.<Plus>operator_doubleArrow(
         ((Plus) _last), _function);
@@ -169,15 +227,15 @@ public class FunPLModelUtilTest {
         final Function1<Symbol, String> _function_1 = (Symbol it_1) -> {
           return it_1.getName();
         };
-        Assert.assertEquals("i,j,myFunc,m,myFunc2", IterableExtensions.join(IterableExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(((Symbol) _get)), _function_1), ","));
+        Assert.assertEquals("", IterableExtensions.join(ListExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(((Symbol) _get)), _function_1), ","));
         final Function1<Symbol, String> _function_2 = (Symbol it_1) -> {
           return it_1.getName();
         };
-        Assert.assertEquals("i,j,myFunc,m,myFunc2,p1,p2,p3", IterableExtensions.join(IterableExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(IterableExtensions.<Value>head(FunPLModelUtil.values(FunPLModelUtil.functions(it).get(1)))), _function_2), ","));
+        Assert.assertEquals("i,j,myFunc,m,myFunc2,p1,p2,p3", IterableExtensions.join(ListExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(IterableExtensions.<Value>head(FunPLModelUtil.values(FunPLModelUtil.functions(it).get(1)))), _function_2), ","));
         final Function1<Symbol, String> _function_3 = (Symbol it_1) -> {
           return it_1.getName();
         };
-        Assert.assertEquals("i,j,myFunc,m,myFunc2,p1,p2", IterableExtensions.join(IterableExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(FunPLModelUtil.functions(it).get(1).getParams().get(2)), _function_3), ","));
+        Assert.assertEquals("i,j,myFunc,m,myFunc2,p1,p2", IterableExtensions.join(ListExtensions.<Symbol, String>map(this._funPLModelUtil.symbolsDefinedBefore(FunPLModelUtil.functions(it).get(1).getParams().get(2)), _function_3), ","));
       };
       ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
     } catch (Throwable _e) {
@@ -185,33 +243,20 @@ public class FunPLModelUtilTest {
     }
   }
   
-  @Test
-  public void symbolsDefinedGlobally() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("var i;");
-      _builder.newLine();
-      _builder.append("function myFunc() { }");
-      _builder.newLine();
-      _builder.append("var j = 2;");
-      _builder.newLine();
-      _builder.append("function myFunc2() { var l = 5; }");
-      _builder.newLine();
-      _builder.append("var k;");
-      _builder.newLine();
-      FunProgram _parse = this._parseHelper.parse(_builder);
-      final Procedure1<FunProgram> _function = (FunProgram it) -> {
-        final Function1<Symbol, String> _function_1 = (Symbol it_1) -> {
-          return it_1.getName();
-        };
-        Assert.assertEquals("i,myFunc,j,myFunc2,k", IterableExtensions.join(ListExtensions.<Symbol, String>map(FunPLModelUtil.symbols(it), _function_1), ","));
-      };
-      ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
+  /**
+   * @Test
+   * def void symbolsDefinedGlobally(){
+   * '''
+   * var i;
+   * function myFunc() { }
+   * var j = 2;
+   * function myFunc2() { var l = 5; }
+   * var k;
+   * '''.parse => [
+   * "i,myFunc,j,myFunc2,k".assertEquals(it.symbols.map[name].join(","))
+   * ]
+   * }
+   */
   @Test
   public void testFunctions_FunProgram() {
     try {

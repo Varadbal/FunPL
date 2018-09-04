@@ -38,6 +38,79 @@ class FunPLValidatorTest {
 		)
 	}
 	
+	@Test
+	def void testGlobalRedefinitionLocally(){
+		'''
+		var i = 4;
+		function myFunc(p){
+			var i = 5;
+		}
+		'''.parse.assertNoErrors
+	}
+	
+	/*@Test
+	def void testGlobalRedefinitionGlobally(){
+		'''
+		var i = 4;
+		function myFunc(){ }
+		const i = 5;
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition in scope not allowed: 'i'"
+		)
+		
+		'''
+		var i = 4;
+		function myFunc(){
+			
+		}
+		function myFunc() {
+			
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition in scope not allowed: 'myFunc'"
+		)
+
+	}
+	
+	@Test 
+	def void testLocalRedefinition(){
+		'''
+		function myFunc(p){
+			var i = 5;
+			var i = 2;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition in scope not allowed: 'i'"
+		)
+	}
+	
+	@Test
+	def void testParameterRedefinition(){
+		'''
+		function myFunc(p){
+			var p = 5;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition in scope not allowed: 'p'"
+			)
+	}
+	
+	@Test
+	def void testOutOfScopeRedefinition(){
+		'''
+		function myFunc(p){
+			var i = 5;
+		}
+		function myFunc2(){
+			var i = 1;
+		}
+		'''.parse.assertNoErrors
+	}*/
+	
 	
 	
 	

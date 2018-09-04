@@ -53,4 +53,23 @@ public class FunPLValidatorTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testGlobalRedefinitionLocally() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var i = 4;");
+      _builder.newLine();
+      _builder.append("function myFunc(p){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 5;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

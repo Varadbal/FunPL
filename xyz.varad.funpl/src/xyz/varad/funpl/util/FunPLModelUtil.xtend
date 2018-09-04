@@ -16,21 +16,24 @@ import xyz.varad.funpl.funPL.Value
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class FunPLModelUtil{
-	/* TODO restructure
-	 * def isDefinedBefore(DefinitionRef defRef)
-	 * def definedBefore(Statement s)
-	 * ^Should be enough, as defRefs and Expressions are Statements too^
-	 */
-	 
+
 	 def boolean isDefinedBefore(SymbolRef _sym){
 	 	(_sym as Expression).symbolsDefinedBefore.contains(_sym.symbol)
 	 }
 	 
-	 def Set<Symbol> symbolsDefinedBefore(Expression _exp){
-	 	//println(_exp)
-	 	//println(_exp.getContainerOfType(FunProgram))
-	 	val before = _exp.getContainerOfType(FunProgram).symbolsDefinedGlobally
-
+	 def boolean isDefinedBefore(Symbol _sym){
+	 	_sym.symbolsDefinedBefore.containsSimilar(_sym)
+	 }
+	 
+	 def List<Symbol> symbolsDefinedBefore(Expression _exp){
+	 	val before = new BasicEList<Symbol>
+	 	
+	 	val outerElement = _exp.walkUpContainmentUntilContainerIs(FunProgram)
+	 	val allGlobalSyms = _exp.getContainerOfType(FunProgram).symbols
+	 	before.addAll(allGlobalSyms.subList(0, allGlobalSyms.indexOf(outerElement)))
+	 	if(outerElement !== _exp)
+	 		before.add(outerElement as Symbol)
+	 	
 	 	val contFunc = _exp.getContainerOfType(Function)
 	 	if(contFunc !== null){
 	 		before.addAll(contFunc.params)		//_exp cannot be param, so all params are added
@@ -43,20 +46,26 @@ class FunPLModelUtil{
 	 	return before
 	 }
 	 
-	 def Set<Symbol> symbolsDefinedBefore(Symbol _sym){
-	 	val before = _sym.getContainerOfType(FunProgram).symbolsDefinedGlobally
+	 def List<Symbol> symbolsDefinedBefore(Symbol _sym){
+	 	val before = new BasicEList<Symbol>
+	 	
+	 	val outerElement = _sym.walkUpContainmentUntilContainerIs(FunProgram)
+	 	val allGlobalSyms = _sym.getContainerOfType(FunProgram).symbols
+	 	before.addAll(allGlobalSyms.subList(0, allGlobalSyms.indexOf(outerElement)))
+	 	if(outerElement !== _sym)
+	 		before.add(outerElement as Symbol)
+	 	
 	 	val contFunc = _sym.getContainerOfType(Function)
-	 	if(contFunc !== null){
-	 		
+	 	if(contFunc !== null && contFunc != _sym){
 	 		val fullList = contFunc.symbols
 	 		before.addAll(fullList.subList(0, fullList.indexOf(_sym)))
 	 	}
 	 	return before
 	 }
 	 
-	 def Set<Symbol> symbolsDefinedGlobally(FunProgram _fp){
+	 /*def Set<Symbol> symbolsDefinedGlobally(FunProgram _fp){
 	 	_fp.symbols().toSet
-	 }
+	 }*/
 	
 	//FunProgram
 	def static functions(FunProgram f){
@@ -104,6 +113,28 @@ class FunPLModelUtil{
 			if(goalContainerType.isInstance(e.eContainer))
 				return e
 		}
+	}
+	
+	
+	def dispatch private boolean containsSimilar(List<Symbol> symsSet, Symbol _sym){
+		for(elem : symsSet){
+			if(elem.name == _sym.name){
+				return true
+			}
+		}
+		return false
+	}
+	
+	def dispatch private boolean containsSimilar(List<Symbol> symsSet, Function _func){
+		for(elem : symsSet){
+			if((elem.name == _func.name) &&
+				(elem instanceof Function) &&
+				((elem as Function).params.size == _func.params.size)
+			){
+				return true
+			}
+		}
+		return false
 	}
 	
 }

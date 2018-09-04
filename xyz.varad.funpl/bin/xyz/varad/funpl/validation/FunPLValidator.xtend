@@ -8,6 +8,7 @@ import com.google.inject.Inject
 import xyz.varad.funpl.util.FunPLModelUtil
 import xyz.varad.funpl.funPL.FunPLPackage
 import xyz.varad.funpl.funPL.SymbolRef
+import xyz.varad.funpl.funPL.Symbol
 
 /**
  * This class contains custom validation rules. 
@@ -23,6 +24,7 @@ class FunPLValidator extends AbstractFunPLValidator {
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
+	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
 	
 	
 	@Inject extension FunPLModelUtil
@@ -38,5 +40,15 @@ class FunPLValidator extends AbstractFunPLValidator {
 			)
 		}
 	}
+	
+	/*@Check
+	def void checkSymbolRedefinition(Symbol _s){
+		if(_s.isDefinedBefore)
+			error("Symbol redefinition not allowed: '" + _s.name + "'",
+				FunPLPackage::eINSTANCE.symbolRef_Symbol,
+				SYMBOL_REDEFINITION,
+				_s.name
+			)
+	}*/
 	
 }

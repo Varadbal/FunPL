@@ -23,6 +23,8 @@ public class FunPLValidator extends AbstractFunPLValidator {
   
   public final static String FORWARD_REFERENCE = (FunPLValidator.ISSUE_CODE_PREFIX + "ForwardReference");
   
+  public final static String SYMBOL_REDEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "SymbolRedefinition");
+  
   @Inject
   @Extension
   private FunPLModelUtil _funPLModelUtil;

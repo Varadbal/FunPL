@@ -19,10 +19,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 import xyz.varad.funpl.util.FunPLModelUtil;
@@ -64,6 +66,31 @@ public class FunPLScopeProviderTest {
       };
       ObjectExtensions.<Expression>operator_doubleArrow(
         ((Expression) _last), _function);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("var i;");
+      _builder_1.newLine();
+      _builder_1.append("var j = i;");
+      _builder_1.newLine();
+      _builder_1.append("function myFunc(p){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("var k = 1;");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("k = 5 + k;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("var l = 1;");
+      _builder_1.newLine();
+      Statement _last_1 = IterableExtensions.<Statement>last(FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder_1)))));
+      final Procedure1<Expression> _function_1 = (Expression it) -> {
+        Expression _right = ((Assignment) it).getRight();
+        this.assertScope(((Plus) _right).getRight(), FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
+          "p, k, i, j, myFunc.p, myFunc.k");
+      };
+      ObjectExtensions.<Expression>operator_doubleArrow(
+        ((Expression) _last_1), _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
