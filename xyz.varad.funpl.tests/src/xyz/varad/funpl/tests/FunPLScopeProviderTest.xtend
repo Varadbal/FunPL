@@ -15,6 +15,8 @@ import xyz.varad.funpl.funPL.FunProgram
 
 import static extension org.junit.Assert.*
 import static extension xyz.varad.funpl.util.FunPLModelUtil.*
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.funPL.SymbolRef
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -46,7 +48,7 @@ class FunPLScopeProviderTest {
 	}*/
 	
 	@Test
-	def void testSymbolReferenceScope(){
+	def void testScopeProviderForSymbolRefs(){
 		'''
 		var i;
 		var j = i;
@@ -67,7 +69,7 @@ class FunPLScopeProviderTest {
 	}
 	
 	@Test
-	def void testFunctionCallScope(){
+	def void testScopeProviderForFunctionCalls(){
 		'''
 		var i;
 		var j = i;
@@ -83,6 +85,23 @@ class FunPLScopeProviderTest {
 			)
 		]	
 	}
+	
+	@Test
+	def void testSymbolRefMasking(){
+		'''
+		var i = 1;
+		function myFunc(){
+			var i = 2;
+			5 + i;
+		}
+		'''.parse => [
+			functions.head.statements.get(0).assertSame(
+				((functions.head.statements.get(1) as Plus).right as SymbolRef).symbol
+			)
+		]
+	}
+	
+	
 	
 	def private assertScope(EObject context, EReference reference, CharSequence expected){
 		expected.toString.assertEquals(

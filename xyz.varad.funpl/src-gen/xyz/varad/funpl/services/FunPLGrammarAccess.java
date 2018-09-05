@@ -29,6 +29,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
+		////TODO add Block(ed)-Element (e.g. Function, Class, If, etc.) for easier validation? (like Symbol)
 		//FunProgram:
 		//	elements+=AbstractElement*;
 		@Override public ParserRule getRule() { return rule; }
@@ -60,9 +61,11 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//	Definition | FunctionParam;
 		@Override public ParserRule getRule() { return rule; }
 		
+		////=Named element
 		//Definition | FunctionParam
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
+		////=Named element
 		//Definition
 		public RuleCall getDefinitionParserRuleCall_0() { return cDefinitionParserRuleCall_0; }
 		
@@ -624,6 +627,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
+	////TODO add Block(ed)-Element (e.g. Function, Class, If, etc.) for easier validation? (like Symbol)
 	//FunProgram:
 	//	elements+=AbstractElement*;
 	public FunProgramElements getFunProgramAccess() {

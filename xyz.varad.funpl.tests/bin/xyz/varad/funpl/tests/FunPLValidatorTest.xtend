@@ -4,6 +4,7 @@
 package xyz.varad.funpl.tests
 
 import com.google.inject.Inject
+import static extension org.junit.Assert.*
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -22,21 +23,33 @@ class FunPLValidatorTest {
 	@Inject extension ValidationTestHelper
 	
 	
-	/*@Test
-	def void testForwardReference(){
-		//Global scope intentionally not tested
-		
+	@Test
+	def void testForwardReference(){		
+		'''
+		var i = j;
+		var j = 10;
+		function myFunc(){
+			
+		}
+		'''.parse => [
+			assertTrue((validate.size == 1) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	//Forward reference error from scoping
+			//assertError(FunPLPackage::eINSTANCE.symbolRef, FunPLValidator::FORWARD_REFERENCE, "Symbol forward reference not allowed: 'j'")
+		]
+	}
+	
+	@Test
+	def void testForwardReferenceLocal(){		
 		'''
 		function myFunc()
 		{
 			var i = j;
 			var j = 10;
 		}
-		'''.parse.assertError(FunPLPackage::eINSTANCE.symbolRef, 
-			FunPLValidator::FORWARD_REFERENCE,
-			"Symbol forward reference not allowed: 'j'"
-		)
-	}*/
+		'''.parse => [
+			assertTrue((validate.size == 1) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	//Forward reference error from scoping
+			//assertError(FunPLPackage::eINSTANCE.symbolRef, FunPLValidator::FORWARD_REFERENCE, "Symbol forward reference not allowed: 'j'")
+		]
+	}
 	
 	@Test
 	def void testGlobalRedefinitionLocally(){
@@ -45,19 +58,23 @@ class FunPLValidatorTest {
 		function myFunc(p){
 			var i = 5;
 		}
-		'''.parse.assertNoErrors
+		'''.parse => [
+			assertNoErrors
+		]
 	}
 	
-	/*@Test
+	@Test
 	def void testGlobalRedefinitionGlobally(){
 		'''
 		var i = 4;
 		function myFunc(){ }
 		const i = 5;
-		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+		'''.parse => [
+			assertError(FunPLPackage::eINSTANCE.value,
 			FunPLValidator::SYMBOL_REDEFINITION,
-			"Symbol redefinition in scope not allowed: 'i'"
-		)
+			"Symbol redefinition not allowed: 'i'"
+			)
+		]
 		
 		'''
 		var i = 4;
@@ -67,14 +84,16 @@ class FunPLValidatorTest {
 		function myFunc() {
 			
 		}
-		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+		'''.parse => [
+			assertError(FunPLPackage::eINSTANCE.function,
 			FunPLValidator::SYMBOL_REDEFINITION,
-			"Symbol redefinition in scope not allowed: 'myFunc'"
-		)
+			"Symbol redefinition not allowed: 'myFunc'"
+			)
+		]
 
 	}
-	*/
-	/*@Test 
+	
+	@Test 
 	def void testLocalRedefinition(){
 		'''
 		function myFunc(p){
@@ -82,22 +101,8 @@ class FunPLValidatorTest {
 			var i = 2;
 		}
 		'''.parse => [
-			//assertNoErrors
-			
-			assertError(FunPLPackage::eINSTANCE.value, FunPLValidator::SYMBOL_REDEFINITION, "Symbol redefinition in scope not allowed: 'i'")
+			assertError(FunPLPackage::eINSTANCE.value, FunPLValidator::SYMBOL_REDEFINITION, "Symbol redefinition not allowed: 'i'")
 		]
-	}*/
-	/*
-	@Test
-	def void testParameterRedefinition(){
-		'''
-		function myFunc(p){
-			var p = 5;
-		}
-		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
-			FunPLValidator::SYMBOL_REDEFINITION,
-			"Symbol redefinition in scope not allowed: 'p'"
-			)
 	}
 	
 	@Test
@@ -110,9 +115,19 @@ class FunPLValidatorTest {
 			var i = 1;
 		}
 		'''.parse.assertNoErrors
-	}*/
+	}
 	
-	
+	@Test
+	def void testParameterRedefinition(){
+		'''
+		function myFunc(p){
+			var p = 5;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition not allowed: 'p'"
+			)
+	}
 	
 	
 	

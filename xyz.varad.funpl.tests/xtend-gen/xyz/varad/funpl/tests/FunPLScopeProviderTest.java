@@ -24,7 +24,9 @@ import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
+import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 import xyz.varad.funpl.util.FunPLModelUtil;
 
@@ -65,7 +67,7 @@ public class FunPLScopeProviderTest {
    * }
    */
   @Test
-  public void testSymbolReferenceScope() {
+  public void testScopeProviderForSymbolRefs() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("var i;");
@@ -106,7 +108,7 @@ public class FunPLScopeProviderTest {
   }
   
   @Test
-  public void testFunctionCallScope() {
+  public void testScopeProviderForFunctionCalls() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("var i;");
@@ -135,6 +137,35 @@ public class FunPLScopeProviderTest {
           "myFunc, myFunc2");
       };
       ObjectExtensions.<List<Statement>>operator_doubleArrow(_statements, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSymbolRefMasking() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var i = 1;");
+      _builder.newLine();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var i = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 + i;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      FunProgram _parse = this._parseHelper.parse(_builder);
+      final Procedure1<FunProgram> _function = (FunProgram it) -> {
+        Statement _get = FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(it))).get(1);
+        Expression _right = ((Plus) _get).getRight();
+        Assert.assertSame(FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(it))).get(0), 
+          ((SymbolRef) _right).getSymbol());
+      };
+      ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

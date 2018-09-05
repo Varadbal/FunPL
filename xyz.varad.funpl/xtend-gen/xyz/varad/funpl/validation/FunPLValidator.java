@@ -3,12 +3,17 @@
  */
 package xyz.varad.funpl.validation;
 
-import com.google.inject.Inject;
+import com.google.common.base.Objects;
+import java.util.Iterator;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import xyz.varad.funpl.funPL.Definition;
 import xyz.varad.funpl.funPL.FunPLPackage;
+import xyz.varad.funpl.funPL.FunProgram;
+import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.Symbol;
-import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.util.FunPLModelUtil;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
@@ -21,25 +26,67 @@ import xyz.varad.funpl.validation.AbstractFunPLValidator;
 public class FunPLValidator extends AbstractFunPLValidator {
   private final static String ISSUE_CODE_PREFIX = "xyz.varad.funpl.";
   
-  public final static String FORWARD_REFERENCE = (FunPLValidator.ISSUE_CODE_PREFIX + "ForwardReference");
-  
   public final static String SYMBOL_REDEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "SymbolRedefinition");
   
-  @Inject
-  @Extension
-  private FunPLModelUtil _funPLModelUtil;
-  
+  /**
+   * //Forward Reference - Scoping Solved That
+   * @Check
+   * def void checkForwardReference(SymbolRef _sym){
+   * val symbol = _sym.symbol
+   * if(symbol !== null && !_sym.isDefinedBefore){
+   * error("Symbol forward reference not allowed: '" + symbol.name + "'",
+   * FunPLPackage::eINSTANCE.symbolRef_Symbol,
+   * FORWARD_REFERENCE,
+   * symbol.name
+   * )
+   * }
+   * }
+   */
   @Check
-  public void checkForwardReference(final SymbolRef _sym) {
-    final Symbol symbol = _sym.getSymbol();
-    if (((symbol != null) && (!this._funPLModelUtil.isDefinedBefore(_sym)))) {
-      String _name = symbol.getName();
-      String _plus = ("Symbol forward reference not allowed: \'" + _name);
-      String _plus_1 = (_plus + "\'");
-      this.error(_plus_1, 
-        FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
-        FunPLValidator.FORWARD_REFERENCE, 
-        symbol.getName());
+  public void checkSymbolRedefinitionAsNeighbor(final Definition _d) {
+    final FunProgram contProg = EcoreUtil2.<FunProgram>getContainerOfType(_d, FunProgram.class);
+    final Function contFunc = EcoreUtil2.<Function>getContainerOfType(_d, Function.class);
+    if (((contFunc != null) && (!(_d instanceof Function)))) {
+      final Function1<Symbol, Boolean> _function = (Symbol it) -> {
+        return Boolean.valueOf((!Objects.equal(it, _d)));
+      };
+      boolean _containsSameNamedSymbol = this.containsSameNamedSymbol(IterableExtensions.<Symbol>takeWhile(FunPLModelUtil.symbols(contFunc), _function), _d);
+      if (_containsSameNamedSymbol) {
+        String _name = _d.getName();
+        String _plus = ("Symbol redefinition not allowed: \'" + _name);
+        String _plus_1 = (_plus + "\'");
+        this.error(_plus_1, 
+          FunPLPackage.eINSTANCE.getSymbol_Name(), 
+          FunPLValidator.SYMBOL_REDEFINITION, 
+          _d.getName());
+      }
+    } else {
+      final Function1<Symbol, Boolean> _function_1 = (Symbol it) -> {
+        return Boolean.valueOf((!Objects.equal(it, _d)));
+      };
+      boolean _containsSameNamedSymbol_1 = this.containsSameNamedSymbol(IterableExtensions.<Symbol>takeWhile(FunPLModelUtil.symbols(contProg), _function_1), _d);
+      if (_containsSameNamedSymbol_1) {
+        String _name_1 = _d.getName();
+        String _plus_2 = ("Symbol redefinition not allowed: \'" + _name_1);
+        String _plus_3 = (_plus_2 + "\'");
+        this.error(_plus_3, 
+          FunPLPackage.eINSTANCE.getSymbol_Name(), 
+          FunPLValidator.SYMBOL_REDEFINITION, 
+          _d.getName());
+      }
     }
+  }
+  
+  private boolean containsSameNamedSymbol(final Iterable<Symbol> _l, final Symbol _s) {
+    final Iterator<Symbol> _it = _l.iterator();
+    while (_it.hasNext()) {
+      String _name = _it.next().getName();
+      String _name_1 = _s.getName();
+      boolean _equals = Objects.equal(_name, _name_1);
+      if (_equals) {
+        return true;
+      }
+    }
+    return false;
   }
 }

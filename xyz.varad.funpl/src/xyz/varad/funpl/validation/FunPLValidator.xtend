@@ -9,6 +9,14 @@ import xyz.varad.funpl.util.FunPLModelUtil
 import xyz.varad.funpl.funPL.FunPLPackage
 import xyz.varad.funpl.funPL.SymbolRef
 import xyz.varad.funpl.funPL.Symbol
+import xyz.varad.funpl.funPL.Definition
+import static extension xyz.varad.funpl.util.FunPLModelUtil.*
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
+import xyz.varad.funpl.funPL.Function
+import xyz.varad.funpl.funPL.FunProgram
+import java.util.List
+import xyz.varad.funpl.funPL.Value
 
 /**
  * This class contains custom validation rules. 
@@ -16,19 +24,19 @@ import xyz.varad.funpl.funPL.Symbol
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
-	// TODO duplicate variable
+	// TODO same named params
 	// TODO const reassignment
 	// TODO const must be initialized
 	// TODO function call #args=#params
 	// TODO disable def. references in global scope???
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
-	public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
+	//public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
 	
+	//@Inject extension FunPLModelUtil
 	
-	@Inject extension FunPLModelUtil
-	
+	/* //Forward Reference - Scoping Solved That 
 	@Check
 	def void checkForwardReference(SymbolRef _sym){
 		val symbol = _sym.symbol
@@ -40,15 +48,38 @@ class FunPLValidator extends AbstractFunPLValidator {
 			)
 		}
 	}
+	*/
 	
-	/*@Check
-	def void checkSymbolRedefinition(Symbol _s){
-		if(_s.isDefinedBefore)
-			error("Symbol redefinition not allowed: '" + _s.name + "'",
-				FunPLPackage::eINSTANCE.symbolRef_Symbol,
+	@Check
+	def void checkSymbolRedefinitionAsNeighbor(Definition _d){
+		val contProg = _d.getContainerOfType(FunProgram)
+		val contFunc = _d.getContainerOfType(Function)
+		if(contFunc !== null && !(_d instanceof Function)){
+			if(contFunc.symbols.takeWhile[it != _d].containsSameNamedSymbol(_d)){
+				error("Symbol redefinition not allowed: '" + _d.name + "'",
+				FunPLPackage::eINSTANCE.symbol_Name,
 				SYMBOL_REDEFINITION,
-				_s.name
-			)
-	}*/
+				_d.name)
+			}
+		}else{
+			if(contProg.symbols.takeWhile[it != _d].containsSameNamedSymbol(_d)){
+				error("Symbol redefinition not allowed: '" + _d.name + "'",
+				FunPLPackage::eINSTANCE.symbol_Name,
+				SYMBOL_REDEFINITION,
+				_d.name)
+			}
+		}
+	}
+	
+	
+	
+	def private boolean containsSameNamedSymbol(Iterable<Symbol> _l, Symbol _s){
+		val _it = _l.iterator
+		while(_it.hasNext){
+			if(_it.next.name == _s.name)
+				return true
+		}
+		return false
+	}
 	
 }

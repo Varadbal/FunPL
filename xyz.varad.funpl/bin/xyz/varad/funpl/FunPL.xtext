@@ -2,6 +2,8 @@ grammar xyz.varad.funpl.FunPL with org.eclipse.xtext.common.Terminals
 
 generate funPL "http://www.varad.xyz/funpl/FunPL"
 
+//TODO add Block(ed)-Element (e.g. Function, Class, If, etc.) for easier validation? (like Symbol)
+
 FunProgram:
 	elements+=AbstractElement*
 ;
@@ -10,7 +12,7 @@ AbstractElement:
 	Definition
 ;
 
-Symbol:
+Symbol: //=Named element
 	Definition | FunctionParam
 ;
 
