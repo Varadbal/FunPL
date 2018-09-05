@@ -13,10 +13,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
-import xyz.varad.funpl.validation.FunPLValidator;
 
 @RunWith(XtextRunner.class)
 @InjectWith(FunPLInjectorProvider.class)
@@ -30,30 +28,23 @@ public class FunPLValidatorTest {
   @Extension
   private ValidationTestHelper _validationTestHelper;
   
-  @Test
-  public void testForwardReference() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc()");
-      _builder.newLine();
-      _builder.append("{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("var i = j;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("var j = 10;");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getSymbolRef(), 
-        FunPLValidator.FORWARD_REFERENCE, 
-        "Symbol forward reference not allowed: \'j\'");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
+  /**
+   * @Test
+   * def void testForwardReference(){
+   * //Global scope intentionally not tested
+   * 
+   * '''
+   * function myFunc()
+   * {
+   * var i = j;
+   * var j = 10;
+   * }
+   * '''.parse.assertError(FunPLPackage::eINSTANCE.symbolRef,
+   * FunPLValidator::FORWARD_REFERENCE,
+   * "Symbol forward reference not allowed: 'j'"
+   * )
+   * }
+   */
   @Test
   public void testGlobalRedefinitionLocally() {
     try {

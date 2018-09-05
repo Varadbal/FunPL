@@ -3,6 +3,15 @@
  */
 package xyz.varad.funpl.scoping
 
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import xyz.varad.funpl.funPL.FunPLPackage
+import org.eclipse.xtext.scoping.IScope
+import xyz.varad.funpl.funPL.Block
+import xyz.varad.funpl.funPL.Function
+import xyz.varad.funpl.funPL.FunProgram
+import org.eclipse.xtext.scoping.Scopes
+import xyz.varad.funpl.funPL.Symbol
 
 /**
  * This class contains custom scoping description.
@@ -11,5 +20,23 @@ package xyz.varad.funpl.scoping
  * on how and when to use it.
  */
 class FunPLScopeProvider extends AbstractFunPLScopeProvider {
+	
+	override getScope(EObject context, EReference reference){
+		if(reference == FunPLPackage.eINSTANCE.symbolRef_Symbol){
+			return scopeForSymbolRef(context)
+		}
+		return super.getScope(context, reference)
+	}
+	
+	def protected IScope scopeForSymbolRef(EObject context){
+		val container = context.eContainer
+		return switch(container) {
+			Block: Scopes.scopeFor(container.statements.takeWhile[it != context].filter(Symbol), scopeForSymbolRef(container))
+			Function: Scopes.scopeFor(container.params, scopeForSymbolRef(container))
+			FunProgram: Scopes.scopeFor(container.elements.takeWhile[it != context].filter(Symbol))
+			default: scopeForSymbolRef(container)	
+		}
+	}
+
 
 }

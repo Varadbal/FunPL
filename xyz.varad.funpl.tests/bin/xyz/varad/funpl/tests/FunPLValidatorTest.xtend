@@ -22,7 +22,7 @@ class FunPLValidatorTest {
 	@Inject extension ValidationTestHelper
 	
 	
-	@Test
+	/*@Test
 	def void testForwardReference(){
 		//Global scope intentionally not tested
 		
@@ -36,7 +36,7 @@ class FunPLValidatorTest {
 			FunPLValidator::FORWARD_REFERENCE,
 			"Symbol forward reference not allowed: 'j'"
 		)
-	}
+	}*/
 	
 	@Test
 	def void testGlobalRedefinitionLocally(){
@@ -73,20 +73,21 @@ class FunPLValidatorTest {
 		)
 
 	}
-	
-	@Test 
+	*/
+	/*@Test 
 	def void testLocalRedefinition(){
 		'''
 		function myFunc(p){
 			var i = 5;
 			var i = 2;
 		}
-		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
-			FunPLValidator::SYMBOL_REDEFINITION,
-			"Symbol redefinition in scope not allowed: 'i'"
-		)
-	}
-	
+		'''.parse => [
+			//assertNoErrors
+			
+			assertError(FunPLPackage::eINSTANCE.value, FunPLValidator::SYMBOL_REDEFINITION, "Symbol redefinition in scope not allowed: 'i'")
+		]
+	}*/
+	/*
 	@Test
 	def void testParameterRedefinition(){
 		'''

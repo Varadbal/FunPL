@@ -40,8 +40,73 @@ public class FunPLScopeProviderTest {
   @Extension
   private IScopeProvider _iScopeProvider;
   
+  /**
+   * //Default Scope Provider Test
+   * @Test
+   * def void testDefaultScopeProvider(){
+   * '''
+   * var i;
+   * var j = i;
+   * function myFunc(p){
+   * var k = 1;
+   * k = 5;
+   * myFunc();
+   * }
+   * function myFunc2() { }
+   * '''.parse.functions.head.statements => [
+   * (it.get(1) as Expression).assertScope(FunPLPackage.eINSTANCE.symbolRef_Symbol,
+   * "p, k, i, j, myFunc, myFunc.p, myFunc.k, myFunc2"
+   * )
+   * (it.get(2) as Expression).assertScope(FunPLPackage.eINSTANCE.functionCall_Function,
+   * "myFunc, myFunc2"
+   * )
+   * ]
+   * 
+   * }
+   */
   @Test
-  public void testScopeProvider() {
+  public void testSymbolReferenceScope() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var i;");
+      _builder.newLine();
+      _builder.append("var j = i;");
+      _builder.newLine();
+      _builder.append("function A(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function myFunc(p){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var k = 1;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("k = 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("myFunc();");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function myFunc2() { }");
+      _builder.newLine();
+      List<Statement> _statements = FunPLModelUtil.statements(FunPLModelUtil.functions(this._parseHelper.parse(_builder)).get(1));
+      final Procedure1<List<Statement>> _function = (List<Statement> it) -> {
+        Statement _get = it.get(1);
+        this.assertScope(((Expression) _get), FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
+          "k, p, i, j, A");
+      };
+      ObjectExtensions.<List<Statement>>operator_doubleArrow(_statements, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionCallScope() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("var i;");
@@ -65,11 +130,8 @@ public class FunPLScopeProviderTest {
       _builder.newLine();
       List<Statement> _statements = FunPLModelUtil.statements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder))));
       final Procedure1<List<Statement>> _function = (List<Statement> it) -> {
-        Statement _get = it.get(1);
-        this.assertScope(((Expression) _get), FunPLPackage.eINSTANCE.getSymbolRef_Symbol(), 
-          "p, k, i, j, myFunc, myFunc.p, myFunc.k, myFunc2");
-        Statement _get_1 = it.get(2);
-        this.assertScope(((Expression) _get_1), FunPLPackage.eINSTANCE.getFunctionCall_Function(), 
+        Statement _get = it.get(2);
+        this.assertScope(((Expression) _get), FunPLPackage.eINSTANCE.getFunctionCall_Function(), 
           "myFunc, myFunc2");
       };
       ObjectExtensions.<List<Statement>>operator_doubleArrow(_statements, _function);
