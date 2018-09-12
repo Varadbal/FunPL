@@ -31,26 +31,12 @@ class FunPLValidator extends AbstractFunPLValidator {
 	// TODO disable def. references in global scope???
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
-	//public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
 	public static val UNDEFINED_CONSTANT = ISSUE_CODE_PREFIX + "UndefinedConstant"
 	public static val CONSTANT_REASSIGNMENT = ISSUE_CODE_PREFIX + "ConstantReassignment"
 	
 	//@Inject extension FunPLModelUtil
 	
-	/* //Forward Reference - Scoping Solved That 
-	@Check
-	def void checkForwardReference(SymbolRef _sym){
-		val symbol = _sym.symbol
-		if(symbol !== null && !_sym.isDefinedBefore){
-			error("Symbol forward reference not allowed: '" + symbol.name + "'",
-				FunPLPackage::eINSTANCE.symbolRef_Symbol,
-				FORWARD_REFERENCE,
-				symbol.name
-			)
-		}
-	}
-	*/
 	
 	@Check
 	def void checkSymbolRedefinitionAsNeighbor(Definition _d){
