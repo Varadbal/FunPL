@@ -318,7 +318,7 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Statement returns Value
 	 *
 	 * Constraint:
-	 *     (isConst?='const'? name=ID expression=Expression?)
+	 *     (const?='const'? name=ID expression=Expression?)
 	 */
 	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

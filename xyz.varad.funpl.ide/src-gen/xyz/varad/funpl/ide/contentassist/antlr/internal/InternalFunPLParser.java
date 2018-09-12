@@ -1245,13 +1245,13 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Value__Alternatives_0"
-    // InternalFunPL.g:423:1: rule__Value__Alternatives_0 : ( ( ( rule__Value__IsConstAssignment_0_0 ) ) | ( 'var' ) );
+    // InternalFunPL.g:423:1: rule__Value__Alternatives_0 : ( ( ( rule__Value__ConstAssignment_0_0 ) ) | ( 'var' ) );
     public final void rule__Value__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalFunPL.g:427:1: ( ( ( rule__Value__IsConstAssignment_0_0 ) ) | ( 'var' ) )
+            // InternalFunPL.g:427:1: ( ( ( rule__Value__ConstAssignment_0_0 ) ) | ( 'var' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1269,24 +1269,24 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalFunPL.g:428:2: ( ( rule__Value__IsConstAssignment_0_0 ) )
+                    // InternalFunPL.g:428:2: ( ( rule__Value__ConstAssignment_0_0 ) )
                     {
-                    // InternalFunPL.g:428:2: ( ( rule__Value__IsConstAssignment_0_0 ) )
-                    // InternalFunPL.g:429:3: ( rule__Value__IsConstAssignment_0_0 )
+                    // InternalFunPL.g:428:2: ( ( rule__Value__ConstAssignment_0_0 ) )
+                    // InternalFunPL.g:429:3: ( rule__Value__ConstAssignment_0_0 )
                     {
-                     before(grammarAccess.getValueAccess().getIsConstAssignment_0_0()); 
-                    // InternalFunPL.g:430:3: ( rule__Value__IsConstAssignment_0_0 )
-                    // InternalFunPL.g:430:4: rule__Value__IsConstAssignment_0_0
+                     before(grammarAccess.getValueAccess().getConstAssignment_0_0()); 
+                    // InternalFunPL.g:430:3: ( rule__Value__ConstAssignment_0_0 )
+                    // InternalFunPL.g:430:4: rule__Value__ConstAssignment_0_0
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Value__IsConstAssignment_0_0();
+                    rule__Value__ConstAssignment_0_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getValueAccess().getIsConstAssignment_0_0()); 
+                     after(grammarAccess.getValueAccess().getConstAssignment_0_0()); 
 
                     }
 
@@ -5984,9 +5984,9 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FunProgram__ElementsAssignment"
 
 
-    // $ANTLR start "rule__Value__IsConstAssignment_0_0"
-    // InternalFunPL.g:1965:1: rule__Value__IsConstAssignment_0_0 : ( ( 'const' ) ) ;
-    public final void rule__Value__IsConstAssignment_0_0() throws RecognitionException {
+    // $ANTLR start "rule__Value__ConstAssignment_0_0"
+    // InternalFunPL.g:1965:1: rule__Value__ConstAssignment_0_0 : ( ( 'const' ) ) ;
+    public final void rule__Value__ConstAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -5997,17 +5997,17 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
             // InternalFunPL.g:1970:2: ( ( 'const' ) )
             // InternalFunPL.g:1971:3: ( 'const' )
             {
-             before(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); 
+             before(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); 
             // InternalFunPL.g:1972:3: ( 'const' )
             // InternalFunPL.g:1973:4: 'const'
             {
-             before(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); 
+             before(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); 
             match(input,23,FOLLOW_2); 
-             after(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); 
+             after(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); 
 
             }
 
-             after(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); 
+             after(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); 
 
             }
 
@@ -6026,7 +6026,7 @@ public class InternalFunPLParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Value__IsConstAssignment_0_0"
+    // $ANTLR end "rule__Value__ConstAssignment_0_0"
 
 
     // $ANTLR start "rule__Value__NameAssignment_1"

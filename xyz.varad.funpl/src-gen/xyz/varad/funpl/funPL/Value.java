@@ -13,7 +13,7 @@ package xyz.varad.funpl.funPL;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.Value#isIsConst <em>Is Const</em>}</li>
+ *   <li>{@link xyz.varad.funpl.funPL.Value#isConst <em>Const</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.Value#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -24,30 +24,30 @@ package xyz.varad.funpl.funPL;
 public interface Value extends Definition, Statement
 {
   /**
-   * Returns the value of the '<em><b>Is Const</b></em>' attribute.
+   * Returns the value of the '<em><b>Const</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Is Const</em>' attribute isn't clear,
+   * If the meaning of the '<em>Const</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Is Const</em>' attribute.
-   * @see #setIsConst(boolean)
-   * @see xyz.varad.funpl.funPL.FunPLPackage#getValue_IsConst()
+   * @return the value of the '<em>Const</em>' attribute.
+   * @see #setConst(boolean)
+   * @see xyz.varad.funpl.funPL.FunPLPackage#getValue_Const()
    * @model
    * @generated
    */
-  boolean isIsConst();
+  boolean isConst();
 
   /**
-   * Sets the value of the '{@link xyz.varad.funpl.funPL.Value#isIsConst <em>Is Const</em>}' attribute.
+   * Sets the value of the '{@link xyz.varad.funpl.funPL.Value#isConst <em>Const</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Is Const</em>' attribute.
-   * @see #isIsConst()
+   * @param value the new value of the '<em>Const</em>' attribute.
+   * @see #isConst()
    * @generated
    */
-  void setIsConst(boolean value);
+  void setConst(boolean value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

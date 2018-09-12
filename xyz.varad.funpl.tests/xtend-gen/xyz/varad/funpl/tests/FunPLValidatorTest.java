@@ -219,4 +219,40 @@ public class FunPLValidatorTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testParameterRedefinitionAsParam() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(p1, p1){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getFunctionParam(), 
+        FunPLValidator.SYMBOL_REDEFINITION, 
+        "Symbol redefinition not allowed: \'p1\'");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUndefinedConstant() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("const i;");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getValue(), 
+        FunPLValidator.UNDEFINED_CONSTANT, 
+        "Undefined constant not allowed: \'i\'");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("const i = 1;");
+      _builder_1.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

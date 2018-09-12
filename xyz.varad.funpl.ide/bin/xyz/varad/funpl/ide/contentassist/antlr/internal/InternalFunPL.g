@@ -426,9 +426,9 @@ rule__Value__Alternatives_0
 	}
 :
 	(
-		{ before(grammarAccess.getValueAccess().getIsConstAssignment_0_0()); }
-		(rule__Value__IsConstAssignment_0_0)
-		{ after(grammarAccess.getValueAccess().getIsConstAssignment_0_0()); }
+		{ before(grammarAccess.getValueAccess().getConstAssignment_0_0()); }
+		(rule__Value__ConstAssignment_0_0)
+		{ after(grammarAccess.getValueAccess().getConstAssignment_0_0()); }
 	)
 	|
 	(
@@ -1962,19 +1962,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Value__IsConstAssignment_0_0
+rule__Value__ConstAssignment_0_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); }
+		{ before(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); }
 		(
-			{ before(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); }
+			{ before(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); }
 			'const'
-			{ after(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); }
+			{ after(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); }
 		)
-		{ after(grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0()); }
+		{ after(grammarAccess.getValueAccess().getConstConstKeyword_0_0_0()); }
 	)
 ;
 finally {

@@ -58,7 +58,7 @@ public class FunPLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_2(), "rule__TerminalExpression__Group_2__0");
 			builder.put(grammarAccess.getTerminalExpressionAccess().getGroup_3(), "rule__TerminalExpression__Group_3__0");
 			builder.put(grammarAccess.getFunProgramAccess().getElementsAssignment(), "rule__FunProgram__ElementsAssignment");
-			builder.put(grammarAccess.getValueAccess().getIsConstAssignment_0_0(), "rule__Value__IsConstAssignment_0_0");
+			builder.put(grammarAccess.getValueAccess().getConstAssignment_0_0(), "rule__Value__ConstAssignment_0_0");
 			builder.put(grammarAccess.getValueAccess().getNameAssignment_1(), "rule__Value__NameAssignment_1");
 			builder.put(grammarAccess.getValueAccess().getExpressionAssignment_2_1(), "rule__Value__ExpressionAssignment_2_1");
 			builder.put(grammarAccess.getFunctionAccess().getNameAssignment_1(), "rule__Function__NameAssignment_1");

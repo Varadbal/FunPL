@@ -22,7 +22,7 @@ Definition:
 
 Value:
 	//TODO type: 'var' (type=...)? name=ID ...
-	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
+	(const?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 ;
 
 Function:

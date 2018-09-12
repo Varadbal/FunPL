@@ -9,11 +9,15 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.util.FunPLModelUtil;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
@@ -27,6 +31,10 @@ public class FunPLValidator extends AbstractFunPLValidator {
   private final static String ISSUE_CODE_PREFIX = "xyz.varad.funpl.";
   
   public final static String SYMBOL_REDEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "SymbolRedefinition");
+  
+  public final static String UNDEFINED_CONSTANT = (FunPLValidator.ISSUE_CODE_PREFIX + "UndefinedConstant");
+  
+  public final static String CONSTANT_REASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "ConstantReassignment");
   
   /**
    * //Forward Reference - Scoping Solved That
@@ -77,8 +85,50 @@ public class FunPLValidator extends AbstractFunPLValidator {
     }
   }
   
-  private boolean containsSameNamedSymbol(final Iterable<Symbol> _l, final Symbol _s) {
-    final Iterator<Symbol> _it = _l.iterator();
+  @Check
+  public void checkSymbolRedefinitionParam(final FunctionParam _p) {
+    final Function contFunc = EcoreUtil2.<Function>getContainerOfType(_p, Function.class);
+    if ((contFunc != null)) {
+      final Function1<FunctionParam, Boolean> _function = (FunctionParam it) -> {
+        return Boolean.valueOf((!Objects.equal(it, _p)));
+      };
+      boolean _containsSameNamedSymbol = this.containsSameNamedSymbol(IterableExtensions.<FunctionParam>takeWhile(contFunc.getParams(), _function), _p);
+      if (_containsSameNamedSymbol) {
+        String _name = _p.getName();
+        String _plus = ("Symbol redefinition not allowed: \'" + _name);
+        String _plus_1 = (_plus + "\'");
+        this.error(_plus_1, 
+          FunPLPackage.eINSTANCE.getSymbol_Name(), 
+          FunPLValidator.SYMBOL_REDEFINITION, 
+          _p.getName());
+      }
+    }
+  }
+  
+  @Check
+  public void checkUndefinedConstant(final Value _v) {
+    boolean _isConst = _v.isConst();
+    if (_isConst) {
+      Expression _expression = _v.getExpression();
+      boolean _tripleEquals = (_expression == null);
+      if (_tripleEquals) {
+        String _name = _v.getName();
+        String _plus = ("Undefined constant not allowed: \'" + _name);
+        String _plus_1 = (_plus + "\'");
+        this.error(_plus_1, 
+          FunPLPackage.eINSTANCE.getSymbol_Name(), 
+          FunPLValidator.UNDEFINED_CONSTANT, 
+          _v.getName());
+      }
+    }
+  }
+  
+  @Check
+  public void checkConstantReassignment(final Assignment _a) {
+  }
+  
+  private boolean containsSameNamedSymbol(final Iterable<? extends Symbol> _l, final Symbol _s) {
+    final Iterator<? extends Symbol> _it = _l.iterator();
     while (_it.hasNext()) {
       String _name = _it.next().getName();
       String _name_1 = _s.getName();

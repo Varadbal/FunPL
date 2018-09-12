@@ -95,8 +95,8 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Value");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cIsConstAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final Keyword cIsConstConstKeyword_0_0_0 = (Keyword)cIsConstAssignment_0_0.eContents().get(0);
+		private final Assignment cConstAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cConstConstKeyword_0_0_0 = (Keyword)cConstAssignment_0_0.eContents().get(0);
 		private final Keyword cVarKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
@@ -107,21 +107,21 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Value:
-		//	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';';
+		//	(const?='const' | 'var') name=ID ('=' expression=Expression)? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';'
+		//(const?='const' | 'var') name=ID ('=' expression=Expression)? ';'
 		public Group getGroup() { return cGroup; }
 		
 		////TODO type: 'var' (type=...)? name=ID ...
-		//isConst?='const' | 'var'
+		//const?='const' | 'var'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
-		//isConst?='const'
-		public Assignment getIsConstAssignment_0_0() { return cIsConstAssignment_0_0; }
+		//const?='const'
+		public Assignment getConstAssignment_0_0() { return cConstAssignment_0_0; }
 		
 		//'const'
-		public Keyword getIsConstConstKeyword_0_0_0() { return cIsConstConstKeyword_0_0_0; }
+		public Keyword getConstConstKeyword_0_0_0() { return cConstConstKeyword_0_0_0; }
 		
 		//'var'
 		public Keyword getVarKeyword_0_1() { return cVarKeyword_0_1; }
@@ -669,7 +669,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Value:
-	//	(isConst?='const' | 'var') name=ID ('=' expression=Expression)? ';';
+	//	(const?='const' | 'var') name=ID ('=' expression=Expression)? ';';
 	public ValueElements getValueAccess() {
 		return pValue;
 	}

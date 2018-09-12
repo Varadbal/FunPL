@@ -180,13 +180,13 @@ public interface FunPLPackage extends EPackage
   int VALUE__NAME = DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Is Const</b></em>' attribute.
+   * The feature id for the '<em><b>Const</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE__IS_CONST = DEFINITION_FEATURE_COUNT + 0;
+  int VALUE__CONST = DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -643,15 +643,15 @@ public interface FunPLPackage extends EPackage
   EClass getValue();
 
   /**
-   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Value#isIsConst <em>Is Const</em>}'.
+   * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Value#isConst <em>Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Is Const</em>'.
-   * @see xyz.varad.funpl.funPL.Value#isIsConst()
+   * @return the meta object for the attribute '<em>Const</em>'.
+   * @see xyz.varad.funpl.funPL.Value#isConst()
    * @see #getValue()
    * @generated
    */
-  EAttribute getValue_IsConst();
+  EAttribute getValue_Const();
 
   /**
    * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Value#getExpression <em>Expression</em>}'.
@@ -1017,12 +1017,12 @@ public interface FunPLPackage extends EPackage
     EClass VALUE = eINSTANCE.getValue();
 
     /**
-     * The meta object literal for the '<em><b>Is Const</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VALUE__IS_CONST = eINSTANCE.getValue_IsConst();
+    EAttribute VALUE__CONST = eINSTANCE.getValue_Const();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

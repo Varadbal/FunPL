@@ -176,15 +176,15 @@ ruleValue returns [EObject current=null]
 		(
 			(
 				(
-					lv_isConst_0_0='const'
+					lv_const_0_0='const'
 					{
-						newLeafNode(lv_isConst_0_0, grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0());
+						newLeafNode(lv_const_0_0, grammarAccess.getValueAccess().getConstConstKeyword_0_0_0());
 					}
 					{
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getValueRule());
 						}
-						setWithLastConsumed($current, "isConst", true, "const");
+						setWithLastConsumed($current, "const", true, "const");
 					}
 				)
 			)

@@ -450,11 +450,11 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValue"
-    // InternalFunPL.g:168:1: ruleValue returns [EObject current=null] : ( ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' ) ;
+    // InternalFunPL.g:168:1: ruleValue returns [EObject current=null] : ( ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' ) ;
     public final EObject ruleValue() throws RecognitionException {
         EObject current = null;
 
-        Token lv_isConst_0_0=null;
+        Token lv_const_0_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
         Token otherlv_3=null;
@@ -466,13 +466,13 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalFunPL.g:174:2: ( ( ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' ) )
-            // InternalFunPL.g:175:2: ( ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' )
+            // InternalFunPL.g:174:2: ( ( ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' ) )
+            // InternalFunPL.g:175:2: ( ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' )
             {
-            // InternalFunPL.g:175:2: ( ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' )
-            // InternalFunPL.g:176:3: ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';'
+            // InternalFunPL.g:175:2: ( ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';' )
+            // InternalFunPL.g:176:3: ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '=' ( (lv_expression_4_0= ruleExpression ) ) )? otherlv_5= ';'
             {
-            // InternalFunPL.g:176:3: ( ( (lv_isConst_0_0= 'const' ) ) | otherlv_1= 'var' )
+            // InternalFunPL.g:176:3: ( ( (lv_const_0_0= 'const' ) ) | otherlv_1= 'var' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -490,23 +490,23 @@ public class InternalFunPLParser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalFunPL.g:177:4: ( (lv_isConst_0_0= 'const' ) )
+                    // InternalFunPL.g:177:4: ( (lv_const_0_0= 'const' ) )
                     {
-                    // InternalFunPL.g:177:4: ( (lv_isConst_0_0= 'const' ) )
-                    // InternalFunPL.g:178:5: (lv_isConst_0_0= 'const' )
+                    // InternalFunPL.g:177:4: ( (lv_const_0_0= 'const' ) )
+                    // InternalFunPL.g:178:5: (lv_const_0_0= 'const' )
                     {
-                    // InternalFunPL.g:178:5: (lv_isConst_0_0= 'const' )
-                    // InternalFunPL.g:179:6: lv_isConst_0_0= 'const'
+                    // InternalFunPL.g:178:5: (lv_const_0_0= 'const' )
+                    // InternalFunPL.g:179:6: lv_const_0_0= 'const'
                     {
-                    lv_isConst_0_0=(Token)match(input,11,FOLLOW_4); 
+                    lv_const_0_0=(Token)match(input,11,FOLLOW_4); 
 
-                    						newLeafNode(lv_isConst_0_0, grammarAccess.getValueAccess().getIsConstConstKeyword_0_0_0());
+                    						newLeafNode(lv_const_0_0, grammarAccess.getValueAccess().getConstConstKeyword_0_0_0());
                     					
 
                     						if (current==null) {
                     							current = createModelElement(grammarAccess.getValueRule());
                     						}
-                    						setWithLastConsumed(current, "isConst", true, "const");
+                    						setWithLastConsumed(current, "const", true, "const");
                     					
 
                     }

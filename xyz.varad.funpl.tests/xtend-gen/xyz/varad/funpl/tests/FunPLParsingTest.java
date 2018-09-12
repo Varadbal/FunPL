@@ -416,8 +416,8 @@ public class FunPLParsingTest {
       if (s instanceof Value) {
         _matched=true;
         String ret = "";
-        boolean _isIsConst = ((Value)s).isIsConst();
-        if (_isIsConst) {
+        boolean _isConst = ((Value)s).isConst();
+        if (_isConst) {
           String _ret = ret;
           ret = (_ret + "const ");
         } else {

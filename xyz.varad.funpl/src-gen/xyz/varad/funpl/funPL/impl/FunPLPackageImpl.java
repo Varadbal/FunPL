@@ -295,7 +295,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getValue_IsConst()
+  public EAttribute getValue_Const()
   {
     return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
   }
@@ -601,7 +601,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     definitionEClass = createEClass(DEFINITION);
 
     valueEClass = createEClass(VALUE);
-    createEAttribute(valueEClass, VALUE__IS_CONST);
+    createEAttribute(valueEClass, VALUE__CONST);
     createEReference(valueEClass, VALUE__EXPRESSION);
 
     functionEClass = createEClass(FUNCTION);
@@ -698,7 +698,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getValue_IsConst(), ecorePackage.getEBoolean(), "isConst", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getValue_Const(), ecorePackage.getEBoolean(), "const", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getValue_Expression(), this.getExpression(), null, "expression", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -129,6 +129,32 @@ class FunPLValidatorTest {
 			)
 	}
 	
+	@Test
+	def void testParameterRedefinitionAsParam(){
+		'''
+		function myFunc(p1, p1){
+			
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.functionParam,
+			FunPLValidator::SYMBOL_REDEFINITION,
+			"Symbol redefinition not allowed: 'p1'"
+			)
+	}
+	
+	@Test
+	def void testUndefinedConstant(){
+		'''
+		const i;
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::UNDEFINED_CONSTANT,
+			"Undefined constant not allowed: 'i'"
+			)
+			
+		'''
+		const i = 1;
+		'''.parse.assertNoErrors
+	}
+	
 	
 	
 }

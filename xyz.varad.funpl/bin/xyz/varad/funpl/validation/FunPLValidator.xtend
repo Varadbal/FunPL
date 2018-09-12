@@ -17,6 +17,8 @@ import xyz.varad.funpl.funPL.Function
 import xyz.varad.funpl.funPL.FunProgram
 import java.util.List
 import xyz.varad.funpl.funPL.Value
+import xyz.varad.funpl.funPL.FunctionParam
+import xyz.varad.funpl.funPL.Assignment
 
 /**
  * This class contains custom validation rules. 
@@ -24,15 +26,15 @@ import xyz.varad.funpl.funPL.Value
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
-	// TODO same named params
 	// TODO const reassignment
-	// TODO const must be initialized
 	// TODO function call #args=#params
 	// TODO disable def. references in global scope???
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	//public static val FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "ForwardReference"
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
+	public static val UNDEFINED_CONSTANT = ISSUE_CODE_PREFIX + "UndefinedConstant"
+	public static val CONSTANT_REASSIGNMENT = ISSUE_CODE_PREFIX + "ConstantReassignment"
 	
 	//@Inject extension FunPLModelUtil
 	
@@ -71,9 +73,40 @@ class FunPLValidator extends AbstractFunPLValidator {
 		}
 	}
 	
+	@Check
+	def void checkSymbolRedefinitionParam(FunctionParam _p){
+		val contFunc = _p.getContainerOfType(Function)
+		if(contFunc !== null){
+			if(contFunc.params.takeWhile[it != _p].containsSameNamedSymbol(_p)){
+				error("Symbol redefinition not allowed: '" + _p.name + "'",
+				FunPLPackage::eINSTANCE.symbol_Name,
+				SYMBOL_REDEFINITION,
+				_p.name)
+			}
+		}
+	}
+	
+	@Check
+	def void checkUndefinedConstant(Value _v){
+		if(_v.isConst){
+			if(_v.expression === null){
+				error("Undefined constant not allowed: '" + _v.name + "'",
+					FunPLPackage::eINSTANCE.symbol_Name,
+					UNDEFINED_CONSTANT,
+					_v.name
+				)
+			}
+		}
+	}
+	
+	@Check
+	def void checkConstantReassignment(Assignment _a){
+		
+	}
 	
 	
-	def private boolean containsSameNamedSymbol(Iterable<Symbol> _l, Symbol _s){
+	
+	def private boolean containsSameNamedSymbol(Iterable<? extends Symbol> _l, Symbol _s){
 		val _it = _l.iterator
 		while(_it.hasNext){
 			if(_it.next.name == _s.name)

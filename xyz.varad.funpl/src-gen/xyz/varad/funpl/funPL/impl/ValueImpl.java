@@ -23,7 +23,7 @@ import xyz.varad.funpl.funPL.Value;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.impl.ValueImpl#isIsConst <em>Is Const</em>}</li>
+ *   <li>{@link xyz.varad.funpl.funPL.impl.ValueImpl#isConst <em>Const</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ValueImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -32,24 +32,24 @@ import xyz.varad.funpl.funPL.Value;
 public class ValueImpl extends DefinitionImpl implements Value
 {
   /**
-   * The default value of the '{@link #isIsConst() <em>Is Const</em>}' attribute.
+   * The default value of the '{@link #isConst() <em>Const</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isIsConst()
+   * @see #isConst()
    * @generated
    * @ordered
    */
-  protected static final boolean IS_CONST_EDEFAULT = false;
+  protected static final boolean CONST_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isIsConst() <em>Is Const</em>}' attribute.
+   * The cached value of the '{@link #isConst() <em>Const</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isIsConst()
+   * @see #isConst()
    * @generated
    * @ordered
    */
-  protected boolean isConst = IS_CONST_EDEFAULT;
+  protected boolean const_ = CONST_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -87,9 +87,9 @@ public class ValueImpl extends DefinitionImpl implements Value
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isIsConst()
+  public boolean isConst()
   {
-    return isConst;
+    return const_;
   }
 
   /**
@@ -97,12 +97,12 @@ public class ValueImpl extends DefinitionImpl implements Value
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIsConst(boolean newIsConst)
+  public void setConst(boolean newConst)
   {
-    boolean oldIsConst = isConst;
-    isConst = newIsConst;
+    boolean oldConst = const_;
+    const_ = newConst;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE__IS_CONST, oldIsConst, isConst));
+      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE__CONST, oldConst, const_));
   }
 
   /**
@@ -179,8 +179,8 @@ public class ValueImpl extends DefinitionImpl implements Value
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE__IS_CONST:
-        return isIsConst();
+      case FunPLPackage.VALUE__CONST:
+        return isConst();
       case FunPLPackage.VALUE__EXPRESSION:
         return getExpression();
     }
@@ -197,8 +197,8 @@ public class ValueImpl extends DefinitionImpl implements Value
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE__IS_CONST:
-        setIsConst((Boolean)newValue);
+      case FunPLPackage.VALUE__CONST:
+        setConst((Boolean)newValue);
         return;
       case FunPLPackage.VALUE__EXPRESSION:
         setExpression((Expression)newValue);
@@ -217,8 +217,8 @@ public class ValueImpl extends DefinitionImpl implements Value
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE__IS_CONST:
-        setIsConst(IS_CONST_EDEFAULT);
+      case FunPLPackage.VALUE__CONST:
+        setConst(CONST_EDEFAULT);
         return;
       case FunPLPackage.VALUE__EXPRESSION:
         setExpression((Expression)null);
@@ -237,8 +237,8 @@ public class ValueImpl extends DefinitionImpl implements Value
   {
     switch (featureID)
     {
-      case FunPLPackage.VALUE__IS_CONST:
-        return isConst != IS_CONST_EDEFAULT;
+      case FunPLPackage.VALUE__CONST:
+        return const_ != CONST_EDEFAULT;
       case FunPLPackage.VALUE__EXPRESSION:
         return expression != null;
     }
@@ -256,8 +256,8 @@ public class ValueImpl extends DefinitionImpl implements Value
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (isConst: ");
-    result.append(isConst);
+    result.append(" (const: ");
+    result.append(const_);
     result.append(')');
     return result.toString();
   }
