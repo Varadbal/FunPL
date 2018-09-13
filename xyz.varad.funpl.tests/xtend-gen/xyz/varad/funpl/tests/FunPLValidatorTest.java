@@ -92,7 +92,7 @@ public class FunPLValidatorTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("var i = 4;");
       _builder.newLine();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var i = 5;");
@@ -157,7 +157,7 @@ public class FunPLValidatorTest {
   public void testLocalRedefinition() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var i = 5;");
@@ -181,7 +181,7 @@ public class FunPLValidatorTest {
   public void testOutOfScopeRedefinition() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var i = 5;");
@@ -205,7 +205,7 @@ public class FunPLValidatorTest {
   public void testParameterRedefinition() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var p = 5;");
@@ -224,7 +224,7 @@ public class FunPLValidatorTest {
   public void testParameterRedefinitionAsParam() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p1, p1){");
+      _builder.append("function myFunc(int p1,int p1){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();

@@ -37,7 +37,7 @@ public class FunPLIndexTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("var i;");
       _builder.newLine();
-      _builder.append("function A(p1){");
+      _builder.append("function A(int p1){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var k;");

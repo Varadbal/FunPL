@@ -23,6 +23,11 @@ import xyz.varad.funpl.funPL.SymbolRef
 import xyz.varad.funpl.funPL.Value
 
 import static extension org.junit.Assert.*
+import xyz.varad.funpl.funPL.Symbol
+import xyz.varad.funpl.funPL.Type
+import xyz.varad.funpl.funPL.BoolTypeDefinition
+import xyz.varad.funpl.funPL.IntTypeDefinition
+import xyz.varad.funpl.funPL.StringTypeDefinition
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -39,12 +44,13 @@ class FunPLParsingTest {
 		var i = 3;
 		const j = i;
 		'''.parse.assertNoErrors
+		'''var int i = 3;'''.parse.assertNoErrors
 	}
 	
 	@Test
 	def void testFunctionDefinition(){
 		'''
-		function myFunc(p1, p2, p3){
+		function myFunc(int p1, bool p2, string p3){
 			
 		}
 		'''.parse.assertNoErrors
@@ -85,11 +91,11 @@ class FunPLParsingTest {
 			myFunc3(1 + 2, 1 + (3 + 4), i = 2);
 		}
 		
-		function myFunc2(p1, p2){
+		function myFunc2(int p1, bool p2){
 			
 		}
 		
-		function myFunc3(p1, p2, p3){
+		function myFunc3(int p1, bool p2, string p3){
 			
 		}
 		'''.parse.assertNoErrors
@@ -97,7 +103,7 @@ class FunPLParsingTest {
 	
 	def private testFunctionLocal(CharSequence toInsert){
 		'''
-		function myFunc(p1, p2){
+		function myFunc(int p1, int p2){
 			var a;
 			var b;
 			var v = 1;
@@ -150,7 +156,7 @@ class FunPLParsingTest {
 			myFunc2(1, myFunc2(myFunc2(1, 1), 2));	
 		}
 		
-		function myFunc2(p1, p2){
+		function myFunc2(int p1, int p2){
 			
 		}
 		'''.parse.elements.head as Function => [
@@ -169,16 +175,77 @@ class FunPLParsingTest {
 			myFunc2(myFunc2(2 + i, i + j + k + myFunc3(i = 3, k, 1 + (i + j))), myFunc3(k = false, 1 , 2))
 		}
 		
-		function myFunc2(p1, p2){
+		function myFunc2(int p1, int p2){
 			
 		}
 		
-		function myFunc3(p1, p2, p3){
+		function myFunc3(int p1, int p2, int p3){
 			
 		}
 		'''.parse.elements.head as Function => [
 			it.body.statements.get(3).assertAssociativity("(myFunc2((myFunc2((2 + i), (((i + j) + k) + (myFunc3((i = 3), k, (1 + (i + j))))))), (myFunc3((k = false), 1, 2))))")
 		]
+	}
+	
+	@Test
+	def void testValueTypes(){
+		
+		'''
+		var int i = 1;
+		const bool j = true;
+		var string k = "sajt";
+		var m;
+		var ins n;
+		'''.parse => [
+			(elements.get(0) as Symbol).assertSymbolType(IntTypeDefinition)
+			(elements.get(1) as Symbol).assertSymbolType(BoolTypeDefinition)
+			(elements.get(2) as Symbol).assertSymbolType(StringTypeDefinition)
+			(elements.get(3) as Symbol).assertSymbolType(null)
+		]
+	}
+	
+	@Test
+	def void testFunctionTypes(){
+		'''
+		function int foo(){
+			
+		}
+		function bool bar(){
+			
+		}
+		function string baz(){
+			
+		}
+		function bax(){
+			
+		}
+		'''.parse => [
+			(elements.get(0) as Symbol).assertSymbolType(IntTypeDefinition)
+			(elements.get(1) as Symbol).assertSymbolType(BoolTypeDefinition)
+			(elements.get(2) as Symbol).assertSymbolType(StringTypeDefinition)
+			(elements.get(3) as Symbol).assertSymbolType(null)
+		]
+	}
+	
+	@Test
+	def void testFunctionParamTypes(){
+		'''
+		function foo(int p1, bool p2, string p3) {
+			
+		}
+		'''.parse.elements.head as Function => [
+			params.get(0).assertSymbolType(IntTypeDefinition)
+			params.get(1).assertSymbolType(BoolTypeDefinition)
+			params.get(2).assertSymbolType(StringTypeDefinition)
+		]
+	}
+	
+	def private void assertSymbolType(Symbol v, Class<? extends Type> t){
+		if(t === null){
+			v.type.assertEquals(null)
+		}else{
+			assertTrue(t.isInstance(v.type))
+		}
 	}
 	
 	def private void assertAssociativity(Statement s, CharSequence expected){

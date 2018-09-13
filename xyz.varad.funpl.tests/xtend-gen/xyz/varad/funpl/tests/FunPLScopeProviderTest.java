@@ -80,7 +80,7 @@ public class FunPLScopeProviderTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var k = 1;");
@@ -115,7 +115,7 @@ public class FunPLScopeProviderTest {
       _builder.newLine();
       _builder.append("var j = i;");
       _builder.newLine();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var k = 1;");

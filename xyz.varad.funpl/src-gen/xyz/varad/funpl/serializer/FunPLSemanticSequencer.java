@@ -17,14 +17,17 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.BoolTypeDefinition;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.StringTypeDefinition;
 import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.services.FunPLGrammarAccess;
@@ -52,6 +55,9 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case FunPLPackage.BOOL_CONSTANT:
 				sequence_TerminalExpression(context, (BoolConstant) semanticObject); 
 				return; 
+			case FunPLPackage.BOOL_TYPE_DEFINITION:
+				sequence_BoolTypeDefinition(context, (BoolTypeDefinition) semanticObject); 
+				return; 
 			case FunPLPackage.FUN_PROGRAM:
 				sequence_FunProgram(context, (FunProgram) semanticObject); 
 				return; 
@@ -67,11 +73,17 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case FunPLPackage.INT_CONSTANT:
 				sequence_TerminalExpression(context, (IntConstant) semanticObject); 
 				return; 
+			case FunPLPackage.INT_TYPE_DEFINITION:
+				sequence_IntTypeDefinition(context, (IntTypeDefinition) semanticObject); 
+				return; 
 			case FunPLPackage.PLUS:
 				sequence_Plus(context, (Plus) semanticObject); 
 				return; 
 			case FunPLPackage.STRING_CONSTANT:
 				sequence_TerminalExpression(context, (StringConstant) semanticObject); 
+				return; 
+			case FunPLPackage.STRING_TYPE_DEFINITION:
+				sequence_StringTypeDefinition(context, (StringTypeDefinition) semanticObject); 
 				return; 
 			case FunPLPackage.SYMBOL_REF:
 				sequence_TerminalExpression(context, (SymbolRef) semanticObject); 
@@ -125,6 +137,20 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Type returns BoolTypeDefinition
+	 *     TypeDefinition returns BoolTypeDefinition
+	 *     BoolTypeDefinition returns BoolTypeDefinition
+	 *
+	 * Constraint:
+	 *     {BoolTypeDefinition}
+	 */
+	protected void sequence_BoolTypeDefinition(ISerializationContext context, BoolTypeDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     FunProgram returns FunProgram
 	 *
 	 * Constraint:
@@ -160,15 +186,18 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     FunctionParam returns FunctionParam
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (type=Type name=ID)
 	 */
 	protected void sequence_FunctionParam(ISerializationContext context, FunctionParam semanticObject) {
 		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.SYMBOL__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.SYMBOL__TYPE));
 			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.SYMBOL__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.SYMBOL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getFunctionParamAccess().getTypeTypeParserRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getFunctionParamAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -181,9 +210,23 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Function returns Function
 	 *
 	 * Constraint:
-	 *     (name=ID (params+=FunctionParam params+=FunctionParam*)? body=Block)
+	 *     (type=Type? name=ID (params+=FunctionParam params+=FunctionParam*)? body=Block)
 	 */
 	protected void sequence_Function(ISerializationContext context, Function semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Type returns IntTypeDefinition
+	 *     TypeDefinition returns IntTypeDefinition
+	 *     IntTypeDefinition returns IntTypeDefinition
+	 *
+	 * Constraint:
+	 *     {IntTypeDefinition}
+	 */
+	protected void sequence_IntTypeDefinition(ISerializationContext context, IntTypeDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -212,6 +255,20 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		feeder.accept(grammarAccess.getPlusAccess().getPlusLeftAction_1_0(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getPlusAccess().getRightPrimaryExpressionParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Type returns StringTypeDefinition
+	 *     TypeDefinition returns StringTypeDefinition
+	 *     StringTypeDefinition returns StringTypeDefinition
+	 *
+	 * Constraint:
+	 *     {StringTypeDefinition}
+	 */
+	protected void sequence_StringTypeDefinition(ISerializationContext context, StringTypeDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -318,7 +375,7 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Statement returns Value
 	 *
 	 * Constraint:
-	 *     (const?='const'? name=ID expression=Expression?)
+	 *     (const?='const'? type=Type? name=ID expression=Expression?)
 	 */
 	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -50,7 +50,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc(p){");
+      _builder.append("function myFunc(int p){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var k = j;\t\t//(0) - global visibility");
@@ -104,7 +104,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;\t\t\t\t//(3)");
       _builder.newLine();
-      _builder.append("function myFunc(p){\t\t//(4)");
+      _builder.append("function myFunc(int p){\t\t//(4)");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var k = 1;");
@@ -117,7 +117,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.append("function myFunc(p) {\t//(5)");
+      _builder.append("function myFunc(int p) {\t//(5)");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -165,7 +165,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2){");
+      _builder.append("function myFunc2(int p1, int p2){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l;");
@@ -207,7 +207,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var m;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2, p3){");
+      _builder.append("function myFunc2(int p1, int p2, int p3){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l;");
@@ -352,7 +352,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2) { ");
+      _builder.append("function myFunc2(int p1, int p2) { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l = 5;");
@@ -394,7 +394,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2) { ");
+      _builder.append("function myFunc2(int p1, int p2) { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l = 5;");
@@ -436,7 +436,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2) { ");
+      _builder.append("function myFunc2(int p1, int p2) { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l = 5;");
@@ -482,7 +482,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2) { ");
+      _builder.append("function myFunc2(int p1, int p2) { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l = 5;");
@@ -524,7 +524,7 @@ public class FunPLModelUtilTest {
       _builder.newLine();
       _builder.append("var j = 2;");
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2) { ");
+      _builder.append("function myFunc2(int p1, int p2) { ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var l = 5;");

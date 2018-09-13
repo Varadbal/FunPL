@@ -21,15 +21,20 @@ import org.junit.runner.RunWith;
 import xyz.varad.funpl.funPL.AbstractElement;
 import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.BoolTypeDefinition;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.StringTypeDefinition;
+import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.funPL.Type;
 import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.tests.FunPLInjectorProvider;
 
@@ -60,6 +65,9 @@ public class FunPLParsingTest {
       _builder_2.append("const j = i;");
       _builder_2.newLine();
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_2));
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("var int i = 3;");
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_3));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -69,7 +77,7 @@ public class FunPLParsingTest {
   public void testFunctionDefinition() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p1, p2, p3){");
+      _builder.append("function myFunc(int p1, bool p2, string p3){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -126,14 +134,14 @@ public class FunPLParsingTest {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2){");
+      _builder.append("function myFunc2(int p1, bool p2){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc3(p1, p2, p3){");
+      _builder.append("function myFunc3(int p1, bool p2, string p3){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -148,7 +156,7 @@ public class FunPLParsingTest {
   private void testFunctionLocal(final CharSequence toInsert) {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(p1, p2){");
+      _builder.append("function myFunc(int p1, int p2){");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("var a;");
@@ -261,7 +269,7 @@ public class FunPLParsingTest {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2){");
+      _builder.append("function myFunc2(int p1, int p2){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -300,14 +308,14 @@ public class FunPLParsingTest {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc2(p1, p2){");
+      _builder.append("function myFunc2(int p1, int p2){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc3(p1, p2, p3){");
+      _builder.append("function myFunc3(int p1, int p2, int p3){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
@@ -321,6 +329,113 @@ public class FunPLParsingTest {
         ((Function) _head), _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testValueTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var int i = 1;");
+      _builder.newLine();
+      _builder.append("const bool j = true;");
+      _builder.newLine();
+      _builder.append("var string k = \"sajt\";");
+      _builder.newLine();
+      _builder.append("var m;");
+      _builder.newLine();
+      _builder.append("var ins n;");
+      _builder.newLine();
+      FunProgram _parse = this._parseHelper.parse(_builder);
+      final Procedure1<FunProgram> _function = (FunProgram it) -> {
+        AbstractElement _get = it.getElements().get(0);
+        this.assertSymbolType(((Symbol) _get), IntTypeDefinition.class);
+        AbstractElement _get_1 = it.getElements().get(1);
+        this.assertSymbolType(((Symbol) _get_1), BoolTypeDefinition.class);
+        AbstractElement _get_2 = it.getElements().get(2);
+        this.assertSymbolType(((Symbol) _get_2), StringTypeDefinition.class);
+        AbstractElement _get_3 = it.getElements().get(3);
+        this.assertSymbolType(((Symbol) _get_3), null);
+      };
+      ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function int foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function bool bar(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function string baz(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function bax(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      FunProgram _parse = this._parseHelper.parse(_builder);
+      final Procedure1<FunProgram> _function = (FunProgram it) -> {
+        AbstractElement _get = it.getElements().get(0);
+        this.assertSymbolType(((Symbol) _get), IntTypeDefinition.class);
+        AbstractElement _get_1 = it.getElements().get(1);
+        this.assertSymbolType(((Symbol) _get_1), BoolTypeDefinition.class);
+        AbstractElement _get_2 = it.getElements().get(2);
+        this.assertSymbolType(((Symbol) _get_2), StringTypeDefinition.class);
+        AbstractElement _get_3 = it.getElements().get(3);
+        this.assertSymbolType(((Symbol) _get_3), null);
+      };
+      ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionParamTypes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(int p1, bool p2, string p3) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(this._parseHelper.parse(_builder).getElements());
+      final Procedure1<Function> _function = (Function it) -> {
+        this.assertSymbolType(it.getParams().get(0), IntTypeDefinition.class);
+        this.assertSymbolType(it.getParams().get(1), BoolTypeDefinition.class);
+        this.assertSymbolType(it.getParams().get(2), StringTypeDefinition.class);
+      };
+      ObjectExtensions.<Function>operator_doubleArrow(
+        ((Function) _head), _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertSymbolType(final Symbol v, final Class<? extends Type> t) {
+    if ((t == null)) {
+      Assert.assertEquals(v.getType(), null);
+    } else {
+      Assert.assertTrue(t.isInstance(v.getType()));
     }
   }
   

@@ -74,6 +74,11 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
       case FunPLPackage.FUNCTION_PARAM: return createFunctionParam();
       case FunPLPackage.BLOCK: return createBlock();
       case FunPLPackage.STATEMENT: return createStatement();
+      case FunPLPackage.TYPE: return createType();
+      case FunPLPackage.TYPE_DEFINITION: return createTypeDefinition();
+      case FunPLPackage.INT_TYPE_DEFINITION: return createIntTypeDefinition();
+      case FunPLPackage.BOOL_TYPE_DEFINITION: return createBoolTypeDefinition();
+      case FunPLPackage.STRING_TYPE_DEFINITION: return createStringTypeDefinition();
       case FunPLPackage.EXPRESSION: return createExpression();
       case FunPLPackage.ASSIGNMENT: return createAssignment();
       case FunPLPackage.PLUS: return createPlus();
@@ -184,6 +189,61 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
   {
     StatementImpl statement = new StatementImpl();
     return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type createType()
+  {
+    TypeImpl type = new TypeImpl();
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeDefinition createTypeDefinition()
+  {
+    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
+    return typeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntTypeDefinition createIntTypeDefinition()
+  {
+    IntTypeDefinitionImpl intTypeDefinition = new IntTypeDefinitionImpl();
+    return intTypeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BoolTypeDefinition createBoolTypeDefinition()
+  {
+    BoolTypeDefinitionImpl boolTypeDefinition = new BoolTypeDefinitionImpl();
+    return boolTypeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StringTypeDefinition createStringTypeDefinition()
+  {
+    StringTypeDefinitionImpl stringTypeDefinition = new StringTypeDefinitionImpl();
+    return stringTypeDefinition;
   }
 
   /**

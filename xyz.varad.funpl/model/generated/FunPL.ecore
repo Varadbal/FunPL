@@ -7,6 +7,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Symbol">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definition" eSuperTypes="#//AbstractElement #//Symbol"/>
@@ -27,6 +28,11 @@
         eType="#//Statement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntTypeDefinition" eSuperTypes="#//TypeDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolTypeDefinition" eSuperTypes="#//TypeDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTypeDefinition" eSuperTypes="#//TypeDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"

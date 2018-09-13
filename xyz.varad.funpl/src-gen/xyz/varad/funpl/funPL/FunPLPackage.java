@@ -115,13 +115,22 @@ public interface FunPLPackage extends EPackage
   int SYMBOL = 2;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL__TYPE = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYMBOL__NAME = 0;
+  int SYMBOL__NAME = 1;
 
   /**
    * The number of structural features of the '<em>Symbol</em>' class.
@@ -130,7 +139,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYMBOL_FEATURE_COUNT = 1;
+  int SYMBOL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.DefinitionImpl <em>Definition</em>}' class.
@@ -143,13 +152,22 @@ public interface FunPLPackage extends EPackage
   int DEFINITION = 3;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEFINITION__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DEFINITION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int DEFINITION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Definition</em>' class.
@@ -158,7 +176,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DEFINITION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int DEFINITION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ValueImpl <em>Value</em>}' class.
@@ -169,6 +187,15 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   int VALUE = 4;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__TYPE = DEFINITION__TYPE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -217,6 +244,15 @@ public interface FunPLPackage extends EPackage
   int FUNCTION = 5;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION__TYPE = DEFINITION__TYPE;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -261,6 +297,15 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   int FUNCTION_PARAM = 6;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_PARAM__TYPE = SYMBOL__TYPE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -328,6 +373,101 @@ public interface FunPLPackage extends EPackage
   int STATEMENT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.TypeImpl <em>Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.TypeImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getType()
+   * @generated
+   */
+  int TYPE = 9;
+
+  /**
+   * The number of structural features of the '<em>Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.TypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTypeDefinition()
+   * @generated
+   */
+  int TYPE_DEFINITION = 10;
+
+  /**
+   * The number of structural features of the '<em>Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_DEFINITION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.IntTypeDefinitionImpl <em>Int Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.IntTypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntTypeDefinition()
+   * @generated
+   */
+  int INT_TYPE_DEFINITION = 11;
+
+  /**
+   * The number of structural features of the '<em>Int Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INT_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.BoolTypeDefinitionImpl <em>Bool Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.BoolTypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolTypeDefinition()
+   * @generated
+   */
+  int BOOL_TYPE_DEFINITION = 12;
+
+  /**
+   * The number of structural features of the '<em>Bool Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.StringTypeDefinitionImpl <em>String Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.StringTypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringTypeDefinition()
+   * @generated
+   */
+  int STRING_TYPE_DEFINITION = 13;
+
+  /**
+   * The number of structural features of the '<em>String Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRING_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ExpressionImpl <em>Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -335,7 +475,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 9;
+  int EXPRESSION = 14;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -354,7 +494,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 10;
+  int ASSIGNMENT = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -391,7 +531,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 11;
+  int PLUS = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -428,7 +568,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 12;
+  int FUNCTION_CALL = 17;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' reference.
@@ -465,7 +605,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 13;
+  int INT_CONSTANT = 18;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -493,7 +633,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 14;
+  int STRING_CONSTANT = 19;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -521,7 +661,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 15;
+  int BOOL_CONSTANT = 20;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -549,7 +689,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbolRef()
    * @generated
    */
-  int SYMBOL_REF = 16;
+  int SYMBOL_REF = 21;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' reference.
@@ -610,6 +750,17 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getSymbol();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Symbol#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see xyz.varad.funpl.funPL.Symbol#getType()
+   * @see #getSymbol()
+   * @generated
+   */
+  EReference getSymbol_Type();
 
   /**
    * Returns the meta object for the attribute '{@link xyz.varad.funpl.funPL.Symbol#getName <em>Name</em>}'.
@@ -736,6 +887,56 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getStatement();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Type <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type</em>'.
+   * @see xyz.varad.funpl.funPL.Type
+   * @generated
+   */
+  EClass getType();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.TypeDefinition <em>Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.TypeDefinition
+   * @generated
+   */
+  EClass getTypeDefinition();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.IntTypeDefinition <em>Int Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Int Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.IntTypeDefinition
+   * @generated
+   */
+  EClass getIntTypeDefinition();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.BoolTypeDefinition <em>Bool Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bool Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.BoolTypeDefinition
+   * @generated
+   */
+  EClass getBoolTypeDefinition();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.StringTypeDefinition <em>String Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.StringTypeDefinition
+   * @generated
+   */
+  EClass getStringTypeDefinition();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Expression <em>Expression</em>}'.
@@ -989,6 +1190,14 @@ public interface FunPLPackage extends EPackage
     EClass SYMBOL = eINSTANCE.getSymbol();
 
     /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL__TYPE = eINSTANCE.getSymbol_Type();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1095,6 +1304,56 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass STATEMENT = eINSTANCE.getStatement();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.TypeImpl <em>Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.TypeImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getType()
+     * @generated
+     */
+    EClass TYPE = eINSTANCE.getType();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.TypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTypeDefinition()
+     * @generated
+     */
+    EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.IntTypeDefinitionImpl <em>Int Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.IntTypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntTypeDefinition()
+     * @generated
+     */
+    EClass INT_TYPE_DEFINITION = eINSTANCE.getIntTypeDefinition();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.BoolTypeDefinitionImpl <em>Bool Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.BoolTypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolTypeDefinition()
+     * @generated
+     */
+    EClass BOOL_TYPE_DEFINITION = eINSTANCE.getBoolTypeDefinition();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.StringTypeDefinitionImpl <em>String Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.StringTypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringTypeDefinition()
+     * @generated
+     */
+    EClass STRING_TYPE_DEFINITION = eINSTANCE.getStringTypeDefinition();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ExpressionImpl <em>Expression</em>}' class.

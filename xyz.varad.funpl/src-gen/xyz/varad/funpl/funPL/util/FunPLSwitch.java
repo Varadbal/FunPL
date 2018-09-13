@@ -146,6 +146,48 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FunPLPackage.TYPE:
+      {
+        Type type = (Type)theEObject;
+        T result = caseType(type);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.TYPE_DEFINITION:
+      {
+        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+        T result = caseTypeDefinition(typeDefinition);
+        if (result == null) result = caseType(typeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.INT_TYPE_DEFINITION:
+      {
+        IntTypeDefinition intTypeDefinition = (IntTypeDefinition)theEObject;
+        T result = caseIntTypeDefinition(intTypeDefinition);
+        if (result == null) result = caseTypeDefinition(intTypeDefinition);
+        if (result == null) result = caseType(intTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.BOOL_TYPE_DEFINITION:
+      {
+        BoolTypeDefinition boolTypeDefinition = (BoolTypeDefinition)theEObject;
+        T result = caseBoolTypeDefinition(boolTypeDefinition);
+        if (result == null) result = caseTypeDefinition(boolTypeDefinition);
+        if (result == null) result = caseType(boolTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.STRING_TYPE_DEFINITION:
+      {
+        StringTypeDefinition stringTypeDefinition = (StringTypeDefinition)theEObject;
+        T result = caseStringTypeDefinition(stringTypeDefinition);
+        if (result == null) result = caseTypeDefinition(stringTypeDefinition);
+        if (result == null) result = caseType(stringTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FunPLPackage.EXPRESSION:
       {
         Expression expression = (Expression)theEObject;
@@ -361,6 +403,86 @@ public class FunPLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStatement(Statement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseType(Type object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeDefinition(TypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Int Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Int Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntTypeDefinition(IntTypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bool Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bool Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBoolTypeDefinition(BoolTypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringTypeDefinition(StringTypeDefinition object)
   {
     return null;
   }

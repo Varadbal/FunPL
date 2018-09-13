@@ -31,7 +31,7 @@ class FunPLModelUtilTest {
 		'''
 		var i;
 		var j = 2;
-		function myFunc(p){
+		function myFunc(int p){
 			var k = j;		//(0) - global visibility
 			var q = k;		//(1) - local visibility
 			l;				//(2) - undefined
@@ -54,12 +54,12 @@ class FunPLModelUtilTest {
 		var j;					//(1)
 		var j = 1;				//(2)
 		var j = 2;				//(3)
-		function myFunc(p){		//(4)
+		function myFunc(int p){		//(4)
 			var k = 1;
 			var k = 2;
 			var p;
 		}
-		function myFunc(p) {	//(5)
+		function myFunc(int p) {	//(5)
 			
 		}
 		function myFunc() { }	//(6)
@@ -85,7 +85,7 @@ class FunPLModelUtilTest {
 		function myFunc(){
 			var k = 1;
 		}
-		function myFunc2(p1, p2){
+		function myFunc2(int p1, int p2){
 			var l;
 			5 + 5;
 		}
@@ -103,7 +103,7 @@ class FunPLModelUtilTest {
 			var k = 1;
 		}
 		var m;
-		function myFunc2(p1, p2, p3){
+		function myFunc2(int p1, int p2, int p3){
 			var l;
 			var f = 2;
 			5 + 5;
@@ -176,7 +176,7 @@ class FunPLModelUtilTest {
 			
 		}
 		var j = 2;
-		function myFunc2(p1, p2) { 
+		function myFunc2(int p1, int p2) { 
 			var l = 5;
 			var m;
 			5 + 5;
@@ -195,7 +195,7 @@ class FunPLModelUtilTest {
 			
 		}
 		var j = 2;
-		function myFunc2(p1, p2) { 
+		function myFunc2(int p1, int p2) { 
 			var l = 5;
 			var m;
 			5 + 5;
@@ -214,7 +214,7 @@ class FunPLModelUtilTest {
 			
 		}
 		var j = 2;
-		function myFunc2(p1, p2) { 
+		function myFunc2(int p1, int p2) { 
 			var l = 5;
 			var m;
 			5 + 5;
@@ -238,7 +238,7 @@ class FunPLModelUtilTest {
 			
 		}
 		var j = 2;
-		function myFunc2(p1, p2) { 
+		function myFunc2(int p1, int p2) { 
 			var l = 5;
 			var m;
 			5 + 5;
@@ -257,7 +257,7 @@ class FunPLModelUtilTest {
 			
 		}
 		var j = 2;
-		function myFunc2(p1, p2) { 
+		function myFunc2(int p1, int p2) { 
 			var l = 5;
 			var m;
 			5 + 5;

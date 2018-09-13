@@ -21,7 +21,7 @@ class FunPLIndexTest {
 	def void testExportedEObjectDescriptions(){
 		'''
 		var i;
-		function A(p1){
+		function A(int p1){
 			var k;
 		}
 		function B() { }

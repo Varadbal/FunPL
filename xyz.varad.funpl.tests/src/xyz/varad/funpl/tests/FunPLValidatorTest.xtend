@@ -55,7 +55,7 @@ class FunPLValidatorTest {
 	def void testGlobalRedefinitionLocally(){
 		'''
 		var i = 4;
-		function myFunc(p){
+		function myFunc(int p){
 			var i = 5;
 		}
 		'''.parse => [
@@ -96,7 +96,7 @@ class FunPLValidatorTest {
 	@Test 
 	def void testLocalRedefinition(){
 		'''
-		function myFunc(p){
+		function myFunc(int p){
 			var i = 5;
 			var i = 2;
 		}
@@ -108,7 +108,7 @@ class FunPLValidatorTest {
 	@Test
 	def void testOutOfScopeRedefinition(){
 		'''
-		function myFunc(p){
+		function myFunc(int p){
 			var i = 5;
 		}
 		function myFunc2(){
@@ -120,7 +120,7 @@ class FunPLValidatorTest {
 	@Test
 	def void testParameterRedefinition(){
 		'''
-		function myFunc(p){
+		function myFunc(int p){
 			var p = 5;
 		}
 		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
@@ -132,7 +132,7 @@ class FunPLValidatorTest {
 	@Test
 	def void testParameterRedefinitionAsParam(){
 		'''
-		function myFunc(p1, p1){
+		function myFunc(int p1,int p1){
 			
 		}
 		'''.parse.assertError(FunPLPackage::eINSTANCE.functionParam,

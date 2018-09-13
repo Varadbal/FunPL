@@ -121,6 +121,31 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
+      public Adapter caseType(Type object)
+      {
+        return createTypeAdapter();
+      }
+      @Override
+      public Adapter caseTypeDefinition(TypeDefinition object)
+      {
+        return createTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseIntTypeDefinition(IntTypeDefinition object)
+      {
+        return createIntTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseBoolTypeDefinition(BoolTypeDefinition object)
+      {
+        return createBoolTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseStringTypeDefinition(StringTypeDefinition object)
+      {
+        return createStringTypeDefinitionAdapter();
+      }
+      @Override
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
@@ -313,6 +338,81 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.Type <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.Type
+   * @generated
+   */
+  public Adapter createTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.TypeDefinition <em>Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.TypeDefinition
+   * @generated
+   */
+  public Adapter createTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.IntTypeDefinition <em>Int Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.IntTypeDefinition
+   * @generated
+   */
+  public Adapter createIntTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.BoolTypeDefinition <em>Bool Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.BoolTypeDefinition
+   * @generated
+   */
+  public Adapter createBoolTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.StringTypeDefinition <em>String Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.StringTypeDefinition
+   * @generated
+   */
+  public Adapter createStringTypeDefinitionAdapter()
   {
     return null;
   }

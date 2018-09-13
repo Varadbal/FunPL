@@ -14,6 +14,7 @@ import xyz.varad.funpl.funPL.AbstractElement;
 import xyz.varad.funpl.funPL.Assignment;
 import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.BoolTypeDefinition;
 import xyz.varad.funpl.funPL.Definition;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLFactory;
@@ -23,11 +24,15 @@ import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.StringTypeDefinition;
 import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.funPL.Type;
+import xyz.varad.funpl.funPL.TypeDefinition;
 import xyz.varad.funpl.funPL.Value;
 
 /**
@@ -100,6 +105,41 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * @generated
    */
   private EClass statementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass typeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass intTypeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass boolTypeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringTypeDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -265,9 +305,19 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSymbol_Type()
+  {
+    return (EReference)symbolEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getSymbol_Name()
   {
-    return (EAttribute)symbolEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)symbolEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -378,6 +428,56 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
   public EClass getStatement()
   {
     return statementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getType()
+  {
+    return typeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTypeDefinition()
+  {
+    return typeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntTypeDefinition()
+  {
+    return intTypeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBoolTypeDefinition()
+  {
+    return boolTypeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringTypeDefinition()
+  {
+    return stringTypeDefinitionEClass;
   }
 
   /**
@@ -596,6 +696,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
 
     symbolEClass = createEClass(SYMBOL);
+    createEReference(symbolEClass, SYMBOL__TYPE);
     createEAttribute(symbolEClass, SYMBOL__NAME);
 
     definitionEClass = createEClass(DEFINITION);
@@ -614,6 +715,16 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     createEReference(blockEClass, BLOCK__STATEMENTS);
 
     statementEClass = createEClass(STATEMENT);
+
+    typeEClass = createEClass(TYPE);
+
+    typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+
+    intTypeDefinitionEClass = createEClass(INT_TYPE_DEFINITION);
+
+    boolTypeDefinitionEClass = createEClass(BOOL_TYPE_DEFINITION);
+
+    stringTypeDefinitionEClass = createEClass(STRING_TYPE_DEFINITION);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -677,6 +788,10 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     valueEClass.getESuperTypes().add(this.getStatement());
     functionEClass.getESuperTypes().add(this.getDefinition());
     functionParamEClass.getESuperTypes().add(this.getSymbol());
+    typeDefinitionEClass.getESuperTypes().add(this.getType());
+    intTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    boolTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    stringTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     expressionEClass.getESuperTypes().add(this.getStatement());
     assignmentEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
@@ -693,6 +808,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(symbolEClass, Symbol.class, "Symbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSymbol_Type(), this.getType(), null, "type", null, 0, 1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSymbol_Name(), ecorePackage.getEString(), "name", null, 0, 1, Symbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -711,6 +827,16 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(intTypeDefinitionEClass, IntTypeDefinition.class, "IntTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(boolTypeDefinitionEClass, BoolTypeDefinition.class, "BoolTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(stringTypeDefinitionEClass, StringTypeDefinition.class, "StringTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -11,6 +11,7 @@
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//AbstractElement"/>
     <genClasses ecoreClass="FunPL.ecore#//Symbol">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Symbol/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//Symbol/name"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Definition"/>
@@ -27,6 +28,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Block/statements"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Statement"/>
+    <genClasses ecoreClass="FunPL.ecore#//Type"/>
+    <genClasses ecoreClass="FunPL.ecore#//TypeDefinition"/>
+    <genClasses ecoreClass="FunPL.ecore#//IntTypeDefinition"/>
+    <genClasses ecoreClass="FunPL.ecore#//BoolTypeDefinition"/>
+    <genClasses ecoreClass="FunPL.ecore#//StringTypeDefinition"/>
     <genClasses ecoreClass="FunPL.ecore#//Expression"/>
     <genClasses ecoreClass="FunPL.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/left"/>

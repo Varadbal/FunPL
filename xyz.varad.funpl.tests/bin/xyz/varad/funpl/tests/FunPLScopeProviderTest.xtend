@@ -55,7 +55,7 @@ class FunPLScopeProviderTest {
 		function A(){
 			
 		}
-		function myFunc(p){
+		function myFunc(int p){
 			var k = 1;
 			k = 5;
 			myFunc();
@@ -73,7 +73,7 @@ class FunPLScopeProviderTest {
 		'''
 		var i;
 		var j = i;
-		function myFunc(p){
+		function myFunc(int p){
 			var k = 1;
 			k = 5;
 			myFunc();

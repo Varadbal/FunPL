@@ -3,7 +3,9 @@ grammar xyz.varad.funpl.FunPL with org.eclipse.xtext.common.Terminals
 generate funPL "http://www.varad.xyz/funpl/FunPL"
 
 //TODO add Block(ed)-Element (e.g. Function, Class, If, etc.) for easier validation? (like Symbol)
+//TODO TypeReference in Type when adding Class, Struct, etc.
 
+////////////////Elements of the program code /////////////////////////////////
 FunProgram:
 	elements+=AbstractElement*
 ;
@@ -12,7 +14,7 @@ AbstractElement:
 	Definition
 ;
 
-Symbol: //=Named element
+Symbol: //=Named and typed element
 	Definition | FunctionParam
 ;
 
@@ -21,15 +23,15 @@ Definition:
 ;
 
 Value:
-	//TODO type: 'var' (type=...)? name=ID ...
-	(const?='const' | 'var') name=ID ('=' expression=Expression)? ';'
+	(const?='const' | 'var') (type=Type)? name=ID ('=' expression=Expression)? ';'
 ;
 
 Function:
-	'function' name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)* )? ')' body=Block
+	'function' (type=Type)? name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)* )? ')' body=Block
 ;
 
 FunctionParam:
+	type=Type
 	name=ID
 ;
 
@@ -43,6 +45,30 @@ Statement:
 	Value | (Expression ';')
 ;
 
+//////////////////////////////Types////////////////////////////////////////////
+Type:
+	TypeDefinition
+;
+
+TypeDefinition:
+	IntTypeDefinition |
+	BoolTypeDefinition |
+	StringTypeDefinition
+;
+
+IntTypeDefinition:
+	{IntTypeDefinition} 'int'
+;
+
+BoolTypeDefinition:
+	{BoolTypeDefinition} 'bool'
+;
+
+StringTypeDefinition:
+	{StringTypeDefinition} 'string'
+;
+
+//////////////////////////////Expressions////////////////////////////////////
 Expression:
 	Assignment
 ;

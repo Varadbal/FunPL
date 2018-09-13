@@ -105,6 +105,51 @@ public interface FunPLFactory extends EFactory
   Statement createStatement();
 
   /**
+   * Returns a new object of class '<em>Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type</em>'.
+   * @generated
+   */
+  Type createType();
+
+  /**
+   * Returns a new object of class '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Definition</em>'.
+   * @generated
+   */
+  TypeDefinition createTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>Int Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Int Type Definition</em>'.
+   * @generated
+   */
+  IntTypeDefinition createIntTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>Bool Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bool Type Definition</em>'.
+   * @generated
+   */
+  BoolTypeDefinition createBoolTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>String Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Type Definition</em>'.
+   * @generated
+   */
+  StringTypeDefinition createStringTypeDefinition();
+
+  /**
    * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

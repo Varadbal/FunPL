@@ -36,20 +36,6 @@ public class FunPLValidator extends AbstractFunPLValidator {
   
   public final static String CONSTANT_REASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "ConstantReassignment");
   
-  /**
-   * //Forward Reference - Scoping Solved That
-   * @Check
-   * def void checkForwardReference(SymbolRef _sym){
-   * val symbol = _sym.symbol
-   * if(symbol !== null && !_sym.isDefinedBefore){
-   * error("Symbol forward reference not allowed: '" + symbol.name + "'",
-   * FunPLPackage::eINSTANCE.symbolRef_Symbol,
-   * FORWARD_REFERENCE,
-   * symbol.name
-   * )
-   * }
-   * }
-   */
   @Check
   public void checkSymbolRedefinitionAsNeighbor(final Definition _d) {
     final FunProgram contProg = EcoreUtil2.<FunProgram>getContainerOfType(_d, FunProgram.class);
