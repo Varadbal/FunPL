@@ -105,6 +105,15 @@ public interface FunPLFactory extends EFactory
   Statement createStatement();
 
   /**
+   * Returns a new object of class '<em>Return Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Return Statement</em>'.
+   * @generated
+   */
+  ReturnStatement createReturnStatement();
+
+  /**
    * Returns a new object of class '<em>Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

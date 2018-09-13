@@ -231,6 +231,20 @@ class FunPLModelUtilTest {
 	}
 	
 	@Test
+	def void testReturnStatements_Function(){
+		'''
+		function foo(){
+			return 5;
+			return 5 + 5;
+		}
+		'''.parse.functions.head.returnStatements => [
+			2.assertEquals(it.size)
+			"return 5".assertEquals(it.get(0).stringRepr)
+			"return (5 + 5)".assertEquals(it.get(1).stringRepr)
+		]
+	}
+	
+	@Test
 	def void testValues_Block(){
 		'''
 		var i;

@@ -26,6 +26,7 @@ import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.StringTypeDefinition;
 import xyz.varad.funpl.funPL.SymbolRef;
@@ -78,6 +79,9 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case FunPLPackage.PLUS:
 				sequence_Plus(context, (Plus) semanticObject); 
+				return; 
+			case FunPLPackage.RETURN_STATEMENT:
+				sequence_ReturnStatement(context, (ReturnStatement) semanticObject); 
 				return; 
 			case FunPLPackage.STRING_CONSTANT:
 				sequence_TerminalExpression(context, (StringConstant) semanticObject); 
@@ -254,6 +258,25 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPlusAccess().getPlusLeftAction_1_0(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getPlusAccess().getRightPrimaryExpressionParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns ReturnStatement
+	 *     ReturnStatement returns ReturnStatement
+	 *
+	 * Constraint:
+	 *     expression=Expression
+	 */
+	protected void sequence_ReturnStatement(ISerializationContext context, ReturnStatement semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.RETURN_STATEMENT__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.RETURN_STATEMENT__EXPRESSION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
 	

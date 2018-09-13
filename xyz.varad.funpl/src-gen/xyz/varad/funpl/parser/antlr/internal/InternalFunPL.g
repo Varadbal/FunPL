@@ -544,6 +544,61 @@ ruleStatement returns [EObject current=null]
 				newLeafNode(otherlv_2, grammarAccess.getStatementAccess().getSemicolonKeyword_1_1());
 			}
 		)
+		    |
+		{
+			newCompositeNode(grammarAccess.getStatementAccess().getReturnStatementParserRuleCall_2());
+		}
+		this_ReturnStatement_3=ruleReturnStatement
+		{
+			$current = $this_ReturnStatement_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleReturnStatement
+entryRuleReturnStatement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getReturnStatementRule()); }
+	iv_ruleReturnStatement=ruleReturnStatement
+	{ $current=$iv_ruleReturnStatement.current; }
+	EOF;
+
+// Rule ReturnStatement
+ruleReturnStatement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='return'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getReturnStatementAccess().getReturnKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0());
+				}
+				lv_expression_1_0=ruleExpression
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getReturnStatementRule());
+					}
+					set(
+						$current,
+						"expression",
+						lv_expression_1_0,
+						"xyz.varad.funpl.FunPL.Expression");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_2=';'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2());
+		}
 	)
 ;
 

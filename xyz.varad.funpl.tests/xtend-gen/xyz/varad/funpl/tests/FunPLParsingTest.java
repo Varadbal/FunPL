@@ -29,6 +29,7 @@ import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.StringTypeDefinition;
@@ -333,6 +334,23 @@ public class FunPLParsingTest {
   }
   
   @Test
+  public void testReturn() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return 2;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testValueTypes() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -552,6 +570,13 @@ public class FunPLParsingTest {
           ret = (_ret_4 + _stringRepr);
         }
         return ret;
+      }
+    }
+    if (!_matched) {
+      if (s instanceof ReturnStatement) {
+        _matched=true;
+        String _stringRepr = FunPLParsingTest.stringRepr(((ReturnStatement)s).getExpression());
+        _switchResult = ("return " + _stringRepr);
       }
     }
     return _switchResult;

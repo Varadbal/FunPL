@@ -373,6 +373,34 @@ public interface FunPLPackage extends EPackage
   int STATEMENT_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.ReturnStatementImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getReturnStatement()
+   * @generated
+   */
+  int RETURN_STATEMENT = 9;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RETURN_STATEMENT__EXPRESSION = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Return Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.TypeImpl <em>Type</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -380,7 +408,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getType()
    * @generated
    */
-  int TYPE = 9;
+  int TYPE = 10;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -399,7 +427,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getTypeDefinition()
    * @generated
    */
-  int TYPE_DEFINITION = 10;
+  int TYPE_DEFINITION = 11;
 
   /**
    * The number of structural features of the '<em>Type Definition</em>' class.
@@ -418,7 +446,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntTypeDefinition()
    * @generated
    */
-  int INT_TYPE_DEFINITION = 11;
+  int INT_TYPE_DEFINITION = 12;
 
   /**
    * The number of structural features of the '<em>Int Type Definition</em>' class.
@@ -437,7 +465,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolTypeDefinition()
    * @generated
    */
-  int BOOL_TYPE_DEFINITION = 12;
+  int BOOL_TYPE_DEFINITION = 13;
 
   /**
    * The number of structural features of the '<em>Bool Type Definition</em>' class.
@@ -456,7 +484,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringTypeDefinition()
    * @generated
    */
-  int STRING_TYPE_DEFINITION = 13;
+  int STRING_TYPE_DEFINITION = 14;
 
   /**
    * The number of structural features of the '<em>String Type Definition</em>' class.
@@ -475,7 +503,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 14;
+  int EXPRESSION = 15;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -494,7 +522,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 15;
+  int ASSIGNMENT = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -531,7 +559,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 16;
+  int PLUS = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -568,7 +596,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 17;
+  int FUNCTION_CALL = 18;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' reference.
@@ -605,7 +633,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 18;
+  int INT_CONSTANT = 19;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -633,7 +661,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 19;
+  int STRING_CONSTANT = 20;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -661,7 +689,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 20;
+  int BOOL_CONSTANT = 21;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -689,7 +717,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbolRef()
    * @generated
    */
-  int SYMBOL_REF = 21;
+  int SYMBOL_REF = 22;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' reference.
@@ -887,6 +915,27 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getStatement();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.ReturnStatement <em>Return Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Return Statement</em>'.
+   * @see xyz.varad.funpl.funPL.ReturnStatement
+   * @generated
+   */
+  EClass getReturnStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.ReturnStatement#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see xyz.varad.funpl.funPL.ReturnStatement#getExpression()
+   * @see #getReturnStatement()
+   * @generated
+   */
+  EReference getReturnStatement_Expression();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Type <em>Type</em>}'.
@@ -1304,6 +1353,24 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass STATEMENT = eINSTANCE.getStatement();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.ReturnStatementImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getReturnStatement()
+     * @generated
+     */
+    EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RETURN_STATEMENT__EXPRESSION = eINSTANCE.getReturnStatement_Expression();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.TypeImpl <em>Type</em>}' class.

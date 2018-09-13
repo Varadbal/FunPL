@@ -12,6 +12,7 @@ import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
@@ -61,11 +62,6 @@ public class FunPLModelUtil {
     return before;
   }
   
-  /**
-   * def Set<Symbol> symbolsDefinedGlobally(FunProgram _fp){
-   * _fp.symbols().toSet
-   * }
-   */
   public static List<Function> functions(final FunProgram f) {
     return EcoreUtil2.<Function>typeSelect(f.getElements(), Function.class);
   }
@@ -91,6 +87,15 @@ public class FunPLModelUtil {
   
   public static List<Statement> statements(final Function f) {
     return IterableExtensions.<Statement>toList(f.getBody().getStatements());
+  }
+  
+  public static List<ReturnStatement> returnStatements(final Function _f) {
+    Block _body = null;
+    if (_f!=null) {
+      _body=_f.getBody();
+    }
+    final List<ReturnStatement> rets = EcoreUtil2.<ReturnStatement>getAllContentsOfType(_body, ReturnStatement.class);
+    return rets;
   }
   
   public static List<Value> values(final Block b) {

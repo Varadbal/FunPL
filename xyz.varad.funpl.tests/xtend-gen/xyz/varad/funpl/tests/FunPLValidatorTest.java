@@ -239,6 +239,64 @@ public class FunPLValidatorTest {
   }
   
   @Test
+  public void testInvalidAssignment() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 = 2;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.INVALID_ASSIGNMENT, 
+        "Invalid assignment");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("function foo(){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("function bar(){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("foo = 2;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.INVALID_ASSIGNMENT, 
+        "Invalid assignment");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testConstantReassignment() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("const m = 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("m = 6;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.CONSTANT_REASSIGNMENT, 
+        "Constant-value reassignment not allowed: \'m\'");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testUndefinedConstant() {
     try {
       StringConcatenation _builder = new StringConcatenation();

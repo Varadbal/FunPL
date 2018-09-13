@@ -26,6 +26,7 @@ import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.StringTypeDefinition;
@@ -105,6 +106,13 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * @generated
    */
   private EClass statementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass returnStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -435,6 +443,26 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getReturnStatement()
+  {
+    return returnStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getReturnStatement_Expression()
+  {
+    return (EReference)returnStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getType()
   {
     return typeEClass;
@@ -716,6 +744,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
 
     statementEClass = createEClass(STATEMENT);
 
+    returnStatementEClass = createEClass(RETURN_STATEMENT);
+    createEReference(returnStatementEClass, RETURN_STATEMENT__EXPRESSION);
+
     typeEClass = createEClass(TYPE);
 
     typeDefinitionEClass = createEClass(TYPE_DEFINITION);
@@ -788,6 +819,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     valueEClass.getESuperTypes().add(this.getStatement());
     functionEClass.getESuperTypes().add(this.getDefinition());
     functionParamEClass.getESuperTypes().add(this.getSymbol());
+    returnStatementEClass.getESuperTypes().add(this.getStatement());
     typeDefinitionEClass.getESuperTypes().add(this.getType());
     intTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     boolTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
@@ -827,6 +859,9 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getReturnStatement_Expression(), this.getExpression(), null, "expression", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

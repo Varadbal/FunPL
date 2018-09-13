@@ -22,6 +22,7 @@ import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.Statement;
 import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
@@ -463,6 +464,32 @@ public class FunPLModelUtilTest {
         Assert.assertEquals("var k = (5 + 5)", FunPLParsingTest.stringRepr(FunPLModelUtil.statements(it).get(3)));
       };
       ObjectExtensions.<Function>operator_doubleArrow(_last, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testReturnStatements_Function() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return 5 + 5;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      List<ReturnStatement> _returnStatements = FunPLModelUtil.returnStatements(IterableExtensions.<Function>head(FunPLModelUtil.functions(this._parseHelper.parse(_builder))));
+      final Procedure1<List<ReturnStatement>> _function = (List<ReturnStatement> it) -> {
+        Assert.assertEquals(2, it.size());
+        Assert.assertEquals("return 5", FunPLParsingTest.stringRepr(it.get(0)));
+        Assert.assertEquals("return (5 + 5)", FunPLParsingTest.stringRepr(it.get(1)));
+      };
+      ObjectExtensions.<List<ReturnStatement>>operator_doubleArrow(_returnStatements, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

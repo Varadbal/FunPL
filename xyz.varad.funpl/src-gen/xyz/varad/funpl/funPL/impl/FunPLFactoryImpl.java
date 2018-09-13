@@ -74,6 +74,7 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
       case FunPLPackage.FUNCTION_PARAM: return createFunctionParam();
       case FunPLPackage.BLOCK: return createBlock();
       case FunPLPackage.STATEMENT: return createStatement();
+      case FunPLPackage.RETURN_STATEMENT: return createReturnStatement();
       case FunPLPackage.TYPE: return createType();
       case FunPLPackage.TYPE_DEFINITION: return createTypeDefinition();
       case FunPLPackage.INT_TYPE_DEFINITION: return createIntTypeDefinition();
@@ -189,6 +190,17 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
   {
     StatementImpl statement = new StatementImpl();
     return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReturnStatement createReturnStatement()
+  {
+    ReturnStatementImpl returnStatement = new ReturnStatementImpl();
+    return returnStatement;
   }
 
   /**

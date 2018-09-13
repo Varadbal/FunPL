@@ -121,6 +121,11 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
+      public Adapter caseReturnStatement(ReturnStatement object)
+      {
+        return createReturnStatementAdapter();
+      }
+      @Override
       public Adapter caseType(Type object)
       {
         return createTypeAdapter();
@@ -338,6 +343,21 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.ReturnStatement <em>Return Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.ReturnStatement
+   * @generated
+   */
+  public Adapter createReturnStatementAdapter()
   {
     return null;
   }

@@ -13,6 +13,7 @@ import xyz.varad.funpl.funPL.SymbolRef
 import xyz.varad.funpl.funPL.Value
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import xyz.varad.funpl.funPL.ReturnStatement
 
 class FunPLModelUtil{
 
@@ -61,10 +62,6 @@ class FunPLModelUtil{
 	 	}
 	 	return before
 	 }
-	 
-	 /*def Set<Symbol> symbolsDefinedGlobally(FunProgram _fp){
-	 	_fp.symbols().toSet
-	 }*/
 	
 	//FunProgram
 	def static functions(FunProgram f){
@@ -94,6 +91,12 @@ class FunPLModelUtil{
 	def static statements(Function f){
 		f.body.statements.toList
 	}
+	
+	def static List<ReturnStatement> returnStatements(Function _f){
+		//TODO rewrite when recursion makes sense (IF/FOR/etc. statements added)
+	 	val rets = _f?.body.getAllContentsOfType(ReturnStatement)
+	 	return rets
+	 }
 	
 	
 	//Block

@@ -142,6 +142,43 @@ class FunPLValidatorTest {
 	}
 	
 	@Test
+	def void testInvalidAssignment(){
+		'''
+		function myFunc(){
+			5 = 2;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::INVALID_ASSIGNMENT,
+			"Invalid assignment"
+			)
+		
+		'''
+		function foo(){
+			
+		}
+		function bar(){
+			foo = 2;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::INVALID_ASSIGNMENT,
+			"Invalid assignment"
+			)
+	}
+	
+	@Test
+	def void testConstantReassignment(){
+		'''
+		function foo(){
+			const m = 5;
+			m = 6;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::CONSTANT_REASSIGNMENT,
+			"Constant-value reassignment not allowed: 'm'"
+			)
+	}
+	
+	@Test
 	def void testUndefinedConstant(){
 		'''
 		const i;

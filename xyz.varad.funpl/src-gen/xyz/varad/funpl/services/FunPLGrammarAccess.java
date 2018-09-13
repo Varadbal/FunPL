@@ -63,11 +63,11 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		//	Definition | FunctionParam;
 		@Override public ParserRule getRule() { return rule; }
 		
-		////=Named element
+		////=Named and typed element
 		//Definition | FunctionParam
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		////=Named element
+		////=Named and typed element
 		//Definition
 		public RuleCall getDefinitionParserRuleCall_0() { return cDefinitionParserRuleCall_0; }
 		
@@ -298,12 +298,13 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final RuleCall cExpressionParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final RuleCall cReturnStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Statement:
-		//	Value | Expression ';';
+		//	Value | Expression ';' | ReturnStatement;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Value | Expression ';'
+		//Value | Expression ';' | ReturnStatement
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Value
@@ -317,6 +318,36 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//';'
 		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
+		
+		//ReturnStatement
+		public RuleCall getReturnStatementParserRuleCall_2() { return cReturnStatementParserRuleCall_2; }
+	}
+	public class ReturnStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.ReturnStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cReturnKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//ReturnStatement:
+		//	'return' expression=Expression ';';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'return' expression=Expression ';'
+		public Group getGroup() { return cGroup; }
+		
+		//'return'
+		public Keyword getReturnKeyword_0() { return cReturnKeyword_0; }
+		
+		//expression=Expression
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+		
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Type");
@@ -690,6 +721,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	private final FunctionParamElements pFunctionParam;
 	private final BlockElements pBlock;
 	private final StatementElements pStatement;
+	private final ReturnStatementElements pReturnStatement;
 	private final TypeElements pType;
 	private final TypeDefinitionElements pTypeDefinition;
 	private final IntTypeDefinitionElements pIntTypeDefinition;
@@ -720,6 +752,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pFunctionParam = new FunctionParamElements();
 		this.pBlock = new BlockElements();
 		this.pStatement = new StatementElements();
+		this.pReturnStatement = new ReturnStatementElements();
 		this.pType = new TypeElements();
 		this.pTypeDefinition = new TypeDefinitionElements();
 		this.pIntTypeDefinition = new IntTypeDefinitionElements();
@@ -846,13 +879,23 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Statement:
-	//	Value | Expression ';';
+	//	Value | Expression ';' | ReturnStatement;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
 	
 	public ParserRule getStatementRule() {
 		return getStatementAccess().getRule();
+	}
+	
+	//ReturnStatement:
+	//	'return' expression=Expression ';';
+	public ReturnStatementElements getReturnStatementAccess() {
+		return pReturnStatement;
+	}
+	
+	public ParserRule getReturnStatementRule() {
+		return getReturnStatementAccess().getRule();
 	}
 	
 	////////////////////////////////Types////////////////////////////////////////////

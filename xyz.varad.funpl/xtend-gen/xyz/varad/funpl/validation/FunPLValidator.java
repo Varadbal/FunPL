@@ -17,6 +17,7 @@ import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionParam;
 import xyz.varad.funpl.funPL.Symbol;
+import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Value;
 import xyz.varad.funpl.util.FunPLModelUtil;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
@@ -32,9 +33,11 @@ public class FunPLValidator extends AbstractFunPLValidator {
   
   public final static String SYMBOL_REDEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "SymbolRedefinition");
   
-  public final static String UNDEFINED_CONSTANT = (FunPLValidator.ISSUE_CODE_PREFIX + "UndefinedConstant");
+  public final static String INVALID_ASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "InvalidAssignment");
   
   public final static String CONSTANT_REASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "ConstantReassignment");
+  
+  public final static String UNDEFINED_CONSTANT = (FunPLValidator.ISSUE_CODE_PREFIX + "UndefinedConstant");
   
   @Check
   public void checkSymbolRedefinitionAsNeighbor(final Definition _d) {
@@ -92,6 +95,45 @@ public class FunPLValidator extends AbstractFunPLValidator {
   }
   
   @Check
+  public void checkAssignmentExpressionValidity(final Assignment _a) {
+    Expression _left = _a.getLeft();
+    boolean _not = (!(_left instanceof SymbolRef));
+    if (_not) {
+      this.error("Invalid assignment", FunPLPackage.eINSTANCE.getAssignment_Left(), FunPLValidator.INVALID_ASSIGNMENT);
+    } else {
+      Expression _left_1 = _a.getLeft();
+      Symbol _symbol = ((SymbolRef) _left_1).getSymbol();
+      if ((_symbol instanceof Function)) {
+        this.error("Invalid assignment", FunPLPackage.eINSTANCE.getAssignment_Left(), FunPLValidator.INVALID_ASSIGNMENT);
+      }
+    }
+  }
+  
+  @Check
+  public void checkConstantReassignment(final Assignment _a) {
+    Expression _left = _a.getLeft();
+    if ((_left instanceof SymbolRef)) {
+      Expression _left_1 = _a.getLeft();
+      final SymbolRef _cRef = ((SymbolRef) _left_1);
+      Symbol _symbol = _cRef.getSymbol();
+      if ((_symbol instanceof Value)) {
+        Symbol _symbol_1 = _cRef.getSymbol();
+        final Value _c = ((Value) _symbol_1);
+        boolean _isConst = _c.isConst();
+        if (_isConst) {
+          String _name = _c.getName();
+          String _plus = ("Constant-value reassignment not allowed: \'" + _name);
+          String _plus_1 = (_plus + "\'");
+          this.error(_plus_1, 
+            FunPLPackage.eINSTANCE.getAssignment_Left(), 
+            FunPLValidator.CONSTANT_REASSIGNMENT, 
+            _c.getName());
+        }
+      }
+    }
+  }
+  
+  @Check
   public void checkUndefinedConstant(final Value _v) {
     boolean _isConst = _v.isConst();
     if (_isConst) {
@@ -107,10 +149,6 @@ public class FunPLValidator extends AbstractFunPLValidator {
           _v.getName());
       }
     }
-  }
-  
-  @Check
-  public void checkConstantReassignment(final Assignment _a) {
   }
   
   private boolean containsSameNamedSymbol(final Iterable<? extends Symbol> _l, final Symbol _s) {

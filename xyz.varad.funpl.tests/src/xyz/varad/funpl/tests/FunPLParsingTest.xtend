@@ -28,6 +28,7 @@ import xyz.varad.funpl.funPL.Type
 import xyz.varad.funpl.funPL.BoolTypeDefinition
 import xyz.varad.funpl.funPL.IntTypeDefinition
 import xyz.varad.funpl.funPL.StringTypeDefinition
+import xyz.varad.funpl.funPL.ReturnStatement
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -187,6 +188,15 @@ class FunPLParsingTest {
 		]
 	}
 	
+	@Test
+	def void testReturn(){
+		'''
+		function foo(){
+			return 2;
+		}
+		'''.parse.assertNoErrors;
+	}
+	
 	//////////////////////Type checks not really needed here (already in TypeProviderTest)//////////////////////////
 	@Test
 	def void testValueTypes(){
@@ -286,6 +296,9 @@ class FunPLParsingTest {
 					ret += s.expression.stringRepr
 				}
 				return ret
+			}
+			ReturnStatement: {
+				"return " + s.expression.stringRepr
 			}
 		}
 	}

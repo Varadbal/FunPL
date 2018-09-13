@@ -28,6 +28,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Block/statements"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Statement"/>
+    <genClasses ecoreClass="FunPL.ecore#//ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//ReturnStatement/expression"/>
+    </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Type"/>
     <genClasses ecoreClass="FunPL.ecore#//TypeDefinition"/>
     <genClasses ecoreClass="FunPL.ecore#//IntTypeDefinition"/>

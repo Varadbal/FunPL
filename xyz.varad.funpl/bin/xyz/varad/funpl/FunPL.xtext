@@ -42,7 +42,11 @@ Block:
 ;
 
 Statement:
-	Value | (Expression ';')
+	Value | (Expression ';') | ReturnStatement
+;
+
+ReturnStatement:
+	'return' expression=Expression ';'
 ;
 
 //////////////////////////////Types////////////////////////////////////////////
