@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	FunPLModelUtilTest.class,
 	FunPLValidatorTest.class,
 	FunPLScopeProviderTest.class,
-	FunPLIndexTest.class}
+	FunPLIndexTest.class,
+	FunPLTypeProviderTest.class}
 )
 public class AllTests {
 

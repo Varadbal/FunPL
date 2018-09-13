@@ -187,6 +187,7 @@ class FunPLParsingTest {
 		]
 	}
 	
+	//////////////////////Type checks not really needed here (already in TypeProviderTest)//////////////////////////
 	@Test
 	def void testValueTypes(){
 		

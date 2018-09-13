@@ -27,10 +27,12 @@ import xyz.varad.funpl.funPL.Assignment
  */
 class FunPLValidator extends AbstractFunPLValidator {
 	// TODO const reassignment
-	// TODO expression type vs. symbol type OR type inference
+	// TODO expression type vs. symbol type OR type inference when null
 	// TODO function call #args=#params
 	// TODO function params and args type
 	// TODO disable def. references in global scope???
+	// TODO value def EITHER Expression -> type inference OR Type
+	// TODO function return statement should correspond to its type and each other
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
