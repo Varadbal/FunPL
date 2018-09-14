@@ -33,6 +33,7 @@ class FunPLValidator extends AbstractFunPLValidator {
 	// TODO disable def. references in global scope???
 	// TODO value def EITHER Expression -> type inference OR Type
 	// TODO function return statement should correspond to its type AND each other 
+	// TODO non-void function should have return statements 
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
