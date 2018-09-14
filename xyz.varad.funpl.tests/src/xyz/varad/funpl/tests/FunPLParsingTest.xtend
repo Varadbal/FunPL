@@ -29,6 +29,7 @@ import xyz.varad.funpl.funPL.BoolTypeDefinition
 import xyz.varad.funpl.funPL.IntTypeDefinition
 import xyz.varad.funpl.funPL.StringTypeDefinition
 import xyz.varad.funpl.funPL.ReturnStatement
+import xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition
 
 @RunWith(XtextRunner)
 @InjectWith(FunPLInjectorProvider)
@@ -195,69 +196,8 @@ class FunPLParsingTest {
 			return 2;
 		}
 		'''.parse.assertNoErrors;
-	}
+	}	
 	
-	//////////////////////Type checks not really needed here (already in TypeProviderTest)//////////////////////////
-	@Test
-	def void testValueTypes(){
-		
-		'''
-		var int i = 1;
-		const bool j = true;
-		var string k = "sajt";
-		var m;
-		var ins n;
-		'''.parse => [
-			(elements.get(0) as Symbol).assertSymbolType(IntTypeDefinition)
-			(elements.get(1) as Symbol).assertSymbolType(BoolTypeDefinition)
-			(elements.get(2) as Symbol).assertSymbolType(StringTypeDefinition)
-			(elements.get(3) as Symbol).assertSymbolType(null)
-		]
-	}
-	
-	@Test
-	def void testFunctionTypes(){
-		'''
-		function int foo(){
-			
-		}
-		function bool bar(){
-			
-		}
-		function string baz(){
-			
-		}
-		function bax(){
-			
-		}
-		'''.parse => [
-			(elements.get(0) as Symbol).assertSymbolType(IntTypeDefinition)
-			(elements.get(1) as Symbol).assertSymbolType(BoolTypeDefinition)
-			(elements.get(2) as Symbol).assertSymbolType(StringTypeDefinition)
-			(elements.get(3) as Symbol).assertSymbolType(null)
-		]
-	}
-	
-	@Test
-	def void testFunctionParamTypes(){
-		'''
-		function foo(int p1, bool p2, string p3) {
-			
-		}
-		'''.parse.elements.head as Function => [
-			params.get(0).assertSymbolType(IntTypeDefinition)
-			params.get(1).assertSymbolType(BoolTypeDefinition)
-			params.get(2).assertSymbolType(StringTypeDefinition)
-		]
-	}
-	
-	def private void assertSymbolType(Symbol v, Class<? extends Type> t){
-		if(t === null){
-			v.type.assertEquals(null)
-		}else{
-			assertTrue(t.isInstance(v.type))
-		}
-	}
 	
 	def private void assertAssociativity(Statement s, CharSequence expected){
 		expected.toString.assertEquals(s.stringRepr)

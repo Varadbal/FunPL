@@ -23,6 +23,7 @@ import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.FunctionParam;
+import xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
@@ -31,6 +32,7 @@ import xyz.varad.funpl.funPL.StringConstant;
 import xyz.varad.funpl.funPL.StringTypeDefinition;
 import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.funPL.VoidTypeDefinition;
 import xyz.varad.funpl.services.FunPLGrammarAccess;
 
 @SuppressWarnings("all")
@@ -71,6 +73,9 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case FunPLPackage.FUNCTION_PARAM:
 				sequence_FunctionParam(context, (FunctionParam) semanticObject); 
 				return; 
+			case FunPLPackage.FUNCTION_REFERENCE_TYPE_DEFINITION:
+				sequence_FunctionReferenceTypeDefinition(context, (FunctionReferenceTypeDefinition) semanticObject); 
+				return; 
 			case FunPLPackage.INT_CONSTANT:
 				sequence_TerminalExpression(context, (IntConstant) semanticObject); 
 				return; 
@@ -94,6 +99,9 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case FunPLPackage.VALUE:
 				sequence_Value(context, (Value) semanticObject); 
+				return; 
+			case FunPLPackage.VOID_TYPE_DEFINITION:
+				sequence_VoidTypeDefinition(context, (VoidTypeDefinition) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -208,13 +216,25 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     FunctionReferenceTypeDefinition returns FunctionReferenceTypeDefinition
+	 *
+	 * Constraint:
+	 *     {FunctionReferenceTypeDefinition}
+	 */
+	protected void sequence_FunctionReferenceTypeDefinition(ISerializationContext context, FunctionReferenceTypeDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AbstractElement returns Function
 	 *     Symbol returns Function
 	 *     Definition returns Function
 	 *     Function returns Function
 	 *
 	 * Constraint:
-	 *     (type=Type? name=ID (params+=FunctionParam params+=FunctionParam*)? body=Block)
+	 *     (type=FunctionReferenceTypeDefinition returnType=Type? name=ID (params+=FunctionParam params+=FunctionParam*)? body=Block)
 	 */
 	protected void sequence_Function(ISerializationContext context, Function semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -401,6 +421,18 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     (const?='const'? type=Type? name=ID expression=Expression?)
 	 */
 	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     VoidTypeDefinition returns VoidTypeDefinition
+	 *
+	 * Constraint:
+	 *     {VoidTypeDefinition}
+	 */
+	protected void sequence_VoidTypeDefinition(ISerializationContext context, VoidTypeDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

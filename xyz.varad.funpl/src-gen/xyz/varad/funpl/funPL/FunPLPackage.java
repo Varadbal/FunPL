@@ -262,13 +262,22 @@ public interface FunPLPackage extends EPackage
   int FUNCTION__NAME = DEFINITION__NAME;
 
   /**
+   * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION__RETURN_TYPE = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Params</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION__PARAMS = DEFINITION_FEATURE_COUNT + 0;
+  int FUNCTION__PARAMS = DEFINITION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -277,7 +286,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTION__BODY = DEFINITION_FEATURE_COUNT + 1;
+  int FUNCTION__BODY = DEFINITION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Function</em>' class.
@@ -286,7 +295,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
+  int FUNCTION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionParamImpl <em>Function Param</em>}' class.
@@ -515,6 +524,44 @@ public interface FunPLPackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionReferenceTypeDefinitionImpl <em>Function Reference Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.FunctionReferenceTypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionReferenceTypeDefinition()
+   * @generated
+   */
+  int FUNCTION_REFERENCE_TYPE_DEFINITION = 16;
+
+  /**
+   * The number of structural features of the '<em>Function Reference Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_REFERENCE_TYPE_DEFINITION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.VoidTypeDefinitionImpl <em>Void Type Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xyz.varad.funpl.funPL.impl.VoidTypeDefinitionImpl
+   * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getVoidTypeDefinition()
+   * @generated
+   */
+  int VOID_TYPE_DEFINITION = 17;
+
+  /**
+   * The number of structural features of the '<em>Void Type Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VOID_TYPE_DEFINITION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -522,7 +569,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 16;
+  int ASSIGNMENT = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -559,7 +606,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 17;
+  int PLUS = 19;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -596,7 +643,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 18;
+  int FUNCTION_CALL = 20;
 
   /**
    * The feature id for the '<em><b>Function</b></em>' reference.
@@ -633,7 +680,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 19;
+  int INT_CONSTANT = 21;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -661,7 +708,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 20;
+  int STRING_CONSTANT = 22;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -689,7 +736,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 21;
+  int BOOL_CONSTANT = 23;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -717,7 +764,7 @@ public interface FunPLPackage extends EPackage
    * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getSymbolRef()
    * @generated
    */
-  int SYMBOL_REF = 22;
+  int SYMBOL_REF = 24;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' reference.
@@ -852,6 +899,17 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getFunction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.Function#getReturnType <em>Return Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Return Type</em>'.
+   * @see xyz.varad.funpl.funPL.Function#getReturnType()
+   * @see #getFunction()
+   * @generated
+   */
+  EReference getFunction_ReturnType();
 
   /**
    * Returns the meta object for the containment reference list '{@link xyz.varad.funpl.funPL.Function#getParams <em>Params</em>}'.
@@ -996,6 +1054,26 @@ public interface FunPLPackage extends EPackage
    * @generated
    */
   EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition <em>Function Reference Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Function Reference Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition
+   * @generated
+   */
+  EClass getFunctionReferenceTypeDefinition();
+
+  /**
+   * Returns the meta object for class '{@link xyz.varad.funpl.funPL.VoidTypeDefinition <em>Void Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Void Type Definition</em>'.
+   * @see xyz.varad.funpl.funPL.VoidTypeDefinition
+   * @generated
+   */
+  EClass getVoidTypeDefinition();
 
   /**
    * Returns the meta object for class '{@link xyz.varad.funpl.funPL.Assignment <em>Assignment</em>}'.
@@ -1301,6 +1379,14 @@ public interface FunPLPackage extends EPackage
     EClass FUNCTION = eINSTANCE.getFunction();
 
     /**
+     * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FUNCTION__RETURN_TYPE = eINSTANCE.getFunction_ReturnType();
+
+    /**
      * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1431,6 +1517,26 @@ public interface FunPLPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.FunctionReferenceTypeDefinitionImpl <em>Function Reference Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.FunctionReferenceTypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getFunctionReferenceTypeDefinition()
+     * @generated
+     */
+    EClass FUNCTION_REFERENCE_TYPE_DEFINITION = eINSTANCE.getFunctionReferenceTypeDefinition();
+
+    /**
+     * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.VoidTypeDefinitionImpl <em>Void Type Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xyz.varad.funpl.funPL.impl.VoidTypeDefinitionImpl
+     * @see xyz.varad.funpl.funPL.impl.FunPLPackageImpl#getVoidTypeDefinition()
+     * @generated
+     */
+    EClass VOID_TYPE_DEFINITION = eINSTANCE.getVoidTypeDefinition();
 
     /**
      * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.

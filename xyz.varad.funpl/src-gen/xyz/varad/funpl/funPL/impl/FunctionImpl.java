@@ -22,6 +22,7 @@ import xyz.varad.funpl.funPL.Block;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionParam;
+import xyz.varad.funpl.funPL.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +32,7 @@ import xyz.varad.funpl.funPL.FunctionParam;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link xyz.varad.funpl.funPL.impl.FunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.FunctionImpl#getParams <em>Params</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.FunctionImpl#getBody <em>Body</em>}</li>
  * </ul>
@@ -39,6 +41,16 @@ import xyz.varad.funpl.funPL.FunctionParam;
  */
 public class FunctionImpl extends DefinitionImpl implements Function
 {
+  /**
+   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getReturnType()
+   * @generated
+   * @ordered
+   */
+  protected Type returnType;
+
   /**
    * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -78,6 +90,54 @@ public class FunctionImpl extends DefinitionImpl implements Function
   protected EClass eStaticClass()
   {
     return FunPLPackage.Literals.FUNCTION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type getReturnType()
+  {
+    return returnType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetReturnType(Type newReturnType, NotificationChain msgs)
+  {
+    Type oldReturnType = returnType;
+    returnType = newReturnType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunPLPackage.FUNCTION__RETURN_TYPE, oldReturnType, newReturnType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setReturnType(Type newReturnType)
+  {
+    if (newReturnType != returnType)
+    {
+      NotificationChain msgs = null;
+      if (returnType != null)
+        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.FUNCTION__RETURN_TYPE, null, msgs);
+      if (newReturnType != null)
+        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.FUNCTION__RETURN_TYPE, null, msgs);
+      msgs = basicSetReturnType(newReturnType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.FUNCTION__RETURN_TYPE, newReturnType, newReturnType));
   }
 
   /**
@@ -152,6 +212,8 @@ public class FunctionImpl extends DefinitionImpl implements Function
   {
     switch (featureID)
     {
+      case FunPLPackage.FUNCTION__RETURN_TYPE:
+        return basicSetReturnType(null, msgs);
       case FunPLPackage.FUNCTION__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
       case FunPLPackage.FUNCTION__BODY:
@@ -170,6 +232,8 @@ public class FunctionImpl extends DefinitionImpl implements Function
   {
     switch (featureID)
     {
+      case FunPLPackage.FUNCTION__RETURN_TYPE:
+        return getReturnType();
       case FunPLPackage.FUNCTION__PARAMS:
         return getParams();
       case FunPLPackage.FUNCTION__BODY:
@@ -189,6 +253,9 @@ public class FunctionImpl extends DefinitionImpl implements Function
   {
     switch (featureID)
     {
+      case FunPLPackage.FUNCTION__RETURN_TYPE:
+        setReturnType((Type)newValue);
+        return;
       case FunPLPackage.FUNCTION__PARAMS:
         getParams().clear();
         getParams().addAll((Collection<? extends FunctionParam>)newValue);
@@ -210,6 +277,9 @@ public class FunctionImpl extends DefinitionImpl implements Function
   {
     switch (featureID)
     {
+      case FunPLPackage.FUNCTION__RETURN_TYPE:
+        setReturnType((Type)null);
+        return;
       case FunPLPackage.FUNCTION__PARAMS:
         getParams().clear();
         return;
@@ -230,6 +300,8 @@ public class FunctionImpl extends DefinitionImpl implements Function
   {
     switch (featureID)
     {
+      case FunPLPackage.FUNCTION__RETURN_TYPE:
+        return returnType != null;
       case FunPLPackage.FUNCTION__PARAMS:
         return params != null && !params.isEmpty();
       case FunPLPackage.FUNCTION__BODY:

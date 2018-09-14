@@ -161,75 +161,85 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFunctionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeTypeParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cParamsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cParamsFunctionParamParserRuleCall_4_0_0 = (RuleCall)cParamsAssignment_4_0.eContents().get(0);
-		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
-		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cParamsFunctionParamParserRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cBodyAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cBodyBlockParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
+		private final RuleCall cTypeFunctionReferenceTypeDefinitionParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cReturnTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cReturnTypeTypeParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Assignment cParamsAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
+		private final RuleCall cParamsFunctionParamParserRuleCall_5_0_0 = (RuleCall)cParamsAssignment_5_0.eContents().get(0);
+		private final Group cGroup_5_1 = (Group)cGroup_5.eContents().get(1);
+		private final Keyword cCommaKeyword_5_1_0 = (Keyword)cGroup_5_1.eContents().get(0);
+		private final Assignment cParamsAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
+		private final RuleCall cParamsFunctionParamParserRuleCall_5_1_1_0 = (RuleCall)cParamsAssignment_5_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cBodyAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//Function:
-		//	'function' type=Type? name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)*)? ')' body=Block;
+		//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
+		//	params+=FunctionParam)*)? ')' body=Block;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'function' type=Type? name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)*)? ')' body=Block
+		//'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
+		//params+=FunctionParam)*)? ')' body=Block
 		public Group getGroup() { return cGroup; }
 		
 		//'function'
 		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
 		
-		//type=Type?
+		//type=FunctionReferenceTypeDefinition
 		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
+		//FunctionReferenceTypeDefinition
+		public RuleCall getTypeFunctionReferenceTypeDefinitionParserRuleCall_1_0() { return cTypeFunctionReferenceTypeDefinitionParserRuleCall_1_0; }
+		
+		//returnType=Type?
+		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
+		
 		//Type
-		public RuleCall getTypeTypeParserRuleCall_1_0() { return cTypeTypeParserRuleCall_1_0; }
+		public RuleCall getReturnTypeTypeParserRuleCall_2_0() { return cReturnTypeTypeParserRuleCall_2_0; }
 		
 		//name=ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
 		
 		//(params+=FunctionParam (',' params+=FunctionParam)*)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 		
 		//params+=FunctionParam
-		public Assignment getParamsAssignment_4_0() { return cParamsAssignment_4_0; }
+		public Assignment getParamsAssignment_5_0() { return cParamsAssignment_5_0; }
 		
 		//FunctionParam
-		public RuleCall getParamsFunctionParamParserRuleCall_4_0_0() { return cParamsFunctionParamParserRuleCall_4_0_0; }
+		public RuleCall getParamsFunctionParamParserRuleCall_5_0_0() { return cParamsFunctionParamParserRuleCall_5_0_0; }
 		
 		//(',' params+=FunctionParam)*
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_5_1() { return cGroup_5_1; }
 		
 		//','
-		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
 		
 		//params+=FunctionParam
-		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
+		public Assignment getParamsAssignment_5_1_1() { return cParamsAssignment_5_1_1; }
 		
 		//FunctionParam
-		public RuleCall getParamsFunctionParamParserRuleCall_4_1_1_0() { return cParamsFunctionParamParserRuleCall_4_1_1_0; }
+		public RuleCall getParamsFunctionParamParserRuleCall_5_1_1_0() { return cParamsFunctionParamParserRuleCall_5_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 		
 		//body=Block
-		public Assignment getBodyAssignment_6() { return cBodyAssignment_6; }
+		public Assignment getBodyAssignment_7() { return cBodyAssignment_7; }
 		
 		//Block
-		public RuleCall getBodyBlockParserRuleCall_6_0() { return cBodyBlockParserRuleCall_6_0; }
+		public RuleCall getBodyBlockParserRuleCall_7_0() { return cBodyBlockParserRuleCall_7_0; }
 	}
 	public class FunctionParamElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.FunctionParam");
@@ -440,6 +450,28 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'string'
 		public Keyword getStringKeyword_1() { return cStringKeyword_1; }
+	}
+	public class FunctionReferenceTypeDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.FunctionReferenceTypeDefinition");
+		private final Action cFunctionReferenceTypeDefinitionAction = (Action)rule.eContents().get(1);
+		
+		//FunctionReferenceTypeDefinition Type:
+		//	{FunctionReferenceTypeDefinition};
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{FunctionReferenceTypeDefinition}
+		public Action getFunctionReferenceTypeDefinitionAction() { return cFunctionReferenceTypeDefinitionAction; }
+	}
+	public class VoidTypeDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.VoidTypeDefinition");
+		private final Action cVoidTypeDefinitionAction = (Action)rule.eContents().get(1);
+		
+		//VoidTypeDefinition Type:
+		//	{VoidTypeDefinition};
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{VoidTypeDefinition}
+		public Action getVoidTypeDefinitionAction() { return cVoidTypeDefinitionAction; }
 	}
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Expression");
@@ -727,6 +759,8 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	private final IntTypeDefinitionElements pIntTypeDefinition;
 	private final BoolTypeDefinitionElements pBoolTypeDefinition;
 	private final StringTypeDefinitionElements pStringTypeDefinition;
+	private final FunctionReferenceTypeDefinitionElements pFunctionReferenceTypeDefinition;
+	private final VoidTypeDefinitionElements pVoidTypeDefinition;
 	private final ExpressionElements pExpression;
 	private final AssignmentElements pAssignment;
 	private final PlusElements pPlus;
@@ -758,6 +792,8 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pIntTypeDefinition = new IntTypeDefinitionElements();
 		this.pBoolTypeDefinition = new BoolTypeDefinitionElements();
 		this.pStringTypeDefinition = new StringTypeDefinitionElements();
+		this.pFunctionReferenceTypeDefinition = new FunctionReferenceTypeDefinitionElements();
+		this.pVoidTypeDefinition = new VoidTypeDefinitionElements();
 		this.pExpression = new ExpressionElements();
 		this.pAssignment = new AssignmentElements();
 		this.pPlus = new PlusElements();
@@ -847,7 +883,8 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Function:
-	//	'function' type=Type? name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)*)? ')' body=Block;
+	//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
+	//	params+=FunctionParam)*)? ')' body=Block;
 	public FunctionElements getFunctionAccess() {
 		return pFunction;
 	}
@@ -947,6 +984,26 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStringTypeDefinitionRule() {
 		return getStringTypeDefinitionAccess().getRule();
+	}
+	
+	//FunctionReferenceTypeDefinition Type:
+	//	{FunctionReferenceTypeDefinition};
+	public FunctionReferenceTypeDefinitionElements getFunctionReferenceTypeDefinitionAccess() {
+		return pFunctionReferenceTypeDefinition;
+	}
+	
+	public ParserRule getFunctionReferenceTypeDefinitionRule() {
+		return getFunctionReferenceTypeDefinitionAccess().getRule();
+	}
+	
+	//VoidTypeDefinition Type:
+	//	{VoidTypeDefinition};
+	public VoidTypeDefinitionElements getVoidTypeDefinitionAccess() {
+		return pVoidTypeDefinition;
+	}
+	
+	public ParserRule getVoidTypeDefinitionRule() {
+		return getVoidTypeDefinitionAccess().getRule();
 	}
 	
 	////////////////////////////////Expressions////////////////////////////////////

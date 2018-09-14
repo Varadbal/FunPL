@@ -27,7 +27,9 @@ Value:
 ;
 
 Function:
-	'function' (type=Type)? name=ID '(' (params+=FunctionParam (',' params+=FunctionParam)* )? ')' body=Block
+	'function' type=FunctionReferenceTypeDefinition (returnType=Type)? name=ID 
+	'(' (params+=FunctionParam (',' params+=FunctionParam)* )? ')' 
+	body=Block
 ;
 
 FunctionParam:
@@ -70,6 +72,14 @@ BoolTypeDefinition:
 
 StringTypeDefinition:
 	{StringTypeDefinition} 'string'
+;
+
+FunctionReferenceTypeDefinition returns Type:
+	{FunctionReferenceTypeDefinition}
+;
+
+VoidTypeDefinition returns Type:
+	{VoidTypeDefinition}
 ;
 
 //////////////////////////////Expressions////////////////////////////////////

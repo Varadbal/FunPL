@@ -23,6 +23,7 @@ import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
 import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.FunctionParam;
+import xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition;
 import xyz.varad.funpl.funPL.IntConstant;
 import xyz.varad.funpl.funPL.IntTypeDefinition;
 import xyz.varad.funpl.funPL.Plus;
@@ -35,6 +36,7 @@ import xyz.varad.funpl.funPL.SymbolRef;
 import xyz.varad.funpl.funPL.Type;
 import xyz.varad.funpl.funPL.TypeDefinition;
 import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.funPL.VoidTypeDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,6 +157,20 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass functionReferenceTypeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass voidTypeDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -383,7 +399,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_Params()
+  public EReference getFunction_ReturnType()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(0);
   }
@@ -393,9 +409,19 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_Body()
+  public EReference getFunction_Params()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunction_Body()
+  {
+    return (EReference)functionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -516,6 +542,26 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
   public EClass getExpression()
   {
     return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getFunctionReferenceTypeDefinition()
+  {
+    return functionReferenceTypeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVoidTypeDefinition()
+  {
+    return voidTypeDefinitionEClass;
   }
 
   /**
@@ -734,6 +780,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     createEReference(valueEClass, VALUE__EXPRESSION);
 
     functionEClass = createEClass(FUNCTION);
+    createEReference(functionEClass, FUNCTION__RETURN_TYPE);
     createEReference(functionEClass, FUNCTION__PARAMS);
     createEReference(functionEClass, FUNCTION__BODY);
 
@@ -758,6 +805,10 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     stringTypeDefinitionEClass = createEClass(STRING_TYPE_DEFINITION);
 
     expressionEClass = createEClass(EXPRESSION);
+
+    functionReferenceTypeDefinitionEClass = createEClass(FUNCTION_REFERENCE_TYPE_DEFINITION);
+
+    voidTypeDefinitionEClass = createEClass(VOID_TYPE_DEFINITION);
 
     assignmentEClass = createEClass(ASSIGNMENT);
     createEReference(assignmentEClass, ASSIGNMENT__LEFT);
@@ -825,6 +876,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     boolTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     stringTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     expressionEClass.getESuperTypes().add(this.getStatement());
+    functionReferenceTypeDefinitionEClass.getESuperTypes().add(this.getType());
+    voidTypeDefinitionEClass.getESuperTypes().add(this.getType());
     assignmentEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     functionCallEClass.getESuperTypes().add(this.getExpression());
@@ -850,6 +903,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEReference(getValue_Expression(), this.getExpression(), null, "expression", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFunction_ReturnType(), this.getType(), null, "returnType", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunction_Params(), this.getFunctionParam(), null, "params", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunction_Body(), this.getBlock(), null, "body", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -874,6 +928,10 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     initEClass(stringTypeDefinitionEClass, StringTypeDefinition.class, "StringTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(functionReferenceTypeDefinitionEClass, FunctionReferenceTypeDefinition.class, "FunctionReferenceTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(voidTypeDefinitionEClass, VoidTypeDefinition.class, "VoidTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssignment_Left(), this.getExpression(), null, "left", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

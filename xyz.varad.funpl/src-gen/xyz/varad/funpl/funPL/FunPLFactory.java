@@ -168,6 +168,24 @@ public interface FunPLFactory extends EFactory
   Expression createExpression();
 
   /**
+   * Returns a new object of class '<em>Function Reference Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function Reference Type Definition</em>'.
+   * @generated
+   */
+  FunctionReferenceTypeDefinition createFunctionReferenceTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>Void Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Void Type Definition</em>'.
+   * @generated
+   */
+  VoidTypeDefinition createVoidTypeDefinition();
+
+  /**
    * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

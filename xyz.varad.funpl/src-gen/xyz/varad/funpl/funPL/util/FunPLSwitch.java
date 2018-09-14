@@ -204,6 +204,22 @@ public class FunPLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FunPLPackage.FUNCTION_REFERENCE_TYPE_DEFINITION:
+      {
+        FunctionReferenceTypeDefinition functionReferenceTypeDefinition = (FunctionReferenceTypeDefinition)theEObject;
+        T result = caseFunctionReferenceTypeDefinition(functionReferenceTypeDefinition);
+        if (result == null) result = caseType(functionReferenceTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FunPLPackage.VOID_TYPE_DEFINITION:
+      {
+        VoidTypeDefinition voidTypeDefinition = (VoidTypeDefinition)theEObject;
+        T result = caseVoidTypeDefinition(voidTypeDefinition);
+        if (result == null) result = caseType(voidTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FunPLPackage.ASSIGNMENT:
       {
         Assignment assignment = (Assignment)theEObject;
@@ -523,6 +539,38 @@ public class FunPLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Function Reference Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Function Reference Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFunctionReferenceTypeDefinition(FunctionReferenceTypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Void Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Void Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVoidTypeDefinition(VoidTypeDefinition object)
   {
     return null;
   }

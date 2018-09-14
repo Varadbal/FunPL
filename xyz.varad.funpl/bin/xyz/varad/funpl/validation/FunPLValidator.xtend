@@ -36,11 +36,8 @@ class FunPLValidator extends AbstractFunPLValidator {
 	
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
-	
 	public static val INVALID_ASSIGNMENT = ISSUE_CODE_PREFIX + "InvalidAssignment"
-	
 	public static val CONSTANT_REASSIGNMENT = ISSUE_CODE_PREFIX + "ConstantReassignment"
-	
 	public static val UNDEFINED_CONSTANT = ISSUE_CODE_PREFIX + "UndefinedConstant"
 	
 	//@Inject extension FunPLModelUtil

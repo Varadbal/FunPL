@@ -156,6 +156,16 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
+      public Adapter caseFunctionReferenceTypeDefinition(FunctionReferenceTypeDefinition object)
+      {
+        return createFunctionReferenceTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseVoidTypeDefinition(VoidTypeDefinition object)
+      {
+        return createVoidTypeDefinitionAdapter();
+      }
+      @Override
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
@@ -448,6 +458,36 @@ public class FunPLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition <em>Function Reference Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition
+   * @generated
+   */
+  public Adapter createFunctionReferenceTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link xyz.varad.funpl.funPL.VoidTypeDefinition <em>Void Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see xyz.varad.funpl.funPL.VoidTypeDefinition
+   * @generated
+   */
+  public Adapter createVoidTypeDefinitionAdapter()
   {
     return null;
   }

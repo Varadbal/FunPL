@@ -81,6 +81,8 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
       case FunPLPackage.BOOL_TYPE_DEFINITION: return createBoolTypeDefinition();
       case FunPLPackage.STRING_TYPE_DEFINITION: return createStringTypeDefinition();
       case FunPLPackage.EXPRESSION: return createExpression();
+      case FunPLPackage.FUNCTION_REFERENCE_TYPE_DEFINITION: return createFunctionReferenceTypeDefinition();
+      case FunPLPackage.VOID_TYPE_DEFINITION: return createVoidTypeDefinition();
       case FunPLPackage.ASSIGNMENT: return createAssignment();
       case FunPLPackage.PLUS: return createPlus();
       case FunPLPackage.FUNCTION_CALL: return createFunctionCall();
@@ -267,6 +269,28 @@ public class FunPLFactoryImpl extends EFactoryImpl implements FunPLFactory
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FunctionReferenceTypeDefinition createFunctionReferenceTypeDefinition()
+  {
+    FunctionReferenceTypeDefinitionImpl functionReferenceTypeDefinition = new FunctionReferenceTypeDefinitionImpl();
+    return functionReferenceTypeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VoidTypeDefinition createVoidTypeDefinition()
+  {
+    VoidTypeDefinitionImpl voidTypeDefinition = new VoidTypeDefinitionImpl();
+    return voidTypeDefinition;
   }
 
   /**

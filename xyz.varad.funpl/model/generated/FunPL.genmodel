@@ -20,6 +20,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Value/expression"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/params"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Function/body"/>
     </genClasses>
@@ -37,6 +38,8 @@
     <genClasses ecoreClass="FunPL.ecore#//BoolTypeDefinition"/>
     <genClasses ecoreClass="FunPL.ecore#//StringTypeDefinition"/>
     <genClasses ecoreClass="FunPL.ecore#//Expression"/>
+    <genClasses ecoreClass="FunPL.ecore#//FunctionReferenceTypeDefinition"/>
+    <genClasses ecoreClass="FunPL.ecore#//VoidTypeDefinition"/>
     <genClasses ecoreClass="FunPL.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//Assignment/right"/>
