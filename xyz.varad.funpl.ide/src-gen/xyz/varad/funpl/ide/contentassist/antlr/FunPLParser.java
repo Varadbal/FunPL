@@ -77,7 +77,7 @@ public class FunPLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFunctionParamAccess().getTypeAssignment_0(), "rule__FunctionParam__TypeAssignment_0");
 			builder.put(grammarAccess.getFunctionParamAccess().getNameAssignment_1(), "rule__FunctionParam__NameAssignment_1");
 			builder.put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
-			builder.put(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1(), "rule__ReturnStatement__ExpressionAssignment_1");
+			builder.put(grammarAccess.getReturnStatementAccess().getExpressionAssignment_2(), "rule__ReturnStatement__ExpressionAssignment_2");
 			builder.put(grammarAccess.getAssignmentAccess().getRightAssignment_1_2(), "rule__Assignment__RightAssignment_1_2");
 			builder.put(grammarAccess.getPlusAccess().getRightAssignment_1_2(), "rule__Plus__RightAssignment_1_2");
 			builder.put(grammarAccess.getFunctionCallAccess().getFunctionAssignment_1(), "rule__FunctionCall__FunctionAssignment_1");

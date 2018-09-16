@@ -4,9 +4,12 @@
 package xyz.varad.funpl.validation;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.Iterator;
+import java.util.List;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import xyz.varad.funpl.funPL.Assignment;
@@ -15,10 +18,15 @@ import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionCall;
 import xyz.varad.funpl.funPL.FunctionParam;
+import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
 import xyz.varad.funpl.funPL.Symbol;
 import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.funPL.Type;
 import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.typing.FunPLTypeProvider;
 import xyz.varad.funpl.util.FunPLModelUtil;
 import xyz.varad.funpl.validation.AbstractFunPLValidator;
 
@@ -33,11 +41,29 @@ public class FunPLValidator extends AbstractFunPLValidator {
   
   public final static String SYMBOL_REDEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "SymbolRedefinition");
   
+  public final static String INVALID_VALUE_DEFINITION = (FunPLValidator.ISSUE_CODE_PREFIX + "InvalidValueDefinition");
+  
   public final static String INVALID_ASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "InvalidAssignment");
+  
+  public final static String INVALID_ADDITION = (FunPLValidator.ISSUE_CODE_PREFIX + "InvalidAddition");
+  
+  public final static String AMBIGUOUS_RETURN_TYPE = (FunPLValidator.ISSUE_CODE_PREFIX + "AmbiguousReturnType");
+  
+  public final static String MISSING_RETURN_STATEMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "MissingReturnStatement");
   
   public final static String CONSTANT_REASSIGNMENT = (FunPLValidator.ISSUE_CODE_PREFIX + "ConstantReassignment");
   
   public final static String UNDEFINED_CONSTANT = (FunPLValidator.ISSUE_CODE_PREFIX + "UndefinedConstant");
+  
+  public final static String INVALID_FUNCTION_CALL = (FunPLValidator.ISSUE_CODE_PREFIX + "InvalidFunctionCall");
+  
+  @Inject
+  @Extension
+  private FunPLModelUtil _funPLModelUtil;
+  
+  @Inject
+  @Extension
+  private FunPLTypeProvider _funPLTypeProvider;
   
   @Check
   public void checkSymbolRedefinitionAsNeighbor(final Definition _d) {
@@ -95,6 +121,37 @@ public class FunPLValidator extends AbstractFunPLValidator {
   }
   
   @Check
+  public void checkValueDefinitionValidity(final Value _v) {
+    Expression _expression = _v.getExpression();
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
+      boolean _isSame = this._funPLTypeProvider.isSame(this._funPLTypeProvider.typeFor(_v), this._funPLTypeProvider.typeFor(_v.getExpression()));
+      boolean _not = (!_isSame);
+      if (_not) {
+        String _typeString = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_v));
+        String _plus = ("The operation is undefined for argument type(s) " + _typeString);
+        String _plus_1 = (_plus + ", ");
+        String _typeString_1 = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_v.getExpression()));
+        String _plus_2 = (_plus_1 + _typeString_1);
+        this.error(_plus_2, 
+          null, 
+          FunPLValidator.INVALID_VALUE_DEFINITION);
+      }
+    } else {
+      Type _typeFor = this._funPLTypeProvider.typeFor(_v);
+      boolean _tripleEquals = (_typeFor == null);
+      if (_tripleEquals) {
+        String _name = _v.getName();
+        String _plus_3 = ("The value \'" + _name);
+        String _plus_4 = (_plus_3 + "\' must either have a declared type or be initialized");
+        this.error(_plus_4, 
+          null, 
+          FunPLValidator.INVALID_VALUE_DEFINITION);
+      }
+    }
+  }
+  
+  @Check
   public void checkAssignmentExpressionValidity(final Assignment _a) {
     Expression _left = _a.getLeft();
     boolean _not = (!(_left instanceof SymbolRef));
@@ -105,7 +162,68 @@ public class FunPLValidator extends AbstractFunPLValidator {
       Symbol _symbol = ((SymbolRef) _left_1).getSymbol();
       if ((_symbol instanceof Function)) {
         this.error("Invalid assignment", FunPLPackage.eINSTANCE.getAssignment_Left(), FunPLValidator.INVALID_ASSIGNMENT);
+      } else {
+        Expression _left_2 = _a.getLeft();
+        boolean _isSame = this._funPLTypeProvider.isSame(this._funPLTypeProvider.typeFor(((SymbolRef) _left_2).getSymbol()), this._funPLTypeProvider.typeFor(_a.getRight()));
+        boolean _not_1 = (!_isSame);
+        if (_not_1) {
+          String _typeString = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_a.getLeft()));
+          String _plus = ("The operation is undefined for argument type(s) " + _typeString);
+          String _plus_1 = (_plus + ", ");
+          String _typeString_1 = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_a.getRight()));
+          String _plus_2 = (_plus_1 + _typeString_1);
+          this.error(_plus_2, 
+            null, 
+            FunPLValidator.INVALID_ASSIGNMENT);
+        }
       }
+    }
+  }
+  
+  @Check
+  public void checkPlusExpressionValidity(final Plus _p) {
+    boolean _not = (!(this._funPLTypeProvider.isInt(this._funPLTypeProvider.typeFor(_p.getLeft())) && this._funPLTypeProvider.isInt(this._funPLTypeProvider.typeFor(_p.getRight()))));
+    if (_not) {
+      String _typeString = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_p.getLeft()));
+      String _plus = ("The operation is undefined for argument type(s) " + _typeString);
+      String _plus_1 = (_plus + ", ");
+      String _typeString_1 = this._funPLTypeProvider.typeString(this._funPLTypeProvider.typeFor(_p.getRight()));
+      String _plus_2 = (_plus_1 + _typeString_1);
+      String _plus_3 = (_plus_2 + "!");
+      this.error(_plus_3, 
+        null, 
+        FunPLValidator.INVALID_ADDITION);
+    }
+  }
+  
+  @Check
+  public void checkFunctionReturnTypesSame(final Function _f) {
+    final Type declaredOrFirst = this._funPLTypeProvider.returnTypeFor(_f);
+    final List<ReturnStatement> res = FunPLModelUtil.returnStatements(_f);
+    for (final ReturnStatement r : res) {
+      boolean _isSame = this._funPLTypeProvider.isSame(this._funPLTypeProvider.typeFor(r), declaredOrFirst);
+      boolean _not = (!_isSame);
+      if (_not) {
+        String _name = _f.getName();
+        String _plus = ("Multiple return types in function \'" + _name);
+        String _plus_1 = (_plus + "\'!");
+        this.error(_plus_1, 
+          FunPLPackage.eINSTANCE.getSymbol_Name(), 
+          FunPLValidator.AMBIGUOUS_RETURN_TYPE);
+      }
+    }
+  }
+  
+  @Check
+  public void checkFunctionHasReturnStatement(final Function _f) {
+    final List<ReturnStatement> res = FunPLModelUtil.returnStatements(_f);
+    if (((res.size() == 0) && (!this._funPLTypeProvider.isVoid(this._funPLTypeProvider.returnTypeFor(_f))))) {
+      String _name = _f.getName();
+      String _plus = ("Missing return statement in function \'" + _name);
+      String _plus_1 = (_plus + "\'!");
+      this.error(_plus_1, 
+        FunPLPackage.eINSTANCE.getSymbol_Name(), 
+        FunPLValidator.MISSING_RETURN_STATEMENT);
     }
   }
   
@@ -147,6 +265,28 @@ public class FunPLValidator extends AbstractFunPLValidator {
           FunPLPackage.eINSTANCE.getSymbol_Name(), 
           FunPLValidator.UNDEFINED_CONSTANT, 
           _v.getName());
+      }
+    }
+  }
+  
+  @Check
+  public void checkFunctionCallValidity(final FunctionCall _fc) {
+    int _size = _fc.getArgs().size();
+    int _size_1 = _fc.getFunction().getParams().size();
+    boolean _notEquals = (_size != _size_1);
+    if (_notEquals) {
+      this.error("The function call signature does not match any possible function definitions", 
+        null, 
+        FunPLValidator.INVALID_FUNCTION_CALL);
+    } else {
+      for (int i = 0; (i < _fc.getArgs().size()); i++) {
+        boolean _isSame = this._funPLTypeProvider.isSame(this._funPLTypeProvider.typeFor(_fc.getArgs().get(i)), this._funPLTypeProvider.typeFor(_fc.getFunction().getParams().get(i)));
+        boolean _not = (!_isSame);
+        if (_not) {
+          this.error("The function call signature does not match any possible function definitions", 
+            null, 
+            FunPLValidator.INVALID_FUNCTION_CALL);
+        }
       }
     }
   }

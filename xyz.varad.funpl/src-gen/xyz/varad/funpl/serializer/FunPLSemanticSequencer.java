@@ -288,16 +288,10 @@ public class FunPLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ReturnStatement returns ReturnStatement
 	 *
 	 * Constraint:
-	 *     expression=Expression
+	 *     expression=Expression?
 	 */
 	protected void sequence_ReturnStatement(ISerializationContext context, ReturnStatement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FunPLPackage.Literals.RETURN_STATEMENT__EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FunPLPackage.Literals.RETURN_STATEMENT__EXPRESSION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0(), semanticObject.getExpression());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -591,16 +591,23 @@ ruleReturnStatement returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='return'
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getReturnStatementAccess().getReturnStatementAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='return'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getReturnStatementAccess().getReturnKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getReturnStatementAccess().getReturnKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_2_0());
 				}
-				lv_expression_1_0=ruleExpression
+				lv_expression_2_0=ruleExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getReturnStatementRule());
@@ -608,15 +615,15 @@ ruleReturnStatement returns [EObject current=null]
 					set(
 						$current,
 						"expression",
-						lv_expression_1_0,
+						lv_expression_2_0,
 						"xyz.varad.funpl.FunPL.Expression");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
-		otherlv_2=';'
+		)?
+		otherlv_3=';'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2());
+			newLeafNode(otherlv_3, grammarAccess.getReturnStatementAccess().getSemicolonKeyword_3());
 		}
 	)
 ;

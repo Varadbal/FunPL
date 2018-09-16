@@ -48,7 +48,7 @@ Statement:
 ;
 
 ReturnStatement:
-	'return' expression=Expression ';'
+	{ReturnStatement} 'return' (expression=Expression)? ';'
 ;
 
 //////////////////////////////Types////////////////////////////////////////////
@@ -78,7 +78,7 @@ FunctionReferenceTypeDefinition returns Type:
 	{FunctionReferenceTypeDefinition}
 ;
 
-VoidTypeDefinition returns Type:
+VoidTypeDefinition returns TypeDefinition:
 	{VoidTypeDefinition}
 ;
 

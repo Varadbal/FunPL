@@ -1498,9 +1498,9 @@ rule__ReturnStatement__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getReturnStatementAccess().getReturnKeyword_0()); }
-	'return'
-	{ after(grammarAccess.getReturnStatementAccess().getReturnKeyword_0()); }
+	{ before(grammarAccess.getReturnStatementAccess().getReturnStatementAction_0()); }
+	()
+	{ after(grammarAccess.getReturnStatementAccess().getReturnStatementAction_0()); }
 )
 ;
 finally {
@@ -1525,9 +1525,9 @@ rule__ReturnStatement__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1()); }
-	(rule__ReturnStatement__ExpressionAssignment_1)
-	{ after(grammarAccess.getReturnStatementAccess().getExpressionAssignment_1()); }
+	{ before(grammarAccess.getReturnStatementAccess().getReturnKeyword_1()); }
+	'return'
+	{ after(grammarAccess.getReturnStatementAccess().getReturnKeyword_1()); }
 )
 ;
 finally {
@@ -1540,6 +1540,7 @@ rule__ReturnStatement__Group__2
 	}
 :
 	rule__ReturnStatement__Group__2__Impl
+	rule__ReturnStatement__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1551,9 +1552,35 @@ rule__ReturnStatement__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2()); }
+	{ before(grammarAccess.getReturnStatementAccess().getExpressionAssignment_2()); }
+	(rule__ReturnStatement__ExpressionAssignment_2)?
+	{ after(grammarAccess.getReturnStatementAccess().getExpressionAssignment_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ReturnStatement__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__ReturnStatement__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ReturnStatement__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_3()); }
 	';'
-	{ after(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_2()); }
+	{ after(grammarAccess.getReturnStatementAccess().getSemicolonKeyword_3()); }
 )
 ;
 finally {
@@ -2747,15 +2774,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ReturnStatement__ExpressionAssignment_1
+rule__ReturnStatement__ExpressionAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0()); }
+		{ before(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_2_0()); }
 		ruleExpression
-		{ after(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_1_0()); }
+		{ after(grammarAccess.getReturnStatementAccess().getExpressionExpressionParserRuleCall_2_0()); }
 	)
 ;
 finally {

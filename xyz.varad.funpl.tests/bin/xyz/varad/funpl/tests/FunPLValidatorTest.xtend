@@ -22,6 +22,7 @@ class FunPLValidatorTest {
 	@Inject extension ParseHelper<FunProgram> 
 	@Inject extension ValidationTestHelper
 	
+	////////////////////////////////////////////////SCOPING-RELATED TESTS//////////////////////////////////////////////
 	
 	@Test
 	def void testForwardReference(){		
@@ -32,8 +33,8 @@ class FunPLValidatorTest {
 			
 		}
 		'''.parse => [
-			assertTrue((validate.size == 1) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	//Forward reference error from scoping
-			//assertError(FunPLPackage::eINSTANCE.symbolRef, FunPLValidator::FORWARD_REFERENCE, "Symbol forward reference not allowed: 'j'")
+			assertTrue((validate.size == 2) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	
+			//Forward reference error from scoping + type error from validator
 		]
 	}
 	
@@ -46,8 +47,8 @@ class FunPLValidatorTest {
 			var j = 10;
 		}
 		'''.parse => [
-			assertTrue((validate.size == 1) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	//Forward reference error from scoping
-			//assertError(FunPLPackage::eINSTANCE.symbolRef, FunPLValidator::FORWARD_REFERENCE, "Symbol forward reference not allowed: 'j'")
+			assertTrue((validate.size == 2) && (validate.head.message == "Couldn't resolve reference to Symbol 'j'."))	
+			//Forward reference error from scoping + type error from validator
 		]
 	}
 	
@@ -141,6 +142,29 @@ class FunPLValidatorTest {
 			)
 	}
 	
+	/////////////////////////////EXPRESSION AND TYPING TESTS/////////////////////////////////////////////////////
+	
+	@Test
+	def void testValueDefinitionValidity(){
+		'''
+		var int i = "asd";
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::INVALID_VALUE_DEFINITION,
+			"The operation is undefined for argument type(s) int, string"
+		)
+		
+		'''
+		var i = "asd";
+		'''.parse.assertNoErrors
+		
+		'''
+		var i;
+		'''.parse.assertError(FunPLPackage::eINSTANCE.value,
+			FunPLValidator::INVALID_VALUE_DEFINITION,
+			"The value 'i' must either have a declared type or be initialized"
+		)
+	}
+	
 	@Test
 	def void testInvalidAssignment(){
 		'''
@@ -163,7 +187,91 @@ class FunPLValidatorTest {
 			FunPLValidator::INVALID_ASSIGNMENT,
 			"Invalid assignment"
 			)
+			
+		'''
+		function foo(){
+			var int i = 5;
+			i = true;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::INVALID_ASSIGNMENT,
+			"The operation is undefined for argument type(s) int, bool"
+		)
 	}
+
+	@Test
+	def void testInvalidAddition(){
+		'''
+		function foo(){
+			5 + "a";
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.expression,
+			FunPLValidator::INVALID_ADDITION,
+			"The operation is undefined for argument type(s) int, string!"
+		)
+		
+		'''
+		var i = 5 + true;
+		'''.parse.assertError(FunPLPackage::eINSTANCE.expression,
+			FunPLValidator::INVALID_ADDITION,
+			"The operation is undefined for argument type(s) int, bool!"
+			)
+	}
+	
+	@Test
+	def void testFunctionReturnTypesSame(){
+		'''
+		function foo(){
+			return 5;
+			return;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.function,
+			FunPLValidator::AMBIGUOUS_RETURN_TYPE,
+			"Multiple return types in function 'foo'"
+		)
+		
+		'''
+		function string foo(){
+			return 5;
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.function,
+			FunPLValidator::AMBIGUOUS_RETURN_TYPE,
+			"Multiple return types in function 'foo'"
+		)
+		
+		'''
+		function int foo(){
+			return 5;
+		}
+		'''.parse.assertNoErrors
+		
+		'''
+		function foo(){
+			return;
+		}
+		'''.parse.assertNoErrors
+		
+	}
+	
+	@Test
+	def void testFunctionHasReturnStatement(){
+		'''
+		function int foo(){
+			
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.function,
+			FunPLValidator::MISSING_RETURN_STATEMENT,
+			"Missing return statement in function 'foo'"
+		)
+		
+		'''
+		function foo(){
+			
+		}
+		'''.parse.assertNoErrors
+	}
+	
+	///////////////////////////////////////OTHER TESTS/////////////////////////////////////////////////////////
 	
 	@Test
 	def void testConstantReassignment(){
@@ -192,6 +300,41 @@ class FunPLValidatorTest {
 		'''.parse.assertNoErrors
 	}
 	
+	@Test
+	def void testFunctionCallValidity(){
+		'''
+		function foo(int p1, int p2){
+			
+		}
+		function bar(){
+			foo(5);
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::INVALID_FUNCTION_CALL,
+			"The function call signature does not match any possible function definitions"
+		)
+		
+		'''
+		function foo(int p1, bool p2, string p3){
+			
+		}
+		function bar(){
+			foo(5, 5, 5);
+		}
+		'''.parse.assertError(FunPLPackage::eINSTANCE.statement,
+			FunPLValidator::INVALID_FUNCTION_CALL,
+			"The function call signature does not match any possible function definitions"
+		)
+		
+		'''
+		function foo(int p1, bool p2, string p3){
+			
+		}
+		function bar(){
+			foo(5, false, "asddsa");
+		}
+		'''.parse.assertNoErrors
+	}
 	
 	
 }

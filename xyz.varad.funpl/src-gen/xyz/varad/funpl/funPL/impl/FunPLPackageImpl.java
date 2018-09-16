@@ -877,7 +877,7 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage
     stringTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     expressionEClass.getESuperTypes().add(this.getStatement());
     functionReferenceTypeDefinitionEClass.getESuperTypes().add(this.getType());
-    voidTypeDefinitionEClass.getESuperTypes().add(this.getType());
+    voidTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     assignmentEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     functionCallEClass.getESuperTypes().add(this.getExpression());

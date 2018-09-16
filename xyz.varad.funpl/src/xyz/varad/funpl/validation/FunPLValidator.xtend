@@ -19,6 +19,12 @@ import java.util.List
 import xyz.varad.funpl.funPL.Value
 import xyz.varad.funpl.funPL.FunctionParam
 import xyz.varad.funpl.funPL.Assignment
+import xyz.varad.funpl.funPL.Plus
+import xyz.varad.funpl.typing.FunPLTypeProvider
+import xyz.varad.funpl.funPL.Type
+import java.util.ArrayList
+import java.util.HashSet
+import xyz.varad.funpl.funPL.FunctionCall
 
 /**
  * This class contains custom validation rules. 
@@ -26,23 +32,25 @@ import xyz.varad.funpl.funPL.Assignment
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class FunPLValidator extends AbstractFunPLValidator {
-	// TODO expression types (plus, assignment)
-	// TODO symbol expression type vs. symbol type OR type inference when null
-	// TODO function call #args=#params
-	// TODO function params and args type
-	// TODO disable def. references in global scope???
-	// TODO value def EITHER Expression -> type inference OR Type
-	// TODO function return statement should correspond to its type AND each other 
-	// TODO non-void function should have return statements 
-	
+	// FIXME disable def. references in global scope???
+	// FIXME non-void function should have return statement (when if-else added) 
+	// FIXME function call signature stringRepr e.g. foo(int, int, string)
+		
 	static val ISSUE_CODE_PREFIX = "xyz.varad.funpl."
 	public static val SYMBOL_REDEFINITION = ISSUE_CODE_PREFIX + "SymbolRedefinition"
+	public static val INVALID_VALUE_DEFINITION = ISSUE_CODE_PREFIX + "InvalidValueDefinition"
 	public static val INVALID_ASSIGNMENT = ISSUE_CODE_PREFIX + "InvalidAssignment"
+	public static val INVALID_ADDITION = ISSUE_CODE_PREFIX + "InvalidAddition"
+	public static val AMBIGUOUS_RETURN_TYPE = ISSUE_CODE_PREFIX + "AmbiguousReturnType"
+	public static val MISSING_RETURN_STATEMENT = ISSUE_CODE_PREFIX + "MissingReturnStatement"
 	public static val CONSTANT_REASSIGNMENT = ISSUE_CODE_PREFIX + "ConstantReassignment"
 	public static val UNDEFINED_CONSTANT = ISSUE_CODE_PREFIX + "UndefinedConstant"
+	public static val INVALID_FUNCTION_CALL = ISSUE_CODE_PREFIX + "InvalidFunctionCall"
 	
-	//@Inject extension FunPLModelUtil
+	@Inject extension FunPLModelUtil
+	@Inject extension FunPLTypeProvider
 	
+	/////////////////////////////////SCOPING-RELATED RULES/////////////////////////////////////////////
 	
 	@Check
 	def void checkSymbolRedefinitionAsNeighbor(Definition _d){
@@ -78,7 +86,24 @@ class FunPLValidator extends AbstractFunPLValidator {
 		}
 	}
 	
+	//////////////////////////////////EXPRESSION AND TYPING-RELATED RULES//////////////////////////////////////////
 	
+	@Check
+	def void checkValueDefinitionValidity(Value _v){
+		if(_v.expression !== null){
+			if(!(_v.typeFor.isSame(_v.expression.typeFor))){
+				error("The operation is undefined for argument type(s) " + _v.typeFor.typeString + ", " + _v.expression.typeFor.typeString,
+					null,
+					INVALID_VALUE_DEFINITION
+				)
+			}
+		}else if(_v.typeFor === null){
+			error("The value '" + _v.name + "' must either have a declared type or be initialized",
+					null,
+					INVALID_VALUE_DEFINITION
+				)
+		}
+	}
 	
 	@Check
 	def void checkAssignmentExpressionValidity(Assignment _a){
@@ -86,8 +111,52 @@ class FunPLValidator extends AbstractFunPLValidator {
 			error("Invalid assignment", FunPLPackage::eINSTANCE.assignment_Left, INVALID_ASSIGNMENT)
 		}else if((_a.left as SymbolRef).symbol instanceof Function){
 			error("Invalid assignment", FunPLPackage::eINSTANCE.assignment_Left, INVALID_ASSIGNMENT)
+		}else if(!(_a.left as SymbolRef).symbol.typeFor.isSame(_a.right.typeFor)){
+			error("The operation is undefined for argument type(s) " + _a.left.typeFor.typeString + ", " + _a.right.typeFor.typeString , 
+				null, 
+				INVALID_ASSIGNMENT
+			)
+		}
+		
+	}
+	
+	@Check
+	def void checkPlusExpressionValidity(Plus _p){
+		if(!(_p.left.typeFor.isInt && _p.right.typeFor.isInt)){
+			error("The operation is undefined for argument type(s) " + _p.left.typeFor.typeString + ", " + _p.right.typeFor.typeString + "!",
+				null,
+				INVALID_ADDITION
+			)
 		}
 	}
+	
+	@Check
+	def void checkFunctionReturnTypesSame(Function _f){
+		val declaredOrFirst = _f.returnTypeFor
+		val res = _f.returnStatements
+		for(r : res){
+			if(!r.typeFor.isSame(declaredOrFirst)){
+				error("Multiple return types in function '" + _f.name + "'!",
+					FunPLPackage::eINSTANCE.symbol_Name,
+					AMBIGUOUS_RETURN_TYPE
+				)
+			}
+		}
+		
+	}
+	
+	@Check
+	def void checkFunctionHasReturnStatement(Function _f){	//TODO Sophisticate!
+		val res = _f.returnStatements
+		if(res.size == 0 && !_f.returnTypeFor.isVoid){
+			error("Missing return statement in function '" + _f.name + "'!",
+					FunPLPackage::eINSTANCE.symbol_Name,
+					MISSING_RETURN_STATEMENT
+				)
+		}
+	}
+	
+	///////////////////////////////////OTHER RULES/////////////////////////////////////////////
 	
 	@Check
 	def void checkConstantReassignment(Assignment _a){
@@ -119,8 +188,26 @@ class FunPLValidator extends AbstractFunPLValidator {
 		}
 	}
 	
+	@Check
+	def void checkFunctionCallValidity(FunctionCall _fc){
+		if(_fc.args.size != _fc.function.params.size){
+			error("The function call signature does not match any possible function definitions",
+				null,
+				INVALID_FUNCTION_CALL
+			)
+		}else{
+			for(var i = 0; i < _fc.args.size; i++){
+				if(!(_fc.args.get(i).typeFor.isSame(_fc.function.params.get(i).typeFor))){
+					error("The function call signature does not match any possible function definitions",
+							null,
+							INVALID_FUNCTION_CALL
+						)
+				}
+			}
+		}
+	}
 	
-	
+	////////////////////////////////ADDITIONAL HELPER METHODS///////////////////////////////////////////
 	
 	def private boolean containsSameNamedSymbol(Iterable<? extends Symbol> _l, Symbol _s){
 		val _it = _l.iterator

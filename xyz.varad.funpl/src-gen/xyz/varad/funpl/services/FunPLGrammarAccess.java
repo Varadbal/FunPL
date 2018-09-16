@@ -179,8 +179,9 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//Function:
-		//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
-		//	params+=FunctionParam)*)? ')' body=Block;
+		//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID
+		//	'(' (params+=FunctionParam (',' params+=FunctionParam)*)? ')'
+		//	body=Block;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
@@ -335,29 +336,33 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	public class ReturnStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.ReturnStatement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cReturnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpressionExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Action cReturnStatementAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cReturnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ReturnStatement:
-		//	'return' expression=Expression ';';
+		//	{ReturnStatement} 'return' expression=Expression? ';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'return' expression=Expression ';'
+		//{ReturnStatement} 'return' expression=Expression? ';'
 		public Group getGroup() { return cGroup; }
 		
-		//'return'
-		public Keyword getReturnKeyword_0() { return cReturnKeyword_0; }
+		//{ReturnStatement}
+		public Action getReturnStatementAction_0() { return cReturnStatementAction_0; }
 		
-		//expression=Expression
-		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+		//'return'
+		public Keyword getReturnKeyword_1() { return cReturnKeyword_1; }
+		
+		//expression=Expression?
+		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
 		
 		//Expression
-		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
+		public RuleCall getExpressionExpressionParserRuleCall_2_0() { return cExpressionExpressionParserRuleCall_2_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.Type");
@@ -466,7 +471,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xyz.varad.funpl.FunPL.VoidTypeDefinition");
 		private final Action cVoidTypeDefinitionAction = (Action)rule.eContents().get(1);
 		
-		//VoidTypeDefinition Type:
+		//VoidTypeDefinition TypeDefinition:
 		//	{VoidTypeDefinition};
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -883,8 +888,9 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Function:
-	//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID '(' (params+=FunctionParam (','
-	//	params+=FunctionParam)*)? ')' body=Block;
+	//	'function' type=FunctionReferenceTypeDefinition returnType=Type? name=ID
+	//	'(' (params+=FunctionParam (',' params+=FunctionParam)*)? ')'
+	//	body=Block;
 	public FunctionElements getFunctionAccess() {
 		return pFunction;
 	}
@@ -926,7 +932,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ReturnStatement:
-	//	'return' expression=Expression ';';
+	//	{ReturnStatement} 'return' expression=Expression? ';';
 	public ReturnStatementElements getReturnStatementAccess() {
 		return pReturnStatement;
 	}
@@ -996,7 +1002,7 @@ public class FunPLGrammarAccess extends AbstractGrammarElementFinder {
 		return getFunctionReferenceTypeDefinitionAccess().getRule();
 	}
 	
-	//VoidTypeDefinition Type:
+	//VoidTypeDefinition TypeDefinition:
 	//	{VoidTypeDefinition};
 	public VoidTypeDefinitionElements getVoidTypeDefinitionAccess() {
 		return pVoidTypeDefinition;

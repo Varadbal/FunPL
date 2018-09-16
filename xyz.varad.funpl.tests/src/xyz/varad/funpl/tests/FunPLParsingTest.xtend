@@ -40,10 +40,10 @@ class FunPLParsingTest {
 	
 	@Test
 	def void testValueDeclaration(){
-		'''var i;'''.parse.assertNoErrors
+		'''var int i;'''.parse.assertNoErrors
 		'''var i = 5;'''.parse.assertNoErrors
 		'''
-		var i = 3;
+		var int i = 3;
 		const j = i;
 		'''.parse.assertNoErrors
 		'''var int i = 3;'''.parse.assertNoErrors
@@ -88,8 +88,8 @@ class FunPLParsingTest {
 		function myFunc(){
 			var i = 5;
 			myFunc();
-			myFunc2(1, 2);
-			myFunc3(1, 1, 5);
+			myFunc2(1, true);
+			myFunc3(1, 3, 5);
 			myFunc3(1 + 2, 1 + (3 + 4), i = 2);
 		}
 		
@@ -97,23 +97,12 @@ class FunPLParsingTest {
 			
 		}
 		
-		function myFunc3(int p1, bool p2, string p3){
+		function myFunc3(int p1, int p2, int p3){
 			
 		}
 		'''.parse.assertNoErrors
 	}
 	
-	def private testFunctionLocal(CharSequence toInsert){
-		'''
-		function myFunc(int p1, int p2){
-			var a;
-			var b;
-			var v = 1;
-			const c = 2;
-			«toInsert»
-		}
-		'''.parse.assertNoErrors
-	}
 	
 	@Test
 	def void testAssignmentAssociativity(){
@@ -198,6 +187,17 @@ class FunPLParsingTest {
 		'''.parse.assertNoErrors;
 	}	
 	
+	def private testFunctionLocal(CharSequence toInsert){
+		'''
+		function myFunc(int p1, int p2){
+			var int a;
+			var int b;
+			var v = 1;
+			const c = 2;
+			«toInsert»
+		}
+		'''.parse.assertNoErrors
+	}
 	
 	def private void assertAssociativity(Statement s, CharSequence expected){
 		expected.toString.assertEquals(s.stringRepr)

@@ -50,13 +50,13 @@ public class FunPLParsingTest {
   public void testValueDeclaration() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("var i;");
+      _builder.append("var int i;");
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("var i = 5;");
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("var i = 3;");
+      _builder_2.append("var int i = 3;");
       _builder_2.newLine();
       _builder_2.append("const j = i;");
       _builder_2.newLine();
@@ -119,10 +119,10 @@ public class FunPLParsingTest {
       _builder.append("myFunc();");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("myFunc2(1, 2);");
+      _builder.append("myFunc2(1, true);");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("myFunc3(1, 1, 5);");
+      _builder.append("myFunc3(1, 3, 5);");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("myFunc3(1 + 2, 1 + (3 + 4), i = 2);");
@@ -137,38 +137,10 @@ public class FunPLParsingTest {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("function myFunc3(int p1, bool p2, string p3){");
+      _builder.append("function myFunc3(int p1, int p2, int p3){");
       _builder.newLine();
       _builder.append("\t");
       _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  private void testFunctionLocal(final CharSequence toInsert) {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("function myFunc(int p1, int p2){");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("var a;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("var b;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("var v = 1;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("const c = 2;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append(toInsert, "\t");
-      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
@@ -337,6 +309,34 @@ public class FunPLParsingTest {
       _builder.append("\t");
       _builder.append("return 2;");
       _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void testFunctionLocal(final CharSequence toInsert) {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function myFunc(int p1, int p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var int a;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var int b;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("var v = 1;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("const c = 2;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append(toInsert, "\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder));

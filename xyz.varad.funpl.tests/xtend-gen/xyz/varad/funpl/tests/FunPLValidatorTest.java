@@ -52,7 +52,7 @@ public class FunPLValidatorTest {
       _builder.newLine();
       FunProgram _parse = this._parseHelper.parse(_builder);
       final Procedure1<FunProgram> _function = (FunProgram it) -> {
-        Assert.assertTrue(((this._validationTestHelper.validate(it).size() == 1) && Objects.equal(IterableExtensions.<Issue>head(this._validationTestHelper.validate(it)).getMessage(), "Couldn\'t resolve reference to Symbol \'j\'.")));
+        Assert.assertTrue(((this._validationTestHelper.validate(it).size() == 2) && Objects.equal(IterableExtensions.<Issue>head(this._validationTestHelper.validate(it)).getMessage(), "Couldn\'t resolve reference to Symbol \'j\'.")));
       };
       ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
     } catch (Throwable _e) {
@@ -78,7 +78,7 @@ public class FunPLValidatorTest {
       _builder.newLine();
       FunProgram _parse = this._parseHelper.parse(_builder);
       final Procedure1<FunProgram> _function = (FunProgram it) -> {
-        Assert.assertTrue(((this._validationTestHelper.validate(it).size() == 1) && Objects.equal(IterableExtensions.<Issue>head(this._validationTestHelper.validate(it)).getMessage(), "Couldn\'t resolve reference to Symbol \'j\'.")));
+        Assert.assertTrue(((this._validationTestHelper.validate(it).size() == 2) && Objects.equal(IterableExtensions.<Issue>head(this._validationTestHelper.validate(it)).getMessage(), "Couldn\'t resolve reference to Symbol \'j\'.")));
       };
       ObjectExtensions.<FunProgram>operator_doubleArrow(_parse, _function);
     } catch (Throwable _e) {
@@ -239,6 +239,30 @@ public class FunPLValidatorTest {
   }
   
   @Test
+  public void testValueDefinitionValidity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("var int i = \"asd\";");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getValue(), 
+        FunPLValidator.INVALID_VALUE_DEFINITION, 
+        "The operation is undefined for argument type(s) int, string");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("var i = \"asd\";");
+      _builder_1.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("var i;");
+      _builder_2.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_2), FunPLPackage.eINSTANCE.getValue(), 
+        FunPLValidator.INVALID_VALUE_DEFINITION, 
+        "The value \'i\' must either have a declared type or be initialized");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testInvalidAssignment() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -269,6 +293,122 @@ public class FunPLValidatorTest {
       this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getStatement(), 
         FunPLValidator.INVALID_ASSIGNMENT, 
         "Invalid assignment");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("function foo(){");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("var int i = 5;");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("i = true;");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_2), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.INVALID_ASSIGNMENT, 
+        "The operation is undefined for argument type(s) int, bool");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testInvalidAddition() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("5 + \"a\";");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getExpression(), 
+        FunPLValidator.INVALID_ADDITION, 
+        "The operation is undefined for argument type(s) int, string!");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("var i = 5 + true;");
+      _builder_1.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getExpression(), 
+        FunPLValidator.INVALID_ADDITION, 
+        "The operation is undefined for argument type(s) int, bool!");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionReturnTypesSame() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return 5;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getFunction(), 
+        FunPLValidator.AMBIGUOUS_RETURN_TYPE, 
+        "Multiple return types in function \'foo\'");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("function string foo(){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("return 5;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getFunction(), 
+        FunPLValidator.AMBIGUOUS_RETURN_TYPE, 
+        "Multiple return types in function \'foo\'");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("function int foo(){");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("return 5;");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_2));
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("function foo(){");
+      _builder_3.newLine();
+      _builder_3.append("\t");
+      _builder_3.append("return;");
+      _builder_3.newLine();
+      _builder_3.append("}");
+      _builder_3.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_3));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionHasReturnStatement() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function int foo(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getFunction(), 
+        FunPLValidator.MISSING_RETURN_STATEMENT, 
+        "Missing return statement in function \'foo\'");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("function foo(){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -309,6 +449,63 @@ public class FunPLValidatorTest {
       _builder_1.append("const i = 1;");
       _builder_1.newLine();
       this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_1));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFunctionCallValidity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("function foo(int p1, int p2){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("function bar(){");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("foo(5);");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.INVALID_FUNCTION_CALL, 
+        "The function call signature does not match any possible function definitions");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("function foo(int p1, bool p2, string p3){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("function bar(){");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("foo(5, 5, 5);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this._validationTestHelper.assertError(this._parseHelper.parse(_builder_1), FunPLPackage.eINSTANCE.getStatement(), 
+        FunPLValidator.INVALID_FUNCTION_CALL, 
+        "The function call signature does not match any possible function definitions");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("function foo(int p1, bool p2, string p3){");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _builder_2.append("function bar(){");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("foo(5, false, \"asddsa\");");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this._validationTestHelper.assertNoErrors(this._parseHelper.parse(_builder_2));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

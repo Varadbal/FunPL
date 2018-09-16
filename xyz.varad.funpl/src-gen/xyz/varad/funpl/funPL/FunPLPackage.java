@@ -559,7 +559,7 @@ public interface FunPLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VOID_TYPE_DEFINITION_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+  int VOID_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.AssignmentImpl <em>Assignment</em>}' class.

@@ -216,6 +216,7 @@ public class FunPLSwitch<T> extends Switch<T>
       {
         VoidTypeDefinition voidTypeDefinition = (VoidTypeDefinition)theEObject;
         T result = caseVoidTypeDefinition(voidTypeDefinition);
+        if (result == null) result = caseTypeDefinition(voidTypeDefinition);
         if (result == null) result = caseType(voidTypeDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
