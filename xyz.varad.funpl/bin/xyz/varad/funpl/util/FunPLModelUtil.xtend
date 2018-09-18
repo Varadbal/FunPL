@@ -14,6 +14,7 @@ import xyz.varad.funpl.funPL.Value
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import xyz.varad.funpl.funPL.ReturnStatement
+import xyz.varad.funpl.funPL.Definition
 
 class FunPLModelUtil{
 
@@ -74,6 +75,11 @@ class FunPLModelUtil{
 	
 	def static symbols(FunProgram f){
 		f.elements.typeSelect(typeof(Symbol))
+	}
+	
+	//TODO test
+	def static definitions(FunProgram f){
+		f.elements.typeSelect(typeof(Definition))
 	}
 	
 	//Function

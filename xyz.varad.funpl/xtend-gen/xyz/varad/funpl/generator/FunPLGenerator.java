@@ -3,10 +3,40 @@
  */
 package xyz.varad.funpl.generator;
 
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+import java.util.Arrays;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import xyz.varad.funpl.funPL.Assignment;
+import xyz.varad.funpl.funPL.BoolConstant;
+import xyz.varad.funpl.funPL.BoolTypeDefinition;
+import xyz.varad.funpl.funPL.Definition;
+import xyz.varad.funpl.funPL.Expression;
+import xyz.varad.funpl.funPL.FunProgram;
+import xyz.varad.funpl.funPL.Function;
+import xyz.varad.funpl.funPL.FunctionCall;
+import xyz.varad.funpl.funPL.FunctionParam;
+import xyz.varad.funpl.funPL.FunctionReferenceTypeDefinition;
+import xyz.varad.funpl.funPL.IntConstant;
+import xyz.varad.funpl.funPL.IntTypeDefinition;
+import xyz.varad.funpl.funPL.Plus;
+import xyz.varad.funpl.funPL.ReturnStatement;
+import xyz.varad.funpl.funPL.Statement;
+import xyz.varad.funpl.funPL.StringConstant;
+import xyz.varad.funpl.funPL.StringTypeDefinition;
+import xyz.varad.funpl.funPL.SymbolRef;
+import xyz.varad.funpl.funPL.Type;
+import xyz.varad.funpl.funPL.Value;
+import xyz.varad.funpl.funPL.VoidTypeDefinition;
+import xyz.varad.funpl.typing.FunPLTypeProvider;
 
 /**
  * Generates code from your model files on save.
@@ -15,7 +45,302 @@ import org.eclipse.xtext.generator.IGeneratorContext;
  */
 @SuppressWarnings("all")
 public class FunPLGenerator extends AbstractGenerator {
+  @Inject
+  @Extension
+  private FunPLTypeProvider _funPLTypeProvider;
+  
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final Iterable<FunProgram> funPrograms = Iterables.<FunProgram>filter(resource.getContents(), FunProgram.class);
+    FunProgram _head = IterableExtensions.<FunProgram>head(funPrograms);
+    final Iterable<Definition> topLevelDefs = Iterables.<Definition>filter(((EObject) _head).eContents(), Definition.class);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.lang.String;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class FunProgram{");
+    _builder.newLine();
+    {
+      for(final Definition definition : topLevelDefs) {
+        _builder.append("public static ");
+        String _compile = this.compile(definition);
+        _builder.append(_compile);
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    fsa.generateFile("FunProgram.java", _builder);
+  }
+  
+  protected String _compile(final Definition v) {
+    boolean _matched = false;
+    if (v instanceof Value) {
+      _matched=true;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        boolean _isConst = ((Value)v).isConst();
+        if (_isConst) {
+          _builder.append("final ");
+        }
+      }
+      String _javaTypeString = this.javaTypeString(this._funPLTypeProvider.typeFor(v));
+      _builder.append(_javaTypeString);
+      _builder.append(" ");
+      String _name = ((Value)v).getName();
+      _builder.append(_name);
+      _builder.append(" ");
+      {
+        Expression _expression = ((Value)v).getExpression();
+        boolean _tripleNotEquals = (_expression != null);
+        if (_tripleNotEquals) {
+          _builder.append("= ");
+          String _compile = this.compile(((Value)v).getExpression());
+          _builder.append(_compile);
+        }
+      }
+      _builder.append(";");
+      return _builder.toString();
+    }
+    if (!_matched) {
+      if (v instanceof Function) {
+        _matched=true;
+        final String functionType = this.javaTypeString(this._funPLTypeProvider.returnTypeFor(((Function)v)));
+        String _name = ((Function)v).getName();
+        String _plus = ((functionType + " ") + _name);
+        String ret = (_plus + "(");
+        EList<FunctionParam> _params = ((Function)v).getParams();
+        for (final FunctionParam p : _params) {
+          {
+            String _ret = ret;
+            String _javaTypeString = this.javaTypeString(this._funPLTypeProvider.typeFor(p));
+            String _name_1 = p.getName();
+            String _plus_1 = (_javaTypeString + _name_1);
+            ret = (_ret + _plus_1);
+            FunctionParam _last = IterableExtensions.<FunctionParam>last(((Function)v).getParams());
+            boolean _tripleNotEquals = (p != _last);
+            if (_tripleNotEquals) {
+              String _ret_1 = ret;
+              ret = (_ret_1 + ", ");
+            }
+          }
+        }
+        String _ret = ret;
+        ret = (_ret + "){ \n");
+        EList<Statement> _statements = ((Function)v).getBody().getStatements();
+        for (final Statement s : _statements) {
+          String _ret_1 = ret;
+          String _compile = this.compile(s);
+          String _plus_1 = (_compile + ";\n");
+          ret = (_ret_1 + _plus_1);
+        }
+        String _ret_2 = ret;
+        ret = (_ret_2 + "}");
+        StringConcatenation _builder = new StringConcatenation();
+        String _javaTypeString = this.javaTypeString(this._funPLTypeProvider.returnTypeFor(((Function)v)));
+        _builder.append(_javaTypeString);
+        _builder.append(" ");
+        String _name_1 = ((Function)v).getName();
+        _builder.append(_name_1);
+        _builder.append("(");
+        {
+          EList<FunctionParam> _params_1 = ((Function)v).getParams();
+          for(final FunctionParam p_1 : _params_1) {
+            String _javaTypeString_1 = this.javaTypeString(this._funPLTypeProvider.typeFor(p_1));
+            _builder.append(_javaTypeString_1);
+            _builder.append(" ");
+            String _name_2 = p_1.getName();
+            _builder.append(_name_2);
+            {
+              FunctionParam _last = IterableExtensions.<FunctionParam>last(((Function)v).getParams());
+              boolean _tripleEquals = (p_1 == _last);
+              boolean _not = (!_tripleEquals);
+              if (_not) {
+                _builder.append(", ");
+              }
+            }
+          }
+        }
+        _builder.append("){");
+        _builder.newLineIfNotEmpty();
+        {
+          EList<Statement> _statements_1 = ((Function)v).getBody().getStatements();
+          for(final Statement s_1 : _statements_1) {
+            _builder.append("\t\t\t\t");
+            String _compile_1 = this.compile(s_1);
+            _builder.append(_compile_1, "\t\t\t\t");
+            {
+              boolean _contains = this.compile(s_1).contains(";");
+              boolean _not_1 = (!_contains);
+              if (_not_1) {
+                _builder.append(";");
+              }
+            }
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        _builder.append("\t\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        return _builder.toString();
+      }
+    }
+    return null;
+  }
+  
+  protected String _compile(final Statement e) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (e instanceof Assignment) {
+      _matched=true;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("(");
+      String _compile = this.compile(((Assignment)e).getLeft());
+      _builder.append(_compile);
+      _builder.append(" = ");
+      String _compile_1 = this.compile(((Assignment)e).getRight());
+      _builder.append(_compile_1);
+      _builder.append(")");
+      _switchResult = _builder.toString();
+    }
+    if (!_matched) {
+      if (e instanceof Plus) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("(");
+        String _compile = this.compile(((Plus)e).getLeft());
+        _builder.append(_compile);
+        _builder.append(" + ");
+        String _compile_1 = this.compile(((Plus)e).getRight());
+        _builder.append(_compile_1);
+        _builder.append(")");
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (e instanceof FunctionCall) {
+        _matched=true;
+        String _name = ((FunctionCall)e).getFunction().getName();
+        String _plus = ("(" + _name);
+        String ret = (_plus + "(");
+        EList<Expression> _args = ((FunctionCall)e).getArgs();
+        for (final Expression a : _args) {
+          {
+            String _ret = ret;
+            String _compile = this.compile(a);
+            ret = (_ret + _compile);
+            Expression _last = IterableExtensions.<Expression>last(((FunctionCall)e).getArgs());
+            boolean _tripleNotEquals = (a != _last);
+            if (_tripleNotEquals) {
+              String _ret_1 = ret;
+              ret = (_ret_1 + ", ");
+            }
+          }
+        }
+        String _ret = ret;
+        ret = (_ret + "))");
+        return ret;
+      }
+    }
+    if (!_matched) {
+      if (e instanceof IntConstant) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        int _value = ((IntConstant)e).getValue();
+        _builder.append(_value);
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (e instanceof StringConstant) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\"");
+        String _value = ((StringConstant)e).getValue();
+        _builder.append(_value);
+        _builder.append("\"");
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (e instanceof BoolConstant) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        String _value = ((BoolConstant)e).getValue();
+        _builder.append(_value);
+        _switchResult = _builder.toString();
+      }
+    }
+    if (!_matched) {
+      if (e instanceof SymbolRef) {
+        _matched=true;
+        _switchResult = ((SymbolRef)e).getSymbol().getName();
+      }
+    }
+    if (!_matched) {
+      if (e instanceof Value) {
+        _matched=true;
+        _switchResult = this.compile(e);
+      }
+    }
+    if (!_matched) {
+      if (e instanceof ReturnStatement) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("return ");
+        String _compile = this.compile(((ReturnStatement)e).getExpression());
+        _builder.append(_compile);
+        _switchResult = _builder.toString();
+      }
+    }
+    return _switchResult;
+  }
+  
+  protected String _javaTypeString(final IntTypeDefinition _d) {
+    return "int";
+  }
+  
+  protected String _javaTypeString(final BoolTypeDefinition _d) {
+    return "boolean";
+  }
+  
+  protected String _javaTypeString(final StringTypeDefinition _d) {
+    return "String";
+  }
+  
+  protected String _javaTypeString(final VoidTypeDefinition _d) {
+    return "void";
+  }
+  
+  protected String _javaTypeString(final FunctionReferenceTypeDefinition _d) {
+    return "Throw exception here";
+  }
+  
+  public String compile(final EObject v) {
+    if (v instanceof Definition) {
+      return _compile((Definition)v);
+    } else if (v instanceof Statement) {
+      return _compile((Statement)v);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(v).toString());
+    }
+  }
+  
+  public String javaTypeString(final Type _d) {
+    if (_d instanceof BoolTypeDefinition) {
+      return _javaTypeString((BoolTypeDefinition)_d);
+    } else if (_d instanceof IntTypeDefinition) {
+      return _javaTypeString((IntTypeDefinition)_d);
+    } else if (_d instanceof StringTypeDefinition) {
+      return _javaTypeString((StringTypeDefinition)_d);
+    } else if (_d instanceof VoidTypeDefinition) {
+      return _javaTypeString((VoidTypeDefinition)_d);
+    } else if (_d instanceof FunctionReferenceTypeDefinition) {
+      return _javaTypeString((FunctionReferenceTypeDefinition)_d);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(_d).toString());
+    }
   }
 }

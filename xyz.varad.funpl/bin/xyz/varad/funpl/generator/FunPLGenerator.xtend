@@ -7,6 +7,14 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import xyz.varad.funpl.funPL.*
+import xyz.varad.funpl.typing.FunPLTypeProvider
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import java.util.HashSet
+import java.util.HashMap
+import org.eclipse.emf.common.util.BasicEList
+import java.util.List
 
 /**
  * Generates code from your model files on save.
@@ -14,12 +22,106 @@ import org.eclipse.xtext.generator.IGeneratorContext
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class FunPLGenerator extends AbstractGenerator {
+	
+	@Inject extension FunPLTypeProvider
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		
+		val funPrograms = resource.contents.filter(FunProgram)
+		val topLevelDefs = (funPrograms.head as EObject).eContents.filter(Definition)
+		
+		fsa.generateFile("FunProgram.java",
+			'''
+			import java.lang.String;
+			
+			public class FunProgram{
+			«FOR definition : topLevelDefs»
+				public static «definition.compile»
+			«ENDFOR»
+			}
+			'''
+		)
 	}
+	
+	
+	////////////////////////// TYPE STRINGS - TODO EXTRACT AND INJECT/////////////////////////////////////
+	def dispatch String compile(Definition v){
+		switch(v){
+			Value: {
+				return '''«IF v.isConst»final «ENDIF»«v.typeFor.javaTypeString» «v.name» «IF v.expression !== null»= «v.expression.compile»«ENDIF»;'''
+			}
+			Function:{
+				val functionType = v.returnTypeFor.javaTypeString
+				var ret = functionType + " " + v.name + "("
+				for(p : v.params){
+					ret += p.typeFor.javaTypeString + p.name
+					if(p !== v.params.last)
+					ret += ", " 
+				}
+				ret += "){ \n"
+				for(s : v.body.statements){
+					ret += s.compile + ";\n"
+				}
+				ret += "}"
+				return '''«v.returnTypeFor.javaTypeString» «v.name»(«FOR p : v.params»«p.typeFor.javaTypeString» «p.name»«IF !(p === v.params.last)», «ENDIF»«ENDFOR»){
+				«FOR s : v.body.statements»
+					«s.compile»«IF !s.compile.contains(";")»;«ENDIF»
+				«ENDFOR»
+				}
+				'''
+			}
+		}
+		
+	}
+	
+	def dispatch String compile(Statement e){
+		switch(e){
+			Assignment:'''(«e.left.compile» = «e.right.compile»)'''
+			Plus: '''(«e.left.compile» + «e.right.compile»)'''
+			FunctionCall: {
+				var ret = "(" + e.function.name + "("
+				for(a : e.args){
+					ret += a.compile
+					if(a !== e.args.last){	//Pointer-equality !!
+						ret += ", "
+					}
+				}
+				ret += "))"
+				return ret
+			}
+			IntConstant: '''«e.value»'''
+			StringConstant: '''"«e.value»"'''
+			BoolConstant: '''«e.value»'''
+			SymbolRef: e.symbol.name
+			Value: e.compile
+			ReturnStatement: {
+				'''return «e.expression.compile»'''
+			}
+		}
+	}
+	
+	/////////////////////////////TYPE STRING-REPRESENTATIONS FOR JAVA - TODO EXTRACT///////////////////////////////
+	
+	def dispatch String javaTypeString(IntTypeDefinition _d){
+		return "int"
+	}
+	
+	def dispatch String javaTypeString(BoolTypeDefinition _d){
+		return "boolean"
+	}
+	
+	def dispatch String javaTypeString(StringTypeDefinition _d){
+		return "String"
+	}
+	
+	def dispatch String javaTypeString(VoidTypeDefinition _d){
+		return "void"
+	}
+	
+	//Force other parent - no function
+	def dispatch String javaTypeString(FunctionReferenceTypeDefinition _d){
+		return "Throw exception here"
+	}
+
+	
 }

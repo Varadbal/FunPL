@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import xyz.varad.funpl.funPL.Block;
+import xyz.varad.funpl.funPL.Definition;
 import xyz.varad.funpl.funPL.Expression;
 import xyz.varad.funpl.funPL.FunProgram;
 import xyz.varad.funpl.funPL.Function;
@@ -72,6 +73,10 @@ public class FunPLModelUtil {
   
   public static List<Symbol> symbols(final FunProgram f) {
     return EcoreUtil2.<Symbol>typeSelect(f.getElements(), Symbol.class);
+  }
+  
+  public static List<Definition> definitions(final FunProgram f) {
+    return EcoreUtil2.<Definition>typeSelect(f.getElements(), Definition.class);
   }
   
   public static List<Value> values(final Function f) {
