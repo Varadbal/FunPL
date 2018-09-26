@@ -160,22 +160,13 @@ public interface FunPLPackage extends EPackage {
 	int DECLARATION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARATION__RETURN_TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Declared Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION__DECLARED_TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+	int DECLARATION__DECLARED_TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
@@ -184,7 +175,7 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+	int DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link xyz.varad.funpl.funPL.TypeInferredElement <em>Type Inferred Element</em>}' class.
@@ -197,22 +188,13 @@ public interface FunPLPackage extends EPackage {
 	int TYPE_INFERRED_ELEMENT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_INFERRED_ELEMENT__RETURN_TYPE = 0;
-
-	/**
 	 * The number of structural features of the '<em>Type Inferred Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_INFERRED_ELEMENT_FEATURE_COUNT = 1;
+	int TYPE_INFERRED_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link xyz.varad.funpl.funPL.TypeDeclaredElement <em>Type Declared Element</em>}' class.
@@ -223,15 +205,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	int TYPE_DECLARED_ELEMENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DECLARED_ELEMENT__RETURN_TYPE = TYPE_INFERRED_ELEMENT__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Declared Type</b></em>' containment reference.
@@ -290,22 +263,13 @@ public interface FunPLPackage extends EPackage {
 	int VALUE_DECLARATION__NAME = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_DECLARATION__RETURN_TYPE = STATEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Declared Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_DECLARATION__DECLARED_TYPE = STATEMENT_FEATURE_COUNT + 2;
+	int VALUE_DECLARATION__DECLARED_TYPE = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -314,7 +278,7 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_DECLARATION__CONSTANT = STATEMENT_FEATURE_COUNT + 3;
+	int VALUE_DECLARATION__CONSTANT = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -323,7 +287,7 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_DECLARATION__EXPRESSION = STATEMENT_FEATURE_COUNT + 4;
+	int VALUE_DECLARATION__EXPRESSION = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Value Declaration</em>' class.
@@ -332,7 +296,7 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 5;
+	int VALUE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.FunctionDeclarationImpl <em>Function Declaration</em>}' class.
@@ -352,15 +316,6 @@ public interface FunPLPackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION_DECLARATION__NAME = DECLARATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DECLARATION__RETURN_TYPE = DECLARATION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Declared Type</b></em>' containment reference.
@@ -465,22 +420,13 @@ public interface FunPLPackage extends EPackage {
 	int EXPRESSION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__RETURN_TYPE = STATEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+	int EXPRESSION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link xyz.varad.funpl.funPL.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
@@ -493,22 +439,13 @@ public interface FunPLPackage extends EPackage {
 	int RETURN_STATEMENT = 11;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RETURN_STATEMENT__RETURN_TYPE = STATEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_STATEMENT__EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+	int RETURN_STATEMENT__EXPRESSION = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Return Statement</em>' class.
@@ -517,7 +454,7 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+	int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link xyz.varad.funpl.funPL.LiteralExpression <em>Literal Expression</em>}' class.
@@ -528,15 +465,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	int LITERAL_EXPRESSION = 13;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_EXPRESSION__RETURN_TYPE = EXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Literal Expression</em>' class.
@@ -556,15 +484,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	int BINARY_EXPRESSION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINARY_EXPRESSION__RETURN_TYPE = EXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -604,15 +523,6 @@ public interface FunPLPackage extends EPackage {
 	int INTEGER_LITERAL_EXPRESSION = 15;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL_EXPRESSION__RETURN_TYPE = LITERAL_EXPRESSION__RETURN_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -641,15 +551,6 @@ public interface FunPLPackage extends EPackage {
 	int BOOLEAN_LITERAL_EXPRESSION = 16;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL_EXPRESSION__RETURN_TYPE = LITERAL_EXPRESSION__RETURN_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -676,15 +577,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	int PLUS_EXPRESSION = 17;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLUS_EXPRESSION__RETURN_TYPE = BINARY_EXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -722,15 +614,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	int ASSIGNMENT_EXPRESSION = 18;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_EXPRESSION__RETURN_TYPE = BINARY_EXPRESSION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -903,15 +786,6 @@ public interface FunPLPackage extends EPackage {
 	int REFERENCE_EXPRESSION = 26;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_EXPRESSION__RETURN_TYPE = EXPRESSION__RETURN_TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Argument List</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -984,15 +858,6 @@ public interface FunPLPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL_VALUE_DECLARATION__NAME = VALUE_DECLARATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FINAL_VALUE_DECLARATION__RETURN_TYPE = VALUE_DECLARATION__RETURN_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Declared Type</b></em>' containment reference.
@@ -1102,17 +967,6 @@ public interface FunPLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTypeInferredElement();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link xyz.varad.funpl.funPL.TypeInferredElement#getReturnType <em>Return Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Return Type</em>'.
-	 * @see xyz.varad.funpl.funPL.TypeInferredElement#getReturnType()
-	 * @see #getTypeInferredElement()
-	 * @generated
-	 */
-	EReference getTypeInferredElement_ReturnType();
 
 	/**
 	 * Returns the meta object for class '{@link xyz.varad.funpl.funPL.ValueDeclaration <em>Value Declaration</em>}'.
@@ -1606,14 +1460,6 @@ public interface FunPLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_INFERRED_ELEMENT = eINSTANCE.getTypeInferredElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_INFERRED_ELEMENT__RETURN_TYPE = eINSTANCE.getTypeInferredElement_ReturnType();
 
 		/**
 		 * The meta object literal for the '{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl <em>Value Declaration</em>}' class.

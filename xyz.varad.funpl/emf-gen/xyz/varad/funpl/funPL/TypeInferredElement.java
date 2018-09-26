@@ -10,12 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Type Inferred Element</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.TypeInferredElement#getReturnType <em>Return Type</em>}</li>
- * </ul>
  *
  * @see xyz.varad.funpl.funPL.FunPLPackage#getTypeInferredElement()
  * @model interface="true" abstract="true"
@@ -24,56 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TypeInferredElement extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return Type</em>' containment reference.
-	 * @see #isSetReturnType()
-	 * @see #unsetReturnType()
-	 * @see #setReturnType(Type)
-	 * @see xyz.varad.funpl.funPL.FunPLPackage#getTypeInferredElement_ReturnType()
-	 * @model containment="true" unsettable="true" transient="true" derived="true"
+	 * @model kind="operation"
 	 * @generated
 	 */
 	Type getReturnType();
-
-	/**
-	 * Sets the value of the '{@link xyz.varad.funpl.funPL.TypeInferredElement#getReturnType <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return Type</em>' containment reference.
-	 * @see #isSetReturnType()
-	 * @see #unsetReturnType()
-	 * @see #getReturnType()
-	 * @generated
-	 */
-	void setReturnType(Type value);
-
-	/**
-	 * Unsets the value of the '{@link xyz.varad.funpl.funPL.TypeInferredElement#getReturnType <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetReturnType()
-	 * @see #getReturnType()
-	 * @see #setReturnType(Type)
-	 * @generated
-	 */
-	void unsetReturnType();
-
-	/**
-	 * Returns whether the value of the '{@link xyz.varad.funpl.funPL.TypeInferredElement#getReturnType <em>Return Type</em>}' containment reference is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Return Type</em>' containment reference is set.
-	 * @see #unsetReturnType()
-	 * @see #getReturnType()
-	 * @see #setReturnType(Type)
-	 * @generated
-	 */
-	boolean isSetReturnType();
 
 } // TypeInferredElement

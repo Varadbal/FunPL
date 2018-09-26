@@ -386,15 +386,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeInferredElement_ReturnType() {
-		return (EReference)typeInferredElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getValueDeclaration() {
 		return valueDeclarationEClass;
 	}
@@ -780,7 +771,6 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage {
 		createEReference(typeDeclaredElementEClass, TYPE_DECLARED_ELEMENT__DECLARED_TYPE);
 
 		typeInferredElementEClass = createEClass(TYPE_INFERRED_ELEMENT);
-		createEReference(typeInferredElementEClass, TYPE_INFERRED_ELEMENT__RETURN_TYPE);
 
 		valueDeclarationEClass = createEClass(VALUE_DECLARATION);
 		createEAttribute(valueDeclarationEClass, VALUE_DECLARATION__CONSTANT);
@@ -916,7 +906,8 @@ public class FunPLPackageImpl extends EPackageImpl implements FunPLPackage {
 		initEReference(getTypeDeclaredElement_DeclaredType(), this.getType(), null, "declaredType", null, 0, 1, TypeDeclaredElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeInferredElementEClass, TypeInferredElement.class, "TypeInferredElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeInferredElement_ReturnType(), this.getType(), null, "returnType", null, 0, 1, TypeInferredElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(typeInferredElementEClass, this.getType(), "getReturnType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(valueDeclarationEClass, ValueDeclaration.class, "ValueDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getValueDeclaration_Constant(), theXMLTypePackage.getBoolean(), "constant", null, 0, 1, ValueDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

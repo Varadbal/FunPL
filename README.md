@@ -1,7 +1,7 @@
-#FunPL
+# FunPL
 A C++-like programming language, just for fun!
 
-##Example Code
+## Example Code
 ```
 var i = 1;
 const bool j = false;

@@ -17,7 +17,6 @@ import xyz.varad.funpl.funPL.Declaration;
 import xyz.varad.funpl.funPL.FunPLPackage;
 import xyz.varad.funpl.funPL.ReferenceExpression;
 import xyz.varad.funpl.funPL.Type;
-import xyz.varad.funpl.funPL.TypeInferredElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,6 @@ import xyz.varad.funpl.funPL.TypeInferredElement;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link xyz.varad.funpl.funPL.impl.ReferenceExpressionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ReferenceExpressionImpl#getArgumentList <em>Argument List</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ReferenceExpressionImpl#getDeclaration <em>Declaration</em>}</li>
  * </ul>
@@ -35,25 +33,6 @@ import xyz.varad.funpl.funPL.TypeInferredElement;
  * @generated
  */
 public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implements ReferenceExpression {
-	/**
-	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReturnType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type returnType;
-
-	/**
-	 * This is true if the Return Type containment reference has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean returnTypeESet;
-
 	/**
 	 * The cached value of the '{@link #getArgumentList() <em>Argument List</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -100,101 +79,6 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	protected EClass eStaticClass() {
 		return FunPLPackage.Literals.REFERENCE_EXPRESSION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type getReturnType() {
-		return returnType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetReturnType(Type newReturnType, NotificationChain msgs) {
-		Type oldReturnType = returnType;
-		returnType = newReturnType;
-		boolean oldReturnTypeESet = returnTypeESet;
-		returnTypeESet = true;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, oldReturnType, newReturnType, !oldReturnTypeESet);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReturnType(Type newReturnType) {
-		if (newReturnType != returnType) {
-			NotificationChain msgs = null;
-			if (returnType != null)
-				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, null, msgs);
-			if (newReturnType != null)
-				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, null, msgs);
-			msgs = basicSetReturnType(newReturnType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else {
-			boolean oldReturnTypeESet = returnTypeESet;
-			returnTypeESet = true;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, newReturnType, newReturnType, !oldReturnTypeESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicUnsetReturnType(NotificationChain msgs) {
-		Type oldReturnType = returnType;
-		returnType = null;
-		boolean oldReturnTypeESet = returnTypeESet;
-		returnTypeESet = false;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.UNSET, FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, oldReturnType, null, oldReturnTypeESet);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetReturnType() {
-		if (returnType != null) {
-			NotificationChain msgs = null;
-			msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, null, msgs);
-			msgs = basicUnsetReturnType(msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else {
-			boolean oldReturnTypeESet = returnTypeESet;
-			returnTypeESet = false;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.UNSET, FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE, null, null, oldReturnTypeESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetReturnType() {
-		return returnTypeESet;
 	}
 
 	/**
@@ -335,11 +219,18 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Type getReturnType() {
+		return xyz.varad.funpl.typing.FunPLTypeComputer.computeDeepType(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE:
-				return basicUnsetReturnType(msgs);
 			case FunPLPackage.REFERENCE_EXPRESSION__ARGUMENT_LIST:
 				return basicUnsetArgumentList(msgs);
 		}
@@ -354,8 +245,6 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE:
-				return getReturnType();
 			case FunPLPackage.REFERENCE_EXPRESSION__ARGUMENT_LIST:
 				return getArgumentList();
 			case FunPLPackage.REFERENCE_EXPRESSION__DECLARATION:
@@ -373,9 +262,6 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE:
-				setReturnType((Type)newValue);
-				return;
 			case FunPLPackage.REFERENCE_EXPRESSION__ARGUMENT_LIST:
 				setArgumentList((ArgumentList)newValue);
 				return;
@@ -394,9 +280,6 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE:
-				unsetReturnType();
-				return;
 			case FunPLPackage.REFERENCE_EXPRESSION__ARGUMENT_LIST:
 				unsetArgumentList();
 				return;
@@ -415,46 +298,12 @@ public class ReferenceExpressionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE:
-				return isSetReturnType();
 			case FunPLPackage.REFERENCE_EXPRESSION__ARGUMENT_LIST:
 				return isSetArgumentList();
 			case FunPLPackage.REFERENCE_EXPRESSION__DECLARATION:
 				return declaration != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeInferredElement.class) {
-			switch (derivedFeatureID) {
-				case FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE: return FunPLPackage.TYPE_INFERRED_ELEMENT__RETURN_TYPE;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeInferredElement.class) {
-			switch (baseFeatureID) {
-				case FunPLPackage.TYPE_INFERRED_ELEMENT__RETURN_TYPE: return FunPLPackage.REFERENCE_EXPRESSION__RETURN_TYPE;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //ReferenceExpressionImpl

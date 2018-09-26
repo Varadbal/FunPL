@@ -31,7 +31,6 @@ import xyz.varad.funpl.funPL.ValueDeclaration;
  * </p>
  * <ul>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl#getDeclaredType <em>Declared Type</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link xyz.varad.funpl.funPL.impl.ValueDeclarationImpl#getExpression <em>Expression</em>}</li>
@@ -59,25 +58,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReturnType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type returnType;
-
-	/**
-	 * This is true if the Return Type containment reference has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean returnTypeESet;
 
 	/**
 	 * The cached value of the '{@link #getDeclaredType() <em>Declared Type</em>}' containment reference.
@@ -175,101 +155,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE_DECLARATION__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type getReturnType() {
-		return returnType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetReturnType(Type newReturnType, NotificationChain msgs) {
-		Type oldReturnType = returnType;
-		returnType = newReturnType;
-		boolean oldReturnTypeESet = returnTypeESet;
-		returnTypeESet = true;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, oldReturnType, newReturnType, !oldReturnTypeESet);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReturnType(Type newReturnType) {
-		if (newReturnType != returnType) {
-			NotificationChain msgs = null;
-			if (returnType != null)
-				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, null, msgs);
-			if (newReturnType != null)
-				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, null, msgs);
-			msgs = basicSetReturnType(newReturnType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else {
-			boolean oldReturnTypeESet = returnTypeESet;
-			returnTypeESet = true;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET, FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, newReturnType, newReturnType, !oldReturnTypeESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicUnsetReturnType(NotificationChain msgs) {
-		Type oldReturnType = returnType;
-		returnType = null;
-		boolean oldReturnTypeESet = returnTypeESet;
-		returnTypeESet = false;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.UNSET, FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, oldReturnType, null, oldReturnTypeESet);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetReturnType() {
-		if (returnType != null) {
-			NotificationChain msgs = null;
-			msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, null, msgs);
-			msgs = basicUnsetReturnType(msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else {
-			boolean oldReturnTypeESet = returnTypeESet;
-			returnTypeESet = false;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.UNSET, FunPLPackage.VALUE_DECLARATION__RETURN_TYPE, null, null, oldReturnTypeESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetReturnType() {
-		return returnTypeESet;
 	}
 
 	/**
@@ -488,11 +373,18 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Type getReturnType() {
+		return xyz.varad.funpl.typing.FunPLTypeComputer.computeDeepType(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE:
-				return basicUnsetReturnType(msgs);
 			case FunPLPackage.VALUE_DECLARATION__DECLARED_TYPE:
 				return basicUnsetDeclaredType(msgs);
 			case FunPLPackage.VALUE_DECLARATION__EXPRESSION:
@@ -511,8 +403,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case FunPLPackage.VALUE_DECLARATION__NAME:
 				return getName();
-			case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE:
-				return getReturnType();
 			case FunPLPackage.VALUE_DECLARATION__DECLARED_TYPE:
 				return getDeclaredType();
 			case FunPLPackage.VALUE_DECLARATION__CONSTANT:
@@ -533,9 +423,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case FunPLPackage.VALUE_DECLARATION__NAME:
 				setName((String)newValue);
-				return;
-			case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE:
-				setReturnType((Type)newValue);
 				return;
 			case FunPLPackage.VALUE_DECLARATION__DECLARED_TYPE:
 				setDeclaredType((Type)newValue);
@@ -561,9 +448,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 			case FunPLPackage.VALUE_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE:
-				unsetReturnType();
-				return;
 			case FunPLPackage.VALUE_DECLARATION__DECLARED_TYPE:
 				unsetDeclaredType();
 				return;
@@ -587,8 +471,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case FunPLPackage.VALUE_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE:
-				return isSetReturnType();
 			case FunPLPackage.VALUE_DECLARATION__DECLARED_TYPE:
 				return isSetDeclaredType();
 			case FunPLPackage.VALUE_DECLARATION__CONSTANT:
@@ -619,7 +501,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		}
 		if (baseClass == TypeInferredElement.class) {
 			switch (derivedFeatureID) {
-				case FunPLPackage.VALUE_DECLARATION__RETURN_TYPE: return FunPLPackage.TYPE_INFERRED_ELEMENT__RETURN_TYPE;
 				default: return -1;
 			}
 		}
@@ -657,7 +538,6 @@ public class ValueDeclarationImpl extends MinimalEObjectImpl.Container implement
 		}
 		if (baseClass == TypeInferredElement.class) {
 			switch (baseFeatureID) {
-				case FunPLPackage.TYPE_INFERRED_ELEMENT__RETURN_TYPE: return FunPLPackage.VALUE_DECLARATION__RETURN_TYPE;
 				default: return -1;
 			}
 		}

@@ -26,6 +26,7 @@ Export-Package: xyz.varad.funpl,
  xyz.varad.funpl.scoping,
  xyz.varad.funpl.serializer,
  xyz.varad.funpl.services,
+ xyz.varad.funpl.typing,
  xyz.varad.funpl.util,
  xyz.varad.funpl.validation
 Import-Package: org.apache.log4j

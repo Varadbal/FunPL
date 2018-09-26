@@ -21,7 +21,7 @@ import xyz.varad.funpl.funPL.Declaration
  */
 class FunPLScopeProvider extends AbstractFunPLScopeProvider {
 	
-	/*override getScope(EObject context, EReference reference){
+	override getScope(EObject context, EReference reference){
 		if(reference == FunPLPackage.eINSTANCE.referenceExpression_Declaration){
 			return scopeForReferenceExpression(context)
 		}
@@ -37,7 +37,7 @@ class FunPLScopeProvider extends AbstractFunPLScopeProvider {
 			FunProgram: Scopes.scopeFor(container.elements.takeWhile[it != context].filter(Declaration))
 			default: scopeForReferenceExpression(container)	
 		}
-	}*/
+	}
 
 
 }

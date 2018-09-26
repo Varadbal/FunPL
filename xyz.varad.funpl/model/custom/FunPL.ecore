@@ -18,8 +18,7 @@
     <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
       <details key="archetype" value="Description"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//Type"
-        transient="true" unsettable="true" derived="true" containment="true"/>
+    <eOperations name="getReturnType" eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueDeclaration" eSuperTypes="#//Statement #//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>

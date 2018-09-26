@@ -15,7 +15,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//TypeDeclaredElement/declaredType"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//TypeInferredElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunPL.ecore#//TypeInferredElement/returnType"/>
+      <genOperations ecoreOperation="FunPL.ecore#//TypeInferredElement/getReturnType"
+          body="return xyz.varad.funpl.typing.FunPLTypeComputer.computeDeepType(this);"/>
     </genClasses>
     <genClasses ecoreClass="FunPL.ecore#//ValueDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunPL.ecore#//ValueDeclaration/constant"/>

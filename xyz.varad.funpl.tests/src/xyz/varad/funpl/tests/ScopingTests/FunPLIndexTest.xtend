@@ -26,6 +26,7 @@ class FunPLIndexTest {
 	@Inject	extension ParseHelper<FunProgram>
 	@Inject Provider<ResourceSet> resourceSetProvider
 	@Inject extension ValidationTestHelper
+	@Inject extension FunPLIndex
 	
 	@Test
 	def void multipleFileResolution(){
@@ -59,13 +60,13 @@ class FunPLIndexTest {
 		'''
 		package my.second.pack;
 		function bar(){
-			my.first.pack.foo;
+			my.first.pack.foo();
 		}
 		'''.parse(resourceSet)
 		//first.assertNoErrors
-		second.assertNoErrors
+		//second.assertNoErrors
 		
-		val rs = resourceSet.getResources
+		/*val rs = resourceSet.getResources
 		for(i : rs){
 			val cnt = i.allContents
 			while(cnt.hasNext){
@@ -73,8 +74,17 @@ class FunPLIndexTest {
 				if(m instanceof NamedElement)
 					println((m as NamedElement). name)
 			}
-		}
+		}*/
 		
+	}
+	
+	@Test 
+	def void testIndex(){
+		'''
+		var int i = 1;
+		'''.parse=> [
+			println(resourceDescription)
+		]
 	}
 
 	

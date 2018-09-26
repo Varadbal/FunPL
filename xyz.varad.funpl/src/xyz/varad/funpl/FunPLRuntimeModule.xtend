@@ -3,6 +3,10 @@
  */
 package xyz.varad.funpl
 
+import org.eclipse.xtext.resource.DerivedStateAwareResource
+import org.eclipse.xtext.resource.IDerivedStateComputer
+import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
