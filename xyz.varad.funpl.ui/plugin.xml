@@ -7,7 +7,7 @@
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
-			extensions="funprog"
+			extensions="funprogram"
 			id="xyz.varad.funpl.FunPL"
 			name="FunPL Editor">
 		</editor>
@@ -207,7 +207,7 @@
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<content-type
 			base-type="org.eclipse.core.runtime.text"
-			file-extensions="funprog"
+			file-extensions="funprogram"
 			id="xyz.varad.funpl.FunPL.contenttype"
 			name="FunPL File"
 			priority="normal">
@@ -218,13 +218,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="funprog">
+			type="funprogram">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-			uriExtension="funprog">
+			uriExtension="funprogram">
 		</resourceServiceProvider>
 	</extension>
 	<!-- marker definitions for xyz.varad.funpl.FunPL -->
@@ -261,7 +261,7 @@
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-			fileExtensions="funprog"/>
+			fileExtensions="funprogram"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
@@ -404,7 +404,7 @@
 	<extension point="org.eclipse.compare.contentViewers">
 		<viewer id="xyz.varad.funpl.FunPL.compare.contentViewers"
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="funprog">
+			extensions="funprogram">
 		</viewer>
 		<contentTypeBinding
 			contentTypeId="xyz.varad.funpl.FunPL.contenttype"
@@ -413,7 +413,7 @@
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="xyz.varad.funpl.FunPL.compare.contentMergeViewers"
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="funprog" label="FunPL Compare">
+			extensions="funprogram" label="FunPL Compare">
 		</viewer>
 		<contentTypeBinding
 			contentTypeId="xyz.varad.funpl.FunPL.contenttype"
@@ -422,12 +422,12 @@
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="xyz.varad.funpl.FunPL.editors.documentProviders"
 			class="xyz.varad.funpl.ui.FunPLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-			extensions="funprog">
+			extensions="funprogram">
 		</provider>
 	</extension>
 	<extension point="org.eclipse.team.core.fileTypes">
 		<fileTypes
-			extension="funprog"
+			extension="funprogram"
 			type="text">
 		</fileTypes>
 	</extension>
